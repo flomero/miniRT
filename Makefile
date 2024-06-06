@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/06 18:52:00 by flfische         ###   ########.fr        #
+#    Updated: 2024/06/06 19:04:41 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ ifeq ($(shell uname),Darwin)
 else ifeq ($(shell uname),Linux)
 	MLX42_FLAGS = -L$(MLX42_DIR)/build -lmlx42 -Iinclude -ldl -lglfw -pthread -lm
 endif
+INCLUDES += -I$(MLX42_DIR)/include/MLX42  
 
 # RULES
 all: ascii $(NAME)
