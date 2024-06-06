@@ -1,0 +1,27 @@
+# miniRT GITIGNORE #
+
+# Compiled source #
+miniRT
+*.out
+
+# Object files #
+*.o
+
+# Libraries #
+*.a
+
+# Test files #
+test
+*.test
+test*
+
+# Subjet files #
+*.pdf
+
+# Weird stuff #
+.DS_Store
+Thumbs.db
+.vscode
+.*.swp
+*.dSYM
+*.log
