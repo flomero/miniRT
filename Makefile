@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/06 18:39:27 by flfische         ###   ########.fr        #
+#    Updated: 2024/06/06 18:52:00 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,16 +38,25 @@ HEADER = $(addprefix $(INC_DIR)/, $(HEADER_FILES))
 INCLUDES := -I$(INC_DIR)
 
 # LIBFT
-
-LIBFT_DIR := libft
+LIBFT_DIR := libs/libft
 LIBFT := $(LIBFT_DIR)/libft.a
 LIBFT_FLAGS := -L$(LIBFT_DIR) -lft
 INCLUDES += -I$(LIBFT_DIR)
 
+# MLX42
+MLX42_DIR := libs/MLX42
+MLX42 =	$(MLX42_DIR)/build/libmlx42.a
+MLX42_FLAGS =
+ifeq ($(shell uname),Darwin)
+	MLX42_FLAGS = -L$(MLX42_DIR)/build -lmlx42 -framework Cocoa -framework OpenGL -framework IOKit -lglfw
+else ifeq ($(shell uname),Linux)
+	MLX42_FLAGS = -L$(MLX42_DIR)/build -lmlx42 -Iinclude -ldl -lglfw -pthread -lm
+endif
+
 # RULES
 all: ascii $(NAME)
 
-$(NAME): $(LIBFT) $(OFILES)
+$(NAME): $(LIBFT) $(MLX42) $(OFILES)
 	@printf "\n$(YELLOW)Compiling $(NAME)...$(NC)\n"
 	@$(CC) $(CFLAGS) -o $@ $(OFILES) $(LIBFT_FLAGS) -lreadline
 	@if [ -f $(NAME) ]; then \
@@ -78,20 +87,30 @@ $(TMP_DIR):
 
 $(LIBFT):
 	@echo "$(YELLOW)Compiling libft...$(NC)"
+	@if [ ! -d $(LIBFT_DIR) ]; then mkdir -p $(LIBFT_DIR); fi
+	@git submodule update --remote --init -q
 	@$(MAKE) -C $(LIBFT_DIR)
 
+$(MLX42):
+	@echo "$(YELLOW)Compiling mlx42...$(NC)"
+	@if [ ! -d $(MLX42_DIR)/build ]; then mkdir -p $(MLX42_DIR)/build; fi
+	@git submodule update --remote --init -q
+	@cd $(MLX42_DIR)/build && cmake .. && make -j4
+
 clean:
+	@echo "$(RED)Cleaning $(NAME)...\n$(NC)"
 	@echo "$(RED)Removing object files...$(NC)"
 	@rm -rf $(OBJ_DIR)
 	@rm -rf $(TMP_DIR)
+	@echo "$(RED)Cleaning libft...$(NC)"
 	@$(MAKE) -C $(LIBFT_DIR) clean
+	@echo "$(RED)Cleaning mlx42...$(NC)"
+	@$(MAKE) -C $(MLX42_DIR)/build clean
 
 fclean: clean
 	@echo "$(RED)Removing binary files...$(NC)"
 	@rm -f $(NAME)
 	@$(MAKE) -C $(LIBFT_DIR) fclean
-	@echo "$(RED)Removing history file...$(NC)"
-	@rm -f .minishell_history
 
 re: fclean all
 
