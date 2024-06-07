@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.c                                           :+:      :+:    :+:   */
+/*   mlx_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/07 15:01:13 by flfische         ###   ########.fr       */
+/*   Created: 2024/06/07 14:56:51 by flfische          #+#    #+#             */
+/*   Updated: 2024/06/07 15:02:19 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_program	*ft_get_program(void)
-{
-	static t_program	program;
-
-	return (&program);
-}
-
-int	main(void)
+// TODO: free stuff on exit
+void	ft_key_hook(void *param)
 {
 	t_program	*program;
 
-	program = ft_get_program();
-	if (ft_mlx_init())
-		return (1);
-	mlx_loop_hook(program->mlx, ft_key_hook, program);
-	mlx_loop(program->mlx);
-	return (0);
+	program = (t_program *)param;
+	if (mlx_is_key_down(program->mlx, MLX_KEY_ESCAPE))
+	{
+		mlx_terminate(program->mlx);
+		exit(0);
+	}
 }
