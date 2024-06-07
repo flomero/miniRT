@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.c                                           :+:      :+:    :+:   */
+/*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/07 15:01:13 by flfische         ###   ########.fr       */
+/*   Created: 2024/06/07 14:36:37 by flfische          #+#    #+#             */
+/*   Updated: 2024/06/07 14:43:47 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_program	*ft_get_program(void)
+void	ft_print_error(const char *error)
 {
-	static t_program	program;
-
-	return (&program);
-}
-
-int	main(void)
-{
-	t_program	*program;
-
-	program = ft_get_program();
-	if (ft_mlx_init())
-		return (1);
-	mlx_loop_hook(program->mlx, ft_key_hook, program);
-	mlx_loop(program->mlx);
-	return (0);
+	ft_putstr_fd(RED, 2);
+	ft_putstr_fd(BOLD, 2);
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(RESET, 2);
+	ft_putstr_fd("\t", 2);
+	ft_putstr_fd((char *)error, 2);
+	ft_putchar_fd('\n', 2);
 }

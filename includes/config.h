@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.c                                           :+:      :+:    :+:   */
+/*   config.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/07 15:01:13 by flfische         ###   ########.fr       */
+/*   Created: 2024/06/07 14:29:22 by flfische          #+#    #+#             */
+/*   Updated: 2024/06/07 14:38:12 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#ifndef CONFIG_H
+# define CONFIG_H
 
-t_program	*ft_get_program(void)
-{
-	static t_program	program;
+# define WIN_TITLE "miniRT"
+# define WIN_WIDTH 800
+# define WIN_HEIGHT 600
 
-	return (&program);
-}
+// COLORS
+# define RESET "\033[0m"
+# define RED "\033[31m"
+# define BOLD "\033[1m"
 
-int	main(void)
-{
-	t_program	*program;
-
-	program = ft_get_program();
-	if (ft_mlx_init())
-		return (1);
-	mlx_loop_hook(program->mlx, ft_key_hook, program);
-	mlx_loop(program->mlx);
-	return (0);
-}
+#endif

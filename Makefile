@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/06 19:04:41 by flfische         ###   ########.fr        #
+#    Updated: 2024/06/07 14:55:56 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,8 @@ MAKEFLAGS += --no-print-directory
 NAME := miniRT
 # DIRECTORIES
 SRC_DIRS := src \
+			src/mlx \
+			src/errors \
 
 
 OBJ_DIR := obj
@@ -27,13 +29,16 @@ vpath %.c $(SRC_DIRS)
 vpath %.h $(INC_DIR)
 
 CFILES := miniRT.c \
+			mlx_init.c \
+			mlx_hooks.c \
+			print_error.c \
 
 
 OFILES := $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
 
 HEADER_FILES := miniRT.h \
-
-HEADER = $(addprefix $(INC_DIR)/, $(HEADER_FILES))
+				config.h \
+				objects.h \
 
 INCLUDES := -I$(INC_DIR)
 
@@ -59,7 +64,7 @@ all: ascii $(NAME)
 
 $(NAME): $(LIBFT) $(MLX42) $(OFILES)
 	@printf "\n$(YELLOW)Compiling $(NAME)...$(NC)\n"
-	@$(CC) $(CFLAGS) -o $@ $(OFILES) $(LIBFT_FLAGS) -lreadline
+	@$(CC) $(CFLAGS) -o $@ $(OFILES) $(LIBFT_FLAGS) $(MLX42_FLAGS)
 	@if [ -f $(NAME) ]; then \
 		echo "$(GREEN)$(NAME) compiled successfully!$(NC)"; \
 		echo "$(CYAN)Run with ./$(NAME)$(NC)"; \
@@ -68,7 +73,7 @@ $(NAME): $(LIBFT) $(MLX42) $(OFILES)
 		echo "$(RED)$(NAME) failed to compile$(NC)"; \
 	fi
 
-$(OBJ_DIR)/%.o: %.c $(HEADER) | $(OBJ_DIR) $(TMP_DIR)
+$(OBJ_DIR)/%.o: %.c $(HEADER_FILES) | $(OBJ_DIR)
 	@$(eval CURRENT := $(shell echo $$(($(CURRENT) + 1))))
 	@$(eval PERCENT := $(shell echo $$(($(CURRENT) * 100 / $(TOTAL_SRCS)))))
 	@printf "$(CLEAR_LINE)$(YELLOW)Compiling $(PERCENT)%% [$(CURRENT)/$(TOTAL_SRCS)] $(ITALIC_LIGHT_YELLOW)$<$(NC) "
@@ -77,14 +82,6 @@ $(OBJ_DIR)/%.o: %.c $(HEADER) | $(OBJ_DIR) $(TMP_DIR)
 $(OBJ_DIR):
 	@echo "$(YELLOW)Creating obj directory...$(NC)"
 	@mkdir -p $(OBJ_DIR)
-
-clean_tmp:
-	@echo "$(YELLOW)Deleting tmp directory...$(NC)"
-	@rm -rf $(TMP_DIR)
-
-$(TMP_DIR):
-	@echo "$(YELLOW)Creating tmp directory...$(NC)"
-	@mkdir -p $(TMP_DIR)
 
 $(LIBFT):
 	@echo "$(YELLOW)Compiling libft...$(NC)"
@@ -102,7 +99,6 @@ clean:
 	@echo "$(RED)Cleaning $(NAME)...\n$(NC)"
 	@echo "$(RED)Removing object files...$(NC)"
 	@rm -rf $(OBJ_DIR)
-	@rm -rf $(TMP_DIR)
 	@echo "$(RED)Cleaning libft...$(NC)"
 	@$(MAKE) -C $(LIBFT_DIR) clean
 	@echo "$(RED)Cleaning mlx42...$(NC)"
@@ -123,7 +119,7 @@ debug: CFLAGS += -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=a
 debug: CFLAGS += -DDEBUG=1
 debug: clean all
 
-.PHONY: all clean fclean re norm ascii debug clean_tmp
+.PHONY: all clean fclean re norm ascii debu
 
 # colors:
 GREEN = \033[0;32m

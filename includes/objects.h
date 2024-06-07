@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:49:15 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/07 13:03:11 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/07 14:40:45 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define OBJECTS_H
 
 # include "miniRT.h"
+
+typedef struct s_vector3	t_vector3;
+typedef struct s_vector2	t_vector2;
 
 typedef enum e_object_type
 {
@@ -24,43 +27,43 @@ typedef enum e_object_type
 	PLANE,
 	CYLINDER,
 	OBJECT_COUNT,
-}						t_object_type;
+}							t_object_type;
 
 typedef struct s_object
 {
-	uint32_t			color;
-	t_vector3			pos;
-	t_object_type		type;
+	uint32_t				color;
+	t_vector3				*pos;
+	t_object_type			type;
 	union
 	{
 		struct
 		{
-			float		ratio;
+			float			ratio;
 		} s_ambient_light;
 		struct
 		{
-			t_vector3	orientation;
-			float		fov;
+			t_vector3		*orientation;
+			float			fov;
 		} s_camera;
 		struct
 		{
-			float		brightness;
+			float			brightness;
 		} s_light;
 		struct
 		{
-			float		diameter;
+			float			diameter;
 		} s_sphere;
 		struct
 		{
-			t_vector3	normal;
+			t_vector3		*normal;
 		} s_plane;
 		struct
 		{
-			float		diameter;
-			float		height;
-			t_vector3	normal;
+			float			diameter;
+			float			height;
+			t_vector3		*normal;
 		} s_cylinder;
 	};
-}						t_object;
+}							t_object;
 
 #endif
