@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/07 14:55:56 by flfische         ###   ########.fr        #
+#    Updated: 2024/06/08 14:38:48 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ NAME := miniRT
 SRC_DIRS := src \
 			src/mlx \
 			src/errors \
+			src/maths \
 
 
 OBJ_DIR := obj
@@ -33,6 +34,16 @@ CFILES := miniRT.c \
 			mlx_hooks.c \
 			print_error.c \
 
+
+# MATHS
+CFILES += v3_add.c \
+			v3_crossprod.c \
+			v3_dotprod.c \
+			v3_len.c \
+			v3_new.c \
+			v3_normalize.c \
+			v3_scalar.c \
+			v3_sub.c \
 
 OFILES := $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
 

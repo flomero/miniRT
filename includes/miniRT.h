@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/08 14:27:23 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/08 14:36:35 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,18 @@ void			ft_key_hook(void *param);
 void			ft_print_error(const char *error);
 
 // MATHS
-t_vector3		*ft_v3_new(float x, float y, float z);
 t_vector3		*ft_v3_add(t_vector3 *a, t_vector3 *b);
-t_vector3		*ft_v3_sub(t_vector3 *a, t_vector3 *b);
-float			ft_v3_dotprod(t_vector3 *a, t_vector3 *b);
+t_vector3		*ft_v3_add_ip(t_vector3 *a, t_vector3 *b);
 t_vector3		*ft_v3_crossprod(t_vector3 *a, t_vector3 *b);
+t_vector3		*ft_v3_crossprod_ip(t_vector3 *a, t_vector3 *b);
+float			ft_v3_dotprod(t_vector3 *a, t_vector3 *b);
+float			ft_v3_len(t_vector3 *a);
+t_vector3		*ft_v3_new(float x, float y, float z);
 t_vector3		*ft_v3_normal(t_vector3 *a);
 t_vector3		*ft_v3_normal_ip(t_vector3 *a);
-float			ft_v3_len(t_vector3 *a);
 t_vector3		*ft_v3_scalar(t_vector3 *a, float scalar);
 t_vector3		*ft_v3_scalar_ip(t_vector3 *a, float scalar);
+t_vector3		*ft_v3_sub(t_vector3 *a, t_vector3 *b);
+t_vector3		*ft_v3_sub_ip(t_vector3 *a, t_vector3 *b);
 
 #endif

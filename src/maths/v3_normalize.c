@@ -6,12 +6,19 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:20:48 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/08 14:27:23 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/08 14:34:33 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+/**
+ * Normalizes a vector.
+ *
+ * @param a The vector.
+ * @return The normalized vector.
+ * @note The function allocates memory.
+ */
 t_vector3	*ft_v3_normal(t_vector3 *a)
 {
 	float		len;
@@ -22,6 +29,12 @@ t_vector3	*ft_v3_normal(t_vector3 *a)
 	return (vector);
 }
 
+/**
+ * Normalizes a vector in place.
+ *
+ * @param a The vector.
+ * @return The normalized vector.
+ */
 t_vector3	*ft_v3_normal_ip(t_vector3 *a)
 {
 	float	len;
