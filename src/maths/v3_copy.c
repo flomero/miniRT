@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   config.h                                           :+:      :+:    :+:   */
+/*   v3_copy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/07 14:29:22 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/09 14:26:36 by flfische         ###   ########.fr       */
+/*   Created: 2024/06/09 13:39:59 by flfische          #+#    #+#             */
+/*   Updated: 2024/06/09 15:24:05 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONFIG_H
-# define CONFIG_H
+#include "miniRT.h"
 
-# define WIN_TITLE "miniRT"
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 600
-# define BACKGROUND_COLOR 0x000000FF
+t_vector3	*ft_v3_copy(t_vector3 *v)
+{
+	t_vector3	*result;
 
-// VIEWPORT
-# define VIEWPORT_WIDTH 2.0
-# define FOCAL_LENGTH 1.0
-
-// COLORS
-# define RESET "\033[0m"
-# define RED "\033[31m"
-# define BOLD "\033[1m"
-
-#endif
+	result = (t_vector3 *)malloc(sizeof(t_vector3));
+	if (!result)
+		return (NULL);
+	result->x = v->x;
+	result->y = v->y;
+	result->z = v->z;
+	return (result);
+}

@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   config.h                                           :+:      :+:    :+:   */
+/*   v3_div.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/07 14:29:22 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/09 14:26:36 by flfische         ###   ########.fr       */
+/*   Created: 2024/06/09 13:34:07 by flfische          #+#    #+#             */
+/*   Updated: 2024/06/09 13:41:00 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONFIG_H
-# define CONFIG_H
+#include "miniRT.h"
 
-# define WIN_TITLE "miniRT"
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 600
-# define BACKGROUND_COLOR 0x000000FF
+t_vector3	*ft_v3_div(t_vector3 *v, float t)
+{
+	t_vector3	*result;
 
-// VIEWPORT
-# define VIEWPORT_WIDTH 2.0
-# define FOCAL_LENGTH 1.0
+	result = (t_vector3 *)malloc(sizeof(t_vector3));
+	if (!result)
+		return (NULL);
+	result->x = v->x / t;
+	result->y = v->y / t;
+	result->z = v->z / t;
+	return (result);
+}
 
-// COLORS
-# define RESET "\033[0m"
-# define RED "\033[31m"
-# define BOLD "\033[1m"
-
-#endif
+t_vector3	*ft_v3_div_ip(t_vector3 *v, float t)
+{
+	v->x /= t;
+	v->y /= t;
+	v->z /= t;
+	return (v);
+}

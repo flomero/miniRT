@@ -6,14 +6,14 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:16:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/08 14:34:56 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/08 17:39:48 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
 /**
- * Subtracts two vectors.
+ * Subtracts two vectors: a - b.
  *
  * @param a The first vector.
  * @param b The second vector.
@@ -29,7 +29,7 @@ t_vector3	*ft_v3_sub(t_vector3 *a, t_vector3 *b)
 }
 
 /**
- * Subtracts two vectors and stores the result in the first vector.
+ * Subtracts two vectors and stores the result in the first vector: a -= b.
  *
  * @param a The first vector.
  * @param b The second vector.

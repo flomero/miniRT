@@ -6,12 +6,12 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/08 14:38:48 by flfische         ###   ########.fr        #
+#    Updated: 2024/06/09 14:44:16 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fno-sanitize=null -fno-sanitize=alignment
 MAKEFLAGS += --no-print-directory
 NAME := miniRT
 # DIRECTORIES
@@ -19,6 +19,8 @@ SRC_DIRS := src \
 			src/mlx \
 			src/errors \
 			src/maths \
+			src/objects \
+			src/raytracer \
 
 
 OBJ_DIR := obj
@@ -35,9 +37,18 @@ CFILES := miniRT.c \
 			print_error.c \
 
 
+# OBJECTS
+CFILES += camera.c \
+			sphere.c \
+
+# RT
+CFILES += send_rays.c
+
 # MATHS
 CFILES += v3_add.c \
+			v3_copy.c \
 			v3_crossprod.c \
+			v3_div.c \
 			v3_dotprod.c \
 			v3_len.c \
 			v3_new.c \
