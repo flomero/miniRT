@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 16:32:02 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/09 18:09:43 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/09 18:53:48 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	is_int(char *str)
  */
 int	is_float(char *str)
 {
-	int		i;
 	char	**parts;
 
 	if (ft_strnstr(str, "..", ft_strlen(str)))

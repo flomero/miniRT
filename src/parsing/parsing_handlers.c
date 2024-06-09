@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 14:41:37 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/09 18:27:33 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/09 18:53:18 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,18 @@ t_object	*get_A(char **tokens)
 t_object	*get_C(char **tokens)
 {
 	t_object	*obj;
-	int			i;
 	float		fov;
-	char		**rgb;
 
 	obj = malloc (sizeof(t_object));
 	if (!obj)
-	{
-		free_str_arr(rgb);
 		return (ft_print_error("Allocation error"), NULL);
-	}
 	obj->type = CAMERA;
 	obj->color = 0;
 	if (get_arr_len(tokens) != 4)
 		return (free(obj), NULL);
-	if (!get_vector(&obj->pos, tokens[1]))
+	if (!get_vector(obj->pos, tokens[1]))
 		return (free(obj), NULL);
-	if (!get_vector(&obj->s_camera.normal, tokens[2]))
+	if (!get_vector(obj->s_camera.normal, tokens[2]))
 		return (free(obj), NULL);
 	if (!in_range(obj->s_camera.normal, -1, 1))
 		return (free(obj), NULL);
