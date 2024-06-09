@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/09 15:47:35 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/09 16:50:30 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,16 @@ int				is_valid_parsing(char *fname);
 int				get_nbr_of_lines(char *fname);
 int				init_struct(char *fname, int len);
 t_object		*get_obj(char **tokens);
+
+// PARSING UTILS
 void			free_str_arr(char **arr);
 void			free_obj_arr(t_object **arr);
+uint32_t		int_to_rgb(int red, int green, int blue);
+int				get_arr_len(char **arr);
+
+// PARSING UTILS2
+int				is_int(char *str);
+int				is_float(char *str);
 
 // PARSING HANDLERS
 t_object		*get_A(char **tokens);
@@ -75,6 +83,5 @@ t_object		*get_L(char **tokens);
 t_object		*get_sp(char **tokens);
 t_object		*get_pl(char **tokens);
 t_object		*get_cy(char **tokens);
-
 
 #endif

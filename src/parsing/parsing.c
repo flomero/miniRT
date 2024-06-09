@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:15:15 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/09 15:48:54 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/09 16:30:07 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,36 +157,4 @@ t_object	*get_obj(char **tokens)
 		return (get_cy(tokens));
 	ft_print_error("Not valid object identifier");
 	return (NULL);
-}
-
-/**
- * @brief free an NULL terminated array of char pointers properly
- * ex. arr = ["El1", "el2", NULL]
- *
- * @param arr
- */
-void	free_str_arr(char **arr)
-{
-	int	i;
-
-	i = -1;
-	while (arr[++i])
-		free(arr[i]);
-	free(arr);
-}
-
-/**
- * @brief free an NULL terminated array of t_object pointers properly
- * ex. arr = ["El1", "el2", NULL]
- *
- * @param arr
- */
-void	free_obj_arr(t_object **arr)
-{
-	int	i;
-
-	i = -1;
-	while (arr[++i])
-		free(arr[i]);
-	free(arr);
 }

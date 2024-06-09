@@ -6,7 +6,7 @@
 #    By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/09 15:27:54 by klamprak         ###   ########.fr        #
+#    Updated: 2024/06/09 17:22:29 by klamprak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ NAME := miniRT
 SRC_DIRS := src \
 			src/mlx \
 			src/errors \
+			src/parsing \
 
 
 OBJ_DIR := obj
@@ -34,7 +35,8 @@ CFILES := miniRT.c \
 			print_error.c \
 			parsing.c \
 			parsing_handlers.c \
-
+			parsing_utils.c \
+			parsing_utils2.c \
 
 OFILES := $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
 
