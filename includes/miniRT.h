@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/09 16:50:30 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/09 18:09:58 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ int				get_arr_len(char **arr);
 // PARSING UTILS2
 int				is_int(char *str);
 int				is_float(char *str);
+int				get_vector(t_vector3 *vector, char *str);
+int				in_range(t_vector3 *vector, float start, float end);
 
 // PARSING HANDLERS
 t_object		*get_A(char **tokens);

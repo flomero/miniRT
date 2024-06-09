@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 16:32:02 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/09 16:50:22 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/09 18:09:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,3 +52,55 @@ int	is_float(char *str)
 	return (free_str_arr(parts), 1);
 }
 
+/**
+ * @brief get x, z and y from a string
+ * ex. "13.4,12,0.1" -> x=13.4, y=12, z=0.1
+ *
+ * @param vector
+ * @param str
+ * @return int 1 if succeed, 0 if not int or not floats or not 3 numbers
+ */
+int	get_vector(t_vector3 *vector, char *str)
+{
+	char	**nums;
+	int		i;
+	float	result[3];
+
+	nums = ft_split(str, ',');
+	if (get_arr_len(nums) != 3)
+		return (free_str_arr(nums), 0);
+	i = 0;
+	while (nums[i])
+	{
+		if (is_int(nums[i]))
+			result[i] = ft_atoi(nums[i]);
+		else if (is_float(nums[i]))
+			result[i] = ft_atod(nums[i]);
+		else
+			return (free_str_arr(nums), 0);
+		i++;
+	}
+	vector->x = result[0];
+	vector->y = result[1];
+	vector->z = result[2];
+	return (1);
+}
+
+/**
+ * @brief check if vector's values are on range [start, end] included
+ *
+ * @param vector
+ * @param start
+ * @param end
+ * @return int 1 if its on range, 0 otherwise
+ */
+int	in_range(t_vector3 *vector, float start, float end)
+{
+	if (vector->x < start || vector->x > end)
+		return (0);
+	if (vector->y < start || vector->y > end)
+		return (0);
+	if (vector->z < start || vector->z > end)
+		return (0);
+	return (1);
+}
