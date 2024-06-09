@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/07 15:02:35 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/09 13:16:45 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,11 @@ void			ft_key_hook(void *param);
 
 // ERRORS
 void			ft_print_error(const char *error);
+
+// PARSING
+int				is_valid_parsing(char *fname);
+int				get_nbr_of_lines(char *fname);
+int				init_struct(char *fname, int len);
+t_object		*get_obj(char *line);
 
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/07 14:55:56 by flfische         ###   ########.fr        #
+#    Updated: 2024/06/09 13:18:40 by klamprak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ CFILES := miniRT.c \
 			mlx_init.c \
 			mlx_hooks.c \
 			print_error.c \
+			parsing.c \
 
 
 OFILES := $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
@@ -57,7 +58,7 @@ ifeq ($(shell uname),Darwin)
 else ifeq ($(shell uname),Linux)
 	MLX42_FLAGS = -L$(MLX42_DIR)/build -lmlx42 -Iinclude -ldl -lglfw -pthread -lm
 endif
-INCLUDES += -I$(MLX42_DIR)/include/MLX42  
+INCLUDES += -I$(MLX42_DIR)/include/MLX42
 
 # RULES
 all: ascii $(NAME)

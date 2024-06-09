@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/07 15:01:13 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/09 13:20:06 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,17 @@ t_program	*ft_get_program(void)
 	return (&program);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_program	*program;
 
+	if (argc != 2)
+		return (0);
+	if (!is_valid_parsing(argv[1]))
+		printf("Not valid\n");
+	else
+		printf("Valid\n");
+	return(0);
 	program = ft_get_program();
 	if (ft_mlx_init())
 		return (1);
@@ -30,3 +37,4 @@ int	main(void)
 	mlx_loop(program->mlx);
 	return (0);
 }
+
