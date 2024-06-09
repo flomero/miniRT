@@ -6,7 +6,7 @@
 #    By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/09 13:18:40 by klamprak         ###   ########.fr        #
+#    Updated: 2024/06/09 15:27:54 by klamprak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ CFILES := miniRT.c \
 			mlx_hooks.c \
 			print_error.c \
 			parsing.c \
+			parsing_handlers.c \
 
 
 OFILES := $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
