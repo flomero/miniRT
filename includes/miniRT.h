@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/09 14:41:34 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/09 17:47:05 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@ uint32_t		ft_trace_ray(t_ray *ray);
 
 // OBJECT HIT FUNCTIONS
 float			ft_sphere_hit(t_object *sphere, t_ray *ray);
+
+// OBJECT UTILS
+void			ft_calculate_viewport(t_object *camera);
 
 // ERRORS
 void			ft_print_error(const char *error);
