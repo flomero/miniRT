@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 14:41:37 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/10 11:49:38 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/10 13:51:04 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_object	*get_A(char **tokens)
 	t_object	*obj;
 	float		ratio;
 
-	obj = malloc (sizeof(t_object));
+	obj = malloc (sizeof(t_object *));
 	if (!obj)
 		return (ft_print_error("Allocation error"), NULL);
 	if (get_arr_len(tokens) != 3)
@@ -30,7 +30,6 @@ t_object	*get_A(char **tokens)
 	if (!get_color(tokens[2], &obj->color))
 		return (free(obj), NULL);
 	obj->s_ambient_light.ratio = ratio;
-	obj->pos = NULL;
 	obj->type = AMBIENT_LIGHT;
 	return (obj);
 }
@@ -40,18 +39,18 @@ t_object	*get_C(char **tokens)
 	t_object	*obj;
 	float		fov;
 
-	obj = malloc (sizeof(t_object));
+	obj = malloc (sizeof(t_object *));
 	if (!obj)
 		return (ft_print_error("Allocation error"), NULL);
 	obj->type = CAMERA;
 	obj->color = 0;
 	if (get_arr_len(tokens) != 4)
 		return (free(obj), NULL);
-	if (!get_vector(obj->pos, tokens[1]))
+	if (!get_vector(&obj->pos, tokens[1]))
 		return (free(obj), NULL);
-	if (!get_vector(obj->s_camera.normal, tokens[2]))
+	if (!get_vector(&obj->s_camera.normal, tokens[2]))
 		return (free(obj), NULL);
-	if (!in_range(obj->s_camera.normal, -1, 1))
+	if (!in_range(&obj->s_camera.normal, -1, 1))
 		return (free(obj), NULL);
 	if (!is_float(tokens[3]) && !is_int(tokens[3]))
 		return (free(obj), NULL);
@@ -67,13 +66,13 @@ t_object	*get_L(char **tokens)
 	t_object	*obj;
 	float		brightness;
 
-	obj = malloc (sizeof(t_object));
+	obj = malloc (sizeof(t_object *));
 	if (!obj)
 		return (ft_print_error("Allocation error"), NULL);
 	obj->type = LIGHT;
 	if (get_arr_len(tokens) != 4)
 		return (free(obj), NULL);
-	if (!get_vector(obj->pos, tokens[1]))
+	if (!get_vector(&obj->pos, tokens[1]))
 		return (free(obj), NULL);
 	if (!is_float(tokens[2]) && !is_int(tokens[2]))
 		return (free(obj), NULL);
@@ -91,13 +90,13 @@ t_object	*get_sp(char **tokens)
 	t_object	*obj;
 	float		diameter;
 
-	obj = malloc (sizeof(t_object));
+	obj = malloc (sizeof(t_object *));
 	if (!obj)
 		return (ft_print_error("Allocation error"), NULL);
 	obj->type = SPHERE;
 	if (get_arr_len(tokens) != 4)
 		return (free(obj), NULL);
-	if (!get_vector(obj->pos, tokens[1]))
+	if (!get_vector(&obj->pos, tokens[1]))
 		return (free(obj), NULL);
 	if (!is_float(tokens[2]) && !is_int(tokens[2]))
 		return (free(obj), NULL);
@@ -112,17 +111,17 @@ t_object	*get_pl(char **tokens)
 {
 	t_object	*obj;
 
-	obj = malloc (sizeof(t_object));
+	obj = malloc (sizeof(t_object *));
 	if (!obj)
 		return (ft_print_error("Allocation error"), NULL);
 	obj->type = PLANE;
 	if (get_arr_len(tokens) != 4)
 		return (free(obj), NULL);
-	if (!get_vector(obj->pos, tokens[1]))
+	if (!get_vector(&obj->pos, tokens[1]))
+		return (free(&obj), NULL);
+	if (!get_vector(&obj->s_plane.normal, tokens[2]))
 		return (free(obj), NULL);
-	if (!get_vector(obj->s_plane.normal, tokens[2]))
-		return (free(obj), NULL);
-	if (!in_range(obj->s_plane.normal, -1, 1))
+	if (!in_range(&obj->s_plane.normal, -1, 1))
 		return (free(obj), NULL);
 	if (!get_color(tokens[3], &obj->color))
 		return (free(obj), NULL);
@@ -135,17 +134,19 @@ t_object	*get_cy(char **tokens)
 	float		diameter;
 	float		height;
 
-	obj = malloc (sizeof(t_object));
+	obj = malloc (sizeof(t_object *));
 	if (!obj)
 		return (ft_print_error("Allocation error"), NULL);
 	obj->type = CYLINDER;
 	if (get_arr_len(tokens) != 6)
 		return (free(obj), NULL);
-	if (!get_vector(obj->pos, tokens[1]))
+	obj->pos.x = 10;
+	if (!get_vector(&obj->pos, tokens[1]))
 		return (free(obj), NULL);
-	if (!get_vector(obj->s_cylinder.normal, tokens[2]))
+	exit(1);
+	if (!get_vector(&obj->s_cylinder.normal, tokens[2]))
 		return (free(obj), NULL);
-	if (!in_range(obj->s_cylinder.normal, -1, 1))
+	if (!in_range(&obj->s_cylinder.normal, -1, 1))
 		return (free(obj), NULL);
 	if (!is_float(tokens[3]) && !is_int(tokens[3]))
 		return (free(obj), NULL);

@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:15:15 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/09 16:30:07 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/10 14:34:05 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	get_nbr_of_lines(char *fname)
 	while(line)
 	{
 		tokens = ft_split(line, ' ');
-		if (!(line[0] == '\n' && !line[1]) || !tokens || !tokens[0])
+		if (!((line[0] == '\n' && !line[1]) || !tokens || !tokens[0]))
 			count++;
 		free(line);
 		if (tokens)
@@ -97,6 +97,9 @@ int	init_struct(char *fname, int len)
 	objs = malloc(sizeof(t_object *) * (len + 1));
 	if (!objs)
 		return (ft_print_error("Memory allocation failed"), 0);
+	i = -1;
+	while (++i < len + 1)
+		objs[i] = NULL;
 	fd = open(fname, O_RDONLY);
 	if (fd == -1)
 	{
@@ -105,24 +108,33 @@ int	init_struct(char *fname, int len)
 		return (free(line), 0);
 	}
 	line = get_next_line(fd);
+	if (line)
+		line[ft_strlen(line) - 1] = '\0';
 	i = 0;
 	while(line)
 	{
 		tokens = ft_split(line, ' ');
-		if (!(line[0] == '\n' && !line[1]) || !tokens || !tokens[0])
+		if ((line[0] == '\n' && !line[1]) || !tokens || !tokens[0])
 		{
 			free(line);
 			if (tokens)
 				free_str_arr(tokens);
 			line = get_next_line(fd);
+			if (line)
+				line[ft_strlen(line) - 1] = '\0';
 			continue ;
 		}
 		objs[i] = get_obj(tokens);
 		free(line);
 		free_str_arr(tokens);
-		if (!objs[i])
+		if (!objs[i++])
+		{
+			printf("Invalid obj %d\n", i);
 			return (free_obj_arr(objs), 0);
+		}
 		line = get_next_line(fd);
+		if (line)
+			line[ft_strlen(line) - 1] = '\0';
 	}
 	if (close(fd) == -1)
 	{
@@ -131,6 +143,7 @@ int	init_struct(char *fname, int len)
 		return (free(line), 0);
 	}
 	ft_get_program()->objs = objs;
+	ft_get_program()->objs[i] = NULL;
 	return (1);
 }
 

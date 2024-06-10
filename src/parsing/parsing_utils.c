@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 16:28:34 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/10 12:04:17 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/10 13:40:29 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ void	print_objs(void)
 	while (objs[i])
 	{
 		printf("Object %d:\nID: %d\n", i, objs[i]->type);
-		printf("Position: %.2f %.2f %.2f\n", objs[i]->pos->x, objs[i]->pos->y, \
-		 objs[i]->pos->z);
+		printf("Position: %.2f %.2f %.2f\n", objs[i]->pos.x, objs[i]->pos.y, \
+		 objs[i]->pos.z);
 		printf("Color: %d, ", objs[i]->color);
 		print_rgb(objs[i]->color);
 		printf("\n---------------- --------------------\n");

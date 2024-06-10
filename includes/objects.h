@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:49:15 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/09 17:44:15 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/10 14:35:03 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,19 @@
 
 # include "miniRT.h"
 
-typedef struct s_vector3	t_vector3;
-typedef struct s_vector2	t_vector2;
+// TYPEDEFS
+typedef struct s_vector3
+{
+	float		x;
+	float		y;
+	float		z;
+}				t_vector3;
+
+typedef struct s_vector2
+{
+	float		x;
+	float		y;
+}				t_vector2;
 
 typedef enum e_object_type
 {
@@ -32,7 +43,7 @@ typedef enum e_object_type
 typedef struct s_object
 {
 	uint32_t				color;
-	t_vector3				*pos;
+	t_vector3				pos;
 	t_object_type			type;
 	union
 	{
@@ -42,7 +53,7 @@ typedef struct s_object
 		} s_ambient_light;
 		struct
 		{
-			t_vector3		*normal;
+			t_vector3		normal;
 			float			fov;
 		} s_camera;
 		struct
@@ -55,13 +66,13 @@ typedef struct s_object
 		} s_sphere;
 		struct
 		{
-			t_vector3		*normal;
+			t_vector3		normal;
 		} s_plane;
 		struct
 		{
 			float			diameter;
 			float			height;
-			t_vector3		*normal;
+			t_vector3		normal;
 		} s_cylinder;
 	};
 }							t_object;

@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 16:32:02 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/10 11:06:08 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/10 14:34:05 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	is_int(char *str)
 
 	if (!str || !str[0])
 		return (0);
-	i = 0;
+	i = str[0] == '-' || str[0] == '+';
 	while (str[i])
 		if (!ft_isdigit(str[i++]))
 			return (0);
@@ -47,6 +47,8 @@ int	is_float(char *str)
 	if (get_arr_len(parts) != 2)
 		return (free_str_arr(parts), 0);
 	if (!is_int(parts[0]) || !is_int(parts[1]))
+		return (free_str_arr(parts), 0);
+	if ((parts[1][0] == '-' || parts[1][0] == '+'))
 		return (free_str_arr(parts), 0);
 	return (free_str_arr(parts), 1);
 }

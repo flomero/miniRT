@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 12:00:59 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/10 14:34:53 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,6 @@
 # include "objects.h"
 
 // TYPEDEFS
-typedef struct s_vector3
-{
-	float		x;
-	float		y;
-	float		z;
-}				t_vector3;
-
-typedef struct s_vector2
-{
-	float		x;
-	float		y;
-}				t_vector2;
-
 typedef struct s_program
 {
 	mlx_t		*mlx;
