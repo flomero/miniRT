@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:15:15 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/10 16:56:11 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/10 17:37:22 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,7 @@ int	get_nbr_of_lines(char *fname)
 
 	fd = open(fname, O_RDONLY);
 	if (fd == -1)
-	{
-		line = ft_strjoin("Error opening file: ", strerror(errno));
-		ft_print_error(line);
-		return (free(line), -1);
-	}
+		return (print_err_extend("Error opening file: ", strerror(errno)), -1);
 	line = get_next_line(fd);
 	count = 0;
 	while (line)
@@ -71,11 +67,7 @@ int	get_nbr_of_lines(char *fname)
 		line = get_next_line(fd);
 	}
 	if (close(fd) == -1)
-	{
-		line = ft_strjoin("Error closing file: ", strerror(errno));
-		ft_print_error(line);
-		return (free(line), -1);
-	}
+		return (print_err_extend("Error closing file: ", strerror(errno)), -1);
 	return (count);
 }
 
@@ -96,23 +88,18 @@ int	init_struct(char *fname, int len)
 
 	objs = malloc(sizeof(t_object *) * (len + 1));
 	if (!objs)
-		return (ft_print_error("Memory allocation failed"), 0);
+		return (ft_print_error(ALLOC_ERR), 0);
 	i = -1;
 	while (++i < len + 1)
 		objs[i] = NULL;
 	fd = open(fname, O_RDONLY);
-	if (fd == -1)
-	{
-		line = ft_strjoin("Error opening file: ", strerror(errno));
-		ft_print_error(line);
-		return (free(line), 0);
-	}
+		return (print_err_extend("Error opening file: ", strerror(errno)), 0);
 	line = get_next_line(fd);
-	if (line)
-		line[ft_strlen(line) - 1] = '\0';
 	i = 0;
 	while (line)
 	{
+		if (line[ft_strlen(line) - 1] == '\n')
+			line[ft_strlen(line) - 1] = '\0';
 		tokens = ft_split(line, ' ');
 		if ((line[0] == '\n' && !line[1]) || !tokens || !tokens[0])
 		{
@@ -120,33 +107,18 @@ int	init_struct(char *fname, int len)
 			if (tokens)
 				free_str_arr(tokens);
 			line = get_next_line(fd);
-			if (line)
-				line[ft_strlen(line) - 1] = '\0';
 			continue ;
 		}
 		objs[i] = get_obj(tokens);
 		free(line);
 		free_str_arr(tokens);
 		if (!objs[i++])
-		{
-			printf("Invalid obj %d\n", i);
-			return (free_obj_arr(objs), 0);
-		}
+			return (ft_print_error("Invalid object"), free_obj_arr(objs), 0);
 		line = get_next_line(fd);
-		if (line)
-			line[ft_strlen(line) - 1] = '\0';
 	}
 	if (close(fd) == -1)
-	{
-		line = ft_strjoin("Error closing file: ", strerror(errno));
-		ft_print_error(line);
-		return (free(line), 0);
-	}
-	if (is_valid_obj_nbr(objs))
-		ft_get_program()->objs = objs;
-	else
-		return (free_obj_arr(objs), 0);
-	return (1);
+		return (print_err_extend("Error closing file: ", strerror(errno)), 0);
+	return (is_valid_obj_nbr(objs));
 }
 
 /**
@@ -196,10 +168,11 @@ int	is_valid_obj_nbr(t_object	**objs)
 		if (objs[i]->type < 3)
 			single_occur[objs[i]->type]++;
 	if (single_occur[0] != 1)
-		return (ft_print_error("Should exists exact one A"), 0);
+		return (ft_print_error("Expect exact one A"), free_obj_arr(objs), 0);
 	if (single_occur[1] != 1)
-		return (ft_print_error("Should exists exact one C"), 0);
+		return (ft_print_error("Expect exact one C"), free_obj_arr(objs), 0);
 	if (single_occur[2] != 1)
-		return (ft_print_error("Should exists exact one L"), 0);
+		return (ft_print_error("Expect exact one L"), free_obj_arr(objs), 0);
+	ft_get_program()->objs = objs;
 	return (1);
 }

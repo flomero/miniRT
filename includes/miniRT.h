@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 16:56:11 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/10 17:19:30 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void			ft_key_hook(void *param);
 
 // ERRORS
 void			ft_print_error(const char *error);
+void			print_err_extend(const char *msg1, const char *msg2);
 
 // PARSING
 int				is_valid_parsing(char *fname);
