@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 17:19:30 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/10 22:52:47 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,11 @@ void			print_err_extend(const char *msg1, const char *msg2);
 
 // PARSING
 int				is_valid_parsing(char *fname);
-int				get_nbr_of_lines(char *fname);
 int				init_struct(char *fname, int len);
 t_object		*get_obj(char **tokens);
 int				is_valid_obj_nbr(t_object	**objs);
 
 // PARSING UTILS
-void			free_str_arr(char **arr);
-void			free_obj_arr(t_object **arr);
-uint32_t		int_to_rgb(int red, int green, int blue);
 int				get_arr_len(char **arr);
 void			print_rgb(uint32_t color);
 void			print_objs(void);
@@ -70,12 +66,18 @@ int				get_vector(t_vector3 *vector, char *str);
 int				in_range(t_vector3 *vector, float start, float end);
 int				get_color(char *token, uint32_t *result);
 
+// PARSING UTILS3
+void			free_str_arr(char **arr);
+void			free_obj_arr(t_object **arr);
+t_object		*get_cy(char **tokens);
+int				get_nbr_of_lines(char *fname);
+uint32_t		int_to_rgb(int red, int green, int blue);
+
 // PARSING HANDLERS
 t_object		*get_a(char **tokens);
 t_object		*get_c(char **tokens);
 t_object		*get_l(char **tokens);
 t_object		*get_sp(char **tokens);
 t_object		*get_pl(char **tokens);
-t_object		*get_cy(char **tokens);
 
 #endif

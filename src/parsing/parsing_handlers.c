@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 14:41:37 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/10 17:07:39 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/10 22:48:44 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,34 +128,7 @@ t_object	*get_pl(char **tokens)
 	return (obj);
 }
 
-t_object	*get_cy(char **tokens)
-{
-	t_object	*obj;
-	float		diameter;
-	float		height;
-
-	obj = malloc (sizeof(t_object));
-	if (!obj)
-		return (ft_print_error(ALLOC_ERR), NULL);
-	obj->type = CYLINDER;
-	if (get_arr_len(tokens) != 6)
-		return (free(obj), NULL);
-	obj->pos.x = 10;
-	if (!get_vector(&obj->pos, tokens[1]))
-		return (free(obj), NULL);
-	if (!get_vector(&obj->s_cylinder.normal, tokens[2]))
-		return (free(obj), NULL);
-	if (!in_range(&obj->s_cylinder.normal, -1, 1))
-		return (free(obj), NULL);
-	if (!is_float(tokens[3]) && !is_int(tokens[3]))
-		return (free(obj), NULL);
-	diameter = (float) ft_atod(tokens[3]);
-	if (!is_float(tokens[4]) && !is_int(tokens[4]))
-		return (free(obj), NULL);
-	height = (float) ft_atod(tokens[4]);
-	if (!get_color(tokens[5], &obj->color))
-		return (free(obj), NULL);
-	obj->s_cylinder.diameter = diameter;
-	obj->s_cylinder.height = height;
-	return (obj);
-}
+/*
+t_object	*get_cy(char **tokens): This implementation is on parsing_utils3.c
+in order for norminette to aprove it.
+ */

@@ -6,11 +6,13 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:15:15 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/10 17:37:22 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/10 22:58:10 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+static int	proccess_line(int fd, t_object	**objs);
 
 /**
  * @brief does the whole parsing and validation check, that consists of these:
@@ -38,40 +40,6 @@ int	is_valid_parsing(char *fname)
 }
 
 /**
- * @brief Get the nbr of lines, count how many lines there are in a file,
- * skipping empty lines
- *
- * @param fname the file which will read and count how many lines it contains
- * @return int -1 if its an error opening-closing file, nbr of lines otherwise
- */
-int	get_nbr_of_lines(char *fname)
-{
-	char	*line;
-	int		count;
-	int		fd;
-	char	**tokens;
-
-	fd = open(fname, O_RDONLY);
-	if (fd == -1)
-		return (print_err_extend("Error opening file: ", strerror(errno)), -1);
-	line = get_next_line(fd);
-	count = 0;
-	while (line)
-	{
-		tokens = ft_split(line, ' ');
-		if (!((line[0] == '\n' && !line[1]) || !tokens || !tokens[0]))
-			count++;
-		free(line);
-		if (tokens)
-			free_str_arr(tokens);
-		line = get_next_line(fd);
-	}
-	if (close(fd) == -1)
-		return (print_err_extend("Error closing file: ", strerror(errno)), -1);
-	return (count);
-}
-
-/**
  * @brief reads each object from .rt file and initialize the program's struct
  *
  * @param fname name of .rt file
@@ -81,10 +49,8 @@ int	get_nbr_of_lines(char *fname)
 int	init_struct(char *fname, int len)
 {
 	t_object	**objs;
-	int			i;
-	char		*line;
 	int			fd;
-	char		**tokens;
+	int			i;
 
 	objs = malloc(sizeof(t_object *) * (len + 1));
 	if (!objs)
@@ -93,7 +59,28 @@ int	init_struct(char *fname, int len)
 	while (++i < len + 1)
 		objs[i] = NULL;
 	fd = open(fname, O_RDONLY);
+	if (fd == -1)
 		return (print_err_extend("Error opening file: ", strerror(errno)), 0);
+	if (!proccess_line(fd, objs))
+		return (0);
+	if (close(fd) == -1)
+		return (print_err_extend("Error closing file: ", strerror(errno)), 0);
+	return (is_valid_obj_nbr(objs));
+}
+
+/**
+ * @brief it reads line by line and initialize one object at a time
+ *
+ * @param fd
+ * @param objs
+ * @return int 1 on success, 0 otherwise
+ */
+static int	proccess_line(int fd, t_object	**objs)
+{
+	char		*line;
+	char		**tokens;
+	int			i;
+
 	line = get_next_line(fd);
 	i = 0;
 	while (line)
@@ -101,24 +88,20 @@ int	init_struct(char *fname, int len)
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
 		tokens = ft_split(line, ' ');
-		if ((line[0] == '\n' && !line[1]) || !tokens || !tokens[0])
+		free(line);
+		if (!tokens || !tokens[0])
 		{
-			free(line);
-			if (tokens)
-				free_str_arr(tokens);
 			line = get_next_line(fd);
+			free_str_arr(tokens);
 			continue ;
 		}
 		objs[i] = get_obj(tokens);
-		free(line);
 		free_str_arr(tokens);
 		if (!objs[i++])
 			return (ft_print_error("Invalid object"), free_obj_arr(objs), 0);
 		line = get_next_line(fd);
 	}
-	if (close(fd) == -1)
-		return (print_err_extend("Error closing file: ", strerror(errno)), 0);
-	return (is_valid_obj_nbr(objs));
+	return (1);
 }
 
 /**
