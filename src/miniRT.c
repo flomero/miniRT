@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 12:04:01 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/10 15:44:53 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,16 @@ t_program	*ft_get_program(void)
 	return (&program);
 }
 
+void	leaks(void)
+{
+	system ("leaks miniRT");
+}
+
 int	main(int argc, char **argv)
 {
 	t_program	*program;
 
+	// atexit(leaks);
 	if (argc != 2)
 		return (0);
 	if (!is_valid_parsing(argv[1]))
