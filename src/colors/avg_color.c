@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 11:35:03 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 13:31:51 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/10 14:58:11 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ uint32_t	ft_avg_color(uint32_t *colors, size_t x)
 
 uint32_t	ft_new_avg_color(uint32_t color, u_int32_t avg, int factor)
 {
-	int	rgb[3];
-	int	avg_color[3];
+	uint32_t	rgb[3];
+	uint32_t	avg_color[3];
 
 	rgb[0] = (color >> 24) & 0xFF;
 	rgb[1] = (color >> 16) & 0xFF;
