@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 16:28:34 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/10 13:40:29 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/10 15:12:05 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,43 @@ void	print_objs(void)
 	while (objs[i])
 	{
 		printf("Object %d:\nID: %d\n", i, objs[i]->type);
-		printf("Position: %.2f %.2f %.2f\n", objs[i]->pos.x, objs[i]->pos.y, \
-		 objs[i]->pos.z);
-		printf("Color: %d, ", objs[i]->color);
-		print_rgb(objs[i]->color);
+		if (objs[i]->type == 0)
+			printf("Type: Ambient lightning\nRatio: %.2f\n", \
+			objs[i]->s_ambient_light.ratio);
+		else if (objs[i]->type == 1)
+		{
+			printf("Type: Camera\nFOV: %.2f\n", \
+			objs[i]->s_camera.fov);
+			printf("Normal: %.2f %.2f %.2f\n", objs[i]->s_camera.normal.x, \
+			objs[i]->s_camera.normal.y, objs[i]->s_camera.normal.z);
+		}
+		else if (objs[i]->type == 2)
+			printf("Type: Light\nBrightness: %.2f\n", \
+			objs[i]->s_light.brightness);
+		else if (objs[i]->type == 3)
+			printf("Type: Sphere\nDiameter: %.2f\n", \
+			objs[i]->s_sphere.diameter);
+		else if (objs[i]->type == 4)
+		{
+			printf("Type: Plane\n");
+			printf("Normal: %.2f %.2f %.2f\n", objs[i]->s_plane.normal.x, \
+			objs[i]->s_plane.normal.y, objs[i]->s_plane.normal.z);
+		}
+		else if (objs[i]->type == 5)
+		{
+			printf("Type: Cylinder\nDiameter: %.2f\nHeight: %.2f\n", \
+			objs[i]->s_cylinder.diameter, objs[i]->s_cylinder.height);
+			printf("Normal: %.2f %.2f %.2f\n", objs[i]->s_cylinder.normal.x, \
+			objs[i]->s_cylinder.normal.y, objs[i]->s_cylinder.normal.z);
+		}
+		if (objs[i]->type != 0)
+			printf("Position: %.2f %.2f %.2f\n", objs[i]->pos.x, \
+			objs[i]->pos.y, objs[i]->pos.z);
+		if (objs[i]->type != 1)
+		{
+			printf("Color: %d, ", objs[i]->color);
+			print_rgb(objs[i]->color);
+		}
 		printf("\n---------------- --------------------\n");
 		i++;
 	}

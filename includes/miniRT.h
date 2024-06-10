@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 14:34:53 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/10 15:28:09 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int				is_valid_parsing(char *fname);
 int				get_nbr_of_lines(char *fname);
 int				init_struct(char *fname, int len);
 t_object		*get_obj(char **tokens);
+int				is_valid_obj_nbr(t_object	**objs);
 
 // PARSING UTILS
 void			free_str_arr(char **arr);

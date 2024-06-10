@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:15:15 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/10 14:34:05 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/10 15:28:19 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,8 +142,10 @@ int	init_struct(char *fname, int len)
 		ft_print_error(line);
 		return (free(line), 0);
 	}
-	ft_get_program()->objs = objs;
-	ft_get_program()->objs[i] = NULL;
+	if (is_valid_obj_nbr(objs))
+		ft_get_program()->objs = objs;
+	else
+		return (free_obj_arr(objs), 0);
 	return (1);
 }
 
@@ -170,4 +172,33 @@ t_object	*get_obj(char **tokens)
 		return (get_cy(tokens));
 	ft_print_error("Not valid object identifier");
 	return (NULL);
+}
+
+/**
+ * @brief checks if exists exactly one A, C and L (Ambient lighting, Camera and Light)
+ *
+ * @param t_object **objs null terminated objs list which will be checked
+ * @return int returns 1 if is valid number, 0 otherwise
+ */
+int	is_valid_obj_nbr(t_object	**objs)
+{
+	int			i;
+	int			single_occur[3];
+
+	i = -1;
+	while (++i < 3)
+		single_occur[i] = 0;
+	if (!objs)
+		return (0);
+	i = -1;
+	while (objs[++i])
+		if (objs[i]->type < 3)
+			single_occur[objs[i]->type]++;
+	if (single_occur[0] != 1)
+		return (ft_print_error("Should exists exact one A"), 0);
+	if (single_occur[1] != 1)
+		return (ft_print_error("Should exists exact one C"), 0);
+	if (single_occur[2] != 1)
+		return (ft_print_error("Should exists exact one L"), 0);
+	return (1);
 }
