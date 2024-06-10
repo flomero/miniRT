@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:56:51 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 14:00:26 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/10 15:04:20 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,6 @@ void	ft_key_hook(mlx_key_data_t keydata, void *param)
 		mlx_terminate(program->mlx);
 		exit(0);
 	}
+	if (keydata.key == MLX_KEY_SPACE)
+		program->current_sample = 0;
 }

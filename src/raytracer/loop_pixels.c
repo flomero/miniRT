@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:49:43 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 14:00:53 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/10 17:20:04 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	loop_pixels(t_program *program)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			color = ft_send_ray(x, y, &program->objects[0]);
+			color = ft_send_ray(x, y, ft_get_first_obj(CAMERA));
 			if (program->current_sample == 0)
 				program->colors_avgs[x][y] = color;
 			else
