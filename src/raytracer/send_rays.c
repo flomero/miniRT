@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:48:28 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/09 17:02:43 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/10 11:59:31 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ uint32_t	ft_send_ray(int x, int y, t_object *camera)
 	float		v;
 
 	ray.origin = camera->pos;
-	u = (float)x / (float)(WIN_WIDTH - 1);
-	v = (float)y / (float)(WIN_HEIGHT - 1);
+	u = ((float)x + ft_randf()) / (float)(WIN_WIDTH - 1);
+	v = ((float)y + ft_randf()) / (float)(WIN_HEIGHT - 1);
 	ray.direction = ft_v3_sub(ft_v3_add(ft_v3_add(camera->s_camera.lower_left_corner,
 					ft_v3_scalar(camera->s_camera.horizontal, u)),
 				ft_v3_scalar(camera->s_camera.vertical, v)), camera->pos);

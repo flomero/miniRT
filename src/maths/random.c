@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   config.h                                           :+:      :+:    :+:   */
+/*   random.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/07 14:29:22 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 12:06:25 by flfische         ###   ########.fr       */
+/*   Created: 2024/06/10 11:56:52 by flfische          #+#    #+#             */
+/*   Updated: 2024/06/10 11:57:59 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONFIG_H
-# define CONFIG_H
+#include "miniRT.h"
 
-# define WIN_TITLE "miniRT"
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 600
-# define BACKGROUND_COLOR 0x000000FF
-# define SAMPLES 50
-
-// VIEWPORT
-# define VIEWPORT_WIDTH 2.0
-# define FOCAL_LENGTH 1.0
-
-// COLORS
-# define RESET "\033[0m"
-# define RED "\033[31m"
-# define BOLD "\033[1m"
-
-#endif
+/**
+ * Generates a random float between 0 and 1.
+ *
+ * @return The random float.
+ */
+float	ft_randf(void)
+{
+	return ((float)rand() / (float)RAND_MAX);
+}

@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/09 17:47:05 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/10 11:58:25 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,11 @@ void			ft_calculate_viewport(t_object *camera);
 // ERRORS
 void			ft_print_error(const char *error);
 
+// COLORS
+uint32_t		ft_avg_color(uint32_t *colors, size_t x);
+
 // MATHS
+float			ft_randf(void);
 t_vector3		*ft_v3_add(t_vector3 *a, t_vector3 *b);
 t_vector3		*ft_v3_add_ip(t_vector3 *a, t_vector3 *b);
 t_vector3		*ft_v3_crossprod(t_vector3 *a, t_vector3 *b);

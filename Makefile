@@ -6,12 +6,12 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/09 14:44:16 by flfische         ###   ########.fr        #
+#    Updated: 2024/06/10 11:58:17 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fno-sanitize=null -fno-sanitize=alignment
+CFLAGS = -Wall -Wextra -Werror
 MAKEFLAGS += --no-print-directory
 NAME := miniRT
 # DIRECTORIES
@@ -21,6 +21,7 @@ SRC_DIRS := src \
 			src/maths \
 			src/objects \
 			src/raytracer \
+			src/colors \
 
 
 OBJ_DIR := obj
@@ -42,10 +43,14 @@ CFILES += camera.c \
 			sphere.c \
 
 # RT
-CFILES += send_rays.c
+CFILES += send_rays.c \
+
+# COLORS
+CFILES += avg_color.c \
 
 # MATHS
-CFILES += v3_add.c \
+CFILES += random.c \
+			v3_add.c \
 			v3_copy.c \
 			v3_crossprod.c \
 			v3_div.c \

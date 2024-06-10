@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/09 17:46:24 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/10 11:40:22 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,11 @@ void	dummy_data(t_program *program)
 
 void	loop_pixels(t_program *program)
 {
-	int	x;
-	int	y;
-	int	color;
+	int			x;
+	int			y;
+	uint32_t	color[SAMPLES];
+	uint32_t	avg_color;
+	size_t		i;
 
 	y = 0;
 	while (y < WIN_HEIGHT)
@@ -55,8 +57,14 @@ void	loop_pixels(t_program *program)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			color = ft_send_ray(x, y, &program->objects[0]);
-			mlx_put_pixel(program->image, x, y, color);
+			i = 0;
+			while (i < SAMPLES)
+			{
+				color[i] = ft_send_ray(x, y, &program->objects[0]);
+				i++;
+			}
+			avg_color = ft_avg_color(color, SAMPLES);
+			mlx_put_pixel(program->image, x, y, avg_color);
 			x++;
 		}
 		y++;
