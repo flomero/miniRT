@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/10 11:58:17 by flfische         ###   ########.fr        #
+#    Updated: 2024/06/10 13:50:42 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ CFILES += camera.c \
 
 # RT
 CFILES += send_rays.c \
+			loop_pixels.c \
 
 # COLORS
 CFILES += avg_color.c \

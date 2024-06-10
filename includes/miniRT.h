@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 11:58:25 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/10 13:55:45 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ typedef struct s_program
 	t_vector2	img_size;
 	t_object	*objects;
 	int			object_count;
+	int			current_sample;
+	uint32_t	colors_avgs[WIN_WIDTH][WIN_HEIGHT];
 }				t_program;
 
 // FUNCTIONS
@@ -68,9 +70,11 @@ t_program		*ft_get_program(void);
 
 // MLX
 int				ft_mlx_init(void);
-void			ft_key_hook(void *param);
+void			ft_render(void *param);
+void			ft_key_hook(mlx_key_data_t key_data, void *param);
 
 // RAYTRACER
+void			loop_pixels(t_program *program);
 uint32_t		ft_send_ray(int x, int y, t_object *camera);
 uint32_t		ft_trace_ray(t_ray *ray);
 
@@ -85,6 +89,7 @@ void			ft_print_error(const char *error);
 
 // COLORS
 uint32_t		ft_avg_color(uint32_t *colors, size_t x);
+uint32_t		ft_new_avg_color(uint32_t color, u_int32_t avg, int factor);
 
 // MATHS
 float			ft_randf(void);

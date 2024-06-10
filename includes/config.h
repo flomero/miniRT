@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:29:22 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 12:06:25 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/10 13:40:40 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define CONFIG_H
 
 # define WIN_TITLE "miniRT"
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 600
+# define WIN_WIDTH 1200
+# define WIN_HEIGHT 800
 # define BACKGROUND_COLOR 0x000000FF
-# define SAMPLES 50
+# define SAMPLES 100
 
 // VIEWPORT
 # define VIEWPORT_WIDTH 2.0

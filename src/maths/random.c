@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 11:56:52 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 11:57:59 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/10 13:37:47 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@
  */
 float	ft_randf(void)
 {
-	return ((float)rand() / (float)RAND_MAX);
+	return (((float)rand() / ((float)RAND_MAX) + 1.0));
 }

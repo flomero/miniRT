@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 11:40:22 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/10 13:57:50 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,34 +43,6 @@ void	dummy_data(t_program *program)
 	program->objects[3].s_sphere.diameter = 1.0;
 }
 
-void	loop_pixels(t_program *program)
-{
-	int			x;
-	int			y;
-	uint32_t	color[SAMPLES];
-	uint32_t	avg_color;
-	size_t		i;
-
-	y = 0;
-	while (y < WIN_HEIGHT)
-	{
-		x = 0;
-		while (x < WIN_WIDTH)
-		{
-			i = 0;
-			while (i < SAMPLES)
-			{
-				color[i] = ft_send_ray(x, y, &program->objects[0]);
-				i++;
-			}
-			avg_color = ft_avg_color(color, SAMPLES);
-			mlx_put_pixel(program->image, x, y, avg_color);
-			x++;
-		}
-		y++;
-	}
-}
-
 int	main(void)
 {
 	t_program	*program;
@@ -80,7 +52,8 @@ int	main(void)
 		return (1);
 	dummy_data(program);
 	ft_calculate_viewport(&program->objects[0]);
-	mlx_loop_hook(program->mlx, ft_key_hook, program);
+	mlx_key_hook(program->mlx, ft_key_hook, program);
+	mlx_loop_hook(program->mlx, ft_render, program);
 	loop_pixels(program);
 	mlx_loop(program->mlx);
 	return (0);
