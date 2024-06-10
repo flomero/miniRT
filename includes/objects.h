@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:49:15 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/09 16:31:16 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/10 13:13:31 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_object
 			float			fov;
 			float			viewport_width;
 			float			viewport_height;
-			t_vector3		*lower_left_corner;
+			t_vector3		*ll_corner;
 			t_vector3		*horizontal;
 			t_vector3		*vertical;
 			float			focal_length;
