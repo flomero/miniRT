@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/09 18:09:58 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/10 12:00:59 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,15 @@ void			free_str_arr(char **arr);
 void			free_obj_arr(t_object **arr);
 uint32_t		int_to_rgb(int red, int green, int blue);
 int				get_arr_len(char **arr);
+void			print_rgb(uint32_t color);
+void			print_objs(void);
 
 // PARSING UTILS2
 int				is_int(char *str);
 int				is_float(char *str);
 int				get_vector(t_vector3 *vector, char *str);
 int				in_range(t_vector3 *vector, float start, float end);
+int				get_color(char *token, uint32_t *result);
 
 // PARSING HANDLERS
 t_object		*get_A(char **tokens);

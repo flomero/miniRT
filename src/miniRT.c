@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/09 13:20:06 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/10 12:04:01 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (0);
 	if (!is_valid_parsing(argv[1]))
-		printf("Not valid\n");
+		printf("Parsing is not valid\n");
 	else
-		printf("Valid\n");
+		printf("Parsing is valid\n");
+	print_objs();
 	return(0);
 	program = ft_get_program();
 	if (ft_mlx_init())
@@ -37,4 +38,3 @@ int	main(int argc, char **argv)
 	mlx_loop(program->mlx);
 	return (0);
 }
-

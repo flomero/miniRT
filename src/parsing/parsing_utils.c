@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 16:28:34 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/09 16:56:23 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/10 12:04:17 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,31 @@ void	free_obj_arr(t_object **arr)
 	free(arr);
 }
 
-// void	print_rgb(uint32_t color)
-// {
-// 	uint8_t red = (color >> 16) & 0xFF;
-// 	uint8_t green = (color >> 8) & 0xFF;
-// 	uint8_t blue = color & 0xFF;
-// 	printf("RGB(%d, %d, %d)\n", red, green, blue);
-// }
+void	print_rgb(uint32_t color)
+{
+	uint8_t red = (color >> 16) & 0xFF;
+	uint8_t green = (color >> 8) & 0xFF;
+	uint8_t blue = color & 0xFF;
+	printf("RGB(%d, %d, %d)\n", red, green, blue);
+}
+
+void	print_objs(void)
+{
+	t_object	**objs;
+	int			i;
+
+	objs = ft_get_program()->objs;
+	if (!objs)
+		return ;
+	i = 0;
+	while (objs[i])
+	{
+		printf("Object %d:\nID: %d\n", i, objs[i]->type);
+		printf("Position: %.2f %.2f %.2f\n", objs[i]->pos->x, objs[i]->pos->y, \
+		 objs[i]->pos->z);
+		printf("Color: %d, ", objs[i]->color);
+		print_rgb(objs[i]->color);
+		printf("\n---------------- --------------------\n");
+		i++;
+	}
+}

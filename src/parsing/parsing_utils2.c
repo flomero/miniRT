@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 16:32:02 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/09 18:53:48 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/10 11:06:08 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,29 @@ int	in_range(t_vector3 *vector, float start, float end)
 		return (0);
 	if (vector->z < start || vector->z > end)
 		return (0);
+	return (1);
+}
+
+/**
+ * @brief Get the color object
+ *
+ * @param token a string in format "255,255,255"
+ * @param result the result, which is uint32_t that includes all rgb colors
+ * @return int 0 on error, 1 on success
+ */
+int	get_color(char *token, uint32_t *result)
+{
+	char	**rgb;
+	int		i;
+
+	rgb = ft_split(token, ',');
+	i = -1;
+	while (rgb[++i])
+		if (!is_int(rgb[i]) || ft_atoi(rgb[i]) > 255 || ft_atoi(rgb[i]) < 0)
+			return (free_str_arr(rgb), 0);
+	if (get_arr_len(rgb) != 3)
+		return (free_str_arr(rgb), 0);
+	*result = int_to_rgb(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]));
+	free_str_arr(rgb);
 	return (1);
 }
