@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 16:32:02 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/10 14:34:05 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/10 15:42:07 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	get_vector(t_vector3 *vector, char *str)
 			return (free_str_arr(nums), 0);
 		i++;
 	}
+	free_str_arr(nums);
 	vector->x = result[0];
 	vector->y = result[1];
 	vector->z = result[2];

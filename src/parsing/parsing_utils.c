@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 16:28:34 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/10 15:12:05 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/10 16:58:02 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	get_arr_len(char **arr)
 
 uint32_t	int_to_rgb(int red, int green, int blue)
 {
-	return ((uint32_t)red << 16) | ((uint32_t)green << 8) | (uint32_t)blue;
+	return (((uint32_t)red << 16) | ((uint32_t)green << 8) | (uint32_t)blue);
 }
 
 /**
@@ -63,9 +63,13 @@ void	free_obj_arr(t_object **arr)
 
 void	print_rgb(uint32_t color)
 {
-	uint8_t red = (color >> 16) & 0xFF;
-	uint8_t green = (color >> 8) & 0xFF;
-	uint8_t blue = color & 0xFF;
+	uint8_t	red;
+	uint8_t	green;
+	uint8_t	blue;
+
+	red = (color >> 16) & 0xFF;
+	green = (color >> 8) & 0xFF;
+	blue = color & 0xFF;
 	printf("RGB(%d, %d, %d)\n", red, green, blue);
 }
 

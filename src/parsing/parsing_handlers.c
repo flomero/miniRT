@@ -6,20 +6,20 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 14:41:37 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/10 14:58:45 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/10 17:07:39 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_object	*get_A(char **tokens)
+t_object	*get_a(char **tokens)
 {
 	t_object	*obj;
 	float		ratio;
 
 	obj = malloc (sizeof(t_object));
 	if (!obj)
-		return (ft_print_error("Allocation error"), NULL);
+		return (ft_print_error(ALLOC_ERR), NULL);
 	if (get_arr_len(tokens) != 3)
 		return (free(obj), NULL);
 	if (!is_float(tokens[1]) && !is_int(tokens[1]))
@@ -34,14 +34,14 @@ t_object	*get_A(char **tokens)
 	return (obj);
 }
 
-t_object	*get_C(char **tokens)
+t_object	*get_c(char **tokens)
 {
 	t_object	*obj;
 	float		fov;
 
 	obj = malloc (sizeof(t_object));
 	if (!obj)
-		return (ft_print_error("Allocation error"), NULL);
+		return (ft_print_error(ALLOC_ERR), NULL);
 	obj->type = CAMERA;
 	obj->color = 0;
 	if (get_arr_len(tokens) != 4)
@@ -61,14 +61,14 @@ t_object	*get_C(char **tokens)
 	return (obj);
 }
 
-t_object	*get_L(char **tokens)
+t_object	*get_l(char **tokens)
 {
 	t_object	*obj;
 	float		brightness;
 
 	obj = malloc (sizeof(t_object));
 	if (!obj)
-		return (ft_print_error("Allocation error"), NULL);
+		return (ft_print_error(ALLOC_ERR), NULL);
 	obj->type = LIGHT;
 	if (get_arr_len(tokens) != 4)
 		return (free(obj), NULL);
@@ -92,7 +92,7 @@ t_object	*get_sp(char **tokens)
 
 	obj = malloc (sizeof(t_object));
 	if (!obj)
-		return (ft_print_error("Allocation error"), NULL);
+		return (ft_print_error(ALLOC_ERR), NULL);
 	obj->type = SPHERE;
 	if (get_arr_len(tokens) != 4)
 		return (free(obj), NULL);
@@ -113,7 +113,7 @@ t_object	*get_pl(char **tokens)
 
 	obj = malloc (sizeof(t_object));
 	if (!obj)
-		return (ft_print_error("Allocation error"), NULL);
+		return (ft_print_error(ALLOC_ERR), NULL);
 	obj->type = PLANE;
 	if (get_arr_len(tokens) != 4)
 		return (free(obj), NULL);
@@ -136,7 +136,7 @@ t_object	*get_cy(char **tokens)
 
 	obj = malloc (sizeof(t_object));
 	if (!obj)
-		return (ft_print_error("Allocation error"), NULL);
+		return (ft_print_error(ALLOC_ERR), NULL);
 	obj->type = CYLINDER;
 	if (get_arr_len(tokens) != 6)
 		return (free(obj), NULL);
@@ -159,4 +159,3 @@ t_object	*get_cy(char **tokens)
 	obj->s_cylinder.height = height;
 	return (obj);
 }
-

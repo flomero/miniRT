@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 15:28:09 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/10 16:56:11 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ int				in_range(t_vector3 *vector, float start, float end);
 int				get_color(char *token, uint32_t *result);
 
 // PARSING HANDLERS
-t_object		*get_A(char **tokens);
-t_object		*get_C(char **tokens);
-t_object		*get_L(char **tokens);
+t_object		*get_a(char **tokens);
+t_object		*get_c(char **tokens);
+t_object		*get_l(char **tokens);
 t_object		*get_sp(char **tokens);
 t_object		*get_pl(char **tokens);
 t_object		*get_cy(char **tokens);

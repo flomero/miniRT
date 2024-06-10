@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:15:15 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/10 15:28:19 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/10 16:56:11 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	get_nbr_of_lines(char *fname)
 	char	*line;
 	int		count;
 	int		fd;
-	char		**tokens;
+	char	**tokens;
 
 	fd = open(fname, O_RDONLY);
 	if (fd == -1)
@@ -60,7 +60,7 @@ int	get_nbr_of_lines(char *fname)
 	}
 	line = get_next_line(fd);
 	count = 0;
-	while(line)
+	while (line)
 	{
 		tokens = ft_split(line, ' ');
 		if (!((line[0] == '\n' && !line[1]) || !tokens || !tokens[0]))
@@ -88,11 +88,11 @@ int	get_nbr_of_lines(char *fname)
  */
 int	init_struct(char *fname, int len)
 {
-	t_object **objs;
-	int		i;
-	char	*line;
-	int		fd;
-	char	**tokens;
+	t_object	**objs;
+	int			i;
+	char		*line;
+	int			fd;
+	char		**tokens;
 
 	objs = malloc(sizeof(t_object *) * (len + 1));
 	if (!objs)
@@ -111,7 +111,7 @@ int	init_struct(char *fname, int len)
 	if (line)
 		line[ft_strlen(line) - 1] = '\0';
 	i = 0;
-	while(line)
+	while (line)
 	{
 		tokens = ft_split(line, ' ');
 		if ((line[0] == '\n' && !line[1]) || !tokens || !tokens[0])
@@ -159,11 +159,11 @@ int	init_struct(char *fname, int len)
 t_object	*get_obj(char **tokens)
 {
 	if (!ft_strcmp("A", tokens[0]))
-		return (get_A(tokens));
+		return (get_a(tokens));
 	else if (!ft_strcmp("C", tokens[0]))
-		return (get_C(tokens));
+		return (get_c(tokens));
 	else if (!ft_strcmp("L", tokens[0]))
-		return (get_L(tokens));
+		return (get_l(tokens));
 	else if (!ft_strcmp("sp", tokens[0]))
 		return (get_sp(tokens));
 	else if (!ft_strcmp("pl", tokens[0]))
@@ -175,7 +175,8 @@ t_object	*get_obj(char **tokens)
 }
 
 /**
- * @brief checks if exists exactly one A, C and L (Ambient lighting, Camera and Light)
+ * @brief checks if exists exactly one A, C and L
+ * (Ambient light, Camera and Light)
  *
  * @param t_object **objs null terminated objs list which will be checked
  * @return int returns 1 if is valid number, 0 otherwise
