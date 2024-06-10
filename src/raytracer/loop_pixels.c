@@ -6,12 +6,17 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:49:43 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 13:50:09 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/10 14:00:53 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+/**
+ * Loops through all pixels and sends a ray for each pixel.
+ *
+ * @param program The program.
+ */
 void	loop_pixels(t_program *program)
 {
 	int			x;

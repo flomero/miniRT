@@ -6,12 +6,19 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:39:59 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/09 15:24:05 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/10 13:59:54 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+/**
+ * Copies a vector.
+ *
+ * @param v The vector to copy.
+ * @return The copied vector.
+ * @note The returned vector must be freed.
+ */
 t_vector3	*ft_v3_copy(t_vector3 *v)
 {
 	t_vector3	*result;

@@ -6,12 +6,19 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:34:52 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/09 16:28:03 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/10 14:00:46 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+/**
+ * Checks if a ray hits a sphere.
+ *
+ * @param sphere The sphere to check.
+ * @param ray The ray to check.
+ * @return The distance to the hit point or INFINITY if no hit.
+ */
 float	ft_sphere_hit(t_object *sphere, t_ray *ray)
 {
 	t_vector3	*oc;

@@ -6,12 +6,18 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:48:28 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 13:14:25 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/10 14:01:09 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+/**
+ * Traces a ray and returns the color of the closest object hit.
+ *
+ * @param ray The ray to trace.
+ * @return The color of the closest object hit.
+ */
 uint32_t	ft_trace_ray(t_ray *ray)
 {
 	int			i;
@@ -40,6 +46,14 @@ uint32_t	ft_trace_ray(t_ray *ray)
 	return (color);
 }
 
+/**
+ * Sends a ray for a pixel.
+ *
+ * @param x The x coordinate of the pixel.
+ * @param y The y coordinate of the pixel.
+ * @param camera The camera.
+ * @return The color of the pixel.
+ */
 uint32_t	ft_send_ray(int x, int y, t_object *camera)
 {
 	t_ray		ray;

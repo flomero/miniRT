@@ -6,12 +6,18 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:24:49 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 13:13:31 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/10 14:00:40 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+/**
+ * Calculates the lower left corner of the camera.
+ *
+ * @param camera The camera object.
+ * @return The lower left corner.
+ */
 static t_vector3	*calc_lower_left_corner(t_object *camera)
 {
 	t_vector3	*ll_corner;
