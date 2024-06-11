@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 22:52:47 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/11 08:12:21 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,9 @@ void			free_obj_arr(t_object **arr);
 t_object		*get_cy(char **tokens);
 int				get_nbr_of_lines(char *fname);
 uint32_t		int_to_rgb(int red, int green, int blue);
+
+// CUSTOM SPLIT
+char			**ft_multi_split(char const *s, char *set);
 
 // PARSING HANDLERS
 t_object		*get_a(char **tokens);

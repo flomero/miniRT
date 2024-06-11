@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:46:57 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/10 22:50:44 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/11 08:16:37 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	get_nbr_of_lines(char *fname)
 	count = 0;
 	while (line)
 	{
-		tokens = ft_split(line, ' ');
+		tokens = ft_multi_split(line, " \t");
 		if (!((line[0] == '\n' && !line[1]) || !tokens || !tokens[0]))
 			count++;
 		free(line);

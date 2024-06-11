@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:15:15 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/10 22:58:10 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/11 08:16:09 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static int	proccess_line(int fd, t_object	**objs)
 	{
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
-		tokens = ft_split(line, ' ');
+		tokens = ft_multi_split(line, " \t");
 		free(line);
 		if (!tokens || !tokens[0])
 		{

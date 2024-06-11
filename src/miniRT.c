@@ -6,15 +6,13 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 22:55:48 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/11 08:27:03 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 	TODO:
-		- replace tabs with spaces right before parsing(now we dont handle them)
 		- replace pointers in malloc with arrays to improve speed
-		- double check to point I replace \n with \0 after get_next_line()(\n\n)
 */
 
 #include "miniRT.h"
