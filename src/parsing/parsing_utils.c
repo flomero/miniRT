@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 16:28:34 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/11 09:41:30 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/11 10:53:19 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ void	print_objs(void)
 		print_a_c_l(objs[i]);
 		print_pl_cy_sp(objs[i]);
 		if (objs[i].type != 0)
-			printf("Position: %.2f %.2f %.2f\n", objs[i].pos.x, \
-			objs[i].pos.y, objs[i].pos.z);
+			printf("Position: %.2f %.2f %.2f\n", objs[i].pos.x, objs[i].pos.y,
+				objs[i].pos.z);
 		if (objs[i].type != 1)
 		{
-			printf("Color: %d, ", objs[i].color);
+			printf("Color: #%08x, ", objs[i].color);
 			print_rgb(objs[i].color);
 		}
 		printf("\n---------------- --------------------\n");
@@ -85,36 +85,33 @@ void	print_objs(void)
 static void	print_a_c_l(t_object obj)
 {
 	if (obj.type == 0)
-		printf("Type: Ambient lightning\nRatio: %.2f\n", \
-		obj.s_ambient_light.ratio);
+		printf("Type: Ambient lightning\nRatio: %.2f\n",
+			obj.s_ambient_light.ratio);
 	else if (obj.type == 1)
 	{
-		printf("Type: Camera\nFOV: %.2f\n", \
-		obj.s_camera.fov);
-		printf("Normal: %.2f %.2f %.2f\n", obj.s_camera.normal.x, \
-		obj.s_camera.normal.y, obj.s_camera.normal.z);
+		printf("Type: Camera\nFOV: %.2f\n", obj.s_camera.fov);
+		printf("Normal: %.2f %.2f %.2f\n", obj.s_camera.normal.x,
+			obj.s_camera.normal.y, obj.s_camera.normal.z);
 	}
 	else if (obj.type == 2)
-		printf("Type: Light\nBrightness: %.2f\n", \
-		obj.s_light.brightness);
+		printf("Type: Light\nBrightness: %.2f\n", obj.s_light.brightness);
 }
 
 static void	print_pl_cy_sp(t_object obj)
 {
 	if (obj.type == 3)
-		printf("Type: Sphere\nDiameter: %.2f\n", \
-		obj.s_sphere.diameter);
+		printf("Type: Sphere\nDiameter: %.2f\n", obj.s_sphere.diameter);
 	else if (obj.type == 4)
 	{
 		printf("Type: Plane\n");
-		printf("Normal: %.2f %.2f %.2f\n", obj.s_plane.normal.x, \
-		obj.s_plane.normal.y, obj.s_plane.normal.z);
+		printf("Normal: %.2f %.2f %.2f\n", obj.s_plane.normal.x,
+			obj.s_plane.normal.y, obj.s_plane.normal.z);
 	}
 	else if (obj.type == 5)
 	{
-		printf("Type: Cylinder\nDiameter: %.2f\nHeight: %.2f\n", \
-		obj.s_cylinder.diameter, obj.s_cylinder.height);
-		printf("Normal: %.2f %.2f %.2f\n", obj.s_cylinder.normal.x, \
-		obj.s_cylinder.normal.y, obj.s_cylinder.normal.z);
+		printf("Type: Cylinder\nDiameter: %.2f\nHeight: %.2f\n",
+			obj.s_cylinder.diameter, obj.s_cylinder.height);
+		printf("Normal: %.2f %.2f %.2f\n", obj.s_cylinder.normal.x,
+			obj.s_cylinder.normal.y, obj.s_cylinder.normal.z);
 	}
 }

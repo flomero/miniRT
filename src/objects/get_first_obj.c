@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 17:13:41 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 17:21:12 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/11 10:36:38 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ t_object	*ft_get_first_obj(t_object_type type)
 
 	program = ft_get_program();
 	i = 0;
-	while (i < program->object_count)
+	while (i < program->objs_len)
 	{
-		obj = &program->objects[i];
+		obj = &program->objs[i];
 		if (obj->type == type)
 			return (obj);
 		i++;

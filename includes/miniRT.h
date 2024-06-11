@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/11 10:34:48 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/11 10:36:44 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,10 @@ typedef struct s_program
 	mlx_t		*mlx;
 	mlx_image_t	*image;
 	t_vector2	img_size;
-	t_object	*objects;
-	int			object_count;
-	int			current_sample;
-	uint32_t	colors_avgs[WIN_WIDTH][WIN_HEIGHT];
 	t_object	*objs;
 	int			objs_len;
+	int			current_sample;
+	uint32_t	colors_avgs[WIN_WIDTH][WIN_HEIGHT];
 }				t_program;
 
 // FUNCTIONS

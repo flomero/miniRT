@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:48:28 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/11 10:14:31 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/11 10:39:34 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ uint32_t	ft_trace_ray(t_ray *ray)
 	closest = INFINITY;
 	program = ft_get_program();
 	color = BACKGROUND_COLOR;
-	while (i < program->object_count)
+	while (i < program->objs_len)
 	{
-		if (program->objects[i].type == SPHERE)
+		if (program->objs[i].type == SPHERE)
 		{
-			hit = ft_sphere_hit(&program->objects[i], ray);
+			hit = ft_sphere_hit(&program->objs[i], ray);
 			if (hit < closest)
 			{
-				color = program->objects[i].color;
+				color = program->objs[i].color;
 				closest = hit;
 			}
 		}
@@ -62,7 +62,7 @@ uint32_t	ft_send_ray(int x, int y, t_object *camera)
 	float		v;
 	t_vector3	temp_vec;
 
-	ray.origin = camera->pos;
+	ray.origin = &camera->pos;
 	u = ((float)x + ft_randf()) / (float)(WIN_WIDTH - 1);
 	v = ((float)y + ft_randf()) / (float)(WIN_HEIGHT - 1);
 	ray.direction = &(t_vector3){camera->s_camera.ll_corner->x,
@@ -73,7 +73,7 @@ uint32_t	ft_send_ray(int x, int y, t_object *camera)
 	ft_v3_init(&temp_vec, camera->s_camera.vertical->x * v,
 		camera->s_camera.vertical->y * v, camera->s_camera.vertical->z * v);
 	ft_v3_add_ip(ray.direction, &temp_vec);
-	ft_v3_sub_ip(ray.direction, camera->pos);
+	ft_v3_sub_ip(ray.direction, &camera->pos);
 	color = ft_trace_ray(&ray);
 	return (color);
 }

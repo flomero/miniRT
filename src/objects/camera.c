@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:24:49 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 14:00:40 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/11 10:44:19 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static t_vector3	*calc_lower_left_corner(t_object *camera)
 	horizontal = ft_v3_div(camera->s_camera.horizontal, 2.0);
 	vertical = ft_v3_div(camera->s_camera.vertical, 2.0);
 	temp = (t_vector3){0.0, 0.0, camera->s_camera.focal_length};
-	ll_corner = ft_v3_sub(camera->pos, horizontal);
+	ll_corner = ft_v3_sub(&camera->pos, horizontal);
 	ll_corner = ft_v3_sub_ip(ll_corner, vertical);
 	ll_corner = ft_v3_sub_ip(ll_corner, &temp);
 	free(horizontal);
@@ -46,6 +46,7 @@ void	ft_calculate_viewport(t_object *camera)
 	float	aspect_ratio;
 	float	theta;
 
+	camera->s_camera.focal_length = 1.0;
 	aspect_ratio = (float)WIN_WIDTH / (float)WIN_HEIGHT;
 	theta = camera->s_camera.fov * M_PI / 180.0;
 	camera->s_camera.viewport_height = 2.0 * tan(theta / 2.0);
