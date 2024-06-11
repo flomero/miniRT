@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:29:22 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 13:40:40 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/11 10:31:26 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,11 @@
 # define RESET "\033[0m"
 # define RED "\033[31m"
 # define BOLD "\033[1m"
+
+# ifndef DEBUG
+#  define DEBUG 0
+# endif
+
+# define ALLOC_ERR "Memory allocation failed"
 
 #endif

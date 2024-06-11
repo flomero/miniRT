@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/11 10:01:28 by flfische         ###   ########.fr        #
+#    Updated: 2024/06/11 10:31:17 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC_DIRS := src \
 			src/objects \
 			src/raytracer \
 			src/colors \
+			src/parsing \
 
 
 OBJ_DIR := obj
@@ -36,7 +37,12 @@ CFILES := miniRT.c \
 			mlx_init.c \
 			mlx_hooks.c \
 			print_error.c \
-
+			parsing.c \
+			parsing_handlers.c \
+			parsing_utils.c \
+			parsing_utils2.c \
+			parsing_utils3.c \
+			custom_split.c \
 
 # OBJECTS
 CFILES += get_first_obj.c \
@@ -87,7 +93,7 @@ ifeq ($(shell uname),Darwin)
 else ifeq ($(shell uname),Linux)
 	MLX42_FLAGS = -L$(MLX42_DIR)/build -lmlx42 -Iinclude -ldl -lglfw -pthread -lm
 endif
-INCLUDES += -I$(MLX42_DIR)/include/MLX42  
+INCLUDES += -I$(MLX42_DIR)/include/MLX42
 
 # RULES
 all: ascii $(NAME)
