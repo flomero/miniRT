@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:24:49 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/11 14:06:10 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/11 14:16:43 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,10 @@ static t_vector3	*calc_lower_left_corner(t_object *camera)
 	t_vector3	u;
 	t_vector3	v;
 	t_vector3	w;
-	t_vector3	look_at;
-	t_vector3	temp_vec;
 
-	ft_v3_init(&look_at, camera->pos.x, camera->pos.y, camera->pos.z);
-	ft_v3_init(&temp_vec, camera->s_camera.normal.x, camera->s_camera.normal.y,
-		camera->s_camera.normal.z);
-	ft_v3_scalar_ip(&temp_vec, camera->s_camera.focal_length);
-	ft_v3_add_ip(&look_at, &temp_vec);
-	ft_v3_init(&w, camera->pos.x - look_at.x, camera->pos.y - look_at.y,
-		camera->pos.z - look_at.z);
+	ft_v3_init(&w, camera->pos.x - camera->s_camera.look_at->x, camera->pos.y
+		- camera->s_camera.look_at->y, camera->pos.z
+		- camera->s_camera.look_at->z);
 	ft_v3_normal_ip(&w);
 	ft_v3_init(&u, 0.0, 1.0, 0.0);
 	ft_v3_crossprod_ip(&u, &w);
@@ -60,19 +54,21 @@ static t_vector3	*calc_lower_left_corner(t_object *camera)
  */
 void	ft_calculate_viewport(t_object *camera)
 {
-	float	aspect_ratio;
-	float	theta;
+	float		aspect_ratio;
+	float		theta;
+	t_vector3	temp_vec;
 
 	camera->s_camera.focal_length = 1.0;
 	aspect_ratio = (float)WIN_WIDTH / (float)WIN_HEIGHT;
+	camera->s_camera.look_at = ft_v3_new(camera->pos.x, camera->pos.y,
+			camera->pos.z);
+	ft_v3_init(&temp_vec, camera->s_camera.normal.x, camera->s_camera.normal.y,
+		camera->s_camera.normal.z);
+	ft_v3_scalar_ip(&temp_vec, camera->s_camera.focal_length);
+	ft_v3_add_ip(camera->s_camera.look_at, &temp_vec);
 	theta = camera->s_camera.fov * M_PI / 180.0;
 	camera->s_camera.viewport_height = 2.0 * tan(theta / 2.0);
 	camera->s_camera.viewport_width = aspect_ratio
 		* camera->s_camera.viewport_height;
-	// camera->s_camera.horizontal = ft_v3_new(camera->s_camera.viewport_width,
-	// 		0.0, 0.0);
-	// camera->s_camera.vertical = ft_v3_new(0.0,
-	// camera->s_camera.viewport_height,
-	// 		0.0);
 	camera->s_camera.ll_corner = calc_lower_left_corner(camera);
 }
