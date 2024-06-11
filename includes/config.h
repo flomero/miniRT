@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   config.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:29:22 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/07 14:38:12 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/10 22:54:02 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,11 @@
 # define RESET "\033[0m"
 # define RED "\033[31m"
 # define BOLD "\033[1m"
+
+# ifndef DEBUG
+#  define DEBUG 0
+# endif
+
+# define ALLOC_ERR "Memory allocation failed"
 
 #endif
