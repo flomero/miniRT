@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+         #
+#    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/11 08:12:45 by klamprak         ###   ########.fr        #
+#    Updated: 2024/06/11 10:31:17 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,10 @@ NAME := miniRT
 SRC_DIRS := src \
 			src/mlx \
 			src/errors \
+			src/maths \
+			src/objects \
+			src/raytracer \
+			src/colors \
 			src/parsing \
 
 
@@ -39,6 +43,32 @@ CFILES := miniRT.c \
 			parsing_utils2.c \
 			parsing_utils3.c \
 			custom_split.c \
+
+# OBJECTS
+CFILES += get_first_obj.c \
+			camera.c \
+			sphere.c \
+
+# RT
+CFILES += send_rays.c \
+			loop_pixels.c \
+
+# COLORS
+CFILES += avg_color.c \
+
+# MATHS
+CFILES += random.c \
+			v3_add.c \
+			v3_copy.c \
+			v3_crossprod.c \
+			v3_div.c \
+			v3_dotprod.c \
+			v3_init.c \
+			v3_len.c \
+			v3_new.c \
+			v3_normalize.c \
+			v3_scalar.c \
+			v3_sub.c \
 
 OFILES := $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
 

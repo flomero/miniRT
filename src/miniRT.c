@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/11 10:17:55 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/11 11:10:45 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_program	*ft_get_program(void)
 
 void	leaks(void)
 {
-	system ("leaks miniRT");
+	system("leaks miniRT");
 }
 
 int	main(int argc, char **argv)
@@ -46,7 +46,9 @@ int	main(int argc, char **argv)
 	program = ft_get_program();
 	if (ft_mlx_init())
 		return (1);
-	mlx_loop_hook(program->mlx, ft_key_hook, program);
+	ft_calculate_viewport(ft_get_first_obj(CAMERA));
+	mlx_key_hook(program->mlx, ft_key_hook, program);
+	mlx_loop_hook(program->mlx, ft_render, program);
 	mlx_loop(program->mlx);
 	return (0);
 }

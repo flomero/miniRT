@@ -6,12 +6,17 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:25:07 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/07 14:56:13 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/10 14:00:32 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+/**
+ * Initializes the mlx.
+ *
+ * @return 0 on success, 1 on error.
+ */
 int	ft_mlx_init(void)
 {
 	t_program	*program;

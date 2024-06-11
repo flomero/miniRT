@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:49:15 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 14:35:03 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/11 10:33:30 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@
 // TYPEDEFS
 typedef struct s_vector3
 {
-	float		x;
-	float		y;
-	float		z;
-}				t_vector3;
+	float				x;
+	float				y;
+	float				z;
+}						t_vector3;
 
 typedef struct s_vector2
 {
-	float		x;
-	float		y;
-}				t_vector2;
+	float				x;
+	float				y;
+}						t_vector2;
 
 typedef enum e_object_type
 {
@@ -38,43 +38,49 @@ typedef enum e_object_type
 	PLANE,
 	CYLINDER,
 	OBJECT_COUNT,
-}							t_object_type;
+}						t_object_type;
 
 typedef struct s_object
 {
-	uint32_t				color;
-	t_vector3				pos;
-	t_object_type			type;
+	uint32_t			color;
+	t_vector3			pos;
+	t_object_type		type;
 	union
 	{
 		struct
 		{
-			float			ratio;
+			float		ratio;
 		} s_ambient_light;
 		struct
 		{
-			t_vector3		normal;
-			float			fov;
+			t_vector3	normal;
+			float		fov;
+			float		viewport_width;
+			float		viewport_height;
+			t_vector3	*ll_corner;
+			t_vector3	*horizontal;
+			t_vector3	*vertical;
+			float		focal_length;
 		} s_camera;
 		struct
 		{
-			float			brightness;
+			float		brightness;
 		} s_light;
 		struct
 		{
-			float			diameter;
+			float		diameter;
 		} s_sphere;
 		struct
 		{
-			t_vector3		normal;
+			t_vector3	normal;
 		} s_plane;
 		struct
 		{
-			float			diameter;
-			float			height;
-			t_vector3		normal;
+			float		diameter;
+			float		height;
+			t_vector3	normal;
 		} s_cylinder;
 	};
-}							t_object;
+}						t_object;
 
 #endif

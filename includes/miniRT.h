@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/11 09:45:31 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/11 10:36:44 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,18 @@
 # include "objects.h"
 
 // TYPEDEFS
+typedef struct s_ray
+{
+	t_vector3	*origin;
+	t_vector3	*direction;
+}				t_ray;
+
+typedef enum e_bool
+{
+	FALSE,
+	TRUE
+}				t_bool;
+
 typedef struct s_program
 {
 	mlx_t		*mlx;
@@ -36,6 +48,8 @@ typedef struct s_program
 	t_vector2	img_size;
 	t_object	*objs;
 	int			objs_len;
+	int			current_sample;
+	uint32_t	colors_avgs[WIN_WIDTH][WIN_HEIGHT];
 }				t_program;
 
 // FUNCTIONS
@@ -43,7 +57,20 @@ t_program		*ft_get_program(void);
 
 // MLX
 int				ft_mlx_init(void);
-void			ft_key_hook(void *param);
+void			ft_render(void *param);
+void			ft_key_hook(mlx_key_data_t key_data, void *param);
+
+// RAYTRACER
+void			loop_pixels(t_program *program);
+uint32_t		ft_send_ray(int x, int y, t_object *camera);
+uint32_t		ft_trace_ray(t_ray *ray);
+
+// OBJECT HIT FUNCTIONS
+float			ft_sphere_hit(t_object *sphere, t_ray *ray);
+
+// OBJECT UTILS
+t_object		*ft_get_first_obj(t_object_type type);
+void			ft_calculate_viewport(t_object *camera);
 
 // ERRORS
 void			ft_print_error(const char *error);
@@ -53,7 +80,7 @@ void			print_err_extend(const char *msg1, const char *msg2);
 int				is_valid_parsing(char *fname);
 int				init_struct(char *fname, int len);
 int				get_obj(char **tokens, t_object *obj);
-int				is_valid_obj_nbr(t_object	*objs);
+int				is_valid_obj_nbr(t_object *objs);
 
 // PARSING UTILS
 int				get_arr_len(char **arr);
@@ -70,7 +97,7 @@ int				get_color(char *token, uint32_t *result);
 // PARSING UTILS3
 void			free_str_arr(char **arr);
 // void			free_obj_arr(t_object **arr);
-int				get_cy(char **tokens, t_object	*obj);
+int				get_cy(char **tokens, t_object *obj);
 int				get_nbr_of_lines(char *fname);
 uint32_t		int_to_rgb(int red, int green, int blue);
 
@@ -83,5 +110,29 @@ int				get_c(char **tokens, t_object *obj);
 int				get_l(char **tokens, t_object *obj);
 int				get_sp(char **tokens, t_object *obj);
 int				get_pl(char **tokens, t_object *obj);
+
+// COLORS
+uint32_t		ft_avg_color(uint32_t *colors, size_t x);
+uint32_t		ft_new_avg_color(uint32_t color, u_int32_t avg, int factor);
+
+// MATHS
+float			ft_randf(void);
+t_vector3		*ft_v3_add(t_vector3 *a, t_vector3 *b);
+t_vector3		*ft_v3_add_ip(t_vector3 *a, t_vector3 *b);
+t_vector3		*ft_v3_crossprod(t_vector3 *a, t_vector3 *b);
+t_vector3		*ft_v3_crossprod_ip(t_vector3 *a, t_vector3 *b);
+t_vector3		*ft_v3_copy(t_vector3 *v);
+t_vector3		*ft_v3_div(t_vector3 *a, float scalar);
+t_vector3		*ft_v3_div_ip(t_vector3 *a, float scalar);
+float			ft_v3_dotprod(t_vector3 *a, t_vector3 *b);
+t_vector3		*ft_v3_init(t_vector3 *v, float x, float y, float z);
+float			ft_v3_len(t_vector3 *a);
+t_vector3		*ft_v3_new(float x, float y, float z);
+t_vector3		*ft_v3_normal(t_vector3 *a);
+t_vector3		*ft_v3_normal_ip(t_vector3 *a);
+t_vector3		*ft_v3_scalar(t_vector3 *a, float scalar);
+t_vector3		*ft_v3_scalar_ip(t_vector3 *a, float scalar);
+t_vector3		*ft_v3_sub(t_vector3 *a, t_vector3 *b);
+t_vector3		*ft_v3_sub_ip(t_vector3 *a, t_vector3 *b);
 
 #endif

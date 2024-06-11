@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:46:57 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/11 09:36:11 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/11 10:53:52 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	free_str_arr(char **arr)
  * @param obj
  * @return int 1 on success, 0 otherwise
  */
-int	get_cy(char **tokens, t_object	*obj)
+int	get_cy(char **tokens, t_object *obj)
 {
 	obj->type = CYLINDER;
 	if (get_arr_len(tokens) != 6)
@@ -66,10 +66,10 @@ int	get_cy(char **tokens, t_object	*obj)
 		return (free(obj), 0);
 	if (!is_float(tokens[3]) && !is_int(tokens[3]))
 		return (free(obj), 0);
-	obj->s_cylinder.diameter = (float) ft_atod(tokens[3]);
+	obj->s_cylinder.diameter = (float)ft_atod(tokens[3]);
 	if (!is_float(tokens[4]) && !is_int(tokens[4]))
 		return (free(obj), 0);
-	obj->s_cylinder.height = (float) ft_atod(tokens[4]);
+	obj->s_cylinder.height = (float)ft_atod(tokens[4]);
 	if (!get_color(tokens[5], &obj->color))
 		return (free(obj), 0);
 	return (1);
@@ -119,5 +119,12 @@ int	get_nbr_of_lines(char *fname)
  */
 uint32_t	int_to_rgb(int red, int green, int blue)
 {
-	return (((uint32_t)red << 16) | ((uint32_t)green << 8) | (uint32_t)blue);
+	uint32_t	color;
+
+	color = 0;
+	color |= red << 24;
+	color |= green << 16;
+	color |= blue << 8;
+	color |= 0xFF;
+	return (color);
 }
