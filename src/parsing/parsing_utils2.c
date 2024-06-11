@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 16:32:02 by klamprak          #+#    #+#             */
 /*   Updated: 2024/06/10 15:42:07 by klamprak         ###   ########.fr       */
