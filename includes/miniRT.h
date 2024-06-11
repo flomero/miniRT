@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 17:19:45 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/11 10:01:34 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ t_vector3		*ft_v3_copy(t_vector3 *v);
 t_vector3		*ft_v3_div(t_vector3 *a, float scalar);
 t_vector3		*ft_v3_div_ip(t_vector3 *a, float scalar);
 float			ft_v3_dotprod(t_vector3 *a, t_vector3 *b);
+t_vector3		*ft_v3_init(t_vector3 *v, float x, float y, float z);
 float			ft_v3_len(t_vector3 *a);
 t_vector3		*ft_v3_new(float x, float y, float z);
 t_vector3		*ft_v3_normal(t_vector3 *a);

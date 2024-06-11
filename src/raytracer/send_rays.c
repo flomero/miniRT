@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:48:28 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 14:01:09 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/11 10:14:31 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,20 @@ uint32_t	ft_send_ray(int x, int y, t_object *camera)
 	uint32_t	color;
 	float		u;
 	float		v;
+	t_vector3	temp_vec;
 
 	ray.origin = camera->pos;
 	u = ((float)x + ft_randf()) / (float)(WIN_WIDTH - 1);
 	v = ((float)y + ft_randf()) / (float)(WIN_HEIGHT - 1);
-	ray.direction = ft_v3_sub(ft_v3_add(ft_v3_add(camera->s_camera.ll_corner,
-					ft_v3_scalar(camera->s_camera.horizontal, u)),
-				ft_v3_scalar(camera->s_camera.vertical, v)), camera->pos);
+	ray.direction = &(t_vector3){camera->s_camera.ll_corner->x,
+		camera->s_camera.ll_corner->y, camera->s_camera.ll_corner->z};
+	ft_v3_init(&temp_vec, camera->s_camera.horizontal->x * u,
+		camera->s_camera.horizontal->y * u, camera->s_camera.horizontal->z * u);
+	ft_v3_add_ip(ray.direction, &temp_vec);
+	ft_v3_init(&temp_vec, camera->s_camera.vertical->x * v,
+		camera->s_camera.vertical->y * v, camera->s_camera.vertical->z * v);
+	ft_v3_add_ip(ray.direction, &temp_vec);
+	ft_v3_sub_ip(ray.direction, camera->pos);
 	color = ft_trace_ray(&ray);
-	free(ray.direction);
 	return (color);
 }

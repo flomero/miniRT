@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/10 17:20:34 by flfische         ###   ########.fr        #
+#    Updated: 2024/06/11 10:01:28 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ CFILES += random.c \
 			v3_crossprod.c \
 			v3_div.c \
 			v3_dotprod.c \
+			v3_init.c \
 			v3_len.c \
 			v3_new.c \
 			v3_normalize.c \
