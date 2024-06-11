@@ -6,13 +6,13 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:15:15 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/11 08:16:09 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/11 10:14:18 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static int	proccess_line(int fd, t_object	**objs);
+static int	proccess_line(int fd, t_object *objs);
 
 /**
  * @brief does the whole parsing and validation check, that consists of these:
@@ -48,21 +48,19 @@ int	is_valid_parsing(char *fname)
  */
 int	init_struct(char *fname, int len)
 {
-	t_object	**objs;
+	t_object	*objs;
 	int			fd;
-	int			i;
 
-	objs = malloc(sizeof(t_object *) * (len + 1));
+	objs = malloc(sizeof(t_object) * (len));
+	ft_get_program()->objs_len = len;
 	if (!objs)
 		return (ft_print_error(ALLOC_ERR), 0);
-	i = -1;
-	while (++i < len + 1)
-		objs[i] = NULL;
 	fd = open(fname, O_RDONLY);
 	if (fd == -1)
 		return (print_err_extend("Error opening file: ", strerror(errno)), 0);
 	if (!proccess_line(fd, objs))
 		return (0);
+	ft_get_program()->objs = objs;
 	if (close(fd) == -1)
 		return (print_err_extend("Error closing file: ", strerror(errno)), 0);
 	return (is_valid_obj_nbr(objs));
@@ -75,7 +73,7 @@ int	init_struct(char *fname, int len)
  * @param objs
  * @return int 1 on success, 0 otherwise
  */
-static int	proccess_line(int fd, t_object	**objs)
+static int	proccess_line(int fd, t_object *objs)
 {
 	char		*line;
 	char		**tokens;
@@ -95,10 +93,10 @@ static int	proccess_line(int fd, t_object	**objs)
 			free_str_arr(tokens);
 			continue ;
 		}
-		objs[i] = get_obj(tokens);
+		if (!get_obj(tokens, &objs[i++]))
+			return (ft_print_error("Invalid object"), free_str_arr(tokens), \
+			free(objs), 0);
 		free_str_arr(tokens);
-		if (!objs[i++])
-			return (ft_print_error("Invalid object"), free_obj_arr(objs), 0);
 		line = get_next_line(fd);
 	}
 	return (1);
@@ -111,22 +109,22 @@ static int	proccess_line(int fd, t_object	**objs)
  * ex. ["A", "0.2", "255,255,255", NULL]
  * @return t_object* the new object created from tokens
  */
-t_object	*get_obj(char **tokens)
+int	get_obj(char **tokens, t_object *obj)
 {
 	if (!ft_strcmp("A", tokens[0]))
-		return (get_a(tokens));
+		return (get_a(tokens, obj));
 	else if (!ft_strcmp("C", tokens[0]))
-		return (get_c(tokens));
+		return (get_c(tokens, obj));
 	else if (!ft_strcmp("L", tokens[0]))
-		return (get_l(tokens));
+		return (get_l(tokens, obj));
 	else if (!ft_strcmp("sp", tokens[0]))
-		return (get_sp(tokens));
+		return (get_sp(tokens, obj));
 	else if (!ft_strcmp("pl", tokens[0]))
-		return (get_pl(tokens));
+		return (get_pl(tokens, obj));
 	else if (!ft_strcmp("cy", tokens[0]))
-		return (get_cy(tokens));
+		return (get_cy(tokens, obj));
 	ft_print_error("Not valid object identifier");
-	return (NULL);
+	return (0);
 }
 
 /**
@@ -136,7 +134,7 @@ t_object	*get_obj(char **tokens)
  * @param t_object **objs null terminated objs list which will be checked
  * @return int returns 1 if is valid number, 0 otherwise
  */
-int	is_valid_obj_nbr(t_object	**objs)
+int	is_valid_obj_nbr(t_object	*objs)
 {
 	int			i;
 	int			single_occur[3];
@@ -147,15 +145,17 @@ int	is_valid_obj_nbr(t_object	**objs)
 	if (!objs)
 		return (0);
 	i = -1;
-	while (objs[++i])
-		if (objs[i]->type < 3)
-			single_occur[objs[i]->type]++;
+	while (++i < ft_get_program()->objs_len)
+	{
+		if (objs[i].type < 3)
+			single_occur[objs[i].type]++;
+	}
 	if (single_occur[0] != 1)
-		return (ft_print_error("Expect exact one A"), free_obj_arr(objs), 0);
+		return (ft_print_error("Expect exact one A"), free(objs), 0);
 	if (single_occur[1] != 1)
-		return (ft_print_error("Expect exact one C"), free_obj_arr(objs), 0);
+		return (ft_print_error("Expect exact one C"), free(objs), 0);
 	if (single_occur[2] != 1)
-		return (ft_print_error("Expect exact one L"), free_obj_arr(objs), 0);
+		return (ft_print_error("Expect exact one L"), free(objs), 0);
 	ft_get_program()->objs = objs;
 	return (1);
 }

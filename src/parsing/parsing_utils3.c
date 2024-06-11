@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:46:57 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/11 08:16:37 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/11 09:36:11 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,47 +30,49 @@ void	free_str_arr(char **arr)
 	free(arr);
 }
 
+// /**
+//  * @brief free an NULL terminated array of t_object pointers properly
+//  * ex. arr = ["El1", "el2", NULL]
+//  *
+//  * @param arr
+//  */
+// void	free_obj_arr(t_object **arr)
+// {
+// 	int	i;
+
+// 	i = -1;
+// 	while (arr[++i])
+// 		free(arr[i]);
+// 	free(arr);
+// }
+
 /**
- * @brief free an NULL terminated array of t_object pointers properly
- * ex. arr = ["El1", "el2", NULL]
+ * @brief Get the cy object
  *
- * @param arr
+ * @param tokens
+ * @param obj
+ * @return int 1 on success, 0 otherwise
  */
-void	free_obj_arr(t_object **arr)
+int	get_cy(char **tokens, t_object	*obj)
 {
-	int	i;
-
-	i = -1;
-	while (arr[++i])
-		free(arr[i]);
-	free(arr);
-}
-
-t_object	*get_cy(char **tokens)
-{
-	t_object	*obj;
-
-	obj = malloc (sizeof(t_object));
-	if (!obj)
-		return (ft_print_error(ALLOC_ERR), NULL);
 	obj->type = CYLINDER;
 	if (get_arr_len(tokens) != 6)
-		return (free(obj), NULL);
+		return (free(obj), 0);
 	if (!get_vector(&obj->pos, tokens[1]))
-		return (free(obj), NULL);
+		return (free(obj), 0);
 	if (!get_vector(&obj->s_cylinder.normal, tokens[2]))
-		return (free(obj), NULL);
+		return (free(obj), 0);
 	if (!in_range(&obj->s_cylinder.normal, -1, 1))
-		return (free(obj), NULL);
+		return (free(obj), 0);
 	if (!is_float(tokens[3]) && !is_int(tokens[3]))
-		return (free(obj), NULL);
+		return (free(obj), 0);
 	obj->s_cylinder.diameter = (float) ft_atod(tokens[3]);
 	if (!is_float(tokens[4]) && !is_int(tokens[4]))
-		return (free(obj), NULL);
+		return (free(obj), 0);
 	obj->s_cylinder.height = (float) ft_atod(tokens[4]);
 	if (!get_color(tokens[5], &obj->color))
-		return (free(obj), NULL);
-	return (obj);
+		return (free(obj), 0);
+	return (1);
 }
 
 /**
