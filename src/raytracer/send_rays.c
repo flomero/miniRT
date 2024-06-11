@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:48:28 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/11 10:39:34 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/11 14:12:26 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@ uint32_t	ft_trace_ray(t_ray *ray)
 		if (program->objs[i].type == SPHERE)
 		{
 			hit = ft_sphere_hit(&program->objs[i], ray);
+			if (hit < 1)
+				hit = INFINITY;
 			if (hit < closest)
-			{
 				color = program->objs[i].color;
+			if (hit < closest)
 				closest = hit;
-			}
 		}
 		i++;
 	}
@@ -64,7 +65,7 @@ uint32_t	ft_send_ray(int x, int y, t_object *camera)
 
 	ray.origin = &camera->pos;
 	u = ((float)x + ft_randf()) / (float)(WIN_WIDTH - 1);
-	v = ((float)y + ft_randf()) / (float)(WIN_HEIGHT - 1);
+	v = 1 - ((float)y + ft_randf()) / (float)(WIN_HEIGHT - 1);
 	ray.direction = &(t_vector3){camera->s_camera.ll_corner->x,
 		camera->s_camera.ll_corner->y, camera->s_camera.ll_corner->z};
 	ft_v3_init(&temp_vec, camera->s_camera.horizontal->x * u,
