@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/11 16:36:00 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/12 11:55:53 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_hit
 	float		t;
 	t_vector3	p;
 	t_vector3	n;
+	t_vector3	e;
 }				t_hit;
 
 typedef enum e_bool
@@ -58,6 +59,7 @@ typedef struct s_program
 	int			current_sample;
 	uint32_t	colors_avgs[WIN_WIDTH][WIN_HEIGHT];
 	t_hit		hit;
+	t_object	*ambient_light;
 }				t_program;
 
 // FUNCTIONS
@@ -122,6 +124,12 @@ int				get_pl(char **tokens, t_object *obj);
 // COLORS
 uint32_t		ft_avg_color(uint32_t *colors, size_t x);
 uint32_t		ft_new_avg_color(uint32_t color, u_int32_t avg, int factor);
+uint32_t		ft_color_float_mult(uint32_t color, float ratio);
+uint32_t		ft_color_color_mult(uint32_t color1, uint32_t color2);
+uint32_t		ft_color_color_add(uint32_t color1, uint32_t color2);
+
+// LIGHT
+uint32_t		ft_compute_ambient(uint32_t color);
 
 // MATHS
 float			ft_randf(void);

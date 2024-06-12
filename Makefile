@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/11 16:14:58 by flfische         ###   ########.fr        #
+#    Updated: 2024/06/12 11:57:46 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC_DIRS := src \
 			src/raytracer \
 			src/colors \
 			src/parsing \
-
+			src/light \
 
 OBJ_DIR := obj
 INC_DIR := includes
@@ -55,6 +55,12 @@ CFILES += send_rays.c \
 
 # COLORS
 CFILES += avg_color.c \
+			color_add.c \
+			color_mult.c \
+
+# LIGHT
+CFILES += compute_ambient.c \
+			compute_phong.c \
 
 # MATHS
 CFILES += random.c \

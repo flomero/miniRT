@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:34:52 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/11 16:18:52 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/12 11:56:48 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ float	ft_sphere_hit(t_object *sphere, t_ray *ray)
 int	ft_sphere_normal(t_object *sphere, t_ray *ray, t_vector3 *normal, float t)
 {
 	t_vector3	oc;
-	t_vector3	tmp;
 
 	ft_v3_init(&oc, ray->origin->x, ray->origin->y, ray->origin->z);
 	ft_v3_sub_ip(&oc, &sphere->pos);
