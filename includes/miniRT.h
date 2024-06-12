@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/11 10:36:44 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/11 16:36:00 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@ typedef struct s_ray
 	t_vector3	*direction;
 }				t_ray;
 
+typedef struct s_hit
+{
+	float		t;
+	t_vector3	p;
+	t_vector3	n;
+}				t_hit;
+
 typedef enum e_bool
 {
 	FALSE,
@@ -50,6 +57,7 @@ typedef struct s_program
 	int			objs_len;
 	int			current_sample;
 	uint32_t	colors_avgs[WIN_WIDTH][WIN_HEIGHT];
+	t_hit		hit;
 }				t_program;
 
 // FUNCTIONS
@@ -117,6 +125,7 @@ uint32_t		ft_new_avg_color(uint32_t color, u_int32_t avg, int factor);
 
 // MATHS
 float			ft_randf(void);
+float			ft_randf_range(float min, float max);
 t_vector3		*ft_v3_add(t_vector3 *a, t_vector3 *b);
 t_vector3		*ft_v3_add_ip(t_vector3 *a, t_vector3 *b);
 t_vector3		*ft_v3_crossprod(t_vector3 *a, t_vector3 *b);
@@ -130,6 +139,11 @@ float			ft_v3_len(t_vector3 *a);
 t_vector3		*ft_v3_new(float x, float y, float z);
 t_vector3		*ft_v3_normal(t_vector3 *a);
 t_vector3		*ft_v3_normal_ip(t_vector3 *a);
+t_vector3		*ft_v3_rand(void);
+t_vector3		*ft_v3_rand_ip(t_vector3 *vec);
+t_vector3		*ft_v3_rand_range(float min, float max);
+t_vector3		*ft_v3_rand_range_ip(t_vector3 *vec, float min, float max);
+t_vector3		*ft_v3_rand_unit(t_vector3 *vec);
 t_vector3		*ft_v3_scalar(t_vector3 *a, float scalar);
 t_vector3		*ft_v3_scalar_ip(t_vector3 *a, float scalar);
 t_vector3		*ft_v3_sub(t_vector3 *a, t_vector3 *b);

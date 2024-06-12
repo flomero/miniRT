@@ -6,32 +6,37 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:29:22 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/11 10:31:26 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/11 15:42:33 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONFIG_H
 # define CONFIG_H
 
-# define WIN_TITLE "miniRT"
-# define WIN_WIDTH 1200
-# define WIN_HEIGHT 800
-# define BACKGROUND_COLOR 0x000000FF
-# define SAMPLES 100
-
-// VIEWPORT
-# define VIEWPORT_WIDTH 2.0
-# define FOCAL_LENGTH 1.0
-
-// COLORS
-# define RESET "\033[0m"
-# define RED "\033[31m"
-# define BOLD "\033[1m"
-
 # ifndef DEBUG
 #  define DEBUG 0
 # endif
 
+// IMAGE
+# define WIN_TITLE "miniRT"
+# define WIN_WIDTH 1200
+# define WIN_HEIGHT 800
+# define BACKGROUND_COLOR 0x000000FF
+
+// VIEWPORT
+# define VIEWPORT_WIDTH 2.0
+# define FOCAL_LENGTH 1.0
+# define SAMPLES 100
+
+// LIGHT
+# define BOUNCES 2
+
+// TERMINAL COLORS
+# define RESET "\033[0m"
+# define RED "\033[31m"
+# define BOLD "\033[1m"
+
+// ERRORS
 # define ALLOC_ERR "Memory allocation failed"
 
 #endif

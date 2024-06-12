@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/11 10:31:17 by flfische         ###   ########.fr        #
+#    Updated: 2024/06/11 16:14:58 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,7 @@ CFILES += random.c \
 			v3_len.c \
 			v3_new.c \
 			v3_normalize.c \
+			v3_random.c \
 			v3_scalar.c \
 			v3_sub.c \
 
