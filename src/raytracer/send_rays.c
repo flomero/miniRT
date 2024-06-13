@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   send_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:48:28 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/11 14:12:26 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/13 11:13:41 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,18 @@ uint32_t	ft_trace_ray(t_ray *ray)
 		if (program->objs[i].type == SPHERE)
 		{
 			hit = ft_sphere_hit(&program->objs[i], ray);
+			if (hit < 1)
+				hit = INFINITY;
+			if (hit < closest)
+				color = program->objs[i].color;
+			if (hit < closest)
+				closest = hit;
+		}
+		if (program->objs[i].type == PLANE)
+		{
+			// printf("\nPLANE\n");
+			hit = ft_plane_hit(&program->objs[i], ray);
+			// printf("\n\nHIT %.2f\n\n", hit);
 			if (hit < 1)
 				hit = INFINITY;
 			if (hit < closest)

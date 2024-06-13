@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/11 11:10:45 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/13 11:09:15 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 	TODO:
-		- replace pointers in malloc with arrays to improve speed
+		- for pl 0,0,-10.0 0,2.0,0 255,255,225 with norm > 1 I have mem bug
 */
 
 #include "miniRT.h"

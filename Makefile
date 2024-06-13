@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/11 10:31:17 by flfische         ###   ########.fr        #
+#    Updated: 2024/06/13 10:31:14 by klamprak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ CFILES := miniRT.c \
 			mlx_init.c \
 			mlx_hooks.c \
 			print_error.c \
-			parsing.c \
+
+CFILES += 	parsing.c \
 			parsing_handlers.c \
 			parsing_utils.c \
 			parsing_utils2.c \
@@ -48,6 +49,7 @@ CFILES := miniRT.c \
 CFILES += get_first_obj.c \
 			camera.c \
 			sphere.c \
+			plane.c \
 
 # RT
 CFILES += send_rays.c \

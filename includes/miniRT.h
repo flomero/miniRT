@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/11 10:36:44 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/13 10:31:51 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ uint32_t		ft_trace_ray(t_ray *ray);
 
 // OBJECT HIT FUNCTIONS
 float			ft_sphere_hit(t_object *sphere, t_ray *ray);
+float			ft_plane_hit(t_object *plane, t_ray *ray);
 
 // OBJECT UTILS
 t_object		*ft_get_first_obj(t_object_type type);
