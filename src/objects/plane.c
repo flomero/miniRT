@@ -6,12 +6,35 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 09:33:50 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/13 11:13:33 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/13 13:13:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+/*
+	Maths for plane:
+	Plane equation: Ax + By + Cz + D = 0
+		- A, B and C are s_plane.normal.x,y,z
+		- We calculate D by using by replacing x, y, z and A, B, C
+		- x, y, z is the position of the random point in the plane
+		plane->pos.x,y,z
+	Ray equation:
+		- P = R + t⋅d
+		- P is the point on ray
+		- R is the origin of the ray(camera.pos = ray.origin, identical)
+		- t is the distance from the origin to the point(random positive number)
+		- d is the direction of the ray, ray.direction like (4, 2, 1)
+	For intersaction:
+		- we take plane equation and replace x, y, z with ray equation
+		- if we find solution for that, that means the point is on both ray and
+		plane
+		- so we calculate t, if t < 0 -> no solution, if t > 0 -> solution
+		and if t == 0 -> the ray is on the plane's border
+		- at the end if there is solution, we calculate the distance from
+		origin to the hit point because at the very end only the obj with
+		minimum distance for this ray does matter
+*/
 /**
  * Checks if a ray hits a plane.
  *
@@ -36,9 +59,6 @@ float	ft_plane_hit(t_object *plane, t_ray *ray)
 			+ plane->s_plane.normal.z * ray->direction->z);
 	if (t < 0)
 		return (INFINITY);
-	distance = sqrt(ray->direction->x * ray->direction->x
-			+ ray->direction->y * ray->direction->y
-			+ ray->direction->z * ray->direction->z) * t;
-	// printf ("\nT is: %f, x: %f, y: %f, z: %f\n", t, ray->direction->x, ray->direction->y, ray->direction->z);
+	distance = ft_v3_len(ray->direction) * t;
 	return (fabs(distance));
 }

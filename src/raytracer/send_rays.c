@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:48:28 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/13 11:13:41 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/13 12:52:21 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ uint32_t	ft_trace_ray(t_ray *ray)
 		if (program->objs[i].type == SPHERE)
 		{
 			hit = ft_sphere_hit(&program->objs[i], ray);
-			if (hit < 1)
+			if (hit < ft_get_first_obj(CAMERA)->s_camera.focal_length)
 				hit = INFINITY;
 			if (hit < closest)
 				color = program->objs[i].color;
@@ -44,10 +44,8 @@ uint32_t	ft_trace_ray(t_ray *ray)
 		}
 		if (program->objs[i].type == PLANE)
 		{
-			// printf("\nPLANE\n");
 			hit = ft_plane_hit(&program->objs[i], ray);
-			// printf("\n\nHIT %.2f\n\n", hit);
-			if (hit < 1)
+			if (hit < ft_get_first_obj(CAMERA)->s_camera.focal_length)
 				hit = INFINITY;
 			if (hit < closest)
 				color = program->objs[i].color;
