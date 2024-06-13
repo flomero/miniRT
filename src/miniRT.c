@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/13 11:09:15 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/13 11:59:01 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	main(int argc, char **argv)
 	else
 		printf("Parsing is valid\n");
 	if (DEBUG)
-		print_objs();
+		print_objs(NULL);
 	program = ft_get_program();
 	if (ft_mlx_init())
 		return (1);

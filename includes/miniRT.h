@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/13 10:31:51 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/13 11:32:09 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int				is_valid_obj_nbr(t_object *objs);
 // PARSING UTILS
 int				get_arr_len(char **arr);
 void			print_rgb(uint32_t color);
-void			print_objs(void);
+void			print_objs(t_object *obj);
 
 // PARSING UTILS2
 int				is_int(char *str);
