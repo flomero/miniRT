@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   v3_copy.c                                          :+:      :+:    :+:   */
+/*   color_float.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/09 13:39:59 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/13 10:27:48 by flfische         ###   ########.fr       */
+/*   Created: 2024/06/13 12:34:21 by flfische          #+#    #+#             */
+/*   Updated: 2024/06/13 12:45:14 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-/**
- * Copies a vector.
- *
- * @param v The vector to copy.
- * @return The copied vector.
- * @note The returned vector must be freed.
- */
-t_vector3	*ft_v3_copy(const t_vector3 *v)
+void	ft_color_to_float(uint32_t color, t_color *fcolor)
 {
-	t_vector3	*result;
+	fcolor->r = (float)((color & 0xFF0000) >> 16) / 255.0;
+	fcolor->g = (float)((color & 0xFF00) >> 8) / 255.0;
+	fcolor->b = (float)(color & 0xFF) / 255.0;
+}
 
-	result = (t_vector3 *)malloc(sizeof(t_vector3));
-	if (!result)
-		return (NULL);
-	result->x = v->x;
-	result->y = v->y;
-	result->z = v->z;
-	return (result);
+uint32_t	ft_color_from_float(t_color fcolor)
+{
+	uint32_t	color;
+
+	color = (uint32_t)(fcolor.r * 255.0) << 16;
+	color |= (uint32_t)(fcolor.g * 255.0) << 8;
+	color |= (uint32_t)(fcolor.b * 255.0);
+	return (color);
 }

@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/12 11:57:46 by flfische         ###   ########.fr        #
+#    Updated: 2024/06/13 12:36:30 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ CFILES := miniRT.c \
 
 # OBJECTS
 CFILES += get_first_obj.c \
+			hit.c \
 			camera.c \
 			sphere.c \
 
@@ -55,12 +56,15 @@ CFILES += send_rays.c \
 
 # COLORS
 CFILES += avg_color.c \
+			color_float.c \
 			color_add.c \
 			color_mult.c \
 
 # LIGHT
 CFILES += compute_ambient.c \
 			compute_phong.c \
+			compute_diffuse.c \
+			compute_specular.c \
 
 # MATHS
 CFILES += random.c \

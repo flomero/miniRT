@@ -6,11 +6,17 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:48:28 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/11 14:12:26 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/13 12:48:34 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+void	ft_ray_init(t_ray *ray, t_vector3 *origin, t_vector3 *direction)
+{
+	ray->origin = origin;
+	ray->direction = direction;
+}
 
 /**
  * Traces a ray and returns the color of the closest object hit.
@@ -22,29 +28,26 @@ uint32_t	ft_trace_ray(t_ray *ray)
 {
 	int			i;
 	float		closest;
-	float		hit;
-	uint32_t	color;
+	t_hit		hit;
+	t_color		color;
 	t_program	*program;
 
 	i = 0;
 	closest = INFINITY;
 	program = ft_get_program();
-	color = BACKGROUND_COLOR;
+	color = (t_color){0, 0, 0};
+	hit.t = INFINITY;
 	while (i < program->objs_len)
 	{
 		if (program->objs[i].type == SPHERE)
 		{
-			hit = ft_sphere_hit(&program->objs[i], ray);
-			if (hit < 1)
-				hit = INFINITY;
-			if (hit < closest)
-				color = program->objs[i].color;
-			if (hit < closest)
-				closest = hit;
+			ft_hit(ray, &program->objs[i], &hit);
 		}
 		i++;
 	}
-	return (color);
+	if (hit.t < closest)
+		color = ft_compute_lights(&hit, program);
+	return (ft_color_from_float(color));
 }
 
 /**

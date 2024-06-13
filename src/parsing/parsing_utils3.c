@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:46:57 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/11 10:53:52 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/13 10:33:05 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,9 +122,9 @@ uint32_t	int_to_rgb(int red, int green, int blue)
 	uint32_t	color;
 
 	color = 0;
-	color |= red << 24;
-	color |= green << 16;
-	color |= blue << 8;
+	color |= (uint32_t)red << 24;
+	color |= (uint32_t)green << 16;
+	color |= (uint32_t)blue << 8;
 	color |= 0xFF;
 	return (color);
 }

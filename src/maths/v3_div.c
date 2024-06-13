@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:34:07 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 14:00:09 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/13 10:28:07 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * @return The divided vector.
  * @note The returned vector must be freed.
  */
-t_vector3	*ft_v3_div(t_vector3 *v, float t)
+t_vector3	*ft_v3_div(const t_vector3 *v, float t)
 {
 	t_vector3	*result;
 

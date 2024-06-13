@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/12 11:55:53 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/13 12:48:17 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ typedef struct s_hit
 	float		t;
 	t_vector3	p;
 	t_vector3	n;
-	t_vector3	e;
+	t_ray		*ray;
+	t_object	*obj;
 }				t_hit;
 
 typedef enum e_bool
@@ -74,8 +75,11 @@ void			ft_key_hook(mlx_key_data_t key_data, void *param);
 void			loop_pixels(t_program *program);
 uint32_t		ft_send_ray(int x, int y, t_object *camera);
 uint32_t		ft_trace_ray(t_ray *ray);
+void			ft_ray_init(t_ray *ray, t_vector3 *origin,
+					t_vector3 *direction);
 
 // OBJECT HIT FUNCTIONS
+t_bool			ft_hit(t_ray *ray, t_object *obj, t_hit *hit);
 float			ft_sphere_hit(t_object *sphere, t_ray *ray);
 
 // OBJECT UTILS
@@ -122,39 +126,49 @@ int				get_sp(char **tokens, t_object *obj);
 int				get_pl(char **tokens, t_object *obj);
 
 // COLORS
+void			ft_color_to_float(uint32_t color, t_color *fcolor);
+uint32_t		ft_color_from_float(t_color color);
+int				ft_color_clamp(int color);
 uint32_t		ft_avg_color(uint32_t *colors, size_t x);
 uint32_t		ft_new_avg_color(uint32_t color, u_int32_t avg, int factor);
-uint32_t		ft_color_float_mult(uint32_t color, float ratio);
-uint32_t		ft_color_color_mult(uint32_t color1, uint32_t color2);
-uint32_t		ft_color_color_add(uint32_t color1, uint32_t color2);
+t_color			ft_color_float_mult(t_color color, float ratio);
+t_color			ft_color_color_mult(t_color color1, t_color color2);
+t_color			ft_color_color_add(t_color color1, t_color color2);
 
 // LIGHT
-uint32_t		ft_compute_ambient(uint32_t color);
+t_color			ft_compute_lights(const t_hit *hit, t_program *program);
+t_color			ft_compute_phong(const t_object *light, const t_hit *hit,
+					t_program *program);
+t_color			ft_compute_ambient(const t_color color);
+t_color			ft_compute_diffuse(const t_hit *rec, const t_object *light,
+					const t_vector3 *light_dir);
+t_color			ft_compute_specular(const t_hit *rec, const t_object *light,
+					const t_vector3 *light_dir);
 
 // MATHS
 float			ft_randf(void);
 float			ft_randf_range(float min, float max);
-t_vector3		*ft_v3_add(t_vector3 *a, t_vector3 *b);
-t_vector3		*ft_v3_add_ip(t_vector3 *a, t_vector3 *b);
-t_vector3		*ft_v3_crossprod(t_vector3 *a, t_vector3 *b);
-t_vector3		*ft_v3_crossprod_ip(t_vector3 *a, t_vector3 *b);
-t_vector3		*ft_v3_copy(t_vector3 *v);
-t_vector3		*ft_v3_div(t_vector3 *a, float scalar);
+t_vector3		*ft_v3_add(const t_vector3 *a, const t_vector3 *b);
+t_vector3		*ft_v3_add_ip(t_vector3 *a, const t_vector3 *b);
+t_vector3		*ft_v3_crossprod(const t_vector3 *a, const t_vector3 *b);
+t_vector3		*ft_v3_crossprod_ip(t_vector3 *a, const t_vector3 *b);
+t_vector3		*ft_v3_copy(const t_vector3 *v);
+t_vector3		*ft_v3_div(const t_vector3 *a, float scalar);
 t_vector3		*ft_v3_div_ip(t_vector3 *a, float scalar);
-float			ft_v3_dotprod(t_vector3 *a, t_vector3 *b);
+float			ft_v3_dotprod(const t_vector3 *a, const t_vector3 *b);
 t_vector3		*ft_v3_init(t_vector3 *v, float x, float y, float z);
-float			ft_v3_len(t_vector3 *a);
+float			ft_v3_len(const t_vector3 *a);
 t_vector3		*ft_v3_new(float x, float y, float z);
-t_vector3		*ft_v3_normal(t_vector3 *a);
+t_vector3		*ft_v3_normal(const t_vector3 *a);
 t_vector3		*ft_v3_normal_ip(t_vector3 *a);
 t_vector3		*ft_v3_rand(void);
 t_vector3		*ft_v3_rand_ip(t_vector3 *vec);
 t_vector3		*ft_v3_rand_range(float min, float max);
 t_vector3		*ft_v3_rand_range_ip(t_vector3 *vec, float min, float max);
 t_vector3		*ft_v3_rand_unit(t_vector3 *vec);
-t_vector3		*ft_v3_scalar(t_vector3 *a, float scalar);
+t_vector3		*ft_v3_scalar(const t_vector3 *a, float scalar);
 t_vector3		*ft_v3_scalar_ip(t_vector3 *a, float scalar);
-t_vector3		*ft_v3_sub(t_vector3 *a, t_vector3 *b);
-t_vector3		*ft_v3_sub_ip(t_vector3 *a, t_vector3 *b);
+t_vector3		*ft_v3_sub(const t_vector3 *a, const t_vector3 *b);
+t_vector3		*ft_v3_sub_ip(t_vector3 *a, const t_vector3 *b);
 
 #endif
