@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/13 11:59:01 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/13 13:17:56 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (0);
 	if (!is_valid_parsing(argv[1]))
-		printf("Parsing is not valid\n");
-	else
-		printf("Parsing is valid\n");
+		return (1);
 	if (DEBUG)
 		print_objs(NULL);
 	program = ft_get_program();

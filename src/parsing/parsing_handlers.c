@@ -21,17 +21,17 @@
  */
 int	get_a(char **tokens, t_object *obj)
 {
-	float		ratio;
+	float	ratio;
 
 	if (get_arr_len(tokens) != 3)
-		return (free(obj), 0);
+		return (0);
 	if (!is_float(tokens[1]) && !is_int(tokens[1]))
-		return (free(obj), 0);
+		return (0);
 	ratio = (float) ft_atod(tokens[1]);
 	if (ratio < 0 || ratio > 1)
-		return (free(obj), 0);
+		return (0);
 	if (!get_color(tokens[2], &obj->color))
-		return (free(obj), 0);
+		return (0);
 	obj->s_ambient_light.ratio = ratio;
 	obj->type = AMBIENT_LIGHT;
 	return (1);
@@ -46,23 +46,23 @@ int	get_a(char **tokens, t_object *obj)
  */
 int	get_c(char **tokens, t_object *obj)
 {
-	float		fov;
+	float	fov;
 
 	obj->type = CAMERA;
 	obj->color = 0;
 	if (get_arr_len(tokens) != 4)
-		return (free(obj), 0);
+		return (0);
 	if (!get_vector(&obj->pos, tokens[1]))
-		return (free(obj), 0);
+		return (0);
 	if (!get_vector(&obj->s_camera.normal, tokens[2]))
-		return (free(obj), 0);
+		return (0);
 	if (!in_range(&obj->s_camera.normal, -1, 1))
-		return (free(obj), 0);
+		return (0);
 	if (!is_float(tokens[3]) && !is_int(tokens[3]))
-		return (free(obj), 0);
+		return (0);
 	fov = (float) ft_atod(tokens[3]);
 	if (fov < 0 || fov > 180)
-		return (free(obj), 0);
+		return (0);
 	obj->s_camera.fov = fov;
 	return (1);
 }
@@ -76,20 +76,20 @@ int	get_c(char **tokens, t_object *obj)
  */
 int	get_l(char **tokens, t_object *obj)
 {
-	float		brightness;
+	float	brightness;
 
 	obj->type = LIGHT;
 	if (get_arr_len(tokens) != 4)
-		return (free(obj), 0);
+		return (0);
 	if (!get_vector(&obj->pos, tokens[1]))
-		return (free(obj), 0);
+		return (0);
 	if (!is_float(tokens[2]) && !is_int(tokens[2]))
-		return (free(obj), 0);
+		return (0);
 	brightness = (float) ft_atod(tokens[2]);
 	if (brightness < 0 || brightness > 1)
-		return (free(obj), 0);
+		return (0);
 	if (!get_color(tokens[3], &obj->color))
-		return (free(obj), 0);
+		return (0);
 	obj->s_light.brightness = brightness;
 	return (1);
 }
@@ -103,18 +103,18 @@ int	get_l(char **tokens, t_object *obj)
  */
 int	get_sp(char **tokens, t_object *obj)
 {
-	float		diameter;
+	float	diameter;
 
 	obj->type = SPHERE;
 	if (get_arr_len(tokens) != 4)
-		return (free(obj), 0);
+		return (0);
 	if (!get_vector(&obj->pos, tokens[1]))
-		return (free(obj), 0);
+		return (0);
 	if (!is_float(tokens[2]) && !is_int(tokens[2]))
-		return (free(obj), 0);
+		return (0);
 	diameter = (float) ft_atod(tokens[2]);
 	if (!get_color(tokens[3], &obj->color))
-		return (free(obj), 0);
+		return (0);
 	obj->s_sphere.diameter = diameter;
 	return (1);
 }
@@ -130,15 +130,15 @@ int	get_pl(char **tokens, t_object *obj)
 {
 	obj->type = PLANE;
 	if (get_arr_len(tokens) != 4)
-		return (free(obj), 0);
+		return (0);
 	if (!get_vector(&obj->pos, tokens[1]))
 		return (free(&obj), 0);
 	if (!get_vector(&obj->s_plane.normal, tokens[2]))
-		return (free(obj), 0);
+		return (0);
 	if (!in_range(&obj->s_plane.normal, -1, 1))
-		return (free(obj), 0);
+		return (0);
 	if (!get_color(tokens[3], &obj->color))
-		return (free(obj), 0);
+		return (0);
 	return (1);
 }
 

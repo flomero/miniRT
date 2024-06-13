@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 16:28:34 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/13 11:59:36 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/13 13:16:08 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,18 +72,16 @@ void	print_objs(t_object	*obj)
 	{
 		if (!is_obj)
 			obj = &objs[i];
-		printf("Object %d:\nID: %d\n", i, obj->type);
+		printf("\n-----------------------\nObject %d:\nID: %d\n", i, obj->type);
 		print_a_c_l(*obj);
 		print_pl_cy_sp(*obj);
 		if (obj->type != 0)
-			printf("Position: %.2f %.2f %.2f\n", obj->pos.x, obj->pos.y,
-				obj->pos.z);
+			printf("Pos: %.2f %.2f %.2f\n", obj->pos.x, obj->pos.y, obj->pos.z);
 		if (obj->type != 1)
 		{
 			printf("Color: #%08x, ", obj->color);
 			print_rgb(obj->color);
 		}
-		printf("\n------------------------------------\n");
 		i++;
 	}
 }
