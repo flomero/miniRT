@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 09:33:50 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/13 13:13:43 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/13 13:39:51 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,19 @@ float	ft_plane_hit(t_object *plane, t_ray *ray)
 	int		d_plane;
 	float	t;
 	float	distance;
+	float	divisor;
 
 	d_plane = -1 * (plane->pos.x * plane->s_plane.normal.x
 			+ plane->pos.y * plane->s_plane.normal.y
 			+ plane->pos.z * plane->s_plane.normal.z);
-	t = -1 * (plane->pos.x * ray->origin->x
-			+ plane->pos.y * ray->origin->y
-			+ plane->pos.z * ray->origin->z + d_plane)
-		/ (plane->s_plane.normal.x * ray->direction->x
+	divisor = (plane->s_plane.normal.x * ray->direction->x
 			+ plane->s_plane.normal.y * ray->direction->y
 			+ plane->s_plane.normal.z * ray->direction->z);
+	if (!divisor)
+		return (INFINITY);
+	t = -1 * (plane->pos.x * ray->origin->x
+			+ plane->pos.y * ray->origin->y
+			+ plane->pos.z * ray->origin->z + d_plane) / divisor;
 	if (t < 0)
 		return (INFINITY);
 	distance = ft_v3_len(ray->direction) * t;
