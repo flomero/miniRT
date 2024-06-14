@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 14:41:37 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/14 17:41:40 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/14 19:32:58 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ int	get_sp(char **tokens, t_object *obj)
 	obj->material.specular = DEFAULT_SPECULAR;
 	obj->material.shininess = DEFAULT_SHININESS;
 	obj->material.diffuse = DEFAULT_DIFFUSE;
+	obj->material.reflectivness = 0;
 	return (1);
 }
 

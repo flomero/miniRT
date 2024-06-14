@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:29:22 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/14 17:59:44 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/14 19:26:07 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define SAMPLES 100
 
 // LIGHT
-# define BOUNCES 2
+# define BOUNCES 3
 # define DEFAULT_SPECULAR 0.99
 # define DEFAULT_SHININESS 100
 # define DEFAULT_DIFFUSE 0.8

@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/14 17:26:11 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/14 19:12:54 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_ray
 {
 	t_vector3	*origin;
 	t_vector3	*direction;
+	int			depth;
 }				t_ray;
 
 typedef struct s_hit
@@ -154,6 +155,8 @@ t_color			*ft_compute_diffuse(t_color *diff_col, const t_hit *rec,
 					const t_object *light, const t_vector3 *light_dir);
 t_color			*ft_compute_specular(t_color *spec_col, const t_hit *rec,
 					const t_object *light, const t_vector3 *light_dir);
+t_color			*ft_compute_reflection(t_color *refl_col, const t_hit *rec,
+					int depth);
 
 // MATHS
 float			ft_randf(void);
