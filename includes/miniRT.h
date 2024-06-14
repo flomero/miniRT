@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/14 12:20:45 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/14 15:06:29 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int				get_pl(char **tokens, t_object *obj);
 // COLORS
 void			ft_color_to_float(uint32_t color, t_color *fcolor);
 uint32_t		ft_color_from_float(t_color color);
-float				ft_color_clamp(float color);
+float			ft_color_clamp(float color);
 uint32_t		ft_avg_color(uint32_t *colors, size_t x);
 uint32_t		ft_new_avg_color(uint32_t color, u_int32_t avg, int factor);
 t_color			*ft_color_float_mult(t_color color, float ratio,
