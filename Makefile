@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/11 10:31:17 by flfische         ###   ########.fr        #
+#    Updated: 2024/06/14 17:24:15 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC_DIRS := src \
 			src/raytracer \
 			src/colors \
 			src/parsing \
-
+			src/light \
 
 OBJ_DIR := obj
 INC_DIR := includes
@@ -46,6 +46,8 @@ CFILES := miniRT.c \
 
 # OBJECTS
 CFILES += get_first_obj.c \
+			obj_func_getters.c \
+			hit.c \
 			camera.c \
 			sphere.c \
 
@@ -55,6 +57,15 @@ CFILES += send_rays.c \
 
 # COLORS
 CFILES += avg_color.c \
+			color_float.c \
+			color_add.c \
+			color_mult.c \
+
+# LIGHT
+CFILES += compute_ambient.c \
+			compute_phong.c \
+			compute_diffuse.c \
+			compute_specular.c \
 
 # MATHS
 CFILES += random.c \
@@ -67,6 +78,7 @@ CFILES += random.c \
 			v3_len.c \
 			v3_new.c \
 			v3_normalize.c \
+			v3_random.c \
 			v3_scalar.c \
 			v3_sub.c \
 

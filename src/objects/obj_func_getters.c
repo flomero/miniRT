@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   random.c                                           :+:      :+:    :+:   */
+/*   obj_func_getters.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/10 11:56:52 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/11 16:10:35 by flfische         ###   ########.fr       */
+/*   Created: 2024/06/14 17:15:54 by flfische          #+#    #+#             */
+/*   Updated: 2024/06/14 17:33:15 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-/**
- * Generates a random float between 0 and 1.
- *
- * @return The random float.
- */
-float	ft_randf(void)
+t_hit_func	*ft_get_hit_func(void)
 {
-	return (((float)rand() / ((float)RAND_MAX) + 1.0));
+	static t_hit_func	hit_functions[OBJECT_COUNT];
+
+	if (!hit_functions[0])
+	{
+		hit_functions[SPHERE] = ft_sphere_hit;
+	}
+	return (hit_functions);
 }
 
-float	ft_randf_range(float min, float max)
+t_normal_func	*ft_get_normal_func(void)
 {
-	return (min + (max - min) * ft_randf());
+	static t_normal_func	normal_functions[OBJECT_COUNT];
+
+	if (!normal_functions[0])
+	{
+		normal_functions[SPHERE] = ft_sphere_normal;
+	}
+	return (normal_functions);
 }

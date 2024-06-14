@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:24:04 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/08 14:34:43 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/13 10:28:38 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * @return The new vector.
  * @note The function allocates memory.
  */
-t_vector3	*ft_v3_scalar(t_vector3 *a, float scalar)
+t_vector3	*ft_v3_scalar(const t_vector3 *a, float scalar)
 {
 	t_vector3	*vector;
 

@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   random.c                                           :+:      :+:    :+:   */
+/*   hit.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/10 11:56:52 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/11 16:10:35 by flfische         ###   ########.fr       */
+/*   Created: 2024/06/13 10:11:15 by flfische          #+#    #+#             */
+/*   Updated: 2024/06/14 17:33:37 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-/**
- * Generates a random float between 0 and 1.
- *
- * @return The random float.
- */
-float	ft_randf(void)
+t_bool	ft_hit(t_ray *ray, t_object *obj, t_hit *hit)
 {
-	return (((float)rand() / ((float)RAND_MAX) + 1.0));
-}
+	float	t;
 
-float	ft_randf_range(float min, float max)
-{
-	return (min + (max - min) * ft_randf());
+	t = INFINITY;
+	if (obj->type > LIGHT)
+		t = ft_get_hit_func()[obj->type](obj, ray);
+	if (t <= 0 || t == INFINITY)
+		return (FALSE);
+	if (t > hit->t)
+		return (FALSE);
+	hit->t = t;
+	hit->obj = obj;
+	hit->obj->color = obj->color;
+	t = ft_get_normal_func()[obj->type](hit, ray);
+	hit->ray = ray;
+	return (TRUE);
 }

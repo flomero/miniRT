@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:16:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/08 17:39:48 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/13 10:29:30 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * @return The new vector.
  * @note The function allocates memory.
  */
-t_vector3	*ft_v3_sub(t_vector3 *a, t_vector3 *b)
+t_vector3	*ft_v3_sub(const t_vector3 *a, const t_vector3 *b)
 {
 	t_vector3	*vector;
 
@@ -35,7 +35,7 @@ t_vector3	*ft_v3_sub(t_vector3 *a, t_vector3 *b)
  * @param b The second vector.
  * @return The first vector with the difference of the two vectors.
  */
-t_vector3	*ft_v3_sub_ip(t_vector3 *a, t_vector3 *b)
+t_vector3	*ft_v3_sub_ip(t_vector3 *a, const t_vector3 *b)
 {
 	a->x -= b->x;
 	a->y -= b->y;
