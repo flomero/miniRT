@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 14:41:37 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/14 12:30:50 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/14 17:41:40 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,9 @@ int	get_sp(char **tokens, t_object *obj)
 		return (free(obj), 0);
 	ft_color_to_float(obj->color, &obj->color_f);
 	obj->s_sphere.diameter = diameter;
-	obj->material.specular = 0.99;
-	obj->material.shininess = 200;
-	obj->material.diffuse = 0.9;
+	obj->material.specular = DEFAULT_SPECULAR;
+	obj->material.shininess = DEFAULT_SHININESS;
+	obj->material.diffuse = DEFAULT_DIFFUSE;
 	return (1);
 }
 

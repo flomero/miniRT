@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:48:28 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/14 12:00:54 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/14 17:56:09 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,26 @@ void	ft_ray_init(t_ray *ray, t_vector3 *origin, t_vector3 *direction)
 {
 	ray->origin = origin;
 	ray->direction = direction;
+}
+
+static uint32_t	ft_get_void_color(void)
+{
+	static t_bool	initialized = FALSE;
+	t_color			color;
+	static uint32_t	color_int;
+	t_object		*ambient_light;
+
+	if (!initialized)
+	{
+		ambient_light = ft_get_first_obj(AMBIENT_LIGHT);
+		color = (t_color){0, 0, 0};
+		ft_color_color_add(color, ambient_light->color_f, &color);
+		ft_color_float_mult(color, ambient_light->s_ambient_light.ratio,
+			&color);
+		color_int = ft_color_from_float(color);
+		initialized = TRUE;
+	}
+	return (color_int);
 }
 
 /**
@@ -48,7 +68,7 @@ uint32_t	ft_trace_ray(t_ray *ray)
 	if (hit.t < closest)
 		ft_compute_lights(&color, &hit, program);
 	else
-		return (BACKGROUND_COLOR);
+		return (ft_get_void_color());
 	return (ft_color_from_float(color));
 }
 

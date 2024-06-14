@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:29:22 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/14 12:21:09 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/14 17:59:44 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # define WIN_TITLE "miniRT"
 # define WIN_WIDTH 1200
 # define WIN_HEIGHT 800
-# define BACKGROUND_COLOR 0x000000FF
 
 // VIEWPORT
 # define VIEWPORT_WIDTH 2.0
@@ -30,6 +29,9 @@
 
 // LIGHT
 # define BOUNCES 2
+# define DEFAULT_SPECULAR 0.99
+# define DEFAULT_SHININESS 100
+# define DEFAULT_DIFFUSE 0.8
 
 // TERMINAL COLORS
 # define RESET "\033[0m"
