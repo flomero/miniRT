@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:32:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/14 12:05:26 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/14 15:04:16 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,18 @@ t_bool	ft_is_shadow(t_vector3 *light_dir, const t_hit *hit, t_program *program)
 	t_vector3	shifted_hit_point;
 	t_vector3	offset;
 
-	ft_v3_init(&offset, light_dir->x * 0.001, light_dir->y * 0.001, light_dir->z
-		* 0.001);
+	ft_v3_init(&offset, light_dir->x * 0.01, light_dir->y * 0.01, light_dir->z
+		* 0.01);
 	ft_v3_init(&shifted_hit_point, hit->p.x + offset.x, hit->p.y + offset.y,
 		hit->p.z + offset.z);
-	ft_ray_init(&ray, &shifted_hit_point, light_dir);
+	ray.origin = &shifted_hit_point;
+	ray.direction = light_dir;
 	i = 0;
 	while (i < program->objs_len)
 	{
 		if (program->objs[i].type != LIGHT)
 		{
+			tmp_hit.t = INFINITY;
 			if (ft_hit(&ray, &program->objs[i], &tmp_hit))
 				return (TRUE);
 		}
@@ -65,14 +67,11 @@ t_color	*ft_compute_lights(t_color *light_col, const t_hit *hit,
 {
 	int		i;
 	t_color	ambient;
-	t_color	phong_color;	
-	static int x;
+	t_color	phong_color;
 
 	i = 0;
 	*light_col = (t_color){0, 0, 0};
 	ft_compute_ambient(&ambient, hit->obj->color_f);
-	if (x++ < 10)
-		printf("ambient: %f %f %f\n", ambient.r, ambient.g, ambient.b);
 	while (i < program->objs_len)
 	{
 		if (program->objs[i].type == LIGHT)
