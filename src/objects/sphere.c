@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:34:52 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/12 11:56:48 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/14 17:14:04 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,13 @@ float	ft_sphere_hit(t_object *sphere, t_ray *ray)
 	return ((-tmp.y - sqrt(discriminant)) / (2.0 * tmp.x));
 }
 
-int	ft_sphere_normal(t_object *sphere, t_ray *ray, t_vector3 *normal, float t)
+int	ft_sphere_normal(t_hit *hit, t_ray *ray)
 {
-	t_vector3	oc;
-
-	ft_v3_init(&oc, ray->origin->x, ray->origin->y, ray->origin->z);
-	ft_v3_sub_ip(&oc, &sphere->pos);
-	ft_v3_scalar_ip(ray->direction, t);
-	ft_v3_add_ip(&oc, ray->direction);
-	ft_v3_sub_ip(&oc, &sphere->pos);
-	ft_v3_normal_ip(&oc);
-	ft_v3_init(normal, oc.x, oc.y, oc.z);
+	ft_v3_init(&hit->p, ray->origin->x + ray->direction->x * hit->t,
+		ray->origin->y + ray->direction->y * hit->t, ray->origin->z
+		+ ray->direction->z * hit->t);
+	ft_v3_init(&hit->n, hit->p.x - hit->obj->pos.x, hit->p.y - hit->obj->pos.y,
+		hit->p.z - hit->obj->pos.z);
+	ft_v3_normal_ip(&hit->n);
 	return (1);
 }

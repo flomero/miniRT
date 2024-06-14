@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:28:34 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/14 15:09:59 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/14 16:42:25 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_color	*ft_color_float_mult(t_color color, float ratio, t_color *result)
 	result->b = ft_color_clamp(result->b);
 	return (result);
 }
+
 /**
  * @brief Multiplies two colors together.
  * @param color1 The first color.

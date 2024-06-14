@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/14 15:06:29 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/14 17:26:11 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,13 @@ void			ft_ray_init(t_ray *ray, t_vector3 *origin,
 
 // OBJECT HIT FUNCTIONS
 t_bool			ft_hit(t_ray *ray, t_object *obj, t_hit *hit);
+
+typedef float	(*t_hit_func)(t_object *sphere, t_ray *ray);
+typedef int		(*t_normal_func)(t_hit *hit, t_ray *ray);
+t_hit_func		*ft_get_hit_func(void);
+t_normal_func	*ft_get_normal_func(void);
 float			ft_sphere_hit(t_object *sphere, t_ray *ray);
+int				ft_sphere_normal(t_hit *hit, t_ray *ray);
 
 // OBJECT UTILS
 t_object		*ft_get_first_obj(t_object_type type);

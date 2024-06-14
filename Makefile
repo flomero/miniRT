@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/13 12:36:30 by flfische         ###   ########.fr        #
+#    Updated: 2024/06/14 17:24:15 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ CFILES := miniRT.c \
 
 # OBJECTS
 CFILES += get_first_obj.c \
+			obj_func_getters.c \
 			hit.c \
 			camera.c \
 			sphere.c \

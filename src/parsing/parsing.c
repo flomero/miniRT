@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:15:15 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/11 10:14:18 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/14 17:28:35 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ int	init_struct(char *fname, int len)
  */
 static int	proccess_line(int fd, t_object *objs)
 {
-	char		*line;
-	char		**tokens;
-	int			i;
+	char	*line;
+	char	**tokens;
+	int		i;
 
 	line = get_next_line(fd);
 	i = 0;
@@ -87,15 +87,15 @@ static int	proccess_line(int fd, t_object *objs)
 			line[ft_strlen(line) - 1] = '\0';
 		tokens = ft_multi_split(line, " \t");
 		free(line);
-		if (!tokens || !tokens[0])
+		if (!tokens || !tokens[0] || tokens[0][0] == '#')
 		{
 			line = get_next_line(fd);
 			free_str_arr(tokens);
 			continue ;
 		}
 		if (!get_obj(tokens, &objs[i++]))
-			return (ft_print_error("Invalid object"), free_str_arr(tokens), \
-			free(objs), 0);
+			return (ft_print_error("Invalid object"), free_str_arr(tokens),
+				free(objs), 0);
 		free_str_arr(tokens);
 		line = get_next_line(fd);
 	}
@@ -134,10 +134,10 @@ int	get_obj(char **tokens, t_object *obj)
  * @param t_object **objs null terminated objs list which will be checked
  * @return int returns 1 if is valid number, 0 otherwise
  */
-int	is_valid_obj_nbr(t_object	*objs)
+int	is_valid_obj_nbr(t_object *objs)
 {
-	int			i;
-	int			single_occur[3];
+	int	i;
+	int	single_occur[3];
 
 	i = -1;
 	while (++i < 3)
@@ -147,15 +147,13 @@ int	is_valid_obj_nbr(t_object	*objs)
 	i = -1;
 	while (++i < ft_get_program()->objs_len)
 	{
-		if (objs[i].type < 3)
+		if (objs[i].type == AMBIENT_LIGHT || objs[i].type == CAMERA)
 			single_occur[objs[i].type]++;
 	}
 	if (single_occur[0] != 1)
 		return (ft_print_error("Expect exact one A"), free(objs), 0);
 	if (single_occur[1] != 1)
 		return (ft_print_error("Expect exact one C"), free(objs), 0);
-	if (single_occur[2] != 1)
-		return (ft_print_error("Expect exact one L"), free(objs), 0);
 	ft_get_program()->objs = objs;
 	return (1);
 }

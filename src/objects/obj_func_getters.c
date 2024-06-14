@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hit.c                                              :+:      :+:    :+:   */
+/*   obj_func_getters.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/13 10:11:15 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/14 17:33:37 by flfische         ###   ########.fr       */
+/*   Created: 2024/06/14 17:15:54 by flfische          #+#    #+#             */
+/*   Updated: 2024/06/14 17:33:15 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_bool	ft_hit(t_ray *ray, t_object *obj, t_hit *hit)
+t_hit_func	*ft_get_hit_func(void)
 {
-	float	t;
+	static t_hit_func	hit_functions[OBJECT_COUNT];
 
-	t = INFINITY;
-	if (obj->type > LIGHT)
-		t = ft_get_hit_func()[obj->type](obj, ray);
-	if (t <= 0 || t == INFINITY)
-		return (FALSE);
-	if (t > hit->t)
-		return (FALSE);
-	hit->t = t;
-	hit->obj = obj;
-	hit->obj->color = obj->color;
-	t = ft_get_normal_func()[obj->type](hit, ray);
-	hit->ray = ray;
-	return (TRUE);
+	if (!hit_functions[0])
+	{
+		hit_functions[SPHERE] = ft_sphere_hit;
+	}
+	return (hit_functions);
+}
+
+t_normal_func	*ft_get_normal_func(void)
+{
+	static t_normal_func	normal_functions[OBJECT_COUNT];
+
+	if (!normal_functions[0])
+	{
+		normal_functions[SPHERE] = ft_sphere_normal;
+	}
+	return (normal_functions);
 }

@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:32:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/14 15:10:54 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/14 16:34:39 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,10 @@ t_color	*ft_compute_lights(t_color *light_col, const t_hit *hit,
 		if (program->objs[i].type == LIGHT)
 		{
 			ft_compute_phong(&phong_color, &program->objs[i], hit, program);
-			ft_color_color_add(ambient, phong_color, light_col);
+			ft_color_color_add(*light_col, phong_color, light_col);
 		}
 		i++;
 	}
+	ft_color_color_add(*light_col, ambient, light_col);
 	return (light_col);
 }
