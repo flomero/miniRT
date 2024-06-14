@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:32:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/13 13:18:51 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/14 12:05:26 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_bool	ft_is_shadow(t_vector3 *light_dir, const t_hit *hit, t_program *program)
 	return (FALSE);
 }
 
-t_color	ft_compute_phong(t_color *color, const t_object *light,
+t_color	*ft_compute_phong(t_color *phong_color, const t_object *light,
 		const t_hit *hit, t_program *program)
 {
 	t_vector3	light_dir;
@@ -46,35 +46,41 @@ t_color	ft_compute_phong(t_color *color, const t_object *light,
 	t_color		spec_color;
 	static int	i = 0;
 
+	*phong_color = (t_color){0, 0, 0};
 	ft_v3_init(&light_dir, light->pos.x, light->pos.y, light->pos.z);
 	ft_v3_sub_ip(&light_dir, &hit->p);
 	ft_v3_normal_ip(&light_dir);
 	if (ft_is_shadow(&light_dir, hit, program))
-		return ((t_color){0, 0, 0});
+		return (phong_color);
 	ft_compute_diffuse(&color, hit, light, &light_dir);
 	if (i++ < 10)
 		printf("color: %f %f %f\n", color.r, color.g, color.b);
-	spec_color = ft_compute_specular(hit, light, &light_dir);
-	color = ft_color_color_add(color, spec_color);
-	return (color);
+	ft_compute_specular(&spec_color, hit, light, &light_dir);
+	ft_color_color_add(color, spec_color, phong_color);
+	return (phong_color);
 }
 
-t_color	ft_compute_lights(const t_hit *hit, t_program *program)
+t_color	*ft_compute_lights(t_color *light_col, const t_hit *hit,
+		t_program *program)
 {
 	int		i;
-	t_color	color;
+	t_color	ambient;
+	t_color	phong_color;	
+	static int x;
 
 	i = 0;
-	color = (t_color){0, 0, 0};
-	color = ft_compute_ambient(hit->obj->color_f);
+	*light_col = (t_color){0, 0, 0};
+	ft_compute_ambient(&ambient, hit->obj->color_f);
+	if (x++ < 10)
+		printf("ambient: %f %f %f\n", ambient.r, ambient.g, ambient.b);
 	while (i < program->objs_len)
 	{
 		if (program->objs[i].type == LIGHT)
 		{
-			color = ft_color_color_add(color,
-					ft_compute_phong(&program->objs[i], hit, program));
+			ft_compute_phong(&phong_color, &program->objs[i], hit, program);
+			ft_color_color_add(ambient, phong_color, light_col);
 		}
 		i++;
 	}
-	return (color);
+	return (light_col);
 }

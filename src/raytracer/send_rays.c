@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:48:28 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/13 12:48:34 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/14 12:00:54 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ uint32_t	ft_trace_ray(t_ray *ray)
 		i++;
 	}
 	if (hit.t < closest)
-		color = ft_compute_lights(&hit, program);
+		ft_compute_lights(&color, &hit, program);
+	else
+		return (BACKGROUND_COLOR);
 	return (ft_color_from_float(color));
 }
 

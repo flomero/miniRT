@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/13 12:48:17 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/14 12:20:45 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,22 +128,26 @@ int				get_pl(char **tokens, t_object *obj);
 // COLORS
 void			ft_color_to_float(uint32_t color, t_color *fcolor);
 uint32_t		ft_color_from_float(t_color color);
-int				ft_color_clamp(int color);
+float				ft_color_clamp(float color);
 uint32_t		ft_avg_color(uint32_t *colors, size_t x);
 uint32_t		ft_new_avg_color(uint32_t color, u_int32_t avg, int factor);
-t_color			ft_color_float_mult(t_color color, float ratio);
-t_color			ft_color_color_mult(t_color color1, t_color color2);
-t_color			ft_color_color_add(t_color color1, t_color color2);
+t_color			*ft_color_float_mult(t_color color, float ratio,
+					t_color *result);
+t_color			*ft_color_color_mult(t_color color1, t_color color2,
+					t_color *result);
+t_color			*ft_color_color_add(t_color color1, t_color color2,
+					t_color *result);
 
 // LIGHT
-t_color			ft_compute_lights(const t_hit *hit, t_program *program);
-t_color			ft_compute_phong(const t_object *light, const t_hit *hit,
+t_color			*ft_compute_lights(t_color *light_col, const t_hit *hit,
 					t_program *program);
-t_color			ft_compute_ambient(const t_color color);
-t_color			ft_compute_diffuse(const t_hit *rec, const t_object *light,
-					const t_vector3 *light_dir);
-t_color			ft_compute_specular(const t_hit *rec, const t_object *light,
-					const t_vector3 *light_dir);
+t_color			*ft_compute_phong(t_color *phong_col, const t_object *light,
+					const t_hit *hit, t_program *program);
+t_color			*ft_compute_ambient(t_color *result, const t_color color);
+t_color			*ft_compute_diffuse(t_color *diff_col, const t_hit *rec,
+					const t_object *light, const t_vector3 *light_dir);
+t_color			*ft_compute_specular(t_color *spec_col, const t_hit *rec,
+					const t_object *light, const t_vector3 *light_dir);
 
 // MATHS
 float			ft_randf(void);
