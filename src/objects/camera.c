@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:24:49 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/11 14:16:43 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/15 14:46:39 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ static t_vector3	*calc_lower_left_corner(t_object *camera)
 		- camera->s_camera.look_at->y, camera->pos.z
 		- camera->s_camera.look_at->z);
 	ft_v3_normal_ip(&w);
-	ft_v3_init(&u, 0.0, 1.0, 0.0);
+	if (fabs(w.y) == 1.0)
+		ft_v3_init(&u, 0.0, 0.0, 1.0);
+	else
+		ft_v3_init(&u, 0.0, 1.0, 0.0);
 	ft_v3_crossprod_ip(&u, &w);
 	ft_v3_normal_ip(&u);
 	ft_v3_init(&v, w.x, w.y, w.z);
