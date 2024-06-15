@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:32:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/14 19:13:30 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/15 13:52:25 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,15 @@ t_color	*ft_compute_phong(t_color *phong_color, const t_object *light,
 	if (ft_is_shadow(&light_dir, hit, program))
 		return (phong_color);
 	ft_compute_diffuse(&color, hit, light, &light_dir);
-	ft_compute_specular(&spec_color, hit, light, &light_dir);
-	ft_color_color_add(color, spec_color, phong_color);
-	if (hit->ray->depth > 0)
+	if (hit->ray->depth > 0 && hit->obj->material.reflectivness > 0)
 	{
 		ft_compute_reflection(&refl_col, hit, --hit->ray->depth);
+		ft_color_float_mult(*phong_color, 1 - hit->obj->material.reflectivness,
+			phong_color);
 		ft_color_color_add(*phong_color, refl_col, phong_color);
 	}
+	ft_compute_specular(&spec_color, hit, light, &light_dir);
+	ft_color_color_add(*phong_color, spec_color, phong_color);
 	return (phong_color);
 }
 

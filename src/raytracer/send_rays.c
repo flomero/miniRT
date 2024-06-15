@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:48:28 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/14 19:06:33 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/15 11:55:34 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static uint32_t	ft_get_void_color(void)
 		ft_color_color_add(color, ambient_light->color_f, &color);
 		ft_color_float_mult(color, ambient_light->s_ambient_light.ratio,
 			&color);
+		ft_color_float_mult(color, BACKGROUND_FACTOR, &color);
 		color_int = ft_color_from_float(color);
 		initialized = TRUE;
 	}

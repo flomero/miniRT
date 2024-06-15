@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 09:36:02 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/14 19:22:06 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/15 11:57:18 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,10 @@ t_color	*ft_compute_diffuse(t_color *diffuse_col, const t_hit *rec,
 	angle = ft_v3_dotprod(&tmp, light_dir);
 	if (angle < 0)
 		return (diffuse_col);
-	if (rec->obj->material.reflectivness > 0)
-	{
-		ft_color_float_mult(rec->obj->color_f, 1
-			- rec->obj->material.reflectivness, diffuse_col);
-		return (diffuse_col);
-	}
 	ft_color_float_mult(light->color_f, angle, diffuse_col);
 	ft_color_float_mult(*diffuse_col, light->s_light.brightness, diffuse_col);
 	ft_color_color_mult(rec->obj->color_f, *diffuse_col, diffuse_col);
+	// ft_color_float_mult(*diffuse_col, 1 - rec->obj->material.reflectivness,
+	// 	diffuse_col);
 	return (diffuse_col);
 }

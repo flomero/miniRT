@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:29:22 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/14 19:26:07 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/15 13:53:31 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,14 @@
 # define VIEWPORT_WIDTH 2.0
 # define FOCAL_LENGTH 1.0
 # define SAMPLES 100
+# define BACKGROUND_FACTOR 0.5
 
 // LIGHT
 # define BOUNCES 3
-# define DEFAULT_SPECULAR 0.99
-# define DEFAULT_SHININESS 100
-# define DEFAULT_DIFFUSE 0.8
+# define DEFAULT_SPECULAR 0.8
+# define DEFAULT_SHININESS 32
+# define DEFAULT_DIFFUSE 0.7
+# define DEFAULT_REFLECTIVNESS 0.0
 
 // TERMINAL COLORS
 # define RESET "\033[0m"
