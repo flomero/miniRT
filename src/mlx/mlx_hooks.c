@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:56:51 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/14 15:12:12 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/16 17:18:21 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_render(void *param)
 	{
 		ft_printf("\033[2K\rRendering sample %d/%d", program->current_sample
 			+ 1, SAMPLES);
-		loop_pixels(program);
+		loop_pixels(program, WIN_WIDTH, WIN_HEIGHT);
 		program->current_sample++;
 	}
 }

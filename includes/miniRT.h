@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/14 19:12:54 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/16 17:40:16 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "libft.h"
 # include <fcntl.h>
 # include <math.h>
+# include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/types.h>
@@ -59,13 +60,16 @@ typedef struct s_program
 	t_object	*objs;
 	int			objs_len;
 	int			current_sample;
-	uint32_t	colors_avgs[WIN_WIDTH][WIN_HEIGHT];
-	t_hit		hit;
-	t_object	*ambient_light;
+	uint32_t	colors_avgs[WIN_WIDTH * WIN_HEIGHT];
+	pthread_t	threads[MAX_THREADS];
+	int			thread_count;
+	uint32_t	void_color;
+	t_color		ambient_base;
 }				t_program;
 
 // FUNCTIONS
 t_program		*ft_get_program(void);
+void			ft_init_rt(t_program *program);
 
 // MLX
 int				ft_mlx_init(void);
@@ -73,7 +77,7 @@ void			ft_render(void *param);
 void			ft_key_hook(mlx_key_data_t key_data, void *param);
 
 // RAYTRACER
-void			loop_pixels(t_program *program);
+void			loop_pixels(t_program *program, int max_x, int max_y);
 uint32_t		ft_send_ray(int x, int y, t_object *camera);
 uint32_t		ft_trace_ray(t_ray *ray);
 void			ft_ray_init(t_ray *ray, t_vector3 *origin,
@@ -117,7 +121,6 @@ int				get_color(char *token, uint32_t *result);
 
 // PARSING UTILS3
 void			free_str_arr(char **arr);
-// void			free_obj_arr(t_object **arr);
 int				get_cy(char **tokens, t_object *obj);
 int				get_nbr_of_lines(char *fname);
 uint32_t		int_to_rgb(int red, int green, int blue);
@@ -151,6 +154,7 @@ t_color			*ft_compute_lights(t_color *light_col, const t_hit *hit,
 t_color			*ft_compute_phong(t_color *phong_col, const t_object *light,
 					const t_hit *hit, t_program *program);
 t_color			*ft_compute_ambient(t_color *result, const t_color color);
+void			ft_init_ambient_base(t_color *result);
 t_color			*ft_compute_diffuse(t_color *diff_col, const t_hit *rec,
 					const t_object *light, const t_vector3 *light_dir);
 t_color			*ft_compute_specular(t_color *spec_col, const t_hit *rec,

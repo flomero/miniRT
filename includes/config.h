@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:29:22 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/15 13:53:31 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/16 17:20:57 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # define WIN_TITLE "miniRT"
 # define WIN_WIDTH 1200
 # define WIN_HEIGHT 800
+
+// COMPUTATION
+# define MAX_THREADS 8
 
 // VIEWPORT
 # define VIEWPORT_WIDTH 2.0
