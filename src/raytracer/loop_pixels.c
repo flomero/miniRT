@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:49:43 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/16 17:18:33 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/17 12:47:17 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  *
  * @param program The program.
  */
-void	loop_pixels(t_program *program, int max_x, int max_y)
+void	loop_pixels(t_program *program, int min_x, int max_x, int max_y)
 {
 	int			x;
 	int			y;
@@ -25,10 +25,12 @@ void	loop_pixels(t_program *program, int max_x, int max_y)
 	int			pos;
 
 	y = 0;
-	while (y < max_y)
+	if (min_x < 0)
+		min_x = 0;
+	while (y < max_y && y < WIN_HEIGHT)
 	{
-		x = 0;
-		while (x < max_x)
+		x = min_x;
+		while (x < max_x && x < WIN_WIDTH)
 		{
 			pos = x + y * WIN_WIDTH;
 			color = ft_send_ray(x, y, ft_get_first_obj(CAMERA));

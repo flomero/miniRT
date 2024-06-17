@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/16 17:40:16 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/17 13:00:12 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_program
 	int			current_sample;
 	uint32_t	colors_avgs[WIN_WIDTH * WIN_HEIGHT];
 	pthread_t	threads[MAX_THREADS];
+	int			thread_samples[MAX_THREADS];
 	int			thread_count;
 	uint32_t	void_color;
 	t_color		ambient_base;
@@ -70,14 +71,17 @@ typedef struct s_program
 // FUNCTIONS
 t_program		*ft_get_program(void);
 void			ft_init_rt(t_program *program);
+void			join_threads(t_program *program);
 
 // MLX
 int				ft_mlx_init(void);
 void			ft_render(void *param);
 void			ft_key_hook(mlx_key_data_t key_data, void *param);
+void			ft_render_multithread(void *param);
 
 // RAYTRACER
-void			loop_pixels(t_program *program, int max_x, int max_y);
+void			loop_pixels(t_program *program, int min_x, int max_x,
+					int max_y);
 uint32_t		ft_send_ray(int x, int y, t_object *camera);
 uint32_t		ft_trace_ray(t_ray *ray);
 void			ft_ray_init(t_ray *ray, t_vector3 *origin,

@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 17:25:16 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/16 17:40:36 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/17 11:54:45 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,6 @@ void	ft_init_rt(t_program *program)
 	ft_calculate_viewport(ft_get_first_obj(CAMERA));
 	program->void_color = init_void_color();
 	ft_init_ambient_base(&program->ambient_base);
+	program->thread_count = 4;
+	program->current_sample = 0;
 }

@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/16 17:27:04 by flfische         ###   ########.fr        #
+#    Updated: 2024/06/17 12:59:48 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ vpath %.h $(INC_DIR)
 
 CFILES := miniRT.c \
 			init_rt.c \
+			join_threads.c \
 			mlx_init.c \
 			mlx_hooks.c \
 			print_error.c \
@@ -164,7 +165,7 @@ norm:
 	@norminette $(SRC_DIRS) $(INC_DIR) $(LIBFT_DIR) | grep "Error" || echo "$(GREEN)Norme OK$(NC)"
 
 debug: CFLAGS += -g
-debug: CFLAGS += -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fno-sanitize=null -fno-sanitize=alignment
+debug: CFLAGS += -fsanitize=thread #-fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fno-sanitize=null -fno-sanitize=alignment
 debug: CFLAGS += -DDEBUG=1
 debug: clean all
 
