@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:56:51 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/17 15:01:25 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/17 15:04:59 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,10 @@ void	*ft_render_multi(void *param)
 	program->thread_samples[thread_id] = 0;
 	while (program->thread_samples[thread_id] < program->max_samples)
 	{
+		pthread_mutex_lock(program->stop);
+		if (program->stop_threads)
+			return (pthread_mutex_unlock(program->stop), NULL);
+		pthread_mutex_unlock(program->stop);
 		if (thread_id == 0)
 			ft_printf("\033[2K\rRendering sample %d/%d",
 				program->thread_samples[thread_id] + 1, program->max_samples);
@@ -102,6 +106,9 @@ void	ft_key_hook(mlx_key_data_t keydata, void *param)
 	program = (t_program *)param;
 	if (keydata.key == MLX_KEY_ESCAPE)
 	{
+		pthread_mutex_lock(program->stop);
+		program->stop_threads = TRUE;
+		pthread_mutex_unlock(program->stop);
 		join_threads(program);
 		mlx_terminate(program->mlx);
 		exit(0);
