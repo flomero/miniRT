@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:48:28 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/17 14:14:14 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/17 14:17:19 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,24 @@ uint32_t	ft_trace_ray(t_ray *ray)
 	float		closest;
 	float		hit;
 	uint32_t	color;
-	t_program	*program;
 
-	i = 0;
+	i = -1;
 	closest = INFINITY;
-	program = ft_get_program();
 	color = BACKGROUND_COLOR;
-	while (i < program->objs_len)
+	while (++i < ft_get_program()->objs_len)
 	{
-		if (program->objs[i].type == SPHERE)
-			hit = ft_sphere_hit(&program->objs[i], ray);
-		if (program->objs[i].type == PLANE)
-			hit = ft_plane_hit(&program->objs[i], ray);
-		if (program->objs[i].type == CYLINDER)
-			hit = ft_cylinder_hit(&program->objs[i], ray);
+		if (ft_get_program()->objs[i].type == SPHERE)
+			hit = ft_sphere_hit(&ft_get_program()->objs[i], ray);
+		if (ft_get_program()->objs[i].type == PLANE)
+			hit = ft_plane_hit(&ft_get_program()->objs[i], ray);
+		if (ft_get_program()->objs[i].type == CYLINDER)
+			hit = ft_cylinder_hit(&ft_get_program()->objs[i], ray);
 		if (hit < ft_get_first_obj(CAMERA)->s_camera.focal_length)
 			hit = INFINITY;
 		if (hit < closest)
-			color = program->objs[i].color;
+			color = ft_get_program()->objs[i].color;
 		if (hit < closest)
 			closest = hit;
-		i++;
 	}
 	return (color);
 }
