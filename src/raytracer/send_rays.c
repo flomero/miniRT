@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:48:28 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/13 12:52:21 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/14 18:41:54 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,16 @@ uint32_t	ft_trace_ray(t_ray *ray)
 		if (program->objs[i].type == PLANE)
 		{
 			hit = ft_plane_hit(&program->objs[i], ray);
+			if (hit < ft_get_first_obj(CAMERA)->s_camera.focal_length)
+				hit = INFINITY;
+			if (hit < closest)
+				color = program->objs[i].color;
+			if (hit < closest)
+				closest = hit;
+		}
+		if (program->objs[i].type == CYLINDER)
+		{
+			hit = ft_cylinder_hit(&program->objs[i], ray);
 			if (hit < ft_get_first_obj(CAMERA)->s_camera.focal_length)
 				hit = INFINITY;
 			if (hit < closest)

@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/13 11:32:09 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/14 17:16:38 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ uint32_t		ft_trace_ray(t_ray *ray);
 // OBJECT HIT FUNCTIONS
 float			ft_sphere_hit(t_object *sphere, t_ray *ray);
 float			ft_plane_hit(t_object *plane, t_ray *ray);
+float			ft_cylinder_hit(t_object *cyl, t_ray *ray);
 
 // OBJECT UTILS
 t_object		*ft_get_first_obj(t_object_type type);

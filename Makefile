@@ -6,7 +6,7 @@
 #    By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/13 10:31:14 by klamprak         ###   ########.fr        #
+#    Updated: 2024/06/14 17:16:01 by klamprak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ CFILES += get_first_obj.c \
 			camera.c \
 			sphere.c \
 			plane.c \
+			cylinder.c \
 
 # RT
 CFILES += send_rays.c \
