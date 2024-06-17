@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 09:43:35 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/14 19:16:37 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/17 15:33:56 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ t_color	*ft_compute_reflection(t_color *refl_col, const t_hit *rec, int depth)
 	t_vector3	direction;
 	t_hit		refl_rec;
 	t_color		tmp_col;
-	uint32_t	color;
 
 	*refl_col = (t_color){0, 0, 0};
 	if (depth <= 0 || rec->obj->material.reflectivness <= 0)
@@ -46,8 +45,7 @@ t_color	*ft_compute_reflection(t_color *refl_col, const t_hit *rec, int depth)
 	refl_rec.obj = NULL;
 	refl_rec.t = INFINITY;
 	refl_ray.depth = depth;
-	color = ft_trace_ray(&refl_ray);
-	ft_color_to_float(color, &tmp_col);
+	ft_color_to_float(ft_trace_ray(&refl_ray), &tmp_col);
 	ft_color_float_mult(tmp_col, rec->obj->material.reflectivness, refl_col);
 	return (refl_col);
 }

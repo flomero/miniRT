@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/17 15:03:36 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/17 16:15:37 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ int					is_valid_parsing(char *fname);
 int					init_struct(char *fname, int len);
 int					get_obj(char **tokens, t_object *obj);
 int					is_valid_obj_nbr(t_object *objs);
+void				ft_default_material(t_material *material);
+void				ft_compute_if_reflective(t_material *material);
 
 // PARSING UTILS
 int					get_arr_len(char **arr);

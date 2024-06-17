@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/17 12:59:48 by flfische         ###   ########.fr        #
+#    Updated: 2024/06/17 16:15:52 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,8 @@ CFILES := miniRT.c \
 			parsing_utils.c \
 			parsing_utils2.c \
 			parsing_utils3.c \
+			parse_camera.c \
+			parse_material.c \
 			custom_split.c \
 
 # OBJECTS

@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:56:51 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/17 15:04:59 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/17 15:32:05 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	ft_render(void *param)
 void	*ft_render_multi(void *param)
 {
 	t_program	*program;
-	int			x_start;
 	t_vector2	max;
 	int			thread_id;
 
@@ -51,9 +50,7 @@ void	*ft_render_multi(void *param)
 		max.x = WIN_WIDTH;
 	else
 		max.x = (WIN_WIDTH / program->thread_count) * (thread_id + 1);
-	x_start = (WIN_WIDTH / program->thread_count) * thread_id;
 	max.y = WIN_HEIGHT;
-	program->thread_samples[thread_id] = 0;
 	while (program->thread_samples[thread_id] < program->max_samples)
 	{
 		pthread_mutex_lock(program->stop);
@@ -63,7 +60,8 @@ void	*ft_render_multi(void *param)
 		if (thread_id == 0)
 			ft_printf("\033[2K\rRendering sample %d/%d",
 				program->thread_samples[thread_id] + 1, program->max_samples);
-		loop_pixels(program, x_start, &max, program->thread_samples[thread_id]);
+		loop_pixels(program, (WIN_WIDTH / program->thread_count) * thread_id,
+			&max, program->thread_samples[thread_id]);
 		program->thread_samples[thread_id]++;
 	}
 	return (NULL);
