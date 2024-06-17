@@ -5,63 +5,93 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/17 11:39:55 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/17 11:53:41 by klamprak         ###   ########.fr       */
+/*   Created: 2024/06/17 11:45:47 by klamprak          #+#    #+#             */
+/*   Updated: 2024/06/17 14:10:41 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static int	in_height(float t, t_object *cyl, t_ray *ray);
-static		t_vector3 *vector_normalize(t_vector3 *v);
+static int			in_height(float t, t_object *cyl, t_ray *ray);
+static t_vector3	*vector_normalize(t_vector3 *v);
+static void			get_t(float t[2], t_object *cyl, t_ray *ray);
+static float		handle_zero(float b, float c, t_ray *ray, t_object *cyl);
 
 float	ft_cylinder_hit(t_object *cyl, t_ray *ray)
 {
-	float		r;
-	t_vector3	*oc;
-	t_vector3	*temp1;
-	t_vector3	*temp2;
-	float		a,b,c;
-	float		discriminant;
-	float		t[2];
+	float	t[2];
 
-	ray->direction = vector_normalize(ray->direction);
-	cyl->s_cylinder.normal = *vector_normalize(&cyl->s_cylinder.normal);
-	r = cyl->s_cylinder.diameter / 2;
-	oc = ft_v3_sub(ray->origin, &cyl->pos);
-	temp1 = ft_v3_sub(ray->direction, ft_v3_scalar(&cyl->s_cylinder.normal, ft_v3_dotprod(ray->direction, &cyl->s_cylinder.normal)));
-	temp2 = ft_v3_sub(oc, ft_v3_scalar(&cyl->s_cylinder.normal, ft_v3_dotprod(oc, &cyl->s_cylinder.normal)));
-	a = ft_v3_dotprod(temp1, temp1);
-	b = 2 * ft_v3_dotprod(temp1, temp2);
-	c = ft_v3_dotprod(temp2, temp2) - (r * r);
-	discriminant = b * b - 4 * a * c;
-	if (discriminant < 0)
-		return (INFINITY);
-	t[0] = (-b + sqrt(discriminant)) / (2 * a);
-	t[1] = (-b - sqrt(discriminant)) / (2 * a);
+	t[0] = INFINITY;
+	t[1] = INFINITY;
+	get_t(t, cyl, ray);
 	if (!in_height(t[0], cyl, ray) && !in_height(t[1], cyl, ray))
 		return (INFINITY);
-	if (in_height(t[0], cyl, ray) && in_height(t[1], cyl, ray))
-	{
-		if (t[0] < t[1])
-			return (t[0]);
-		return (t[1]);
-	}
+	if (in_height(t[0], cyl, ray) && in_height(t[1], cyl, ray) && t[0] > t[1])
+		t[0] = t[1];
 	if (in_height(t[0], cyl, ray))
 		return (t[0]);
 	return (t[1]);
 }
 
+static void	get_t(float t[2], t_object *cyl, t_ray *ray)
+{
+	t_vector3	*temp1;
+	t_vector3	*temp2;
+	float		a;
+	float		b;
+	float		c;
+
+	ray->direction = vector_normalize(ray->direction);
+	cyl->s_cylinder.normal = *vector_normalize(&cyl->s_cylinder.normal);
+	temp1 = ft_v3_sub(ray->direction, ft_v3_scalar(&cyl->s_cylinder.normal, \
+	ft_v3_dotprod(ray->direction, &cyl->s_cylinder.normal)));
+	temp2 = ft_v3_sub(ft_v3_sub(ray->origin, &cyl->pos), \
+	ft_v3_scalar(&cyl->s_cylinder.normal, ft_v3_dotprod(ft_v3_sub(ray->origin, \
+	&cyl->pos), &cyl->s_cylinder.normal)));
+	a = ft_v3_dotprod(temp1, temp1);
+	b = 2 * ft_v3_dotprod(temp1, temp2);
+	c = (ft_v3_dotprod(temp2, temp2) - ((cyl->s_cylinder.diameter / 2) * \
+	(cyl->s_cylinder.diameter / 2)));
+	if (a == 0)
+		t[0] = handle_zero(b, c, ray, cyl);
+	c = b * b - 4 * a * c;
+	if (c < 0 || a < 0)
+		return ;
+	t[0] = (-b + sqrt(c)) / (2 * a);
+	t[1] = (-b - sqrt(c)) / (2 * a);
+}
+
+static float	handle_zero(float b, float c, t_ray *ray, t_object *cyl)
+{
+	float		t[2];
+	t_vector3	*temp1;
+
+	if (b == 0)
+		return (INFINITY);
+	else
+	{
+		t[0] = -c / b;
+		if (t < 0)
+			return (INFINITY);
+		temp1 = ft_v3_add(ray->origin, ft_v3_scalar(ray->direction, t[0]));
+		t[1] = ft_v3_dotprod(ft_v3_sub(temp1, &cyl->pos), \
+		&cyl->s_cylinder.normal);
+		if (t[1] >= 0 && t[1] <= cyl->s_cylinder.height)
+			return (t[0]);
+	}
+	return (INFINITY);
+}
+
 static int	in_height(float t, t_object *cyl, t_ray *ray)
 {
 	t_vector3	*temp2;
-	float		height_pos;
+	float		hei_p;
 
 	if (t < 0)
 		return (0);
 	temp2 = ft_v3_add(ray->origin, ft_v3_scalar(ray->direction, t));
-	height_pos = ft_v3_dotprod(ft_v3_sub(temp2, &cyl->pos), &cyl->s_cylinder.normal);
-	if (height_pos >= 0 && height_pos <= cyl->s_cylinder.height)
+	hei_p = ft_v3_dotprod(ft_v3_sub(temp2, &cyl->pos), &cyl->s_cylinder.normal);
+	if (hei_p >= 0 && hei_p <= cyl->s_cylinder.height)
 		return (1);
 	return (0);
 }
