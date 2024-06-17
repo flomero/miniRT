@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/17 16:15:37 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/17 19:15:14 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_hit
 	t_vector3		n;
 	t_ray			*ray;
 	t_object		*obj;
+	t_color			local_color;
 }					t_hit;
 
 typedef enum e_bool
@@ -159,7 +160,7 @@ t_color				*ft_color_color_add(t_color color1, t_color color2,
 						t_color *result);
 
 // LIGHT
-t_color				*ft_compute_lights(t_color *light_col, const t_hit *hit,
+t_color				*ft_compute_lights(t_color *light_col, t_hit *hit,
 						t_program *program);
 t_color				*ft_compute_phong(t_color *phong_col, const t_object *light,
 						const t_hit *hit, t_program *program);
@@ -171,6 +172,10 @@ t_color				*ft_compute_specular(t_color *spec_col, const t_hit *rec,
 						const t_object *light, const t_vector3 *light_dir);
 t_color				*ft_compute_reflection(t_color *refl_col, const t_hit *rec,
 						int depth);
+
+// TEXTURES
+uint32_t			ft_checkerboard(t_material *material,
+						const t_vector3 *point, t_color *result);
 
 // MATHS
 float				ft_randf(void);

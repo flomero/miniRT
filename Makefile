@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/17 16:15:52 by flfische         ###   ########.fr        #
+#    Updated: 2024/06/17 19:05:49 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC_DIRS := src \
 			src/colors \
 			src/parsing \
 			src/light \
+			src/textures \
 
 OBJ_DIR := obj
 INC_DIR := includes
@@ -85,6 +86,9 @@ CFILES += random.c \
 			v3_random.c \
 			v3_scalar.c \
 			v3_sub.c \
+
+# TEXTURES
+CFILES += checkerboard.c \
 
 OFILES := $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
 

@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:32:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/15 13:52:25 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/17 19:14:55 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,7 @@ t_color	*ft_compute_phong(t_color *phong_color, const t_object *light,
  * @param program The program.
  * @return The computed color.
  */
-t_color	*ft_compute_lights(t_color *light_col, const t_hit *hit,
-		t_program *program)
+t_color	*ft_compute_lights(t_color *light_col, t_hit *hit, t_program *program)
 {
 	int		i;
 	t_color	ambient;
@@ -101,7 +100,12 @@ t_color	*ft_compute_lights(t_color *light_col, const t_hit *hit,
 
 	i = 0;
 	*light_col = (t_color){0, 0, 0};
-	ft_compute_ambient(&ambient, hit->obj->color_f);
+	hit->local_color = (t_color){hit->obj->color_f.r, hit->obj->color_f.g,
+		hit->obj->color_f.b};
+	if (hit->obj->material.type == CHECKER)
+		ft_checkerboard(&hit->obj->material, &hit->p,
+			(t_color *)&hit->local_color);
+	ft_compute_ambient(&ambient, hit->local_color);
 	while (i < program->objs_len)
 	{
 		if (program->objs[i].type == LIGHT)
