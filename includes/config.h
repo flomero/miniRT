@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:29:22 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/16 17:20:57 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/17 13:26:46 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,17 @@
 # define WIN_HEIGHT 800
 
 // COMPUTATION
+# define DEFAULT_THREADS 1
 # define MAX_THREADS 8
 
 // VIEWPORT
 # define VIEWPORT_WIDTH 2.0
 # define FOCAL_LENGTH 1.0
-# define SAMPLES 100
+# define DEFAULT_SAMPLES 100
 # define BACKGROUND_FACTOR 0.5
 
 // LIGHT
-# define BOUNCES 3
+# define DEFAULT_BOUNCES 3
 # define DEFAULT_SPECULAR 0.8
 # define DEFAULT_SHININESS 32
 # define DEFAULT_DIFFUSE 0.7

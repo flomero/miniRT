@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:56:51 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/17 13:00:33 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/17 15:01:25 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,15 @@
 void	ft_render(void *param)
 {
 	t_program	*program;
+	t_vector2	max;
 
 	program = (t_program *)param;
-	if (program->current_sample < SAMPLES)
+	max = (t_vector2){WIN_WIDTH, WIN_HEIGHT};
+	if (program->current_sample < program->max_samples)
 	{
 		ft_printf("\033[2K\rRendering sample %d/%d", program->current_sample
-			+ 1, SAMPLES);
-		loop_pixels(program, 0, WIN_WIDTH, WIN_HEIGHT);
+			+ 1, program->max_samples);
+		loop_pixels(program, 0, &max, program->current_sample);
 		program->current_sample++;
 	}
 }
@@ -40,25 +42,24 @@ void	*ft_render_multi(void *param)
 {
 	t_program	*program;
 	int			x_start;
-	int			x_end;
-	int			height;
+	t_vector2	max;
 	int			thread_id;
 
 	thread_id = (int)(uintptr_t)param;
 	program = ft_get_program();
 	if (thread_id == program->thread_count - 1)
-		x_end = WIN_WIDTH;
+		max.x = WIN_WIDTH;
 	else
-		x_end = (WIN_WIDTH / program->thread_count) * (thread_id + 1);
+		max.x = (WIN_WIDTH / program->thread_count) * (thread_id + 1);
 	x_start = (WIN_WIDTH / program->thread_count) * thread_id;
-	height = WIN_HEIGHT;
+	max.y = WIN_HEIGHT;
 	program->thread_samples[thread_id] = 0;
-	while (program->thread_samples[thread_id] < SAMPLES)
+	while (program->thread_samples[thread_id] < program->max_samples)
 	{
 		if (thread_id == 0)
 			ft_printf("\033[2K\rRendering sample %d/%d",
-				program->thread_samples[thread_id] + 1, SAMPLES);
-		loop_pixels(program, x_start, x_end, height);
+				program->thread_samples[thread_id] + 1, program->max_samples);
+		loop_pixels(program, x_start, &max, program->thread_samples[thread_id]);
 		program->thread_samples[thread_id]++;
 	}
 	return (NULL);

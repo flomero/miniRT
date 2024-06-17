@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/17 13:00:12 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/17 14:59:43 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ typedef struct s_program
 	t_object	*objs;
 	int			objs_len;
 	int			current_sample;
+	int			max_samples;
+	int			bounces;
 	uint32_t	colors_avgs[WIN_WIDTH * WIN_HEIGHT];
 	pthread_t	threads[MAX_THREADS];
 	int			thread_samples[MAX_THREADS];
@@ -80,8 +82,8 @@ void			ft_key_hook(mlx_key_data_t key_data, void *param);
 void			ft_render_multithread(void *param);
 
 // RAYTRACER
-void			loop_pixels(t_program *program, int min_x, int max_x,
-					int max_y);
+void			loop_pixels(t_program *program, int min_x, t_vector2 *max,
+					int sample);
 uint32_t		ft_send_ray(int x, int y, t_object *camera);
 uint32_t		ft_trace_ray(t_ray *ray);
 void			ft_ray_init(t_ray *ray, t_vector3 *origin,

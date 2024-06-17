@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:48:28 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/16 17:32:33 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/17 13:27:28 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ uint32_t	ft_send_ray(int x, int y, t_object *camera)
 		camera->s_camera.vertical->y * v, camera->s_camera.vertical->z * v);
 	ft_v3_add_ip(ray.direction, &temp_vec);
 	ft_v3_sub_ip(ray.direction, &camera->pos);
-	ray.depth = BOUNCES;
+	ray.depth = ft_get_program()->bounces;
 	color = ft_trace_ray(&ray);
 	return (color);
 }

@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 14:41:37 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/15 12:05:50 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/17 14:47:31 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	get_c(char **tokens, t_object *obj)
 
 	obj->type = CAMERA;
 	obj->color = 0;
-	if (get_arr_len(tokens) != 4)
+	if (get_arr_len(tokens) < 4 || get_arr_len(tokens) > 7)
 		return (free(obj), 0);
 	if (!get_vector(&obj->pos, tokens[1]))
 		return (free(obj), 0);
@@ -64,6 +64,18 @@ int	get_c(char **tokens, t_object *obj)
 	fov = (float)ft_atod(tokens[3]);
 	if (fov < 0 || fov > 180)
 		return (free(obj), 0);
+	if (get_arr_len(tokens) == 5 && !ft_atoi(tokens[4]))
+		return (0);
+	if (get_arr_len(tokens) >= 5)
+		ft_get_program()->max_samples = ft_atoi(tokens[4]);
+	if (get_arr_len(tokens) == 6 && !ft_atoi(tokens[5]))
+		return (0);
+	if (get_arr_len(tokens) >= 6)
+		ft_get_program()->bounces = ft_atoi(tokens[5]);
+	if (get_arr_len(tokens) == 7 && !ft_atoi(tokens[6]))
+		return (0);
+	if (get_arr_len(tokens) == 7)
+		ft_get_program()->thread_count = ft_atoi(tokens[6]);
 	obj->s_camera.fov = fov;
 	return (1);
 }
