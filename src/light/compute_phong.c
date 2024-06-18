@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:32:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/17 19:14:55 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 10:14:42 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,9 @@ t_color	*ft_compute_lights(t_color *light_col, t_hit *hit, t_program *program)
 	if (hit->obj->material.type == CHECKER)
 		ft_checkerboard(&hit->obj->material, &hit->p,
 			(t_color *)&hit->local_color);
+	else if (hit->obj->material.type == UVCHECKER)
+		ft_checkerboard_uv(&hit->obj->material, (t_color *)&hit->local_color,
+			hit);
 	ft_compute_ambient(&ambient, hit->local_color);
 	while (i < program->objs_len)
 	{

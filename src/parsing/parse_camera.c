@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:03:03 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/17 16:07:36 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 10:53:18 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int	get_c(char **tokens, t_object *obj)
 	fov = (float)ft_atod(tokens[3]);
 	if (fov < 0 || fov > 180)
 		return (0);
+	obj->s_camera.fov = fov;
 	if (!get_c_config(tokens, get_arr_len(tokens)))
 		return (0);
-	obj->s_camera.fov = fov;
 	return (1);
 }

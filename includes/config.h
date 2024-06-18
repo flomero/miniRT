@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:29:22 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/17 13:26:46 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 10:03:42 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define VIEWPORT_WIDTH 2.0
 # define FOCAL_LENGTH 1.0
 # define DEFAULT_SAMPLES 100
-# define BACKGROUND_FACTOR 0.5
+# define BACKGROUND_FACTOR 0.2
 
 // LIGHT
 # define DEFAULT_BOUNCES 3

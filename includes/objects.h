@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:49:15 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/17 19:02:31 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 10:13:06 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef enum e_material_type
 {
 	DEFAULT,
 	CHECKER,
+	UVCHECKER,
 	CUSTOM,
 }						t_material_type;
 

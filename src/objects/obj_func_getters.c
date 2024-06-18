@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 17:15:54 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/17 15:38:53 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 10:09:44 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,12 @@ t_normal_func	*ft_get_normal_func(void)
 	[SPHERE] = ft_sphere_normal};
 
 	return ((t_normal_func *)normal_functions);
+}
+
+t_uv_func	*ft_get_uv_func(void)
+{
+	static const t_uv_func	uv_functions[OBJECT_COUNT] = {
+	[SPHERE] = ft_sphere_uv};
+
+	return ((t_uv_func *)uv_functions);
 }

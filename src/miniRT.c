@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/17 19:19:40 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 10:59:07 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,12 @@ int	main(int argc, char **argv)
 	ft_get_first_obj(SPHERE)->material.s_checker.color1 = 0x00FF00FF;
 	ft_get_first_obj(SPHERE)->material.s_checker.color2 = 0x0000FFFF;
 	ft_get_first_obj(SPHERE)->material.s_checker.size = 1;
+	ft_get_first_obj(SPHERE)->material.reflectivness = 0;
+	ft_get_nth_obj(SPHERE, 1)->material.type = UVCHECKER;
+	ft_get_nth_obj(SPHERE, 1)->material.s_checker.color1 = 0x00FF00FF;
+	ft_get_nth_obj(SPHERE, 1)->material.s_checker.color2 = 0x0000FFFF;
+	ft_get_nth_obj(SPHERE, 1)->material.s_checker.size = 20;
+	ft_get_nth_obj(SPHERE, 1)->material.reflectivness = 0;
 	mlx_key_hook(program->mlx, ft_key_hook, program);
 	if (program->thread_count < 2)
 		mlx_loop_hook(program->mlx, ft_render, program);
