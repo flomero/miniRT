@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:34:52 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/14 17:10:16 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/18 08:33:04 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,15 @@ float	ft_sphere_hit(t_object *sphere, t_ray *ray)
 	if (discriminant < 0)
 		return (INFINITY);
 	return ((-tmp.y - sqrt(discriminant)) / (2.0 * tmp.x));
+}
+
+int	ft_sphere_normal(t_hit *hit, t_ray *ray)
+{
+	ft_v3_init(&hit->p, ray->origin->x + ray->direction->x * hit->t,
+		ray->origin->y + ray->direction->y * hit->t, ray->origin->z
+		+ ray->direction->z * hit->t);
+	ft_v3_init(&hit->n, hit->p.x - hit->obj->pos.x, hit->p.y - hit->obj->pos.y,
+		hit->p.z - hit->obj->pos.z);
+	ft_v3_normal_ip(&hit->n);
+	return (1);
 }

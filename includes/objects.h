@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:49:15 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/11 14:14:34 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/13 12:32:39 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@ typedef struct s_vector2
 	float				y;
 }						t_vector2;
 
+typedef struct s_material
+{
+	float				ambient;
+	float				diffuse;
+	float				specular;
+	float				shininess;
+	float				reflectivness;
+}						t_material;
+
 typedef enum e_object_type
 {
 	AMBIENT_LIGHT,
@@ -40,11 +49,20 @@ typedef enum e_object_type
 	OBJECT_COUNT,
 }						t_object_type;
 
+typedef struct s_color
+{
+	float				r;
+	float				g;
+	float				b;
+}						t_color;
+
 typedef struct s_object
 {
 	uint32_t			color;
+	t_color				color_f;
 	t_vector3			pos;
 	t_object_type		type;
+	t_material			material;
 	union
 	{
 		struct

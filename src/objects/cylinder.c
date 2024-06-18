@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:45:47 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/17 14:10:41 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/18 08:46:00 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,19 @@ static t_vector3	*vector_normalize(t_vector3 *v)
 	if (length != 0)
 		return (ft_v3_scalar(v, 1.0f / length));
 	return (v);
+}
+
+int ft_cylinder_normal(t_hit *hit, t_ray *ray)
+{
+	t_vector3 hit_point;
+	t_vector3 object_center_to_hit;
+
+	ft_v3_init(&hit_point, ray->origin->x + ray->direction->x * hit->t,
+		ray->origin->y + ray->direction->y * hit->t, ray->origin->z
+		+ ray->direction->z * hit->t);
+	ft_v3_init(&object_center_to_hit, hit_point.x - hit->obj->pos.x,
+		0, hit_point.z - hit->obj->pos.z);
+	ft_v3_normal_ip(&object_center_to_hit);
+	ft_v3_init(&hit->n, object_center_to_hit.x, 0, object_center_to_hit.z);
+	return (1);
 }
