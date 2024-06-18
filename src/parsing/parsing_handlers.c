@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 14:41:37 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/17 16:16:57 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:20:34 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ int	get_a(char **tokens, t_object *obj)
 	float	ratio;
 
 	if (get_arr_len(tokens) != 3)
-		return (free(obj), 0);
+		return (0);
 	if (!is_float(tokens[1]) && !is_int(tokens[1]))
 		return (free(obj), 0);
 	ratio = (float)ft_atod(tokens[1]);
 	if (ratio < 0 || ratio > 1)
-		return (free(obj), 0);
+		return (0);
 	if (!get_color(tokens[2], &obj->color))
 		return (free(obj), 0);
 	ft_color_to_float(obj->color, &obj->color_f);
@@ -51,14 +51,14 @@ int	get_l(char **tokens, t_object *obj)
 
 	obj->type = LIGHT;
 	if (get_arr_len(tokens) != 4)
-		return (free(obj), 0);
+		return (0);
 	if (!get_vector(&obj->pos, tokens[1]))
-		return (free(obj), 0);
+		return (0);
 	if (!is_float(tokens[2]) && !is_int(tokens[2]))
 		return (free(obj), 0);
 	brightness = (float)ft_atod(tokens[2]);
 	if (brightness < 0 || brightness > 1)
-		return (free(obj), 0);
+		return (0);
 	if (!get_color(tokens[3], &obj->color))
 		return (free(obj), 0);
 	ft_color_to_float(obj->color, &obj->color_f);
@@ -79,14 +79,14 @@ int	get_sp(char **tokens, t_object *obj)
 
 	obj->type = SPHERE;
 	if (get_arr_len(tokens) < 4 || get_arr_len(tokens) > 5)
-		return (free(obj), 0);
+		return (0);
 	if (!get_vector(&obj->pos, tokens[1]))
-		return (free(obj), 0);
+		return (0);
 	if (!is_float(tokens[2]) && !is_int(tokens[2]))
-		return (free(obj), 0);
+		return (0);
 	diameter = (float)ft_atod(tokens[2]);
 	if (!get_color(tokens[3], &obj->color))
-		return (free(obj), 0);
+		return (0);
 	ft_color_to_float(obj->color, &obj->color_f);
 	obj->s_sphere.diameter = diameter;
 	ft_default_material(&obj->material);
@@ -109,15 +109,16 @@ int	get_pl(char **tokens, t_object *obj)
 {
 	obj->type = PLANE;
 	if (get_arr_len(tokens) != 4)
-		return (free(obj), 0);
+		return (0);
 	if (!get_vector(&obj->pos, tokens[1]))
 		return (free(&obj), 0);
 	if (!get_vector(&obj->s_plane.normal, tokens[2]))
-		return (free(obj), 0);
+		return (0);
 	if (!in_range(&obj->s_plane.normal, -1, 1))
-		return (free(obj), 0);
+		return (0);
 	if (!get_color(tokens[3], &obj->color))
-		return (free(obj), 0);
+		return (0);
+	ft_color_to_float(obj->color, &obj->color_f);
 	return (1);
 }
 

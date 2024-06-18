@@ -6,13 +6,20 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 10:59:07 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:14:55 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 	TODO:
-		- replace pointers in malloc with arrays to improve speed
+		- take care of camera with 0,0,0 instead of seg fault
+		- make sure objects work good with negative and positive values at z
+		- need to properly take care of 0 division, not just return INFINITY
+		- make sure I don't modify vector values in obj functs
+		- check for mem leaks
+		- merge from master the new stuff
+		- put at cylinder top and bottom cover
+		- replace normalize func of cylinder with the one of flog
 */
 
 #include "miniRT.h"
@@ -38,11 +45,9 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (0);
 	if (!is_valid_parsing(argv[1]))
-		printf("Parsing is not valid\n");
-	else
-		printf("Parsing is valid\n");
+		return (1);
 	if (DEBUG)
-		print_objs();
+		print_objs(NULL);
 	program = ft_get_program();
 	if (ft_mlx_init())
 		return (1);

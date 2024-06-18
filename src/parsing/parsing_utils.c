@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 16:28:34 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/11 10:53:19 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/13 13:16:08 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,30 +54,34 @@ void	print_rgb(uint32_t color)
  * @brief mostly for debuging, prints info of all objects
  * like spere, plane, camera
  *
+ * @param obj if its NULL, then it prints all objects of the program, else
+ * it prints the object passed
  */
-void	print_objs(void)
+void	print_objs(t_object	*obj)
 {
 	t_object	*objs;
 	int			i;
+	int			is_obj;
 
 	objs = ft_get_program()->objs;
 	if (!objs)
 		return ;
 	i = 0;
+	is_obj = obj != NULL;
 	while (i < ft_get_program()->objs_len)
 	{
-		printf("Object %d:\nID: %d\n", i, objs[i].type);
-		print_a_c_l(objs[i]);
-		print_pl_cy_sp(objs[i]);
-		if (objs[i].type != 0)
-			printf("Position: %.2f %.2f %.2f\n", objs[i].pos.x, objs[i].pos.y,
-				objs[i].pos.z);
-		if (objs[i].type != 1)
+		if (!is_obj)
+			obj = &objs[i];
+		printf("\n-----------------------\nObject %d:\nID: %d\n", i, obj->type);
+		print_a_c_l(*obj);
+		print_pl_cy_sp(*obj);
+		if (obj->type != 0)
+			printf("Pos: %.2f %.2f %.2f\n", obj->pos.x, obj->pos.y, obj->pos.z);
+		if (obj->type != 1)
 		{
-			printf("Color: #%08x, ", objs[i].color);
-			print_rgb(objs[i].color);
+			printf("Color: #%08x, ", obj->color);
+			print_rgb(obj->color);
 		}
-		printf("\n---------------- --------------------\n");
 		i++;
 	}
 }

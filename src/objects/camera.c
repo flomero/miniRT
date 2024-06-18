@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:24:49 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/17 15:37:32 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:16:23 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_calculate_viewport(t_object *camera)
 	float		theta;
 	t_vector3	temp_vec;
 
-	camera->s_camera.focal_length = 1.0;
+	camera->s_camera.focal_length = FOCAL_LENGTH;
 	aspect_ratio = (float)WIN_WIDTH / (float)WIN_HEIGHT;
 	camera->s_camera.look_at = ft_v3_new(camera->pos.x, camera->pos.y,
 			camera->pos.z);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:46:57 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/14 16:26:05 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:10:18 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,22 @@ int	get_cy(char **tokens, t_object *obj)
 {
 	obj->type = CYLINDER;
 	if (get_arr_len(tokens) != 6)
-		return (free(obj), 0);
+		return (0);
 	if (!get_vector(&obj->pos, tokens[1]))
-		return (free(obj), 0);
+		return (0);
 	if (!get_vector(&obj->s_cylinder.normal, tokens[2]))
-		return (free(obj), 0);
+		return (0);
 	if (!in_range(&obj->s_cylinder.normal, -1, 1))
-		return (free(obj), 0);
+		return (0);
 	if (!is_float(tokens[3]) && !is_int(tokens[3]))
-		return (free(obj), 0);
+		return (0);
 	obj->s_cylinder.diameter = (float)ft_atod(tokens[3]);
 	if (!is_float(tokens[4]) && !is_int(tokens[4]))
-		return (free(obj), 0);
+		return (0);
 	obj->s_cylinder.height = (float)ft_atod(tokens[4]);
 	if (!get_color(tokens[5], &obj->color))
-		return (free(obj), 0);
+		return (0);
+	ft_color_to_float(obj->color, &obj->color_f);
 	return (1);
 }
 

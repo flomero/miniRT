@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 10:14:31 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:21:41 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,12 @@ t_hit_func			*ft_get_hit_func(void);
 t_normal_func		*ft_get_normal_func(void);
 t_uv_func			*ft_get_uv_func(void);
 float				ft_sphere_hit(t_object *sphere, t_ray *ray);
-int					ft_sphere_normal(t_hit *hit, t_ray *ray);
 int					ft_sphere_uv(t_hit *hit, t_vector2 *uv);
+float				ft_plane_hit(t_object *plane, t_ray *ray);
+float				ft_cylinder_hit(t_object *cyl, t_ray *ray);
+int					ft_sphere_normal(t_hit *hit, t_ray *ray);
+int					ft_plane_normal(t_hit *hit, t_ray *ray);
+int					ft_cylinder_normal(t_hit *hit, t_ray *ray);
 
 // OBJECT UTILS
 t_object			*ft_get_first_obj(t_object_type type);
@@ -125,7 +129,7 @@ void				ft_compute_if_reflective(t_material *material);
 // PARSING UTILS
 int					get_arr_len(char **arr);
 void				print_rgb(uint32_t color);
-void				print_objs(void);
+void				print_objs(t_object *obj);
 
 // PARSING UTILS2
 int					is_int(char *str);

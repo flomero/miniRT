@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:48:28 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/17 13:27:28 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:20:45 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,8 @@ uint32_t	ft_trace_ray(t_ray *ray)
 	hit.t = INFINITY;
 	while (i < program->objs_len)
 	{
-		if (program->objs[i].type == SPHERE)
-		{
+		if (program->objs[i].type > LIGHT)
 			ft_hit(ray, &program->objs[i], &hit);
-		}
 		i++;
 	}
 	if (hit.t < closest)

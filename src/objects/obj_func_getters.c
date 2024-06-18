@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 17:15:54 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 10:09:44 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:18:23 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 t_hit_func	*ft_get_hit_func(void)
 {
 	static const t_hit_func	hit_functions[OBJECT_COUNT] = {
-	[SPHERE] = ft_sphere_hit};
+	[SPHERE] = ft_sphere_hit,
+	[PLANE] = ft_plane_hit,
+	[CYLINDER] = ft_cylinder_hit};
 
 	return ((t_hit_func *)hit_functions);
 }
@@ -23,7 +25,9 @@ t_hit_func	*ft_get_hit_func(void)
 t_normal_func	*ft_get_normal_func(void)
 {
 	static const t_normal_func	normal_functions[OBJECT_COUNT] = {
-	[SPHERE] = ft_sphere_normal};
+	[SPHERE] = ft_sphere_normal,
+	[PLANE] = ft_plane_normal,
+	[CYLINDER] = ft_cylinder_normal};
 
 	return ((t_normal_func *)normal_functions);
 }
