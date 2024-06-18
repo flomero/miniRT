@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   v3_normalize.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:20:48 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 15:09:58 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:16:13 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

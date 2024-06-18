@@ -3,17 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   compute_phong.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 11:32:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 14:58:44 by klamprak         ###   ########.fr       */
-=======
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:32:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/14 16:34:39 by flfische         ###   ########.fr       */
->>>>>>> master
+/*   Updated: 2024/06/18 15:15:50 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +22,9 @@
  */
 t_bool	ft_is_shadow(t_vector3 *light_dir, const t_hit *hit, t_program *program)
 {
-	t_ray		ray;
-	t_hit		tmp_hit;
-	int			i;
+	t_ray	ray;
+	t_hit	tmp_hit;
+	int		i;
 
 	ray.origin = &(t_vector3){hit->p.x, hit->p.y, hit->p.z};
 	ray.direction = light_dir;
@@ -67,6 +60,7 @@ t_color	*ft_compute_phong(t_color *phong_color, const t_object *light,
 	t_vector3	light_dir;
 	t_color		color;
 	t_color		spec_color;
+	t_color		refl_col;
 
 	*phong_color = (t_color){0, 0, 0};
 	ft_v3_init(&light_dir, light->pos.x, light->pos.y, light->pos.z);
@@ -75,8 +69,15 @@ t_color	*ft_compute_phong(t_color *phong_color, const t_object *light,
 		return (phong_color);
 	ft_v3_normal_ip(&light_dir);
 	ft_compute_diffuse(&color, hit, light, &light_dir);
+	if (hit->ray->depth > 0 && hit->obj->material.reflectivness > 0)
+	{
+		ft_compute_reflection(&refl_col, hit, --hit->ray->depth);
+		ft_color_float_mult(*phong_color, 1 - hit->obj->material.reflectivness,
+			phong_color);
+		ft_color_color_add(*phong_color, refl_col, phong_color);
+	}
 	ft_compute_specular(&spec_color, hit, light, &light_dir);
-	ft_color_color_add(color, spec_color, phong_color);
+	ft_color_color_add(*phong_color, spec_color, phong_color);
 	return (phong_color);
 }
 
@@ -88,8 +89,7 @@ t_color	*ft_compute_phong(t_color *phong_color, const t_object *light,
  * @param program The program.
  * @return The computed color.
  */
-t_color	*ft_compute_lights(t_color *light_col, const t_hit *hit,
-		t_program *program)
+t_color	*ft_compute_lights(t_color *light_col, t_hit *hit, t_program *program)
 {
 	int		i;
 	t_color	ambient;
@@ -97,7 +97,15 @@ t_color	*ft_compute_lights(t_color *light_col, const t_hit *hit,
 
 	i = 0;
 	*light_col = (t_color){0, 0, 0};
-	ft_compute_ambient(&ambient, hit->obj->color_f);
+	hit->local_color = (t_color){hit->obj->color_f.r, hit->obj->color_f.g,
+		hit->obj->color_f.b};
+	if (hit->obj->material.type == CHECKER)
+		ft_checkerboard(&hit->obj->material, &hit->p,
+			(t_color *)&hit->local_color);
+	else if (hit->obj->material.type == UVCHECKER)
+		ft_checkerboard_uv(&hit->obj->material, (t_color *)&hit->local_color,
+			hit);
+	ft_compute_ambient(&ambient, hit->local_color);
 	while (i < program->objs_len)
 	{
 		if (program->objs[i].type == LIGHT)

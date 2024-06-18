@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/18 15:09:19 by klamprak         ###   ########.fr        #
+#    Updated: 2024/06/18 15:14:44 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC_DIRS := src \
 			src/colors \
 			src/parsing \
 			src/light \
+			src/textures \
 
 OBJ_DIR := obj
 INC_DIR := includes
@@ -34,6 +35,8 @@ vpath %.c $(SRC_DIRS)
 vpath %.h $(INC_DIR)
 
 CFILES := miniRT.c \
+			init_rt.c \
+			join_threads.c \
 			mlx_init.c \
 			mlx_hooks.c \
 			print_error.c \
@@ -43,6 +46,8 @@ CFILES += 	parsing.c \
 			parsing_utils.c \
 			parsing_utils2.c \
 			parsing_utils3.c \
+			parse_camera.c \
+			parse_material.c \
 			custom_split.c \
 
 # OBJECTS
@@ -84,6 +89,9 @@ CFILES += random.c \
 			v3_random.c \
 			v3_scalar.c \
 			v3_sub.c \
+
+# TEXTURES
+CFILES += checkerboard.c \
 
 OFILES := $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
 
@@ -166,7 +174,7 @@ norm:
 	@norminette $(SRC_DIRS) $(INC_DIR) $(LIBFT_DIR) | grep "Error" || echo "$(GREEN)Norme OK$(NC)"
 
 debug: CFLAGS += -g
-debug: CFLAGS += -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fno-sanitize=null -fno-sanitize=alignment
+debug: CFLAGS += -fsanitize=thread #-fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fno-sanitize=null -fno-sanitize=alignment
 debug: CFLAGS += -DDEBUG=1
 debug: clean all
 

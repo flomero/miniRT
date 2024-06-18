@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 09:36:02 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/14 15:07:15 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/17 19:12:36 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ t_color	*ft_compute_diffuse(t_color *diffuse_col, const t_hit *rec,
 		return (diffuse_col);
 	ft_color_float_mult(light->color_f, angle, diffuse_col);
 	ft_color_float_mult(*diffuse_col, light->s_light.brightness, diffuse_col);
-	ft_color_color_mult(rec->obj->color_f, *diffuse_col, diffuse_col);
+	ft_color_color_mult(rec->local_color, *diffuse_col, diffuse_col);
 	return (diffuse_col);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 15:06:41 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:23:24 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,13 @@ int	main(int argc, char **argv)
 	program = ft_get_program();
 	if (ft_mlx_init())
 		return (1);
-	ft_calculate_viewport(ft_get_first_obj(CAMERA));
+	ft_init_rt(program);
 	mlx_key_hook(program->mlx, ft_key_hook, program);
-	mlx_loop_hook(program->mlx, ft_render, program);
+	if (program->thread_count < 2)
+		mlx_loop_hook(program->mlx, ft_render, program);
+	else
+		mlx_loop_hook(program->mlx, ft_render_multithread, program);
 	mlx_loop(program->mlx);
+	join_threads(program);
 	return (0);
 }

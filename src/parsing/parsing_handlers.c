@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_handlers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.de>          +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 14:41:37 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/14 17:41:40 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:20:34 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,36 +35,6 @@ int	get_a(char **tokens, t_object *obj)
 	ft_color_to_float(obj->color, &obj->color_f);
 	obj->s_ambient_light.ratio = ratio;
 	obj->type = AMBIENT_LIGHT;
-	return (1);
-}
-
-/**
- * @brief Get the c object
- *
- * @param tokens
- * @param obj
- * @return int 1 on success, 0 otherwise
- */
-int	get_c(char **tokens, t_object *obj)
-{
-	float	fov;
-
-	obj->type = CAMERA;
-	obj->color = 0;
-	if (get_arr_len(tokens) != 4)
-		return (0);
-	if (!get_vector(&obj->pos, tokens[1]))
-		return (0);
-	if (!get_vector(&obj->s_camera.normal, tokens[2]))
-		return (0);
-	if (!in_range(&obj->s_camera.normal, -1, 1))
-		return (0);
-	if (!is_float(tokens[3]) && !is_int(tokens[3]))
-		return (free(obj), 0);
-	fov = (float)ft_atod(tokens[3]);
-	if (fov < 0 || fov > 180)
-		return (0);
-	obj->s_camera.fov = fov;
 	return (1);
 }
 
@@ -108,20 +78,23 @@ int	get_sp(char **tokens, t_object *obj)
 	float	diameter;
 
 	obj->type = SPHERE;
-	if (get_arr_len(tokens) != 4)
+	if (get_arr_len(tokens) < 4 || get_arr_len(tokens) > 5)
 		return (0);
 	if (!get_vector(&obj->pos, tokens[1]))
 		return (0);
 	if (!is_float(tokens[2]) && !is_int(tokens[2]))
-		return (free(obj), 0);
+		return (0);
 	diameter = (float)ft_atod(tokens[2]);
 	if (!get_color(tokens[3], &obj->color))
-		return (free(obj), 0);
+		return (0);
 	ft_color_to_float(obj->color, &obj->color_f);
 	obj->s_sphere.diameter = diameter;
-	obj->material.specular = DEFAULT_SPECULAR;
-	obj->material.shininess = DEFAULT_SHININESS;
-	obj->material.diffuse = DEFAULT_DIFFUSE;
+	ft_default_material(&obj->material);
+	if (tokens[4] && (!is_float(tokens[4]) && !is_int(tokens[4])))
+		return (0);
+	if (tokens[4])
+		obj->material.reflectivness = ft_atod(tokens[4]);
+	ft_compute_if_reflective(&obj->material);
 	return (1);
 }
 

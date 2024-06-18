@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.de>          +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 16:32:02 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/10 15:42:07 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:26:29 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

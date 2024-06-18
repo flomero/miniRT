@@ -6,11 +6,49 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 09:43:35 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/14 15:08:17 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/17 15:33:56 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+void	ft_v3_reflect(t_vector3 *v, const t_vector3 *n, t_vector3 *result)
+{
+	t_vector3	tmp;
+	t_vector3	normal;
+
+	ft_v3_init(&normal, n->x, n->y, n->z);
+	ft_v3_scalar_ip(&normal, 2 * ft_v3_dotprod(v, n));
+	ft_v3_init(&tmp, v->x, v->y, v->z);
+	ft_v3_sub_ip(&tmp, &normal);
+	ft_v3_init(result, tmp.x, tmp.y, tmp.z);
+}
+
+t_color	*ft_compute_reflection(t_color *refl_col, const t_hit *rec, int depth)
+{
+	t_ray		refl_ray;
+	t_vector3	origin;
+	t_vector3	direction;
+	t_hit		refl_rec;
+	t_color		tmp_col;
+
+	*refl_col = (t_color){0, 0, 0};
+	if (depth <= 0 || rec->obj->material.reflectivness <= 0)
+		return (refl_col);
+	ft_v3_init(&origin, rec->p.x, rec->p.y, rec->p.z);
+	ft_v3_init(&direction, rec->ray->direction->x, rec->ray->direction->y,
+		rec->ray->direction->z);
+	ft_v3_reflect(&direction, &rec->n, &direction);
+	ft_v3_normal_ip(&direction);
+	ft_ray_init(&refl_ray, &origin, &direction);
+	refl_rec.ray = &refl_ray;
+	refl_rec.obj = NULL;
+	refl_rec.t = INFINITY;
+	refl_ray.depth = depth;
+	ft_color_to_float(ft_trace_ray(&refl_ray), &tmp_col);
+	ft_color_float_mult(tmp_col, rec->obj->material.reflectivness, refl_col);
+	return (refl_col);
+}
 
 /**
  * @brief Computes the specular light of the scene.

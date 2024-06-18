@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hit.c                                              :+:      :+:    :+:   */
+/*   join_threads.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/13 10:11:15 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 15:16:28 by flfische         ###   ########.fr       */
+/*   Created: 2024/06/17 12:59:13 by flfische          #+#    #+#             */
+/*   Updated: 2024/06/17 15:06:46 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_bool	ft_hit(t_ray *ray, t_object *obj, t_hit *hit)
+void	join_threads(t_program *program)
 {
-	float	t;
+	int	i;
 
-	t = INFINITY;
-	if (obj->type > LIGHT)
-		t = ft_get_hit_func()[obj->type](obj, ray);
-	if (t <= 0 || t == INFINITY)
-		return (FALSE);
-	if (t > hit->t)
-		return (FALSE);
-	hit->t = t;
-	hit->obj = obj;
-	t = ft_get_normal_func()[obj->type](hit, ray);
-	hit->ray = ray;
-	return (TRUE);
+	i = 0;
+	if (program->thread_count < 2)
+		return ;
+	while (i < program->thread_count)
+	{
+		pthread_join(program->threads[i], NULL);
+		i++;
+	}
+	pthread_mutex_destroy(program->stop);
 }

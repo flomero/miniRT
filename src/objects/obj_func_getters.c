@@ -3,17 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   obj_func_getters.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/14 17:15:54 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 08:47:55 by klamprak         ###   ########.fr       */
-=======
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 17:15:54 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/14 17:33:15 by flfische         ###   ########.fr       */
->>>>>>> master
+/*   Updated: 2024/06/18 15:18:23 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +14,28 @@
 
 t_hit_func	*ft_get_hit_func(void)
 {
-	static t_hit_func	hit_functions[OBJECT_COUNT];
+	static const t_hit_func	hit_functions[OBJECT_COUNT] = {
+	[SPHERE] = ft_sphere_hit,
+	[PLANE] = ft_plane_hit,
+	[CYLINDER] = ft_cylinder_hit};
 
-	if (!hit_functions[0])
-	{
-		hit_functions[SPHERE] = ft_sphere_hit;
-		hit_functions[PLANE] = ft_plane_hit;
-		hit_functions[CYLINDER] = ft_cylinder_hit;
-	}
-	return (hit_functions);
+	return ((t_hit_func *)hit_functions);
 }
 
 t_normal_func	*ft_get_normal_func(void)
 {
-	static t_normal_func	normal_functions[OBJECT_COUNT];
+	static const t_normal_func	normal_functions[OBJECT_COUNT] = {
+	[SPHERE] = ft_sphere_normal,
+	[PLANE] = ft_plane_normal,
+	[CYLINDER] = ft_cylinder_normal};
 
-	if (!normal_functions[0])
-	{
-		normal_functions[SPHERE] = ft_sphere_normal;
-		normal_functions[PLANE] = ft_plane_normal;
-		normal_functions[CYLINDER] = ft_cylinder_normal;
-	}
-	return (normal_functions);
+	return ((t_normal_func *)normal_functions);
+}
+
+t_uv_func	*ft_get_uv_func(void)
+{
+	static const t_uv_func	uv_functions[OBJECT_COUNT] = {
+	[SPHERE] = ft_sphere_uv};
+
+	return ((t_uv_func *)uv_functions);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:34:52 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 15:10:10 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:19:36 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,19 @@ int	ft_sphere_normal(t_hit *hit, t_ray *ray)
 	ft_v3_init(&hit->n, hit->p.x - hit->obj->pos.x, hit->p.y - hit->obj->pos.y,
 		hit->p.z - hit->obj->pos.z);
 	ft_v3_normal_ip(&hit->n);
+	return (1);
+}
+
+int	ft_sphere_uv(t_hit *hit, t_vector2 *uv)
+{
+	float		phi;
+	float		theta;
+	t_vector3	*normal;
+
+	normal = &hit->n;
+	phi = atan2(normal->z, normal->x);
+	theta = asin(normal->y);
+	uv->x = 1.0 - (phi + M_PI) / (2.0 * M_PI);
+	uv->y = (theta + M_PI / 2.0) / M_PI;
 	return (1);
 }
