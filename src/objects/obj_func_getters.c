@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   obj_func_getters.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 17:15:54 by flfische          #+#    #+#             */
 /*   Updated: 2024/06/18 08:47:55 by klamprak         ###   ########.fr       */
+=======
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/14 17:15:54 by flfische          #+#    #+#             */
+/*   Updated: 2024/06/14 17:33:15 by flfische         ###   ########.fr       */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
