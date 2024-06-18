@@ -6,18 +6,20 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/14 19:07:45 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:06:41 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 	TODO:
-		- for pl 0,0,-10.0 0,2.0,0 255,255,225 with norm > 1 I have mem bug
+		- take care of camera with 0,0,0 instead of seg fault
 		- make sure objects work good with negative and positive values at z
 		- need to properly take care of 0 division, not just return INFINITY
 		- make sure I don't modify vector values in obj functs
-		- checke for mem leaks
+		- check for mem leaks
 		- merge from master the new stuff
+		- put at cylinder top and bottom cover
+		- replace normalize func of cylinder with the one of flog
 */
 
 #include "miniRT.h"
