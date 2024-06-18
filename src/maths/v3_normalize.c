@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   v3_normalize.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:20:48 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/13 10:28:30 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:09:58 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ t_vector3	*ft_v3_normal_ip(t_vector3 *a)
 	float	len;
 
 	len = ft_v3_len(a);
+	if (len == 0)
+		return (a);
 	a->x /= len;
 	a->y /= len;
 	a->z /= len;

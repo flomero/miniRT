@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:36:37 by flfische          #+#    #+#             */
 /*   Updated: 2024/06/10 17:34:14 by klamprak         ###   ########.fr       */

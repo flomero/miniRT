@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   custom_split.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 07:51:20 by klamprak          #+#    #+#             */
 /*   Updated: 2024/06/11 08:24:15 by klamprak         ###   ########.fr       */

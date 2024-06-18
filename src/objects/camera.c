@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:24:49 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/11 14:16:43 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/13 12:40:18 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_calculate_viewport(t_object *camera)
 	float		theta;
 	t_vector3	temp_vec;
 
-	camera->s_camera.focal_length = 1.0;
+	camera->s_camera.focal_length = FOCAL_LENGTH;
 	aspect_ratio = (float)WIN_WIDTH / (float)WIN_HEIGHT;
 	camera->s_camera.look_at = ft_v3_new(camera->pos.x, camera->pos.y,
 			camera->pos.z);

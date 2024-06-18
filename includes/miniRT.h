@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/14 17:26:11 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:09:35 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,12 @@ typedef int		(*t_normal_func)(t_hit *hit, t_ray *ray);
 t_hit_func		*ft_get_hit_func(void);
 t_normal_func	*ft_get_normal_func(void);
 float			ft_sphere_hit(t_object *sphere, t_ray *ray);
+float			ft_plane_hit(t_object *plane, t_ray *ray);
+float			ft_cylinder_hit(t_object *cyl, t_ray *ray);
 int				ft_sphere_normal(t_hit *hit, t_ray *ray);
+int				ft_plane_normal(t_hit *hit, t_ray *ray);
+int				ft_cylinder_normal(t_hit *hit, t_ray *ray);
+
 
 // OBJECT UTILS
 t_object		*ft_get_first_obj(t_object_type type);
@@ -105,7 +110,7 @@ int				is_valid_obj_nbr(t_object *objs);
 // PARSING UTILS
 int				get_arr_len(char **arr);
 void			print_rgb(uint32_t color);
-void			print_objs(void);
+void			print_objs(t_object *obj);
 
 // PARSING UTILS2
 int				is_int(char *str);
