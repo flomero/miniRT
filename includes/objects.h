@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:49:15 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 10:13:06 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:27:37 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ typedef struct s_material
 			char		*texture;
 		} s_custom;
 	};
-
 }						t_material;
 
 typedef enum e_object_type

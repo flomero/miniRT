@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.de>          +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:36:37 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 17:34:14 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:24:44 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

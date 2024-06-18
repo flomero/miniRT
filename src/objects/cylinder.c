@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:45:47 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/18 13:25:04 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:26:50 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static int			in_height(float t, t_object *cyl, t_ray *ray);
+static int		in_height(float t, t_object *cyl, t_ray *ray);
 // static t_vector3	*vector_normalize(t_vector3 *v);
-static void			get_t(float t[2], t_object *cyl, t_ray *ray);
-static float		handle_zero(float b, float c, t_ray *ray, t_object *cyl);
+static void		get_t(float t[2], t_object *cyl, t_ray *ray);
+static float	handle_zero(float b, float c, t_ray *ray, t_object *cyl);
 
 float	ft_cylinder_hit(t_object *cyl, t_ray *ray)
 {
@@ -37,23 +37,25 @@ static void	get_t(float t[2], t_object *cyl, t_ray *ray)
 {
 	t_vector3	*temp1;
 	t_vector3	*temp2;
-	t_vector3 normalized_raydir;
+	t_vector3	normalized_raydir;
 	float		a;
 	float		b;
 	float		c;
 
-	ft_v3_init(&normalized_raydir, ray->direction->x, ray->direction->y, ray->direction->z);
+	ft_v3_init(&normalized_raydir, ray->direction->x, ray->direction->y,
+		ray->direction->z);
 	ft_v3_normal_ip(&normalized_raydir);
 	ft_v3_normal_ip(&cyl->s_cylinder.normal);
-	temp1 = ft_v3_sub(&normalized_raydir, ft_v3_scalar(&cyl->s_cylinder.normal, \
-	ft_v3_dotprod(&normalized_raydir, &cyl->s_cylinder.normal)));
-	temp2 = ft_v3_sub(ft_v3_sub(ray->origin, &cyl->pos), \
-	ft_v3_scalar(&cyl->s_cylinder.normal, ft_v3_dotprod(ft_v3_sub(ray->origin, \
-	&cyl->pos), &cyl->s_cylinder.normal)));
+	temp1 = ft_v3_sub(&normalized_raydir, ft_v3_scalar(&cyl->s_cylinder.normal,
+				ft_v3_dotprod(&normalized_raydir, &cyl->s_cylinder.normal)));
+	temp2 = ft_v3_sub(ft_v3_sub(ray->origin, &cyl->pos),
+			ft_v3_scalar(&cyl->s_cylinder.normal,
+				ft_v3_dotprod(ft_v3_sub(ray->origin, &cyl->pos),
+					&cyl->s_cylinder.normal)));
 	a = ft_v3_dotprod(temp1, temp1);
 	b = 2 * ft_v3_dotprod(temp1, temp2);
-	c = (ft_v3_dotprod(temp2, temp2) - ((cyl->s_cylinder.diameter / 2) * \
-	(cyl->s_cylinder.diameter / 2)));
+	c = (ft_v3_dotprod(temp2, temp2) - ((cyl->s_cylinder.diameter / 2)
+				* (cyl->s_cylinder.diameter / 2)));
 	if (a == 0)
 		t[0] = handle_zero(b, c, ray, cyl);
 	c = b * b - 4 * a * c;
@@ -76,8 +78,8 @@ static float	handle_zero(float b, float c, t_ray *ray, t_object *cyl)
 		if (t < 0)
 			return (INFINITY);
 		temp1 = ft_v3_add(ray->origin, ft_v3_scalar(ray->direction, t[0]));
-		t[1] = ft_v3_dotprod(ft_v3_sub(temp1, &cyl->pos), \
-		&cyl->s_cylinder.normal);
+		t[1] = ft_v3_dotprod(ft_v3_sub(temp1, &cyl->pos),
+				&cyl->s_cylinder.normal);
 		if (t[1] >= 0 && t[1] <= cyl->s_cylinder.height)
 			return (t[0]);
 	}
@@ -108,16 +110,16 @@ static int	in_height(float t, t_object *cyl, t_ray *ray)
 // 	return (v);
 // }
 
-int ft_cylinder_normal(t_hit *hit, t_ray *ray)
+int	ft_cylinder_normal(t_hit *hit, t_ray *ray)
 {
-	t_vector3 hit_point;
-	t_vector3 object_center_to_hit;
+	t_vector3	hit_point;
+	t_vector3	object_center_to_hit;
 
 	ft_v3_init(&hit_point, ray->origin->x + ray->direction->x * hit->t,
 		ray->origin->y + ray->direction->y * hit->t, ray->origin->z
 		+ ray->direction->z * hit->t);
-	ft_v3_init(&object_center_to_hit, hit_point.x - hit->obj->pos.x,
-		0, hit_point.z - hit->obj->pos.z);
+	ft_v3_init(&object_center_to_hit, hit_point.x - hit->obj->pos.x, 0,
+		hit_point.z - hit->obj->pos.z);
 	ft_v3_normal_ip(&object_center_to_hit);
 	ft_v3_init(&hit->n, object_center_to_hit.x, 0, object_center_to_hit.z);
 	return (1);
