@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 14:41:37 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/18 18:16:26 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 19:22:23 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	get_sp(char **tokens, t_object *obj)
 	float	diameter;
 
 	obj->type = SPHERE;
-	if (get_arr_len(tokens) < 4 || get_arr_len(tokens) > 5)
+	if (get_arr_len(tokens) < 4 || get_arr_len(tokens) > 6)
 		return (0);
 	if (!get_vector(&obj->pos, tokens[1]))
 		return (0);
@@ -95,6 +95,10 @@ int	get_sp(char **tokens, t_object *obj)
 		obj->material_name = ft_strdup(tokens[4]);
 	else
 		obj->material_name = NULL;
+	if (get_arr_len(tokens) == 6)
+		obj->texture_name = ft_strdup(tokens[5]);
+	else
+		obj->texture_name = NULL;
 	return (1);
 }
 
@@ -119,6 +123,7 @@ int	get_pl(char **tokens, t_object *obj)
 	if (!get_color(tokens[3], &obj->color))
 		return (0);
 	ft_color_to_float(obj->color, &obj->color_f);
+	ft_assign_own_tm(obj);
 	return (1);
 }
 

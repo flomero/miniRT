@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:49:15 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 17:42:15 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 18:53:13 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ typedef struct s_color
 
 typedef enum texture_type
 {
-	DEFAULT,
-	CHECKER,
-	UVCHECKER,
-	CUSTOM,
+	TEX_DEFAULT,
+	TEX_CHECKER,
+	TEX_UVCHECKER,
+	TEX_FILE,
 }						t_texture_type;
 
 typedef enum e_object_type
@@ -87,6 +87,7 @@ typedef struct t_tex
 		} s_uvchecker;
 		struct
 		{
+			char		*path;
 			t_color		*data;
 			int			width;
 			int			height;

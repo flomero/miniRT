@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:32:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 18:29:59 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 19:21:15 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,11 @@ t_bool	ft_is_shadow(t_vector3 *light_dir, const t_hit *hit, t_program *program)
 			tmp_hit.t = INFINITY;
 			if (ft_hit(&ray, &program->objs[i], &tmp_hit))
 			{
-				if (tmp_hit.t < -0.0001 && tmp_hit.t > -0.9999)
+				if (tmp_hit.obj->type == SPHERE && tmp_hit.t > 0.0001
+					&& tmp_hit.t < 0.9999)
+					return (TRUE);
+				else if (tmp_hit.obj->type != SPHERE && tmp_hit.t < -0.0001
+					&& tmp_hit.t > -0.9999)
 					return (TRUE);
 			}
 		}
@@ -99,11 +103,11 @@ t_color	*ft_compute_lights(t_color *light_col, t_hit *hit, t_program *program)
 	*light_col = (t_color){0, 0, 0};
 	hit->local_color = (t_color){hit->obj->material->color_f.r,
 		hit->obj->material->color_f.g, hit->obj->material->color_f.b};
-	if (hit->obj->texture->s_tex.type == CHECKER)
-		ft_checkerboard(hit->obj->material, &hit->p,
+	if (hit->obj->texture->s_tex.type == TEX_CHECKER)
+		ft_checkerboard(hit->obj->texture, &hit->p,
 			(t_color *)&hit->local_color);
-	else if (hit->obj->texture->s_tex.type == UVCHECKER)
-		ft_checkerboard_uv(hit->obj->material, (t_color *)&hit->local_color,
+	else if (hit->obj->texture->s_tex.type == TEX_UVCHECKER)
+		ft_checkerboard_uv(hit->obj->texture, (t_color *)&hit->local_color,
 			hit);
 	ft_compute_ambient(&ambient, hit->local_color);
 	while (i < program->objs_len)

@@ -69,7 +69,7 @@
 ### External Texture
 | **Identifier** | **Texture Name** | **File Path**        |
 |----------------|------------------|----------------------|
-| T              | Texture          | textures/texture.jpg |
+| TF             | Texture          | textures/texture.jpg |
 
 ### Checkerboard Texture 
 | **Identifier** | **Texture Name** | **RGB Colors** | **RGB Colors** | **Scale** |
@@ -79,4 +79,4 @@
 ### UV Checkerboard Texture (looks better on spheres)
 | **Identifier** | **Texture Name** | **RGB Colors** | **RGB Colors** | **Scale** |
 |----------------|------------------|----------------|----------------|-----------|
-| TU             | UVCheckerboard   | 255,255,255    | 0,0,0          | 0.5       |
+| TUC            | UVCheckerboard   | 255,255,255    | 0,0,0          | 0.5       |

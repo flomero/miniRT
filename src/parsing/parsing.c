@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:15:15 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/18 18:19:23 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 18:58:13 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,12 @@ int	get_obj(char **tokens, t_object *obj)
 		return (get_basic_mat(tokens, obj));
 	else if (!ft_strcmp("MA", tokens[0]))
 		return (get_adv_mat(tokens, obj));
+	else if (!ft_strcmp("TF", tokens[0]))
+		return (get_tex_file(tokens, obj));
+	else if (!ft_strcmp("TC", tokens[0]))
+		return (get_tex_checker(tokens, obj, FALSE));
+	else if (!ft_strcmp("TUC", tokens[0]))
+		return (get_tex_checker(tokens, obj, TRUE));
 	ft_print_error("Not valid object identifier");
 	return (0);
 }

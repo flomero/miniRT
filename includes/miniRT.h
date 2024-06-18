@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 18:19:30 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 18:54:23 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,8 @@ uint32_t			ft_checkerboard_uv(t_object *material, t_color *result,
 						t_hit *hit);
 t_bool				get_basic_mat(char **tokens, t_object *obj);
 t_bool				get_adv_mat(char **tokens, t_object *obj);
+t_bool				get_tex_checker(char **tokens, t_object *obj, t_bool UV);
+t_bool				get_tex_file(char **tokens, t_object *obj);
 
 // MATHS
 float				ft_randf(void);

@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 18:05:37 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 18:36:22 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 19:02:36 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_bool	ft_assign_tex(t_object *obj, t_program *program)
 				program->objs[i].s_tex.name))
 		{
 			obj->texture = &program->objs[i];
+			printf("Assigned texture %s to object\n", obj->texture_name);
 			return (TRUE);
 		}
 		i++;
