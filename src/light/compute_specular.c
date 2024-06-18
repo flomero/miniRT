@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 09:43:35 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/17 15:33:56 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 17:08:17 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_color	*ft_compute_reflection(t_color *refl_col, const t_hit *rec, int depth)
 	t_color		tmp_col;
 
 	*refl_col = (t_color){0, 0, 0};
-	if (depth <= 0 || rec->obj->material.reflectivness <= 0)
+	if (depth <= 0 || rec->obj->material->s_mat.reflectivness <= 0)
 		return (refl_col);
 	ft_v3_init(&origin, rec->p.x, rec->p.y, rec->p.z);
 	ft_v3_init(&direction, rec->ray->direction->x, rec->ray->direction->y,
@@ -46,7 +46,8 @@ t_color	*ft_compute_reflection(t_color *refl_col, const t_hit *rec, int depth)
 	refl_rec.t = INFINITY;
 	refl_ray.depth = depth;
 	ft_color_to_float(ft_trace_ray(&refl_ray), &tmp_col);
-	ft_color_float_mult(tmp_col, rec->obj->material.reflectivness, refl_col);
+	ft_color_float_mult(tmp_col, rec->obj->material->s_mat.reflectivness,
+		refl_col);
 	return (refl_col);
 }
 
@@ -69,7 +70,7 @@ t_color	*ft_compute_specular(t_color *spec_col, const t_hit *rec,
 	float		power;
 
 	*spec_col = (t_color){0, 0, 0};
-	if (rec->obj->material.specular <= 0)
+	if (rec->obj->material->s_mat.specular <= 0)
 		return (spec_col);
 	l_n = ft_v3_dotprod(light_dir, &rec->n);
 	ft_v3_init(&tmp, rec->n.x, rec->n.y, rec->n.z);
@@ -82,7 +83,7 @@ t_color	*ft_compute_specular(t_color *spec_col, const t_hit *rec,
 	if (r_v < 0)
 		return (spec_col);
 	power = pow(r_v / (ft_v3_len(&rev_ray) * ft_v3_len(&tmp)),
-			rec->obj->material.specular);
+			rec->obj->material->s_mat.specular);
 	ft_color_float_mult(light->color_f, power, spec_col);
 	ft_color_float_mult(*spec_col, light->s_light.brightness, spec_col);
 	return (spec_col);

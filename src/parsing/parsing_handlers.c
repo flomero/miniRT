@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 14:41:37 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/18 15:20:34 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 18:16:26 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,12 @@ int	get_sp(char **tokens, t_object *obj)
 		return (0);
 	ft_color_to_float(obj->color, &obj->color_f);
 	obj->s_sphere.diameter = diameter;
-	ft_default_material(&obj->material);
-	if (tokens[4] && (!is_float(tokens[4]) && !is_int(tokens[4])))
-		return (0);
-	if (tokens[4])
-		obj->material.reflectivness = ft_atod(tokens[4]);
-	ft_compute_if_reflective(&obj->material);
+	ft_default_material(obj);
+	ft_assign_own_tm(obj);
+	if (get_arr_len(tokens) == 5)
+		obj->material_name = ft_strdup(tokens[4]);
+	else
+		obj->material_name = NULL;
 	return (1);
 }
 
