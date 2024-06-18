@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 09:33:50 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/18 08:46:14 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/18 14:25:33 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
  */
 float	ft_plane_hit(t_object *plane, t_ray *ray)
 {
-	int		d_plane;
+	float	d_plane;
 	float	t;
 	float	distance;
 	float	divisor;
@@ -66,13 +66,15 @@ float	ft_plane_hit(t_object *plane, t_ray *ray)
 	return (fabs(distance));
 }
 
-int ft_plane_normal(t_hit *hit, t_ray *ray)
+int	ft_plane_normal(t_hit *hit, t_ray *ray)
 {
 	ft_v3_init(&hit->p, ray->origin->x + ray->direction->x * hit->t,
 		ray->origin->y + ray->direction->y * hit->t, ray->origin->z
 		+ ray->direction->z * hit->t);
-	ft_v3_init(&hit->n, hit->obj->s_plane.normal.x,
-		hit->obj->s_plane.normal.y, hit->obj->s_plane.normal.z);
+	ft_v3_init(&hit->n, hit->obj->s_plane.normal.x, hit->obj->s_plane.normal.y,
+		hit->obj->s_plane.normal.z);
 	ft_v3_normal_ip(&hit->n);
+	if (ft_v3_dotprod(&hit->n, ray->direction) > 0)
+		ft_v3_scalar_ip(&hit->n, -1);
 	return (1);
 }
