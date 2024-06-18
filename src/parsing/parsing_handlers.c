@@ -145,6 +145,7 @@ int	get_pl(char **tokens, t_object *obj)
 		return (0);
 	if (!get_color(tokens[3], &obj->color))
 		return (0);
+	ft_color_to_float(obj->color, &obj->color_f);
 	return (1);
 }
 

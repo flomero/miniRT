@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:46:57 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/18 08:29:09 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/18 12:56:13 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	get_cy(char **tokens, t_object *obj)
 	obj->s_cylinder.height = (float)ft_atod(tokens[4]);
 	if (!get_color(tokens[5], &obj->color))
 		return (0);
+	ft_color_to_float(obj->color, &obj->color_f);
 	return (1);
 }
 
