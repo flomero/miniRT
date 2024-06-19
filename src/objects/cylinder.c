@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:45:47 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/18 15:26:50 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/19 12:33:41 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
 static int		in_height(float t, t_object *cyl, t_ray *ray);
-// static t_vector3	*vector_normalize(t_vector3 *v);
 static void		get_t(float t[2], t_object *cyl, t_ray *ray);
 static float	handle_zero(float b, float c, t_ray *ray, t_object *cyl);
 
@@ -38,6 +37,7 @@ static void	get_t(float t[2], t_object *cyl, t_ray *ray)
 	t_vector3	*temp1;
 	t_vector3	*temp2;
 	t_vector3	normalized_raydir;
+	t_vector3	*normalized_cyl;
 	float		a;
 	float		b;
 	float		c;
@@ -45,13 +45,13 @@ static void	get_t(float t[2], t_object *cyl, t_ray *ray)
 	ft_v3_init(&normalized_raydir, ray->direction->x, ray->direction->y,
 		ray->direction->z);
 	ft_v3_normal_ip(&normalized_raydir);
-	ft_v3_normal_ip(&cyl->s_cylinder.normal);
-	temp1 = ft_v3_sub(&normalized_raydir, ft_v3_scalar(&cyl->s_cylinder.normal,
-				ft_v3_dotprod(&normalized_raydir, &cyl->s_cylinder.normal)));
+	normalized_cyl = ft_v3_normal(&cyl->s_cylinder.normal);
+	temp1 = ft_v3_sub(&normalized_raydir, ft_v3_scalar(normalized_cyl,
+				ft_v3_dotprod(&normalized_raydir, normalized_cyl)));
 	temp2 = ft_v3_sub(ft_v3_sub(ray->origin, &cyl->pos),
-			ft_v3_scalar(&cyl->s_cylinder.normal,
+			ft_v3_scalar(normalized_cyl,
 				ft_v3_dotprod(ft_v3_sub(ray->origin, &cyl->pos),
-					&cyl->s_cylinder.normal)));
+					normalized_cyl)));
 	a = ft_v3_dotprod(temp1, temp1);
 	b = 2 * ft_v3_dotprod(temp1, temp2);
 	c = (ft_v3_dotprod(temp2, temp2) - ((cyl->s_cylinder.diameter / 2)
@@ -79,7 +79,7 @@ static float	handle_zero(float b, float c, t_ray *ray, t_object *cyl)
 			return (INFINITY);
 		temp1 = ft_v3_add(ray->origin, ft_v3_scalar(ray->direction, t[0]));
 		t[1] = ft_v3_dotprod(ft_v3_sub(temp1, &cyl->pos),
-				&cyl->s_cylinder.normal);
+				ft_v3_normal(&cyl->s_cylinder.normal));
 		if (t[1] >= 0 && t[1] <= cyl->s_cylinder.height)
 			return (t[0]);
 	}
@@ -94,21 +94,11 @@ static int	in_height(float t, t_object *cyl, t_ray *ray)
 	if (t < 0)
 		return (0);
 	temp2 = ft_v3_add(ray->origin, ft_v3_scalar(ray->direction, t));
-	hei_p = ft_v3_dotprod(ft_v3_sub(temp2, &cyl->pos), &cyl->s_cylinder.normal);
+	hei_p = ft_v3_dotprod(ft_v3_sub(temp2, &cyl->pos), ft_v3_normal(&cyl->s_cylinder.normal));
 	if (hei_p >= 0 && hei_p <= cyl->s_cylinder.height)
 		return (1);
 	return (0);
 }
-
-// static t_vector3	*vector_normalize(t_vector3 *v)
-// {
-// 	float	length;
-
-// 	length = ft_v3_len(v);
-// 	if (length != 0)
-// 		return (ft_v3_scalar(v, 1.0f / length));
-// 	return (v);
-// }
 
 int	ft_cylinder_normal(t_hit *hit, t_ray *ray)
 {

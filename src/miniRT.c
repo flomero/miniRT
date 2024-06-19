@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/19 12:14:01 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/19 12:30:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 		- cylinder:
 			- make sure I don't modify vector values in obj functs
 			- division by 0
-			- dont malloc
+			- dont malloc(ft_v3_new())
 			- add top and bottom cover
-			- replace normalize func of cylinder with the one of flo
 		- check for mem leaks
 */
 

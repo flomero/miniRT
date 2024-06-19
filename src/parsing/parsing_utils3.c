@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:46:57 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/19 09:45:02 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/19 12:31:40 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,6 @@ void	free_str_arr(char **arr)
 		free(arr[i]);
 	free(arr);
 }
-
-// /**
-//  * @brief free an NULL terminated array of t_object pointers properly
-//  * ex. arr = ["El1", "el2", NULL]
-//  *
-//  * @param arr
-//  */
-// void	free_obj_arr(t_object **arr)
-// {
-// 	int	i;
-
-// 	i = -1;
-// 	while (arr[++i])
-// 		free(arr[i]);
-// 	free(arr);
-// }
 
 /**
  * @brief Get the cy object
