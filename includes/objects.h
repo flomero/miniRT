@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:49:15 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 18:53:13 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/19 15:49:28 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef enum e_object_type
 	SPHERE,
 	PLANE,
 	CYLINDER,
+	CONE,
 	OBJECT_COUNT,
 }						t_object_type;
 
@@ -97,6 +98,7 @@ typedef struct t_tex
 
 typedef struct s_object	t_object;
 
+// s_cone.angle: half angle of conde in radians
 typedef struct s_object
 {
 	uint32_t			color;
@@ -145,6 +147,11 @@ typedef struct s_object
 			float		height;
 			t_vector3	normal;
 		} s_cylinder;
+		struct
+		{
+			float		angle;
+			t_vector3	normal;
+		} s_cone;
 	};
 }						t_object;
 

@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/20 13:48:33 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/20 15:13:04 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_ray
 	int				depth;
 }					t_ray;
 
+// n: normal, p: point, t: distance
 typedef struct s_hit
 {
 	float			t;
@@ -142,7 +143,6 @@ int					get_color(char *token, uint32_t *result);
 
 // PARSING UTILS3
 void				free_str_arr(char **arr);
-int					get_cy(char **tokens, t_object *obj);
 int					get_nbr_of_lines(char *fname);
 uint32_t			int_to_rgb(int red, int green, int blue);
 
@@ -155,6 +155,10 @@ int					get_c(char **tokens, t_object *obj);
 int					get_l(char **tokens, t_object *obj);
 int					get_sp(char **tokens, t_object *obj);
 int					get_pl(char **tokens, t_object *obj);
+
+// PARSING HANDLERS2
+int					get_co(char **tokens, t_object *obj);
+int					get_cy(char **tokens, t_object *obj);
 
 // COLORS
 void				ft_color_to_float(uint32_t color, t_color *fcolor);
