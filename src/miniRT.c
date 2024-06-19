@@ -6,18 +6,19 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/19 11:25:45 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/19 12:14:01 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 	TODO:
-		- take care of camera with 0,0,0 instead of seg fault
-		- need to properly take care of 0 division, not just return INFINITY
-		- make sure I don't modify vector values in obj functs
+		- cylinder:
+			- make sure I don't modify vector values in obj functs
+			- division by 0
+			- dont malloc
+			- add top and bottom cover
+			- replace normalize func of cylinder with the one of flo
 		- check for mem leaks
-		- put at cylinder top and bottom cover
-		- replace normalize func of cylinder with the one of flog
 */
 
 #include "miniRT.h"

@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 09:33:50 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/18 14:25:33 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/19 12:11:39 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 		- at the end if there is solution, we calculate the distance from
 		origin to the hit point because at the very end only the obj with
 		minimum distance for this ray does matter
+		- if divisor == 0, means plane is parallel to ray, no hit
 */
 /**
  * Checks if a ray hits a plane.
