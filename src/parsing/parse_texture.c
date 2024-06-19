@@ -6,12 +6,18 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 18:48:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 18:58:31 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/19 09:47:55 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+/**
+ * @brief parsing for the texture file
+ * @param tokens the tokens to parse
+ * @param obj the object to assign the parsed values
+ * @note not yet used
+ */
 t_bool	get_tex_file(char **tokens, t_object *obj)
 {
 	int	fd;
@@ -29,6 +35,12 @@ t_bool	get_tex_file(char **tokens, t_object *obj)
 	return (TRUE);
 }
 
+/**
+ * @brief parsing for the texture checker
+ * @param tokens the tokens to parse
+ * @param obj the object to assign the parsed values
+ * @param UV if the texture is UV or not
+ */
 t_bool	get_tex_checker(char **tokens, t_object *obj, t_bool UV)
 {
 	obj->type = TEXTURE;

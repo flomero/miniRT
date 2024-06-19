@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:46:57 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/18 15:10:18 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/19 09:45:02 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int	get_cy(char **tokens, t_object *obj)
 	if (!get_color(tokens[5], &obj->color))
 		return (0);
 	ft_color_to_float(obj->color, &obj->color_f);
+	ft_default_material(obj);
+	ft_assign_own_tm(obj);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 14:41:37 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/18 19:22:23 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/19 09:44:29 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ int	get_pl(char **tokens, t_object *obj)
 	if (!get_color(tokens[3], &obj->color))
 		return (0);
 	ft_color_to_float(obj->color, &obj->color_f);
+	ft_default_material(obj);
 	ft_assign_own_tm(obj);
 	return (1);
 }

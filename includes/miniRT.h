@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 18:54:23 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/19 09:56:15 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,8 @@ t_bool				get_basic_mat(char **tokens, t_object *obj);
 t_bool				get_adv_mat(char **tokens, t_object *obj);
 t_bool				get_tex_checker(char **tokens, t_object *obj, t_bool UV);
 t_bool				get_tex_file(char **tokens, t_object *obj);
+t_bool				ft_check_dup_mat(void);
+t_bool				ft_check_dup_tex(void);
 
 // MATHS
 float				ft_randf(void);

@@ -6,18 +6,27 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:10:43 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 18:42:15 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/19 09:46:48 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+/**
+ * @brief assigns the object to its own material and texture
+ * @note each object is also a material and texture
+ * @param obj the object to assign
+ */
 void	ft_assign_own_tm(t_object *obj)
 {
 	obj->material = obj;
 	obj->texture = obj;
 }
 
+/**
+ * @brief assigns the default material values to the object
+ * @param material the object to assign the default material values
+ */
 void	ft_default_material(t_object *material)
 {
 	material->s_mat.specular = DEFAULT_SPECULAR;
@@ -26,6 +35,10 @@ void	ft_default_material(t_object *material)
 	material->s_mat.reflectivness = DEFAULT_REFLECTIVNESS;
 }
 
+/**
+ * @brief computes the material values if the object is reflective
+ * @param material the object to compute the values
+ */
 void	ft_compute_if_reflective(t_object *material)
 {
 	if (material->s_mat.reflectivness > 0)
