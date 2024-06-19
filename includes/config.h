@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:29:22 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 10:03:42 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 19:09:58 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 // COMPUTATION
 # define DEFAULT_THREADS 1
-# define MAX_THREADS 8
+# define MAX_THREADS 32
 
 // VIEWPORT
 # define VIEWPORT_WIDTH 2.0
@@ -34,8 +34,8 @@
 
 // LIGHT
 # define DEFAULT_BOUNCES 3
-# define DEFAULT_SPECULAR 0.8
-# define DEFAULT_SHININESS 32
+# define DEFAULT_SPECULAR 0.9
+# define DEFAULT_SHININESS 10
 # define DEFAULT_DIFFUSE 0.7
 # define DEFAULT_REFLECTIVNESS 0.0
 

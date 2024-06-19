@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:32:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 15:15:50 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 19:21:15 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,11 @@ t_bool	ft_is_shadow(t_vector3 *light_dir, const t_hit *hit, t_program *program)
 			tmp_hit.t = INFINITY;
 			if (ft_hit(&ray, &program->objs[i], &tmp_hit))
 			{
-				if (tmp_hit.t < -0.0001 && tmp_hit.t > -0.9999)
+				if (tmp_hit.obj->type == SPHERE && tmp_hit.t > 0.0001
+					&& tmp_hit.t < 0.9999)
+					return (TRUE);
+				else if (tmp_hit.obj->type != SPHERE && tmp_hit.t < -0.0001
+					&& tmp_hit.t > -0.9999)
 					return (TRUE);
 			}
 		}
@@ -69,11 +73,11 @@ t_color	*ft_compute_phong(t_color *phong_color, const t_object *light,
 		return (phong_color);
 	ft_v3_normal_ip(&light_dir);
 	ft_compute_diffuse(&color, hit, light, &light_dir);
-	if (hit->ray->depth > 0 && hit->obj->material.reflectivness > 0)
+	if (hit->ray->depth > 0 && hit->obj->material->s_mat.reflectivness > 0)
 	{
 		ft_compute_reflection(&refl_col, hit, --hit->ray->depth);
-		ft_color_float_mult(*phong_color, 1 - hit->obj->material.reflectivness,
-			phong_color);
+		ft_color_float_mult(*phong_color, 1
+			- hit->obj->material->s_mat.reflectivness, phong_color);
 		ft_color_color_add(*phong_color, refl_col, phong_color);
 	}
 	ft_compute_specular(&spec_color, hit, light, &light_dir);
@@ -97,13 +101,13 @@ t_color	*ft_compute_lights(t_color *light_col, t_hit *hit, t_program *program)
 
 	i = 0;
 	*light_col = (t_color){0, 0, 0};
-	hit->local_color = (t_color){hit->obj->color_f.r, hit->obj->color_f.g,
-		hit->obj->color_f.b};
-	if (hit->obj->material.type == CHECKER)
-		ft_checkerboard(&hit->obj->material, &hit->p,
+	hit->local_color = (t_color){hit->obj->material->color_f.r,
+		hit->obj->material->color_f.g, hit->obj->material->color_f.b};
+	if (hit->obj->texture->s_tex.type == TEX_CHECKER)
+		ft_checkerboard(hit->obj->texture, &hit->p,
 			(t_color *)&hit->local_color);
-	else if (hit->obj->material.type == UVCHECKER)
-		ft_checkerboard_uv(&hit->obj->material, (t_color *)&hit->local_color,
+	else if (hit->obj->texture->s_tex.type == TEX_UVCHECKER)
+		ft_checkerboard_uv(hit->obj->texture, (t_color *)&hit->local_color,
 			hit);
 	ft_compute_ambient(&ambient, hit->local_color);
 	while (i < program->objs_len)

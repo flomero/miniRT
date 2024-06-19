@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 15:21:41 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/19 09:56:15 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,8 @@ int					is_valid_parsing(char *fname);
 int					init_struct(char *fname, int len);
 int					get_obj(char **tokens, t_object *obj);
 int					is_valid_obj_nbr(t_object *objs);
-void				ft_default_material(t_material *material);
-void				ft_compute_if_reflective(t_material *material);
+void				ft_default_material(t_object *material);
+void				ft_compute_if_reflective(t_object *material);
 
 // PARSING UTILS
 int					get_arr_len(char **arr);
@@ -182,10 +182,18 @@ t_color				*ft_compute_reflection(t_color *refl_col, const t_hit *rec,
 						int depth);
 
 // TEXTURES
-uint32_t			ft_checkerboard(t_material *material,
-						const t_vector3 *point, t_color *result);
-uint32_t			ft_checkerboard_uv(t_material *material, t_color *result,
+t_bool				ft_assign_mat_tex(void);
+void				ft_assign_own_tm(t_object *obj);
+uint32_t			ft_checkerboard(t_object *material, const t_vector3 *point,
+						t_color *result);
+uint32_t			ft_checkerboard_uv(t_object *material, t_color *result,
 						t_hit *hit);
+t_bool				get_basic_mat(char **tokens, t_object *obj);
+t_bool				get_adv_mat(char **tokens, t_object *obj);
+t_bool				get_tex_checker(char **tokens, t_object *obj, t_bool UV);
+t_bool				get_tex_file(char **tokens, t_object *obj);
+t_bool				ft_check_dup_mat(void);
+t_bool				ft_check_dup_tex(void);
 
 // MATHS
 float				ft_randf(void);

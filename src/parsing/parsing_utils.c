@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 16:28:34 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/13 13:16:08 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/18 17:24:20 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	print_rgb(uint32_t color)
  * @param obj if its NULL, then it prints all objects of the program, else
  * it prints the object passed
  */
-void	print_objs(t_object	*obj)
+void	print_objs(t_object *obj)
 {
 	t_object	*objs;
 	int			i;
@@ -88,30 +88,30 @@ void	print_objs(t_object	*obj)
 
 static void	print_a_c_l(t_object obj)
 {
-	if (obj.type == 0)
+	if (obj.type == AMBIENT_LIGHT)
 		printf("Type: Ambient lightning\nRatio: %.2f\n",
 			obj.s_ambient_light.ratio);
-	else if (obj.type == 1)
+	else if (obj.type == CAMERA)
 	{
 		printf("Type: Camera\nFOV: %.2f\n", obj.s_camera.fov);
 		printf("Normal: %.2f %.2f %.2f\n", obj.s_camera.normal.x,
 			obj.s_camera.normal.y, obj.s_camera.normal.z);
 	}
-	else if (obj.type == 2)
+	else if (obj.type == LIGHT)
 		printf("Type: Light\nBrightness: %.2f\n", obj.s_light.brightness);
 }
 
 static void	print_pl_cy_sp(t_object obj)
 {
-	if (obj.type == 3)
+	if (obj.type == SPHERE)
 		printf("Type: Sphere\nDiameter: %.2f\n", obj.s_sphere.diameter);
-	else if (obj.type == 4)
+	else if (obj.type == PLANE)
 	{
 		printf("Type: Plane\n");
 		printf("Normal: %.2f %.2f %.2f\n", obj.s_plane.normal.x,
 			obj.s_plane.normal.y, obj.s_plane.normal.z);
 	}
-	else if (obj.type == 5)
+	else if (obj.type == CYLINDER)
 	{
 		printf("Type: Cylinder\nDiameter: %.2f\nHeight: %.2f\n",
 			obj.s_cylinder.diameter, obj.s_cylinder.height);

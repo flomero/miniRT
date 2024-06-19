@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:49:15 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 15:27:37 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/18 18:53:13 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,48 @@ typedef struct s_vector2
 	float				y;
 }						t_vector2;
 
-typedef enum e_material_type
+typedef struct s_color
 {
-	DEFAULT,
-	CHECKER,
-	UVCHECKER,
-	CUSTOM,
-}						t_material_type;
+	float				r;
+	float				g;
+	float				b;
+}						t_color;
 
-typedef struct s_material
+typedef enum texture_type
 {
+	TEX_DEFAULT,
+	TEX_CHECKER,
+	TEX_UVCHECKER,
+	TEX_FILE,
+}						t_texture_type;
+
+typedef enum e_object_type
+{
+	MATERIAL,
+	TEXTURE,
+	AMBIENT_LIGHT,
+	CAMERA,
+	LIGHT,
+	SPHERE,
+	PLANE,
+	CYLINDER,
+	OBJECT_COUNT,
+}						t_object_type;
+
+typedef struct s_mat
+{
+	char				*name;
 	float				ambient;
 	float				diffuse;
 	float				specular;
 	float				shininess;
 	float				reflectivness;
-	t_material_type		type;
+}						t_mat;
+
+typedef struct t_tex
+{
+	t_texture_type		type;
+	char				*name;
 	union
 	{
 		struct
@@ -55,28 +81,21 @@ typedef struct s_material
 		} s_checker;
 		struct
 		{
-			char		*texture;
+			uint32_t	color1;
+			uint32_t	color2;
+			float		size;
+		} s_uvchecker;
+		struct
+		{
+			char		*path;
+			t_color		*data;
+			int			width;
+			int			height;
 		} s_custom;
 	};
-}						t_material;
+}						t_tex;
 
-typedef enum e_object_type
-{
-	AMBIENT_LIGHT,
-	CAMERA,
-	LIGHT,
-	SPHERE,
-	PLANE,
-	CYLINDER,
-	OBJECT_COUNT,
-}						t_object_type;
-
-typedef struct s_color
-{
-	float				r;
-	float				g;
-	float				b;
-}						t_color;
+typedef struct s_object	t_object;
 
 typedef struct s_object
 {
@@ -84,7 +103,12 @@ typedef struct s_object
 	t_color				color_f;
 	t_vector3			pos;
 	t_object_type		type;
-	t_material			material;
+	char				*material_name;
+	char				*texture_name;
+	t_object			*material;
+	t_object			*texture;
+	t_tex				s_tex;
+	t_mat				s_mat;
 	union
 	{
 		struct

@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/18 15:14:44 by flfische         ###   ########.fr        #
+#    Updated: 2024/06/18 19:08:31 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,8 +90,15 @@ CFILES += random.c \
 			v3_scalar.c \
 			v3_sub.c \
 
+
+# MATERIALS
+CFILES += check_materials.c \
+			assign_mat_tex.c \
+
 # TEXTURES
+
 CFILES += checkerboard.c \
+			parse_texture.c \
 
 OFILES := $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
 

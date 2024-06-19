@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:15:15 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/18 15:10:21 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/18 18:58:13 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,16 @@ int	get_obj(char **tokens, t_object *obj)
 		return (get_pl(tokens, obj));
 	else if (!ft_strcmp("cy", tokens[0]))
 		return (get_cy(tokens, obj));
+	else if (!ft_strcmp("M", tokens[0]))
+		return (get_basic_mat(tokens, obj));
+	else if (!ft_strcmp("MA", tokens[0]))
+		return (get_adv_mat(tokens, obj));
+	else if (!ft_strcmp("TF", tokens[0]))
+		return (get_tex_file(tokens, obj));
+	else if (!ft_strcmp("TC", tokens[0]))
+		return (get_tex_checker(tokens, obj, FALSE));
+	else if (!ft_strcmp("TUC", tokens[0]))
+		return (get_tex_checker(tokens, obj, TRUE));
 	ft_print_error("Not valid object identifier");
 	return (0);
 }
@@ -137,22 +147,19 @@ int	get_obj(char **tokens, t_object *obj)
 int	is_valid_obj_nbr(t_object *objs)
 {
 	int	i;
-	int	single_occur[3];
+	int	single_occur[OBJECT_COUNT];
 
-	i = -1;
-	while (++i < 3)
-		single_occur[i] = 0;
+	i = 0;
+	while (i < OBJECT_COUNT)
+		single_occur[i++] = 0;
 	if (!objs)
 		return (0);
 	i = -1;
 	while (++i < ft_get_program()->objs_len)
-	{
-		if (objs[i].type == AMBIENT_LIGHT || objs[i].type == CAMERA)
-			single_occur[objs[i].type]++;
-	}
-	if (single_occur[0] != 1)
+		single_occur[objs[i].type]++;
+	if (single_occur[AMBIENT_LIGHT] != 1)
 		return (ft_print_error("Expect exact one A"), free(objs), 0);
-	if (single_occur[1] != 1)
+	if (single_occur[CAMERA] != 1)
 		return (ft_print_error("Expect exact one C"), free(objs), 0);
 	ft_get_program()->objs = objs;
 	return (1);
