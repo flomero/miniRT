@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   custom_split.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 07:51:20 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/18 15:25:45 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/19 12:20:05 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ static char	*ft_multi_strdeldup(const char *src, char *set)
 {
 	char	*dest;
 	char	del;
+	char	*tmp;
 
-	while (*set && !ft_strchr(src, *set))
-		set++;
-	del = '\0';
-	if (*set)
-		del = *(ft_strchr(src, *set));
+	tmp = (char *)src;
+	while (*tmp && !ft_strchr(set, *tmp))
+		tmp++;
+	del = *(ft_strchr(set, *tmp));
 	dest = (char *)malloc(ft_strdellen(src, del) + 1);
 	if (dest == NULL)
 		return (NULL);
