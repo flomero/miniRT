@@ -3,21 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 18:14:58 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/19 11:25:45 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 	TODO:
 		- take care of camera with 0,0,0 instead of seg fault
-		- make sure objects work good with negative and positive values at z
 		- need to properly take care of 0 division, not just return INFINITY
 		- make sure I don't modify vector values in obj functs
 		- check for mem leaks
-		- merge from master the new stuff
 		- put at cylinder top and bottom cover
 		- replace normalize func of cylinder with the one of flog
 */
