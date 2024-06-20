@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 16:28:34 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/18 17:24:20 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/20 18:13:12 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,12 @@ static void	print_pl_cy_sp(t_object obj)
 			obj.s_cylinder.diameter, obj.s_cylinder.height);
 		printf("Normal: %.2f %.2f %.2f\n", obj.s_cylinder.normal.x,
 			obj.s_cylinder.normal.y, obj.s_cylinder.normal.z);
+	}
+	else if (obj.type == CONE)
+	{
+		printf("Type: Cone\nAngle: %.2f",
+			obj.s_cone.angle);
+		printf("Normal: %.2f %.2f %.2f\n", obj.s_cone.normal.x,
+			obj.s_cone.normal.y, obj.s_cone.normal.z);
 	}
 }
