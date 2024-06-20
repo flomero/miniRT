@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:45:47 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/20 10:17:38 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/20 11:26:16 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,72 @@
 static int		in_height(float t, t_object *cyl, t_ray *ray);
 static void		get_t(float t[2], t_object *cyl, t_ray *ray);
 static float	handle_zero(float abc[3], t_ray *ray, t_object *cyl);
+float	get_min(float t1, float t2, float t3);
+
+static double	hit_disk(t_object *obj, t_ray *ray, const double radius)
+{
+	double	t;
+	t_vector3	*p;
+	t_vector3	*v;
+	double	d2;
+
+	t = ft_plane_hit(obj, ray);
+	if (t < 0)
+		return (INFINITY);
+	p = ft_v3_add(ray->origin, ft_v3_scalar(ray->direction, t));
+	v = ft_v3_sub(p, &obj->pos);
+	d2 = ft_v3_len(v);
+	if (d2 <= radius)
+		return (t);
+	return (INFINITY);
+}
 
 float	ft_cylinder_hit(t_object *cyl, t_ray *ray)
 {
-	float	t[2];
+	float		t[3];
+	t_object	plane;
+	int			i;
 
 	t[0] = INFINITY;
 	t[1] = INFINITY;
+	t[2] = INFINITY;
 	get_t(t, cyl, ray);
-	if (!in_height(t[0], cyl, ray) && !in_height(t[1], cyl, ray))
-		return (INFINITY);
-	if (in_height(t[0], cyl, ray) && in_height(t[1], cyl, ray) && t[0] > t[1])
-		t[0] = t[1];
-	if (in_height(t[0], cyl, ray))
-		return (t[0]);
-	return (t[1]);
+	plane.type = PLANE;
+	plane.s_plane.normal = *ft_v3_copy(&cyl->s_cylinder.normal);
+	plane.pos = *ft_v3_add(&cyl->pos, ft_v3_scalar(&cyl->s_cylinder.normal,
+				cyl->s_cylinder.height / 2));
+	t[2] = hit_disk(&plane, ray, cyl->s_cylinder.diameter / 2);
+	i = -1;
+	while (++i < 3)
+		if (!in_height(t[i], cyl, ray))
+			t[i] = INFINITY;
+	return (get_min(t[0], t[1], t[2]));
 }
 
-static void	get_t(float t[2], t_object *cyl, t_ray *ray)
+float	get_min(float t1, float t2, float t3)
+{
+	float	t[3];
+	int		i;
+	float	min;
+
+	t[0] = t1;
+	t[1] = t2;
+	t[2] = t3;
+	min = INFINITY;
+	if (t[0] != INFINITY)
+		min = t[0];
+	if (t[1] != INFINITY)
+		min = t[1];
+	if (t[2] != INFINITY)
+		min = t[2];
+	i = -1;
+	while (++i < 3)
+		if (t[i] < min && t[i] != INFINITY)
+			min = t[i];
+	return (min);
+}
+
+static void	get_t(float t[3], t_object *cyl, t_ray *ray)
 {
 	t_vector3	*v1;
 	t_vector3	n_rd;
