@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/20 15:13:04 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/20 15:17:16 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,11 @@ float				ft_sphere_hit(t_object *sphere, t_ray *ray);
 int					ft_sphere_uv(t_hit *hit, t_vector2 *uv);
 float				ft_plane_hit(t_object *plane, t_ray *ray);
 float				ft_cylinder_hit(t_object *cyl, t_ray *ray);
+float				ft_cone_hit(t_object *cone, t_ray *ray);
 int					ft_sphere_normal(t_hit *hit, t_ray *ray);
 int					ft_plane_normal(t_hit *hit, t_ray *ray);
 int					ft_cylinder_normal(t_hit *hit, t_ray *ray);
+int					ft_cone_normal(t_hit *hit, t_ray *ray);
 
 // OBJECT UTILS
 t_object			*ft_get_first_obj(t_object_type type);

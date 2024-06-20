@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:43:05 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/19 15:47:21 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/20 16:12:31 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ int	get_co(char **tokens, t_object *obj)
 		return (0);
 	if (!in_range(&obj->s_cone.normal, -1, 1))
 		return (0);
-	if (!is_float(tokens[2]) && !is_int(tokens[2]))
+	if (!is_float(tokens[3]) && !is_int(tokens[3]))
 		return (0);
-	obj->s_cone.angle = (float)ft_atod(tokens[2]);
-	if (!get_color(tokens[3], &obj->color))
+	obj->s_cone.angle = (float)ft_atod(tokens[2]) * (M_PI / 180);
+	if (!get_color(tokens[4], &obj->color))
 		return (0);
 	ft_color_to_float(obj->color, &obj->color_f);
 	ft_default_material(obj);

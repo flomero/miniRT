@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:15:15 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/19 11:50:25 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/20 16:11:00 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ int	get_obj(char **tokens, t_object *obj)
 		return (get_pl(tokens, obj));
 	else if (!ft_strcmp("cy", tokens[0]))
 		return (get_cy(tokens, obj));
+	else if (!ft_strcmp("co", tokens[0]))
+		return (get_co(tokens, obj));
 	else if (!ft_strcmp("M", tokens[0]))
 		return (get_basic_mat(tokens, obj));
 	else if (!ft_strcmp("MA", tokens[0]))
