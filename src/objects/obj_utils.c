@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 12:46:05 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/20 13:51:57 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/20 14:47:22 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@
  */
 float	get_min(float t1, float t2, float t3, float t4)
 {
-	const int	size = 4;
-	float		t[size];
+	float		t[4];
 	int			i;
 	float		min;
 
@@ -35,11 +34,11 @@ float	get_min(float t1, float t2, float t3, float t4)
 	t[3] = t4;
 	min = INFINITY;
 	i = -1;
-	while (++i < size)
+	while (++i < 4)
 		if (t[i] != INFINITY)
 			min = t[i];
 	i = -1;
-	while (++i < size)
+	while (++i < 4)
 		if (t[i] < min && t[i] != INFINITY)
 			min = t[i];
 	return (min);
@@ -55,11 +54,11 @@ float	get_min(float t1, float t2, float t3, float t4)
  */
 double	hit_top_bot(t_object *plane, t_ray *ray, const double radius)
 {
-	double	t;
+	double		t;
 	t_vector3	*p;
 	t_vector3	*tmp;
 	t_vector3	*v;
-	double	d2;
+	double		d2;
 
 	t = ft_plane_hit(plane, ray);
 	if (t < 0)
