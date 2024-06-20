@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/20 12:48:50 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/20 13:48:33 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ t_object			*ft_get_first_obj(t_object_type type);
 t_object			*ft_get_nth_obj(t_object_type type, int n);
 void				ft_calculate_viewport(t_object *camera);
 float				get_min(float t1, float t2, float t3, float t4);
-static double		hit_top_bot(t_object *obj, t_ray *ray, const double radius);
+double				hit_top_bot(t_object *obj, t_ray *ray, const double radius);
 
 // ERRORS
 void				ft_print_error(const char *error);

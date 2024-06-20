@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 12:46:05 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/20 12:50:46 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/20 13:51:57 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,24 @@ float	get_min(float t1, float t2, float t3, float t4)
  * @param ray The current ray.
  * @return int 1 if the hit point is in the height, 0 otherwise.
  */
-static double	hit_top_bot(t_object *obj, t_ray *ray, const double radius)
+double	hit_top_bot(t_object *plane, t_ray *ray, const double radius)
 {
 	double	t;
 	t_vector3	*p;
+	t_vector3	*tmp;
 	t_vector3	*v;
 	double	d2;
 
-	t = ft_plane_hit(obj, ray);
+	t = ft_plane_hit(plane, ray);
 	if (t < 0)
 		return (INFINITY);
-	p = ft_v3_add(ray->origin, ft_v3_scalar(ray->direction, t));
-	v = ft_v3_sub(p, &obj->pos);
+	tmp = ft_v3_scalar(ray->direction, t);
+	p = ft_v3_add(ray->origin, tmp);
+	v = ft_v3_sub(p, &plane->pos);
 	d2 = ft_v3_len(v);
+	free(v);
+	free(p);
+	free(tmp);
 	if (d2 <= radius)
 		return (t);
 	return (INFINITY);
