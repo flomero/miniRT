@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:45:47 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/20 14:30:34 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/20 14:34:37 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,6 @@ float	ft_cylinder_hit(t_object *cyl, t_ray *ray)
 	plane.pos = *tmp[1];
 	t[2] = hit_top_bot(&plane, ray, cyl->s_cylinder.diameter / 2);
 	ft_v3_scalar_ip(&plane.s_plane.normal, -1);
-	free(tmp[0]);
-	free(tmp[1]);
-	tmp[0] = ft_v3_scalar(&plane.s_plane.normal, cyl->s_cylinder.height / 2);
-	tmp[1] = ft_v3_add(&cyl->pos, tmp[0]);
 	plane.pos = cyl->pos;
 	t[3] = hit_top_bot(&plane, ray, cyl->s_cylinder.diameter / 2);
 	i = -1;
