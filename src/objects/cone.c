@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:39:34 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/20 18:14:17 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/20 19:07:46 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ float	ft_cone_hit(t_object *cone, t_ray *ray)
 	return (INFINITY);
 }
 
-int	ft_cylinder_normal(t_hit *hit, t_ray *ray)
+int	ft_cone_hit(t_hit *hit, t_ray *ray)
 {
 	return(1);
 }
