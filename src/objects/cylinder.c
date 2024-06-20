@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:45:47 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/19 14:27:03 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/20 10:17:38 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static void	get_t(float t[2], t_object *cyl, t_ray *ray)
 	abc[0] = ft_v3_dotprod(&n_rd, &n_rd);
 	abc[1] = 2 * ft_v3_dotprod(&n_rd, v1);
 	abc[2] = (ft_v3_dotprod(v1, v1) - pow((cyl->s_cylinder.diameter / 2), 2));
+	free(v1);
 	t[0] = handle_zero(abc, ray, cyl);
 	if ((abc[1] * abc[1] - 4 * abc[0] * abc[2]) < 0 || abc[0] <= 0)
 		return ;
@@ -111,6 +112,7 @@ int	ft_cylinder_normal(t_hit *hit, t_ray *ray)
 	t_vector3	*oc;
 	t_vector3	*projection;
 	t_vector3	*normal;
+	t_vector3	*tmp;
 
 	ft_v3_init(&hit->p, ray->origin->x + ray->direction->x * hit->t,
 		ray->origin->y + ray->direction->y * hit->t, ray->origin->z
@@ -119,7 +121,9 @@ int	ft_cylinder_normal(t_hit *hit, t_ray *ray)
 	projection = ft_v3_scalar(&hit->obj->s_cylinder.normal, ft_v3_dotprod(oc,
 				&hit->obj->s_cylinder.normal));
 	normal = ft_v3_sub(oc, projection);
-	hit->n = *ft_v3_normal(normal);
+	tmp = ft_v3_normal(normal);
+	ft_v3_init(&hit->n, tmp->x, tmp->y, tmp->z);
+	free(tmp);
 	free(oc);
 	free(projection);
 	free(normal);
