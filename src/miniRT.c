@@ -6,18 +6,14 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/19 12:30:43 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/20 12:54:18 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 	TODO:
-		- cylinder:
-			- make sure I don't modify vector values in obj functs
-			- division by 0
-			- dont malloc(ft_v3_new())
-			- add top and bottom cover
-		- check for mem leaks
+		- adding cone
+		- clean print func
 */
 
 #include "miniRT.h"

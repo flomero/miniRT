@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:45:47 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/20 11:26:16 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/20 12:52:54 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,69 +15,32 @@
 static int		in_height(float t, t_object *cyl, t_ray *ray);
 static void		get_t(float t[2], t_object *cyl, t_ray *ray);
 static float	handle_zero(float abc[3], t_ray *ray, t_object *cyl);
-float	get_min(float t1, float t2, float t3);
-
-static double	hit_disk(t_object *obj, t_ray *ray, const double radius)
-{
-	double	t;
-	t_vector3	*p;
-	t_vector3	*v;
-	double	d2;
-
-	t = ft_plane_hit(obj, ray);
-	if (t < 0)
-		return (INFINITY);
-	p = ft_v3_add(ray->origin, ft_v3_scalar(ray->direction, t));
-	v = ft_v3_sub(p, &obj->pos);
-	d2 = ft_v3_len(v);
-	if (d2 <= radius)
-		return (t);
-	return (INFINITY);
-}
 
 float	ft_cylinder_hit(t_object *cyl, t_ray *ray)
 {
-	float		t[3];
+	float		t[4];
 	t_object	plane;
+	t_vector3	*tmp[2];
 	int			i;
 
-	t[0] = INFINITY;
-	t[1] = INFINITY;
-	t[2] = INFINITY;
+	i = -1;
+	while (++i < 4)
+		t[i] = INFINITY;
 	get_t(t, cyl, ray);
 	plane.type = PLANE;
-	plane.s_plane.normal = *ft_v3_copy(&cyl->s_cylinder.normal);
-	plane.pos = *ft_v3_add(&cyl->pos, ft_v3_scalar(&cyl->s_cylinder.normal,
-				cyl->s_cylinder.height / 2));
-	t[2] = hit_disk(&plane, ray, cyl->s_cylinder.diameter / 2);
+	ft_v3_init(&plane.s_plane.normal, cyl->s_cylinder.normal.x,
+			cyl->s_cylinder.normal.y, cyl->s_cylinder.normal.z);
+	tmp[0] = ft_v3_scalar(&cyl->s_cylinder.normal, cyl->s_cylinder.height / 2);
+	tmp[1] = ft_v3_add(&cyl->pos, tmp[0]);
+	plane.pos = *tmp[1];
+	t[2] = hit_top_bot(&plane, ray, cyl->s_cylinder.diameter / 2);
+	ft_v3_scalar_ip(&plane.s_plane.normal, -1);
+	t[3] = hit_top_bot(&plane, ray, cyl->s_cylinder.diameter / 2);
 	i = -1;
-	while (++i < 3)
+	while (++i < 4)
 		if (!in_height(t[i], cyl, ray))
 			t[i] = INFINITY;
-	return (get_min(t[0], t[1], t[2]));
-}
-
-float	get_min(float t1, float t2, float t3)
-{
-	float	t[3];
-	int		i;
-	float	min;
-
-	t[0] = t1;
-	t[1] = t2;
-	t[2] = t3;
-	min = INFINITY;
-	if (t[0] != INFINITY)
-		min = t[0];
-	if (t[1] != INFINITY)
-		min = t[1];
-	if (t[2] != INFINITY)
-		min = t[2];
-	i = -1;
-	while (++i < 3)
-		if (t[i] < min && t[i] != INFINITY)
-			min = t[i];
-	return (min);
+	return (free(tmp[0]), free(tmp[1]), get_min(t[0], t[1], t[2], t[3]));
 }
 
 static void	get_t(float t[3], t_object *cyl, t_ray *ray)
@@ -85,7 +48,7 @@ static void	get_t(float t[3], t_object *cyl, t_ray *ray)
 	t_vector3	*v1;
 	t_vector3	n_rd;
 	t_vector3	*n_cy;
-	float		abc[3];
+	float		ac[3];
 
 	ft_v3_init(&n_rd, ray->direction->x, ray->direction->y, ray->direction->z);
 	ft_v3_normal_ip(&n_rd);
@@ -97,17 +60,15 @@ static void	get_t(float t[3], t_object *cyl, t_ray *ray)
 	ft_v3_scalar_ip(n_cy, ft_v3_dotprod(v1, n_cy));
 	ft_v3_sub_ip(v1, n_cy);
 	free(n_cy);
-	abc[0] = ft_v3_dotprod(&n_rd, &n_rd);
-	abc[1] = 2 * ft_v3_dotprod(&n_rd, v1);
-	abc[2] = (ft_v3_dotprod(v1, v1) - pow((cyl->s_cylinder.diameter / 2), 2));
+	ac[0] = ft_v3_dotprod(&n_rd, &n_rd);
+	ac[1] = 2 * ft_v3_dotprod(&n_rd, v1);
+	ac[2] = (ft_v3_dotprod(v1, v1) - pow((cyl->s_cylinder.diameter / 2), 2));
 	free(v1);
-	t[0] = handle_zero(abc, ray, cyl);
-	if ((abc[1] * abc[1] - 4 * abc[0] * abc[2]) < 0 || abc[0] <= 0)
+	t[0] = handle_zero(ac, ray, cyl);
+	if ((ac[1] * ac[1] - 4 * ac[0] * ac[2]) < 0 || ac[0] <= 0)
 		return ;
-	t[0] = (-abc[1] + sqrt(abc[1] * abc[1] - 4 * abc[0] * abc[2]))
-	/ (2 * abc[0]);
-	t[1] = (-abc[1] - sqrt(abc[1] * abc[1] - 4 * abc[0] * abc[2]))
-	/ (2 * abc[0]);
+	t[0] = (-ac[1] + sqrt(ac[1] * ac[1] - 4 * ac[0] * ac[2])) / (2 * ac[0]);
+	t[1] = (-ac[1] - sqrt(ac[1] * ac[1] - 4 * ac[0] * ac[2])) / (2 * ac[0]);
 }
 
 static float	handle_zero(float abc[3], t_ray *ray, t_object *cyl)
