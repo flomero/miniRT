@@ -6,15 +6,9 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/20 12:54:18 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/20 17:15:46 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-	TODO:
-		- adding cone
-		- clean print func
-*/
 
 #include "miniRT.h"
 
@@ -37,7 +31,7 @@ int	main(int argc, char **argv)
 	if (DEBUG)
 		atexit(leaks);
 	if (argc != 2)
-		return (0);
+		return (ft_print_error("Arguments shouldn't by empty"), 0);
 	if (!is_valid_parsing(argv[1]))
 		return (1);
 	if (DEBUG)
