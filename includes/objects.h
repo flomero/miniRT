@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:49:15 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/20 15:35:16 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/20 19:55:32 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,8 +151,8 @@ typedef struct s_object
 		{
 			float		angle;
 			t_vector3	normal;
-			float		min_m;
-			float		max_m;
+			float		min;
+			float		max;
 		} s_cone;
 	};
 }						t_object;

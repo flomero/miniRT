@@ -12,6 +12,7 @@
 /* ************************************************************************** */
 
 #include "miniRT.h"
+#include "miniRT.h"
 
 float	ft_cone_hit(t_object *cone, t_ray *ray)
 {
@@ -25,7 +26,11 @@ float	ft_cone_hit(t_object *cone, t_ray *ray)
 	float		discriminant;
 	float		t1;
 	float		t2;
+	float		hit_height1;
+	float		hit_height2;
 
+	cone->s_cone.min = 1;
+	cone->s_cone.max = 10;
 	CO = ft_v3_sub(ray->origin, &cone->pos);
 	cos_theta2 = cos(cone->s_cone.angle) * cos(cone->s_cone.angle);
 	D_dot_A = ft_v3_dotprod(ray->direction, &cone->s_cone.normal);
@@ -40,29 +45,73 @@ float	ft_cone_hit(t_object *cone, t_ray *ray)
 		return (INFINITY);
 	t1 = (-b - sqrt(discriminant)) / (2 * a);
 	t2 = (-b + sqrt(discriminant)) / (2 * a);
-	if (t1 > 0 && t2 > 0)
-		return (fmin(t1, t2));
+
 	if (t1 > 0)
-		return (t1);
+	{
+		hit_height1 = CO_dot_A + t1 * D_dot_A;
+		if ((hit_height1 >= cone->s_cone.min && hit_height1 <= cone->s_cone.max))
+			return (t1);
+	}
 	if (t2 > 0)
-		return (t2);
+	{
+		hit_height2 = CO_dot_A + t2 * D_dot_A;
+		if ((hit_height2 >= cone->s_cone.min && hit_height2 <= cone->s_cone.max))
+			return (t2);
+	}
 	return (INFINITY);
 }
+
+#include "miniRT.h"
 
 int	ft_cone_normal(t_hit *hit, t_ray *ray)
 {
 	t_vector3	*VP;
-	float		projection;
 	t_vector3	*normal;
+	float		projection;
+	float		magnitude;
+	float		angle;
 
+	// Calculate intersection point
 	ft_v3_init(&hit->p, ray->origin->x + ray->direction->x * hit->t,
 		ray->origin->y + ray->direction->y * hit->t, ray->origin->z
 		+ ray->direction->z * hit->t);
+
+	// Calculate vector from cone vertex to hit point
 	VP = ft_v3_sub(&hit->p, &hit->obj->pos);
+
+	// Calculate the projection of VP onto the cone axis (normal)
 	projection = ft_v3_dotprod(VP, &hit->obj->s_cone.normal);
-	normal = ft_v3_sub(VP, ft_v3_scalar(&hit->obj->s_cone.normal, projection));
+
+	// Calculate magnitude of the vector from cone axis to surface
+	magnitude = sqrt(ft_v3_dotprod(VP, VP) - (projection * projection));
+
+	// Calculate angle of the cone
+	angle = atan(magnitude / projection);
+
+	// Calculate the normal at the hit point
+	normal = ft_v3_sub(VP, ft_v3_scalar(&hit->obj->s_cone.normal, projection * (1 + (tan(angle) * tan(angle)))));
 	ft_v3_normal_ip(normal);
+
+	// Store normal in hit structure
 	hit->n = *normal;
+
 	return (1);
 }
+
+// int	ft_cone_normal(t_hit *hit, t_ray *ray)
+// {
+// 	t_vector3	*VP;
+// 	float		projection;
+// 	t_vector3	*normal;
+
+// 	ft_v3_init(&hit->p, ray->origin->x + ray->direction->x * hit->t,
+// 		ray->origin->y + ray->direction->y * hit->t, ray->origin->z
+// 		+ ray->direction->z * hit->t);
+// 	VP = ft_v3_sub(&hit->p, &hit->obj->pos);
+// 	projection = ft_v3_dotprod(VP, &hit->obj->s_cone.normal);
+// 	normal = ft_v3_sub(VP, ft_v3_scalar(&hit->obj->s_cone.normal, projection));
+// 	ft_v3_normal_ip(normal);
+// 	hit->n = *normal;
+// 	return (1);
+// }
 
