@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -6,27 +7,62 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:39:34 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/20 19:07:46 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/19 16:13:23 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-/*
-Cone equation: x^2 + y^2 = (tan(angle))^2 * z^2
-Ray equation: p = o + td
-Substitute ray equation into cone equation and solve it.
-A = d.x^2 + d.y^2 - (tan(angle))^2 * d.z^2
-B = 2(o.x * d.x + o.y * d.y - (tan(angle))^2 * o.z * d.z)
-C = o.x^2 + o.y^2 - (tan(angle))^2 * o.z^2
-t = (-B +- sqrt(B^2 - 4AC)) / 2A
-*/
 float	ft_cone_hit(t_object *cone, t_ray *ray)
 {
+	t_vector3	*CO;
+	float		cos_theta2;
+	float		D_dot_A;
+	float		CO_dot_A;
+	float		a;
+	float		b;
+	float		c;
+	float		discriminant;
+	float		t1;
+	float		t2;
+
+	CO = ft_v3_sub(ray->origin, &cone->pos);
+	cos_theta2 = cos(cone->s_cone.angle) * cos(cone->s_cone.angle);
+	D_dot_A = ft_v3_dotprod(ray->direction, &cone->s_cone.normal);
+	CO_dot_A = ft_v3_dotprod(CO, &cone->s_cone.normal);
+	a = ft_v3_dotprod(ray->direction, ray->direction) - (cos_theta2 + 1)
+		* (D_dot_A * D_dot_A);
+	b = 2 * (ft_v3_dotprod(ray->direction, CO) - (cos_theta2 + 1) * D_dot_A
+			* CO_dot_A);
+	c = ft_v3_dotprod(CO, CO) - (cos_theta2 + 1) * (CO_dot_A * CO_dot_A);
+	discriminant = b * b - 4 * a * c;
+	if (discriminant < 0)
+		return (INFINITY);
+	t1 = (-b - sqrt(discriminant)) / (2 * a);
+	t2 = (-b + sqrt(discriminant)) / (2 * a);
+	if (t1 > 0 && t2 > 0)
+		return (fmin(t1, t2));
+	if (t1 > 0)
+		return (t1);
+	if (t2 > 0)
+		return (t2);
 	return (INFINITY);
 }
 
-int	ft_cone_hit(t_hit *hit, t_ray *ray)
+int	ft_cone_normal(t_hit *hit, t_ray *ray)
 {
-	return(1);
+	t_vector3	*VP;
+	float		projection;
+	t_vector3	*normal;
+
+	ft_v3_init(&hit->p, ray->origin->x + ray->direction->x * hit->t,
+		ray->origin->y + ray->direction->y * hit->t, ray->origin->z
+		+ ray->direction->z * hit->t);
+	VP = ft_v3_sub(&hit->p, &hit->obj->pos);
+	projection = ft_v3_dotprod(VP, &hit->obj->s_cone.normal);
+	normal = ft_v3_sub(VP, ft_v3_scalar(&hit->obj->s_cone.normal, projection));
+	ft_v3_normal_ip(normal);
+	hit->n = *normal;
+	return (1);
 }
+
