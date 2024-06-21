@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/20 13:48:33 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/21 14:59:31 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,8 +194,11 @@ t_bool				get_basic_mat(char **tokens, t_object *obj);
 t_bool				get_adv_mat(char **tokens, t_object *obj);
 t_bool				get_tex_checker(char **tokens, t_object *obj, t_bool UV);
 t_bool				get_tex_file(char **tokens, t_object *obj);
+t_bool				get_bump(char **tokens, t_object *obj);
 t_bool				ft_check_dup_mat(void);
 t_bool				ft_check_dup_tex(void);
+t_bool				ft_check_dup_bump(void);
+uint32_t			ft_texture_file(t_object *obj, t_hit *hit, t_color *result);
 
 // MATHS
 float				ft_randf(void);

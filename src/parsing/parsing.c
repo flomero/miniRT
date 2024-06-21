@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:15:15 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/19 11:50:25 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/21 14:56:27 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,8 @@ int	get_obj(char **tokens, t_object *obj)
 		return (get_tex_checker(tokens, obj, FALSE));
 	else if (!ft_strcmp("TUC", tokens[0]))
 		return (get_tex_checker(tokens, obj, TRUE));
+	else if (!ft_strcmp("B", tokens[0]))
+		return (get_bump(tokens, obj));
 	ft_print_error("Not valid object identifier");
 	return (0);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/20 13:49:09 by klamprak         ###   ########.fr        #
+#    Updated: 2024/06/21 14:52:33 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,6 +100,8 @@ CFILES += check_materials.c \
 
 CFILES += checkerboard.c \
 			parse_texture.c \
+			file_textures.c \
+			parse_bump.c \
 
 OFILES := $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
 
