@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:45:47 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/21 10:13:31 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/21 15:06:17 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,20 +118,71 @@ static int	in_height(float t, t_object *cyl, t_ray *ray)
 		return (1);
 	return (0);
 }
+// -------------Experiment code---------------------
+
+double	signed_distance_t_cylinder_point(t_vector3 *point, t_vector3 *og,
+		t_object *obj)
+{
+	t_vector3	*sub_mult_ray_distance_og;
+	double		signed_distance;
+
+	sub_mult_ray_distance_og = ft_v3_sub(point, og);
+	if (sub_mult_ray_distance_og == NULL)
+		return (0);
+	signed_distance = ft_v3_dotprod(&obj->s_cylinder.normal,
+			sub_mult_ray_distance_og);
+	free(sub_mult_ray_distance_og);
+	return (signed_distance);
+}
+
+void	ft_v3_innormalize(t_vector3 *v)
+{
+	double	v_len;
+
+	v_len = ft_v3_len(v);
+	if (v_len <= 0.00001)
+		return ;
+	v->x /= v_len;
+	v->y /= v_len;
+	v->z /= v_len;
+}
+
+t_vector3	*normal_sides(double signed_distance, t_vector3 *point,
+		t_object *obj)
+{
+	t_vector3	*normal;
+	t_vector3	*sub_dir_pos;
+	t_vector3	*mult_dir_dis;
+
+	mult_dir_dis = ft_v3_scalar(&obj->s_cylinder.normal, signed_distance);
+	if (mult_dir_dis == NULL)
+		return (NULL);
+	sub_dir_pos = ft_v3_sub(point, mult_dir_dis);
+	if (sub_dir_pos == NULL)
+		return (free(mult_dir_dis), NULL);
+	normal = ft_v3_sub(sub_dir_pos, &obj->pos);
+	free(sub_dir_pos);
+	free(mult_dir_dis);
+	if (normal == NULL)
+		return (NULL);
+	ft_v3_innormalize(normal);
+	return (normal);
+}
 
 int	ft_cylinder_normal(t_hit *hit, t_ray *ray)
 {
-	t_vector3	norm;
+	double	signed_distance;
 
 	ft_v3_init(&hit->p, ray->origin->x + ray->direction->x * hit->t,
 		ray->origin->y + ray->direction->y * hit->t, ray->origin->z
 		+ ray->direction->z * hit->t);
-	ft_v3_init(&hit->n, hit->p.x, hit->p.y, hit->p.z);
-	ft_v3_sub_ip(&hit->n, &hit->obj->pos);
-	ft_v3_init(&norm, hit->obj->s_cylinder.normal.x,
-		hit->obj->s_cylinder.normal.y, hit->obj->s_cylinder.normal.z);
-	ft_v3_scalar_ip(&norm, ft_v3_dotprod(&hit->n, &hit->obj->s_cylinder.normal));
-	ft_v3_sub_ip(&hit->n, &norm);
-	ft_v3_normal_ip(&hit->n);
+	signed_distance = signed_distance_t_cylinder_point(&hit->p,
+			&hit->obj->pos, hit->obj);
+	if (fabs(signed_distance) < 0.00001)
+		hit->n = (*ft_v3_scalar(&hit->obj->s_cylinder.normal, -1.0));
+	else if (fabs(signed_distance - hit->obj->s_cylinder.height) < 0.00001)
+		hit->n = (*ft_v3_copy(&hit->obj->s_cylinder.normal));
+	else
+		hit->n = (*normal_sides(signed_distance, &hit->p, hit->obj));
 	return (1);
 }
