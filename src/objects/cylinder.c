@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:45:47 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/20 14:49:07 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/21 09:45:03 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,23 +119,17 @@ static int	in_height(float t, t_object *cyl, t_ray *ray)
 
 int	ft_cylinder_normal(t_hit *hit, t_ray *ray)
 {
-	t_vector3	*oc;
-	t_vector3	*projection;
-	t_vector3	*normal;
-	t_vector3	*tmp;
+	t_vector3	norm;
 
 	ft_v3_init(&hit->p, ray->origin->x + ray->direction->x * hit->t,
 		ray->origin->y + ray->direction->y * hit->t, ray->origin->z
 		+ ray->direction->z * hit->t);
-	oc = ft_v3_sub(&hit->p, &hit->obj->pos);
-	projection = ft_v3_scalar(&hit->obj->s_cylinder.normal, ft_v3_dotprod(oc,
-				&hit->obj->s_cylinder.normal));
-	normal = ft_v3_sub(oc, projection);
-	tmp = ft_v3_normal(normal);
-	ft_v3_init(&hit->n, tmp->x, tmp->y, tmp->z);
-	free(tmp);
-	free(oc);
-	free(projection);
-	free(normal);
+	ft_v3_init(&hit->n, hit->p.x, hit->p.y, hit->p.z);
+	ft_v3_sub_ip(&hit->n, &hit->obj->pos);
+	ft_v3_init(&norm, hit->obj->s_cylinder.normal.x,
+		hit->obj->s_cylinder.normal.y, hit->obj->s_cylinder.normal.z);
+	ft_v3_scalar_ip(&norm, ft_v3_dotprod(&hit->n, &hit->obj->s_cylinder.normal));
+	ft_v3_sub_ip(&hit->n, &norm);
+	ft_v3_normal_ip(&hit->n);
 	return (1);
 }
