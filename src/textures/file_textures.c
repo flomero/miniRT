@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 11:26:52 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/21 15:15:17 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/21 15:30:30 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ uint32_t	ft_get_pixel_color(mlx_texture_t *texture, int x, int y,
 	pixel = texture->pixels + (y * texture->width + x)
 		* texture->bytes_per_pixel;
 	color = (pixel[0] << 24) | (pixel[1] << 16) | (pixel[2] << 8) | pixel[3];
-	ft_color_to_float(color, result);
+	if (result)
+		ft_color_to_float(color, result);
 	return (color);
 }
 

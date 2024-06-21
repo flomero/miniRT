@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:34:52 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 15:19:36 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/21 15:49:10 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,34 @@ float	ft_sphere_hit(t_object *sphere, t_ray *ray)
 	return ((-tmp.y - sqrt(discriminant)) / (2.0 * tmp.x));
 }
 
+static int	ft_sphere_bump(t_hit *hit, t_ray *ray)
+{
+	uint32_t		color;
+	t_vector2		uv;
+	mlx_texture_t	*texture;
+	float			factor;
+	static int		i = 0;
+
+	ft_sphere_uv(hit, &uv);
+	texture = hit->obj->bump->s_bump.img;
+	uv.x = fmod(uv.x * texture->width, texture->width);
+	uv.y = fmod(uv.y * texture->height, texture->height);
+	if (uv.x < 0)
+		uv.x += texture->width;
+	if (uv.y < 0)
+		uv.y += texture->height;
+	color = ft_get_pixel_color(texture, uv.x, uv.y, NULL);
+	// color is between white an black
+	factor = (float)(color & 0xFF) / 255.0;
+	hit->n.x += factor * 0.1;
+	hit->n.y += factor * 0.1;
+	hit->n.z += factor * 0.1;
+	(void)ray;
+	if (i++ < 10)
+		printf("hit->n: %f %f %f\n", hit->n.x, hit->n.y, hit->n.z);
+	return (1);
+}
+
 int	ft_sphere_normal(t_hit *hit, t_ray *ray)
 {
 	ft_v3_init(&hit->p, ray->origin->x + ray->direction->x * hit->t,
@@ -45,6 +73,8 @@ int	ft_sphere_normal(t_hit *hit, t_ray *ray)
 	ft_v3_init(&hit->n, hit->p.x - hit->obj->pos.x, hit->p.y - hit->obj->pos.y,
 		hit->p.z - hit->obj->pos.z);
 	ft_v3_normal_ip(&hit->n);
+	if (hit->obj->bump_name != NULL)
+		return (ft_sphere_bump(hit, ray));
 	return (1);
 }
 
