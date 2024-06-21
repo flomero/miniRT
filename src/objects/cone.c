@@ -62,25 +62,23 @@ float	ft_cone_hit(t_object *cone, t_ray *ray)
 
 int	ft_cone_normal(t_hit *hit, t_ray *ray)
 {
-	t_vector3	*VP;
-	t_vector3	*normal;
-	float		projection;
+	t_vector3	tmp;
+	float		projec;
 	float		magnitude;
 	float		angle;
 
 	ft_v3_init(&hit->p, ray->origin->x + ray->direction->x * hit->t,
 		ray->origin->y + ray->direction->y * hit->t, ray->origin->z
 		+ ray->direction->z * hit->t);
-	VP = ft_v3_sub(&hit->p, &hit->obj->pos);
-	// Calculate the projection of VP onto the cone axis (normal)
-	projection = ft_v3_dotprod(VP, &hit->obj->s_cone.normal);
-	// Calculate magnitude of the vector from cone axis to surface
-	magnitude = sqrt(ft_v3_dotprod(VP, VP) - (projection * projection));
-	// Calculate angle of the cone
-	angle = atan(magnitude / projection);
-	// Calculate the normal at the hit point
-	normal = ft_v3_sub(VP, ft_v3_scalar(&hit->obj->s_cone.normal, projection * (1 + (tan(angle) * tan(angle)))));
-	ft_v3_normal_ip(normal);
-	hit->n = *normal;
+	ft_v3_init(&hit->n, hit->p.x, hit->p.y, hit->p.z);
+	ft_v3_sub_ip(&hit->n, &hit->obj->pos);
+	projec = ft_v3_dotprod(&hit->n, &hit->obj->s_cone.normal);
+	magnitude = sqrt(ft_v3_dotprod(&hit->n, &hit->n) - (projec * projec));
+	angle = atan(magnitude / projec);
+	ft_v3_init(&tmp, hit->obj->s_cone.normal.x, hit->obj->s_cone.normal.y, \
+	hit->obj->s_cone.normal.z);
+	ft_v3_scalar_ip(&tmp, projec * (1 + (tan(angle) * tan(angle))));
+	ft_v3_sub_ip(&hit->n, &tmp);
+	ft_v3_normal_ip(&hit->n);
 	return (1);
 }
