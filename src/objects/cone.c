@@ -26,11 +26,13 @@ float	ft_cone_hit(t_object *cone, t_ray *ray)
 	float		t1;
 	float		t2;
 	float		hit_height1;
-	// float		hit_height2;
+	float		hit_height2;
 
 	cone->s_cone.min = 0;
 	cone->s_cone.max = 5;
 	CO = ft_v3_sub(ray->origin, &cone->pos);
+	// ft_v3_normal_ip(ray->direction);
+	// ft_v3_normal_ip(&cone->s_cone.normal);
 	cos_theta2 = cos(cone->s_cone.angle) * cos(cone->s_cone.angle);
 	D_dot_A = ft_v3_dotprod(ray->direction, &cone->s_cone.normal);
 	CO_dot_A = ft_v3_dotprod(CO, &cone->s_cone.normal);
@@ -40,23 +42,22 @@ float	ft_cone_hit(t_object *cone, t_ray *ray)
 			* CO_dot_A);
 	c = ft_v3_dotprod(CO, CO) - (cos_theta2 + 1) * (CO_dot_A * CO_dot_A);
 	discriminant = b * b - 4 * a * c;
-	if (discriminant < 0)
+	if (discriminant < 0 || a == 0)
 		return (INFINITY);
 	t1 = (-b - sqrt(discriminant)) / (2 * a);
 	t2 = (-b + sqrt(discriminant)) / (2 * a);
-
 	if (t1 > 0)
 	{
 		hit_height1 = CO_dot_A + t1 * D_dot_A;
 		if ((hit_height1 >= cone->s_cone.min && hit_height1 <= cone->s_cone.max))
 			return (t1);
 	}
-	// if (t2 > 0)
-	// {
-	// 	hit_height2 = CO_dot_A + t2 * D_dot_A;
-	// 	if ((hit_height2 >= cone->s_cone.min && hit_height2 <= cone->s_cone.max))
-	// 		return (t2);
-	// }
+	if (t2 > 0)
+	{
+		hit_height2 = CO_dot_A + t2 * D_dot_A;
+		if ((hit_height2 >= cone->s_cone.min && hit_height2 <= cone->s_cone.max))
+			return (t2);
+	}
 	return (INFINITY);
 }
 
