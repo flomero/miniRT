@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:56:51 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/17 15:32:05 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/20 14:42:21 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,13 @@ void	ft_key_hook(mlx_key_data_t keydata, void *param)
 	program = (t_program *)param;
 	if (keydata.key == MLX_KEY_ESCAPE)
 	{
-		pthread_mutex_lock(program->stop);
-		program->stop_threads = TRUE;
-		pthread_mutex_unlock(program->stop);
-		join_threads(program);
+		if (program->thread_count > 1)
+		{
+			pthread_mutex_lock(program->stop);
+			program->stop_threads = TRUE;
+			pthread_mutex_unlock(program->stop);
+			join_threads(program);
+		}
 		mlx_terminate(program->mlx);
 		exit(0);
 	}

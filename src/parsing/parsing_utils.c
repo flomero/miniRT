@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 16:28:34 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/18 17:24:20 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/21 09:42:59 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	print_rgb(uint32_t color)
 	uint8_t	green;
 	uint8_t	blue;
 
-	red = (color >> 16) & 0xFF;
-	green = (color >> 8) & 0xFF;
-	blue = color & 0xFF;
+	red = (color >> 24) & 0xFF;
+	green = (color >> 16) & 0xFF;
+	blue = (color >> 8) & 0xFF;
 	printf("RGB(%d, %d, %d)\n", red, green, blue);
 }
 
