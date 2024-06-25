@@ -4,6 +4,7 @@
 - Three dimensional Vectors (V3), consist of either integers or floats for x, y and z
 - Lines starting with `#` are treated as comments and ignored during parsing
 - optional fields will be filled with default values if not provided
+- Paths and Names have a maximum length of 50 characters
 
 
 ## Camera & Lights

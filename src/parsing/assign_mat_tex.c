@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 18:05:37 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/25 16:11:00 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:45:38 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,13 @@ t_bool	ft_assign_mat_tex(void)
 	{
 		if (program->objs[i].type > LIGHT)
 		{
-			if (program->objs[i].material_name != NULL
+			if (program->objs[i].material_name[0]
 				&& !ft_assign_mat(&program->objs[i], program))
 				return (ft_print_error("Failed to assign material."), FALSE);
-			if (program->objs[i].texture_name != NULL
+			if (program->objs[i].texture_name[0]
 				&& !ft_assign_tex(&program->objs[i], program))
 				return (ft_print_error("Failed to assign texture."), FALSE);
-			if (program->objs[i].bump_name != NULL
+			if (program->objs[i].bump_name[0]
 				&& !ft_assign_bump(&program->objs[i], program))
 				return (ft_print_error("Failed to assign bump."), FALSE);
 		}
