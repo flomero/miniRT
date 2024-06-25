@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:43:05 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/21 11:39:05 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/25 15:43:36 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,7 @@ int	get_co(char **tokens, t_object *obj)
 	ft_color_to_float(obj->color, &obj->color_f);
 	ft_default_material(obj);
 	ft_assign_own_tm(obj);
+	obj->s_cone.min = 0;
+	obj->s_cone.max = 5;
 	return (1);
 }
