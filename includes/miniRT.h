@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/25 11:30:29 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/25 15:38:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_ray
 	int				depth;
 }					t_ray;
 
+// n: normal, p: point, t: distance
 typedef struct s_hit
 {
 	float			t;
@@ -106,9 +107,11 @@ float				ft_sphere_hit(t_object *sphere, t_ray *ray);
 int					ft_sphere_uv(t_hit *hit, t_vector2 *uv);
 float				ft_plane_hit(t_object *plane, t_ray *ray);
 float				ft_cylinder_hit(t_object *cyl, t_ray *ray);
+float				ft_cone_hit(t_object *cone, t_ray *ray);
 int					ft_sphere_normal(t_hit *hit, t_ray *ray);
 int					ft_plane_normal(t_hit *hit, t_ray *ray);
 int					ft_cylinder_normal(t_hit *hit, t_ray *ray);
+int					ft_cone_normal(t_hit *hit, t_ray *ray);
 
 // OBJECT UTILS
 t_object			*ft_get_first_obj(t_object_type type);
@@ -143,7 +146,6 @@ int					get_color(char *token, uint32_t *result);
 
 // PARSING UTILS3
 void				free_str_arr(char **arr);
-int					get_cy(char **tokens, t_object *obj);
 int					get_nbr_of_lines(char *fname);
 uint32_t			int_to_rgb(int red, int green, int blue);
 
@@ -156,6 +158,10 @@ int					get_c(char **tokens, t_object *obj);
 int					get_l(char **tokens, t_object *obj);
 int					get_sp(char **tokens, t_object *obj);
 int					get_pl(char **tokens, t_object *obj);
+
+// PARSING HANDLERS2
+int					get_co(char **tokens, t_object *obj);
+int					get_cy(char **tokens, t_object *obj);
 
 // COLORS
 void				ft_color_to_float(uint32_t color, t_color *fcolor);

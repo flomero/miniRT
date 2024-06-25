@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:45:47 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/21 10:13:31 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/25 15:57:25 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,8 @@ int	ft_cylinder_normal(t_hit *hit, t_ray *ray)
 	ft_v3_sub_ip(&hit->n, &hit->obj->pos);
 	ft_v3_init(&norm, hit->obj->s_cylinder.normal.x,
 		hit->obj->s_cylinder.normal.y, hit->obj->s_cylinder.normal.z);
-	ft_v3_scalar_ip(&norm, ft_v3_dotprod(&hit->n, &hit->obj->s_cylinder.normal));
+	ft_v3_scalar_ip(&norm, \
+	ft_v3_dotprod(&hit->n, &hit->obj->s_cylinder.normal));
 	ft_v3_sub_ip(&hit->n, &norm);
 	ft_v3_normal_ip(&hit->n);
 	return (1);

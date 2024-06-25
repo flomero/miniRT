@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/21 14:52:33 by flfische         ###   ########.fr        #
+#    Updated: 2024/06/25 15:38:49 by klamprak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ CFILES := miniRT.c \
 
 CFILES += 	parsing.c \
 			parsing_handlers.c \
+			parsing_handlers2.c \
 			parsing_utils.c \
 			parsing_utils2.c \
 			parsing_utils3.c \
@@ -59,6 +60,7 @@ CFILES += get_first_obj.c \
 			plane.c \
 			cylinder.c \
 			obj_utils.c \
+			cone.c \
 
 # RT
 CFILES += send_rays.c \
