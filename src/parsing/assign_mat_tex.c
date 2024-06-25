@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 18:05:37 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/19 09:56:39 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:45:38 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,25 @@ static t_bool	ft_assign_tex(t_object *obj, t_program *program)
 	return (FALSE);
 }
 
+static t_bool	ft_assign_bump(t_object *obj, t_program *program)
+{
+	int	i;
+
+	i = 0;
+	while (i < program->objs_len)
+	{
+		if (program->objs[i].type == BUMP && !ft_strcmp(obj->bump_name,
+				program->objs[i].s_bump.name))
+		{
+			obj->bump = &program->objs[i];
+			printf("Assigned bump %s to object\n", obj->bump_name);
+			return (TRUE);
+		}
+		i++;
+	}
+	return (FALSE);
+}
+
 /**
  * @brief assigns the material and texture to the objects
  * @return t_bool - checks if the assignment was successful
@@ -60,20 +79,21 @@ t_bool	ft_assign_mat_tex(void)
 
 	program = ft_get_program();
 	i = 0;
-	if (ft_check_dup_mat())
-		return (ft_print_error("Duplicate materials."), FALSE);
-	if (ft_check_dup_tex())
-		return (ft_print_error("Duplicate textures."), FALSE);
+	if (ft_check_dup_mat() || ft_check_dup_tex() || ft_check_dup_bump())
+		return (ft_print_error("Duplicate material, texture or bump."), FALSE);
 	while (i < program->objs_len)
 	{
 		if (program->objs[i].type > LIGHT)
 		{
-			if (program->objs[i].material_name != NULL
+			if (program->objs[i].material_name[0]
 				&& !ft_assign_mat(&program->objs[i], program))
 				return (ft_print_error("Failed to assign material."), FALSE);
-			if (program->objs[i].texture_name != NULL
+			if (program->objs[i].texture_name[0]
 				&& !ft_assign_tex(&program->objs[i], program))
 				return (ft_print_error("Failed to assign texture."), FALSE);
+			if (program->objs[i].bump_name[0]
+				&& !ft_assign_bump(&program->objs[i], program))
+				return (ft_print_error("Failed to assign bump."), FALSE);
 		}
 		i++;
 	}

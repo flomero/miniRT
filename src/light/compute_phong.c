@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   compute_phong.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:32:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/20 14:46:25 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/21 15:11:27 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,17 @@ t_color	*ft_compute_phong(t_color *phong_color, const t_object *light,
 	return (phong_color);
 }
 
+t_color	*ft_check_texture(t_hit *hit, t_color *local_color)
+{
+	if (hit->obj->texture->s_tex.type == TEX_CHECKER)
+		ft_checkerboard(hit->obj->texture, &hit->p, (t_color *)local_color);
+	else if (hit->obj->texture->s_tex.type == TEX_UVCHECKER)
+		ft_checkerboard_uv(hit->obj->texture, (t_color *)local_color, hit);
+	else if (hit->obj->texture->s_tex.type == TEX_FILE)
+		ft_texture_file(hit->obj, hit, (t_color *)local_color);
+	return (local_color);
+}
+
 /**
  * @brief Computes the lights of the scene.
  *
@@ -102,12 +113,8 @@ t_color	*ft_compute_lights(t_color *light_col, t_hit *hit, t_program *program)
 	*light_col = (t_color){0, 0, 0};
 	hit->local_color = (t_color){hit->obj->material->color_f.r,
 		hit->obj->material->color_f.g, hit->obj->material->color_f.b};
-	if (hit->obj->texture->s_tex.type == TEX_CHECKER)
-		ft_checkerboard(hit->obj->texture, &hit->p,
-			(t_color *)&hit->local_color);
-	else if (hit->obj->texture->s_tex.type == TEX_UVCHECKER)
-		ft_checkerboard_uv(hit->obj->texture, (t_color *)&hit->local_color,
-			hit);
+	if (hit->obj->texture)
+		ft_check_texture(hit, &hit->local_color);
 	ft_compute_ambient(&ambient, hit->local_color);
 	i = -1;
 	while (++i < program->objs_len)

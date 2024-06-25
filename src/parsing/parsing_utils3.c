@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:46:57 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/19 12:31:40 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:16:32 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,38 +28,6 @@ void	free_str_arr(char **arr)
 	while (arr[++i])
 		free(arr[i]);
 	free(arr);
-}
-
-/**
- * @brief Get the cy object
- *
- * @param tokens
- * @param obj
- * @return int 1 on success, 0 otherwise
- */
-int	get_cy(char **tokens, t_object *obj)
-{
-	obj->type = CYLINDER;
-	if (get_arr_len(tokens) != 6)
-		return (0);
-	if (!get_vector(&obj->pos, tokens[1]))
-		return (0);
-	if (!get_vector(&obj->s_cylinder.normal, tokens[2]))
-		return (0);
-	if (!in_range(&obj->s_cylinder.normal, -1, 1))
-		return (0);
-	if (!is_float(tokens[3]) && !is_int(tokens[3]))
-		return (0);
-	obj->s_cylinder.diameter = (float)ft_atod(tokens[3]);
-	if (!is_float(tokens[4]) && !is_int(tokens[4]))
-		return (0);
-	obj->s_cylinder.height = (float)ft_atod(tokens[4]);
-	if (!get_color(tokens[5], &obj->color))
-		return (0);
-	ft_color_to_float(obj->color, &obj->color_f);
-	ft_default_material(obj);
-	ft_assign_own_tm(obj);
-	return (1);
 }
 
 /**
@@ -115,4 +83,32 @@ uint32_t	int_to_rgb(int red, int green, int blue)
 	color |= (uint32_t)blue << 8;
 	color |= 0xFF;
 	return (color);
+}
+
+/**
+ * @brief checks if exists exactly one A, C and L
+ * (Ambient light, Camera and Light)
+ *
+ * @param t_object **objs null terminated objs list which will be checked
+ * @return int returns 1 if is valid number, 0 otherwise
+ */
+int	is_valid_obj_nbr(t_object *objs)
+{
+	int	i;
+	int	single_occur[OBJECT_COUNT];
+
+	i = 0;
+	while (i < OBJECT_COUNT)
+		single_occur[i++] = 0;
+	if (!objs)
+		return (0);
+	i = -1;
+	while (++i < ft_get_program()->objs_len)
+		single_occur[objs[i].type]++;
+	if (single_occur[AMBIENT_LIGHT] != 1)
+		return (ft_print_error("Expect exact one A"), free(objs), 0);
+	if (single_occur[CAMERA] != 1)
+		return (ft_print_error("Expect exact one C"), free(objs), 0);
+	ft_get_program()->objs = objs;
+	return (1);
 }

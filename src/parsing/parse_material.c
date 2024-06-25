@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:10:43 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/19 09:46:48 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:41:23 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@
 void	ft_assign_own_tm(t_object *obj)
 {
 	obj->material = obj;
+	ft_bzero(obj->material_name, MAX_NAME_LEN);
 	obj->texture = obj;
+	ft_bzero(obj->texture_name, MAX_NAME_LEN);
+	obj->bump = obj;
+	ft_bzero(obj->bump_name, MAX_NAME_LEN);
 }
 
 /**
@@ -55,7 +59,7 @@ t_bool	get_basic_mat(char **tokens, t_object *obj)
 	obj->type = MATERIAL;
 	if (get_arr_len(tokens) != 4)
 		return (FALSE);
-	obj->s_mat.name = ft_strdup(tokens[1]);
+	ft_strlcpy(obj->s_mat.name, tokens[1], MAX_NAME_LEN);
 	if (!get_color(tokens[2], &obj->color))
 		return (FALSE);
 	ft_color_to_float(obj->color, &obj->color_f);
@@ -72,7 +76,8 @@ t_bool	get_adv_mat(char **tokens, t_object *obj)
 	obj->type = MATERIAL;
 	if (get_arr_len(tokens) != 7)
 		return (FALSE);
-	obj->s_mat.name = ft_strdup(tokens[1]);
+	ft_bzero(obj->s_mat.name, MAX_NAME_LEN);
+	ft_strlcpy(obj->s_mat.name, tokens[1], MAX_NAME_LEN);
 	if (!get_color(tokens[2], &obj->color))
 		return (FALSE);
 	ft_color_to_float(obj->color, &obj->color_f);

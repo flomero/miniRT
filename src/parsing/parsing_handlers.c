@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 14:41:37 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/19 09:44:29 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:45:05 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	get_sp(char **tokens, t_object *obj)
 	float	diameter;
 
 	obj->type = SPHERE;
-	if (get_arr_len(tokens) < 4 || get_arr_len(tokens) > 6)
+	if (get_arr_len(tokens) < 4 || get_arr_len(tokens) > 7)
 		return (0);
 	if (!get_vector(&obj->pos, tokens[1]))
 		return (0);
@@ -91,14 +91,12 @@ int	get_sp(char **tokens, t_object *obj)
 	obj->s_sphere.diameter = diameter;
 	ft_default_material(obj);
 	ft_assign_own_tm(obj);
-	if (get_arr_len(tokens) == 5)
-		obj->material_name = ft_strdup(tokens[4]);
-	else
-		obj->material_name = NULL;
-	if (get_arr_len(tokens) == 6)
-		obj->texture_name = ft_strdup(tokens[5]);
-	else
-		obj->texture_name = NULL;
+	if (get_arr_len(tokens) >= 5)
+		ft_strlcpy(obj->material_name, tokens[4], ft_strlen(tokens[4]) + 1);
+	if (get_arr_len(tokens) >= 6)
+		ft_strlcpy(obj->texture_name, tokens[5], ft_strlen(tokens[5]) + 1);
+	if (get_arr_len(tokens) == 7)
+		ft_strlcpy(obj->bump_name, tokens[6], ft_strlen(tokens[6]) + 1);
 	return (1);
 }
 
