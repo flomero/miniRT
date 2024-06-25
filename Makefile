@@ -6,7 +6,7 @@
 #    By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/20 15:13:18 by klamprak         ###   ########.fr        #
+#    Updated: 2024/06/25 15:38:49 by klamprak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,6 +102,8 @@ CFILES += check_materials.c \
 
 CFILES += checkerboard.c \
 			parse_texture.c \
+			file_textures.c \
+			parse_bump.c \
 
 OFILES := $(addprefix $(OBJ_DIR)/, $(CFILES:.c=.o))
 

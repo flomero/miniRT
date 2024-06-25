@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:15:15 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/20 16:11:00 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/25 15:39:31 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@ int	get_obj(char **tokens, t_object *obj)
 		return (get_tex_checker(tokens, obj, FALSE));
 	else if (!ft_strcmp("TUC", tokens[0]))
 		return (get_tex_checker(tokens, obj, TRUE));
+	else if (!ft_strcmp("B", tokens[0]))
+		return (get_bump(tokens, obj));
 	ft_print_error("Not valid object identifier");
 	return (0);
 }
