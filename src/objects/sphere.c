@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:34:52 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/21 15:49:10 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/25 14:14:18 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	ft_sphere_bump(t_hit *hit, t_ray *ray)
 	uint32_t		color;
 	t_vector2		uv;
 	mlx_texture_t	*texture;
-	float			factor;
+	t_vector3		perturbation;
 	static int		i = 0;
 
 	ft_sphere_uv(hit, &uv);
@@ -53,12 +53,14 @@ static int	ft_sphere_bump(t_hit *hit, t_ray *ray)
 		uv.x += texture->width;
 	if (uv.y < 0)
 		uv.y += texture->height;
-	color = ft_get_pixel_color(texture, uv.x, uv.y, NULL);
-	// color is between white an black
-	factor = (float)(color & 0xFF) / 255.0;
-	hit->n.x += factor * 0.1;
-	hit->n.y += factor * 0.1;
-	hit->n.z += factor * 0.1;
+	color = ft_get_pixel_color(texture, (int)uv.x, (int)uv.y, NULL);
+	perturbation.x = ((color >> 16) & 0xFF) / 127.5 - 1.0;
+	perturbation.y = ((color >> 8) & 0xFF) / 127.5 - 1.0;
+	perturbation.z = (color & 0xFF) / 127.5 - 1.0;
+	hit->n.x += perturbation.x;
+	hit->n.y += perturbation.y;
+	hit->n.z += perturbation.z;
+	ft_v3_normal_ip(&hit->n);
 	(void)ray;
 	if (i++ < 10)
 		printf("hit->n: %f %f %f\n", hit->n.x, hit->n.y, hit->n.z);
@@ -73,6 +75,7 @@ int	ft_sphere_normal(t_hit *hit, t_ray *ray)
 	ft_v3_init(&hit->n, hit->p.x - hit->obj->pos.x, hit->p.y - hit->obj->pos.y,
 		hit->p.z - hit->obj->pos.z);
 	ft_v3_normal_ip(&hit->n);
+	ft_v3_init(&hit->uvn, hit->n.x, hit->n.y, hit->n.z);
 	if (hit->obj->bump_name != NULL)
 		return (ft_sphere_bump(hit, ray));
 	return (1);
@@ -84,7 +87,7 @@ int	ft_sphere_uv(t_hit *hit, t_vector2 *uv)
 	float		theta;
 	t_vector3	*normal;
 
-	normal = &hit->n;
+	normal = &hit->uvn;
 	phi = atan2(normal->z, normal->x);
 	theta = asin(normal->y);
 	uv->x = 1.0 - (phi + M_PI) / (2.0 * M_PI);

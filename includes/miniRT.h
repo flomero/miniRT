@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/21 15:28:20 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/25 11:30:29 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_hit
 	float			t;
 	t_vector3		p;
 	t_vector3		n;
+	t_vector3		uvn;
 	t_ray			*ray;
 	t_object		*obj;
 	t_color			local_color;
