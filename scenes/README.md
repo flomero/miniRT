@@ -81,3 +81,11 @@
 | **Identifier** | **Texture Name** | **RGB Colors** | **RGB Colors** | **Scale** |
 |----------------|------------------|----------------|----------------|-----------|
 | TUC            | UVCheckerboard   | 255,255,255    | 0,0,0          | 0.5       |
+
+## Bump Maps
+> [!IMPORTANT]
+> Bump Maps are optional and can currently only be used with spheres. (They will be ignored for other objects)
+
+| **Identifier** | **Texture Name** | **File Path**     |
+|----------------|------------------|-------------------|
+| B              | bump             | textures/bump.jpg |
