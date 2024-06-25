@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 18:05:37 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/21 15:10:44 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:11:00 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,8 @@ t_bool	ft_assign_mat_tex(void)
 
 	program = ft_get_program();
 	i = 0;
-	if (ft_check_dup_mat())
-		return (ft_print_error("Duplicate materials."), FALSE);
-	if (ft_check_dup_tex())
-		return (ft_print_error("Duplicate textures."), FALSE);
-	if (ft_check_dup_bump())
-		return (ft_print_error("Duplicate bump map."), FALSE);
+	if (ft_check_dup_mat() || ft_check_dup_tex() || ft_check_dup_bump())
+		return (ft_print_error("Duplicate material, texture or bump."), FALSE);
 	while (i < program->objs_len)
 	{
 		if (program->objs[i].type > LIGHT)

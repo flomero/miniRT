@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:46:57 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/19 15:43:20 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:16:32 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,32 @@ uint32_t	int_to_rgb(int red, int green, int blue)
 	color |= (uint32_t)blue << 8;
 	color |= 0xFF;
 	return (color);
+}
+
+/**
+ * @brief checks if exists exactly one A, C and L
+ * (Ambient light, Camera and Light)
+ *
+ * @param t_object **objs null terminated objs list which will be checked
+ * @return int returns 1 if is valid number, 0 otherwise
+ */
+int	is_valid_obj_nbr(t_object *objs)
+{
+	int	i;
+	int	single_occur[OBJECT_COUNT];
+
+	i = 0;
+	while (i < OBJECT_COUNT)
+		single_occur[i++] = 0;
+	if (!objs)
+		return (0);
+	i = -1;
+	while (++i < ft_get_program()->objs_len)
+		single_occur[objs[i].type]++;
+	if (single_occur[AMBIENT_LIGHT] != 1)
+		return (ft_print_error("Expect exact one A"), free(objs), 0);
+	if (single_occur[CAMERA] != 1)
+		return (ft_print_error("Expect exact one C"), free(objs), 0);
+	ft_get_program()->objs = objs;
+	return (1);
 }

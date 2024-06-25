@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:15:15 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/25 15:39:31 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:22:05 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,22 @@ static int	proccess_line(int fd, t_object *objs)
 	return (1);
 }
 
+static int	get_obj2(char **tokens, t_object *obj)
+{
+	if (!ft_strcmp("MA", tokens[0]))
+		return (get_adv_mat(tokens, obj));
+	else if (!ft_strcmp("TF", tokens[0]))
+		return (get_tex_file(tokens, obj));
+	else if (!ft_strcmp("TC", tokens[0]))
+		return (get_tex_checker(tokens, obj, FALSE));
+	else if (!ft_strcmp("TUC", tokens[0]))
+		return (get_tex_checker(tokens, obj, TRUE));
+	else if (!ft_strcmp("B", tokens[0]))
+		return (get_bump(tokens, obj));
+	ft_print_error("Not valid object identifier");
+	return (0);
+}
+
 /**
  * @brief Get the obj creates an object from a line of file .rt
  *
@@ -127,44 +143,5 @@ int	get_obj(char **tokens, t_object *obj)
 		return (get_co(tokens, obj));
 	else if (!ft_strcmp("M", tokens[0]))
 		return (get_basic_mat(tokens, obj));
-	else if (!ft_strcmp("MA", tokens[0]))
-		return (get_adv_mat(tokens, obj));
-	else if (!ft_strcmp("TF", tokens[0]))
-		return (get_tex_file(tokens, obj));
-	else if (!ft_strcmp("TC", tokens[0]))
-		return (get_tex_checker(tokens, obj, FALSE));
-	else if (!ft_strcmp("TUC", tokens[0]))
-		return (get_tex_checker(tokens, obj, TRUE));
-	else if (!ft_strcmp("B", tokens[0]))
-		return (get_bump(tokens, obj));
-	ft_print_error("Not valid object identifier");
-	return (0);
-}
-
-/**
- * @brief checks if exists exactly one A, C and L
- * (Ambient light, Camera and Light)
- *
- * @param t_object **objs null terminated objs list which will be checked
- * @return int returns 1 if is valid number, 0 otherwise
- */
-int	is_valid_obj_nbr(t_object *objs)
-{
-	int	i;
-	int	single_occur[OBJECT_COUNT];
-
-	i = 0;
-	while (i < OBJECT_COUNT)
-		single_occur[i++] = 0;
-	if (!objs)
-		return (0);
-	i = -1;
-	while (++i < ft_get_program()->objs_len)
-		single_occur[objs[i].type]++;
-	if (single_occur[AMBIENT_LIGHT] != 1)
-		return (ft_print_error("Expect exact one A"), free(objs), 0);
-	if (single_occur[CAMERA] != 1)
-		return (ft_print_error("Expect exact one C"), free(objs), 0);
-	ft_get_program()->objs = objs;
-	return (1);
+	return (get_obj2(tokens, obj));
 }
