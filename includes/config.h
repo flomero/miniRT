@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:29:22 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 19:09:58 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/25 17:00:34 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@
 # define FOCAL_LENGTH 1.0
 # define DEFAULT_SAMPLES 100
 # define BACKGROUND_FACTOR 0.2
+
+// INPUT
+# define MAX_NAME_LEN 50
+# define MAX_PATH_LEN 50
 
 // LIGHT
 # define DEFAULT_BOUNCES 3

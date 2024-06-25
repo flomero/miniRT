@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:49:15 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/25 15:38:38 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:59:19 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef enum e_object_type
 
 typedef struct s_mat
 {
-	char					*name;
+	char					name[MAX_NAME_LEN];
 	float					ambient;
 	float					diffuse;
 	float					specular;
@@ -72,7 +72,7 @@ typedef struct s_mat
 typedef struct t_tex
 {
 	t_texture_type			type;
-	char					*name;
+	char					name[MAX_NAME_LEN];
 	union
 	{
 		struct
@@ -89,7 +89,7 @@ typedef struct t_tex
 		} s_uvchecker;
 		struct
 		{
-			char			*path;
+			char			path[MAX_NAME_LEN];
 			t_color			*data;
 			mlx_texture_t	*img;
 			int				width;
@@ -100,8 +100,8 @@ typedef struct t_tex
 
 typedef struct s_bump
 {
-	char					*name;
-	char					*path;
+	char					name[MAX_NAME_LEN];
+	char					path[MAX_NAME_LEN];
 	mlx_texture_t			*img;
 }							t_bump;
 
@@ -114,9 +114,9 @@ typedef struct s_object
 	t_color					color_f;
 	t_vector3				pos;
 	t_object_type			type;
-	char					*material_name;
-	char					*texture_name;
-	char					*bump_name;
+	char					material_name[MAX_NAME_LEN];
+	char					texture_name[MAX_NAME_LEN];
+	char					bump_name[MAX_NAME_LEN];
 	t_object				*material;
 	t_object				*texture;
 	t_object				*bump;
@@ -161,10 +161,10 @@ typedef struct s_object
 		} s_cylinder;
 		struct
 		{
-			float		angle;
-			t_vector3	normal;
-			float		min;
-			float		max;
+			float			angle;
+			t_vector3		normal;
+			float			min;
+			float			max;
 		} s_cone;
 	};
 }							t_object;

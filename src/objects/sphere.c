@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:34:52 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/25 14:14:18 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:32:43 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static int	ft_sphere_bump(t_hit *hit, t_ray *ray)
 	t_vector2		uv;
 	mlx_texture_t	*texture;
 	t_vector3		perturbation;
-	static int		i = 0;
 
 	ft_sphere_uv(hit, &uv);
 	texture = hit->obj->bump->s_bump.img;
@@ -62,8 +61,6 @@ static int	ft_sphere_bump(t_hit *hit, t_ray *ray)
 	hit->n.z += perturbation.z;
 	ft_v3_normal_ip(&hit->n);
 	(void)ray;
-	if (i++ < 10)
-		printf("hit->n: %f %f %f\n", hit->n.x, hit->n.y, hit->n.z);
 	return (1);
 }
 
@@ -76,7 +73,7 @@ int	ft_sphere_normal(t_hit *hit, t_ray *ray)
 		hit->p.z - hit->obj->pos.z);
 	ft_v3_normal_ip(&hit->n);
 	ft_v3_init(&hit->uvn, hit->n.x, hit->n.y, hit->n.z);
-	if (hit->obj->bump_name != NULL)
+	if (hit->obj->bump_name[0])
 		return (ft_sphere_bump(hit, ray));
 	return (1);
 }
