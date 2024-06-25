@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 18:48:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/19 09:47:55 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/21 14:38:53 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ t_bool	get_tex_file(char **tokens, t_object *obj)
 	if (fd < 0)
 		return (FALSE);
 	close(fd);
+	obj->s_tex.s_custom.img = mlx_load_png(obj->s_tex.s_custom.path);
+	if (obj->s_tex.s_custom.img == NULL)
+		return (FALSE);
 	return (TRUE);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/20 13:48:33 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/25 11:30:29 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_hit
 	float			t;
 	t_vector3		p;
 	t_vector3		n;
+	t_vector3		uvn;
 	t_ray			*ray;
 	t_object		*obj;
 	t_color			local_color;
@@ -194,8 +195,13 @@ t_bool				get_basic_mat(char **tokens, t_object *obj);
 t_bool				get_adv_mat(char **tokens, t_object *obj);
 t_bool				get_tex_checker(char **tokens, t_object *obj, t_bool UV);
 t_bool				get_tex_file(char **tokens, t_object *obj);
+t_bool				get_bump(char **tokens, t_object *obj);
 t_bool				ft_check_dup_mat(void);
 t_bool				ft_check_dup_tex(void);
+t_bool				ft_check_dup_bump(void);
+uint32_t			ft_texture_file(t_object *obj, t_hit *hit, t_color *result);
+uint32_t			ft_get_pixel_color(mlx_texture_t *texture, int x, int y,
+						t_color *result);
 
 // MATHS
 float				ft_randf(void);

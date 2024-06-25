@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:10:43 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/19 09:46:48 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/21 15:02:14 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@
 void	ft_assign_own_tm(t_object *obj)
 {
 	obj->material = obj;
+	obj->material_name = NULL;
 	obj->texture = obj;
+	obj->texture_name = NULL;
+	obj->bump = obj;
+	obj->bump_name = NULL;
 }
 
 /**
