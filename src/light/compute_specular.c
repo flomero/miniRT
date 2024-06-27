@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 09:43:35 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 17:08:17 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/27 14:23:45 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,7 @@ t_color	*ft_compute_specular(t_color *spec_col, const t_hit *rec,
 	r_v = ft_v3_dotprod(&rev_ray, &tmp);
 	if (r_v < 0)
 		return (spec_col);
-	power = pow(r_v / (ft_v3_len(&rev_ray) * ft_v3_len(&tmp)),
-			rec->obj->material->s_mat.specular);
+	power = pow(r_v, rec->obj->material->s_mat.shininess);
 	ft_color_float_mult(light->color_f, power, spec_col);
 	ft_color_float_mult(*spec_col, light->s_light.brightness, spec_col);
 	return (spec_col);
