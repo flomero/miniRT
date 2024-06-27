@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checkerboard.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 19:04:06 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 17:11:37 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 uint32_t	ft_checkerboard(t_object *texture, const t_vector3 *point,
 		t_color *result)
 {
-	float	px;
-	float	py;
-	float	pz;
+	double	px;
+	double	py;
+	double	pz;
 
 	px = floor(point->x / texture->s_tex.s_checker.size);
 	py = floor(point->y / texture->s_tex.s_checker.size);
@@ -43,7 +43,7 @@ uint32_t	ft_checkerboard_uv(t_object *texture, t_color *result, t_hit *hit)
 	if (uv_func[hit->obj->type] == NULL)
 		return (ft_checkerboard(texture, &hit->p, result));
 	uv_func[hit->obj->type](hit, &uv);
-	uv.x *= (float)texture->s_tex.s_checker.size;
+	uv.x *= (double)texture->s_tex.s_checker.size;
 	uv.y *= texture->s_tex.s_checker.size;
 	if ((int)(floor(uv.x) + floor(uv.y)) % 2 == 0)
 	{

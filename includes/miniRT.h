@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/25 15:38:43 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_ray
 // n: normal, p: point, t: distance
 typedef struct s_hit
 {
-	float			t;
+	double			t;
 	t_vector3		p;
 	t_vector3		n;
 	t_vector3		uvn;
@@ -97,17 +97,17 @@ void				ft_ray_init(t_ray *ray, t_vector3 *origin,
 // OBJECT HIT FUNCTIONS
 t_bool				ft_hit(t_ray *ray, t_object *obj, t_hit *hit);
 
-typedef float		(*t_hit_func)(t_object *sphere, t_ray *ray);
+typedef double		(*t_hit_func)(t_object *sphere, t_ray *ray);
 typedef int			(*t_normal_func)(t_hit *hit, t_ray *ray);
 typedef int			(*t_uv_func)(t_hit *hit, t_vector2 *uv);
 t_hit_func			*ft_get_hit_func(void);
 t_normal_func		*ft_get_normal_func(void);
 t_uv_func			*ft_get_uv_func(void);
-float				ft_sphere_hit(t_object *sphere, t_ray *ray);
+double				ft_sphere_hit(t_object *sphere, t_ray *ray);
 int					ft_sphere_uv(t_hit *hit, t_vector2 *uv);
-float				ft_plane_hit(t_object *plane, t_ray *ray);
-float				ft_cylinder_hit(t_object *cyl, t_ray *ray);
-float				ft_cone_hit(t_object *cone, t_ray *ray);
+double				ft_plane_hit(t_object *plane, t_ray *ray);
+double				ft_cylinder_hit(t_object *cyl, t_ray *ray);
+double				ft_cone_hit(t_object *cone, t_ray *ray);
 int					ft_sphere_normal(t_hit *hit, t_ray *ray);
 int					ft_plane_normal(t_hit *hit, t_ray *ray);
 int					ft_cylinder_normal(t_hit *hit, t_ray *ray);
@@ -117,7 +117,7 @@ int					ft_cone_normal(t_hit *hit, t_ray *ray);
 t_object			*ft_get_first_obj(t_object_type type);
 t_object			*ft_get_nth_obj(t_object_type type, int n);
 void				ft_calculate_viewport(t_object *camera);
-float				get_min(float t1, float t2, float t3, float t4);
+double				get_min(double t1, double t2, double t3, double t4);
 double				hit_top_bot(t_object *obj, t_ray *ray, const double radius);
 
 // ERRORS
@@ -141,7 +141,7 @@ void				print_objs(t_object *obj);
 int					is_int(char *str);
 int					is_float(char *str);
 int					get_vector(t_vector3 *vector, char *str);
-int					in_range(t_vector3 *vector, float start, float end);
+int					in_range(t_vector3 *vector, double start, double end);
 int					get_color(char *token, uint32_t *result);
 
 // PARSING UTILS3
@@ -166,10 +166,10 @@ int					get_cy(char **tokens, t_object *obj);
 // COLORS
 void				ft_color_to_float(uint32_t color, t_color *fcolor);
 uint32_t			ft_color_from_float(t_color color);
-float				ft_color_clamp(float color);
+double				ft_color_clamp(double color);
 uint32_t			ft_avg_color(uint32_t *colors, size_t x);
 uint32_t			ft_new_avg_color(uint32_t color, u_int32_t avg, int factor);
-t_color				*ft_color_float_mult(t_color color, float ratio,
+t_color				*ft_color_float_mult(t_color color, double ratio,
 						t_color *result);
 t_color				*ft_color_color_mult(t_color color1, t_color color2,
 						t_color *result);
@@ -210,28 +210,28 @@ uint32_t			ft_get_pixel_color(mlx_texture_t *texture, int x, int y,
 						t_color *result);
 
 // MATHS
-float				ft_randf(void);
-float				ft_randf_range(float min, float max);
+double				ft_randf(void);
+double				ft_randf_range(double min, double max);
 t_vector3			*ft_v3_add(const t_vector3 *a, const t_vector3 *b);
 t_vector3			*ft_v3_add_ip(t_vector3 *a, const t_vector3 *b);
 t_vector3			*ft_v3_crossprod(const t_vector3 *a, const t_vector3 *b);
 t_vector3			*ft_v3_crossprod_ip(t_vector3 *a, const t_vector3 *b);
 t_vector3			*ft_v3_copy(const t_vector3 *v);
-t_vector3			*ft_v3_div(const t_vector3 *a, float scalar);
-t_vector3			*ft_v3_div_ip(t_vector3 *a, float scalar);
-float				ft_v3_dotprod(const t_vector3 *a, const t_vector3 *b);
-t_vector3			*ft_v3_init(t_vector3 *v, float x, float y, float z);
-float				ft_v3_len(const t_vector3 *a);
-t_vector3			*ft_v3_new(float x, float y, float z);
+t_vector3			*ft_v3_div(const t_vector3 *a, double scalar);
+t_vector3			*ft_v3_div_ip(t_vector3 *a, double scalar);
+double				ft_v3_dotprod(const t_vector3 *a, const t_vector3 *b);
+t_vector3			*ft_v3_init(t_vector3 *v, double x, double y, double z);
+double				ft_v3_len(const t_vector3 *a);
+t_vector3			*ft_v3_new(double x, double y, double z);
 t_vector3			*ft_v3_normal(const t_vector3 *a);
 t_vector3			*ft_v3_normal_ip(t_vector3 *a);
 t_vector3			*ft_v3_rand(void);
 t_vector3			*ft_v3_rand_ip(t_vector3 *vec);
-t_vector3			*ft_v3_rand_range(float min, float max);
-t_vector3			*ft_v3_rand_range_ip(t_vector3 *vec, float min, float max);
+t_vector3			*ft_v3_rand_range(double min, double max);
+t_vector3			*ft_v3_rand_range_ip(t_vector3 *vec, double min, double max);
 t_vector3			*ft_v3_rand_unit(t_vector3 *vec);
-t_vector3			*ft_v3_scalar(const t_vector3 *a, float scalar);
-t_vector3			*ft_v3_scalar_ip(t_vector3 *a, float scalar);
+t_vector3			*ft_v3_scalar(const t_vector3 *a, double scalar);
+t_vector3			*ft_v3_scalar_ip(t_vector3 *a, double scalar);
 t_vector3			*ft_v3_sub(const t_vector3 *a, const t_vector3 *b);
 t_vector3			*ft_v3_sub_ip(t_vector3 *a, const t_vector3 *b);
 

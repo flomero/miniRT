@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   color_float.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:34:21 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/14 15:09:25 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
 /**
- * @brief Converts a color from uint32_t to float values in the range [0, 1].
+ * @brief Converts a color from uint32_t to double values in the range [0, 1].
  *
  * @param color The color to convert.
  * @param fcolor The color to store the result in.
  */
 void	ft_color_to_float(uint32_t color, t_color *fcolor)
 {
-	fcolor->r = (float)((color >> 24) & 0xFF) / 255.0;
-	fcolor->g = (float)((color >> 16) & 0xFF) / 255.0;
-	fcolor->b = (float)((color >> 8) & 0xFF) / 255.0;
+	fcolor->r = (double)((color >> 24) & 0xFF) / 255.0;
+	fcolor->g = (double)((color >> 16) & 0xFF) / 255.0;
+	fcolor->b = (double)((color >> 8) & 0xFF) / 255.0;
 }
 
 /**
- * @brief Converts a color from float values in the range [0, 1] to uint32_t.
+ * @brief Converts a color from double values in the range [0, 1] to uint32_t.
  *
  * @param fcolor The color to convert.
  * @return uint32_t The converted color.

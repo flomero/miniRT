@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:20:48 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/19 12:14:38 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
  */
 t_vector3	*ft_v3_normal(const t_vector3 *a)
 {
-	float		len;
+	double		len;
 	t_vector3	*vector;
 
 	len = ft_v3_len(a);
@@ -39,7 +39,7 @@ t_vector3	*ft_v3_normal(const t_vector3 *a)
  */
 t_vector3	*ft_v3_normal_ip(t_vector3 *a)
 {
-	float	len;
+	double	len;
 
 	len = ft_v3_len(a);
 	if (len == 0)

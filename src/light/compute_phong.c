@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:32:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/27 14:17:12 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/27 17:02:39 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ t_bool	ft_is_shadow(t_vector3 *light_dir, const t_hit *hit, t_program *program)
 			tmp_hit.t = INFINITY;
 			if (ft_hit(&ray, &program->objs[i], &tmp_hit))
 			{
-				if (tmp_hit.obj->type == SPHERE && tmp_hit.t > 0.0001
+				if (tmp_hit.obj->type != PLANE && tmp_hit.t > 0.0001
 					&& tmp_hit.t < 0.9999)
 					return (TRUE);
-				else if (tmp_hit.obj->type != SPHERE && tmp_hit.t < -0.0001
+				else if (tmp_hit.obj->type == PLANE && tmp_hit.t < -0.0001
 					&& tmp_hit.t > -0.9999)
 					return (TRUE);
 			}

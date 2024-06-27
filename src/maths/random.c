@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   random.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 11:56:52 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/11 16:10:35 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
 /**
- * Generates a random float between 0 and 1.
+ * Generates a random double between 0 and 1.
  *
- * @return The random float.
+ * @return The random double.
  */
-float	ft_randf(void)
+double	ft_randf(void)
 {
-	return (((float)rand() / ((float)RAND_MAX) + 1.0));
+	return (((double)rand() / ((double)RAND_MAX) + 1.0));
 }
 
-float	ft_randf_range(float min, float max)
+double	ft_randf_range(double min, double max)
 {
 	return (min + (max - min) * ft_randf());
 }

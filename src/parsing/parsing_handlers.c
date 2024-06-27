@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_handlers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 14:41:37 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/25 16:45:05 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@
  */
 int	get_a(char **tokens, t_object *obj)
 {
-	float	ratio;
+	double	ratio;
 
 	if (get_arr_len(tokens) != 3)
 		return (0);
 	if (!is_float(tokens[1]) && !is_int(tokens[1]))
 		return (free(obj), 0);
-	ratio = (float)ft_atod(tokens[1]);
+	ratio = (double)ft_atod(tokens[1]);
 	if (ratio < 0 || ratio > 1)
 		return (0);
 	if (!get_color(tokens[2], &obj->color))
@@ -47,7 +47,7 @@ int	get_a(char **tokens, t_object *obj)
  */
 int	get_l(char **tokens, t_object *obj)
 {
-	float	brightness;
+	double	brightness;
 
 	obj->type = LIGHT;
 	if (get_arr_len(tokens) != 4)
@@ -56,7 +56,7 @@ int	get_l(char **tokens, t_object *obj)
 		return (0);
 	if (!is_float(tokens[2]) && !is_int(tokens[2]))
 		return (free(obj), 0);
-	brightness = (float)ft_atod(tokens[2]);
+	brightness = (double)ft_atod(tokens[2]);
 	if (brightness < 0 || brightness > 1)
 		return (0);
 	if (!get_color(tokens[3], &obj->color))
@@ -75,7 +75,7 @@ int	get_l(char **tokens, t_object *obj)
  */
 int	get_sp(char **tokens, t_object *obj)
 {
-	float	diameter;
+	double	diameter;
 
 	obj->type = SPHERE;
 	if (get_arr_len(tokens) < 4 || get_arr_len(tokens) > 7)
@@ -84,7 +84,7 @@ int	get_sp(char **tokens, t_object *obj)
 		return (0);
 	if (!is_float(tokens[2]) && !is_int(tokens[2]))
 		return (0);
-	diameter = (float)ft_atod(tokens[2]);
+	diameter = (double)ft_atod(tokens[2]);
 	if (!get_color(tokens[3], &obj->color))
 		return (0);
 	ft_color_to_float(obj->color, &obj->color_f);

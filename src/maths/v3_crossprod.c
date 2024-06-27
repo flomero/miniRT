@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   v3_crossprod.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:18:51 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/13 10:28:01 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ t_vector3	*ft_v3_crossprod(const t_vector3 *a, const t_vector3 *b)
  */
 t_vector3	*ft_v3_crossprod_ip(t_vector3 *a, const t_vector3 *b)
 {
-	float	x;
-	float	y;
-	float	z;
+	double	x;
+	double	y;
+	double	z;
 
 	x = a->y * b->z - a->z * b->y;
 	y = a->z * b->x - a->x * b->z;

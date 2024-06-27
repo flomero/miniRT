@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 09:33:50 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/19 12:11:39 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@
  * @param ray The ray to check.
  * @return The distance to the hit point or INFINITY if no hit.
  */
-float	ft_plane_hit(t_object *plane, t_ray *ray)
+double	ft_plane_hit(t_object *plane, t_ray *ray)
 {
-	float	d_plane;
-	float	t;
-	float	distance;
-	float	divisor;
+	double	d_plane;
+	double	t;
+	double	distance;
+	double	divisor;
 
 	d_plane = -1 * (plane->pos.x * plane->s_plane.normal.x
 			+ plane->pos.y * plane->s_plane.normal.y

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   compute_diffuse.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 09:36:02 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/17 19:12:36 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 t_color	*ft_compute_diffuse(t_color *diffuse_col, const t_hit *rec,
 		const t_object *light, const t_vector3 *light_dir)
 {
-	float		angle;
+	double		angle;
 	t_vector3	tmp;
 
 	*diffuse_col = (t_color){0, 0, 0};

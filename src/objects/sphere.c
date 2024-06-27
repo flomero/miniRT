@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:34:52 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/25 16:32:43 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@
  * @param ray The ray to check.
  * @return The distance to the hit point or INFINITY if no hit.
  */
-float	ft_sphere_hit(t_object *sphere, t_ray *ray)
+double	ft_sphere_hit(t_object *sphere, t_ray *ray)
 {
 	t_vector3	oc;
 	t_vector3	tmp;
-	float		discriminant;
+	double		discriminant;
 
 	ft_v3_init(&oc, ray->origin->x, ray->origin->y, ray->origin->z);
 	ft_v3_sub_ip(&oc, &sphere->pos);
@@ -80,8 +80,8 @@ int	ft_sphere_normal(t_hit *hit, t_ray *ray)
 
 int	ft_sphere_uv(t_hit *hit, t_vector2 *uv)
 {
-	float		phi;
-	float		theta;
+	double		phi;
+	double		theta;
 	t_vector3	*normal;
 
 	normal = &hit->uvn;
