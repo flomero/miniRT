@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:45:47 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/27 17:05:39 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/27 17:06:26 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ double	ft_cylinder_hit(t_object *cyl, t_ray *ray)
 	return (get_min(t[0], t[1], t[2], t[3]));
 }
 
-static void	get_t(float t[4], t_object *cyl, t_ray *ray)
+static void	get_t(double t[4], t_object *cyl, t_ray *ray)
 {
 	t_vector3	t1;
 	t_vector3	t2;
