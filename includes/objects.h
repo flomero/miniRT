@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:49:15 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/25 16:59:19 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/27 15:14:18 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,8 @@ typedef struct s_object
 			float			angle;
 			t_vector3		normal;
 			float			min;
-			float			max;
+			float			height;
+			float			radius;
 		} s_cone;
 	};
 }							t_object;
