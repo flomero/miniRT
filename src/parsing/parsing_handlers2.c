@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_handlers2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:43:05 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:39:01 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int	get_co(char **tokens, t_object *obj)
 		return (0);
 	ft_color_to_float(obj->color, &obj->color_f);
 	obj->s_cone.angle = atan(obj->s_cone.radius / obj->s_cone.height) * 2;
-	printf("angle: %f\n", obj->s_cone.angle);
 	obj->s_cone.min = 0;
 	ft_default_material(obj);
 	ft_assign_own_tm(obj);
