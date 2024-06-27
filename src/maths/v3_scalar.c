@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   v3_scalar.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:24:04 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/13 10:28:38 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * @return The new vector.
  * @note The function allocates memory.
  */
-t_vector3	*ft_v3_scalar(const t_vector3 *a, float scalar)
+t_vector3	*ft_v3_scalar(const t_vector3 *a, double scalar)
 {
 	t_vector3	*vector;
 
@@ -35,7 +35,7 @@ t_vector3	*ft_v3_scalar(const t_vector3 *a, float scalar)
  * @param scalar The scalar.
  * @return The vector with the scalar applied.
  */
-t_vector3	*ft_v3_scalar_ip(t_vector3 *a, float scalar)
+t_vector3	*ft_v3_scalar_ip(t_vector3 *a, double scalar)
 {
 	a->x *= scalar;
 	a->y *= scalar;

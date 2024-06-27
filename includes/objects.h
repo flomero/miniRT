@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:49:15 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/25 16:59:19 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,22 @@
 // TYPEDEFS
 typedef struct s_vector3
 {
-	float					x;
-	float					y;
-	float					z;
+	double					x;
+	double					y;
+	double					z;
 }							t_vector3;
 
 typedef struct s_vector2
 {
-	float					x;
-	float					y;
+	double					x;
+	double					y;
 }							t_vector2;
 
 typedef struct s_color
 {
-	float					r;
-	float					g;
-	float					b;
+	double					r;
+	double					g;
+	double					b;
 }							t_color;
 
 typedef enum texture_type
@@ -62,11 +62,11 @@ typedef enum e_object_type
 typedef struct s_mat
 {
 	char					name[MAX_NAME_LEN];
-	float					ambient;
-	float					diffuse;
-	float					specular;
-	float					shininess;
-	float					reflectivness;
+	double					ambient;
+	double					diffuse;
+	double					specular;
+	double					shininess;
+	double					reflectivness;
 }							t_mat;
 
 typedef struct t_tex
@@ -79,13 +79,13 @@ typedef struct t_tex
 		{
 			uint32_t		color1;
 			uint32_t		color2;
-			float			size;
+			double			size;
 		} s_checker;
 		struct
 		{
 			uint32_t		color1;
 			uint32_t		color2;
-			float			size;
+			double			size;
 		} s_uvchecker;
 		struct
 		{
@@ -127,27 +127,27 @@ typedef struct s_object
 	{
 		struct
 		{
-			float			ratio;
+			double			ratio;
 		} s_ambient_light;
 		struct
 		{
 			t_vector3		normal;
-			float			fov;
-			float			vp_width;
-			float			vp_height;
+			double			fov;
+			double			vp_width;
+			double			vp_height;
 			t_vector3		*ll_corner;
 			t_vector3		*horizontal;
 			t_vector3		*vertical;
 			t_vector3		*look_at;
-			float			focal_length;
+			double			focal_length;
 		} s_camera;
 		struct
 		{
-			float			brightness;
+			double			brightness;
 		} s_light;
 		struct
 		{
-			float			diameter;
+			double			diameter;
 		} s_sphere;
 		struct
 		{
@@ -155,16 +155,17 @@ typedef struct s_object
 		} s_plane;
 		struct
 		{
-			float			diameter;
-			float			height;
+			double			diameter;
+			double			height;
 			t_vector3		normal;
 		} s_cylinder;
 		struct
 		{
-			float			angle;
+			double			angle;
 			t_vector3		normal;
-			float			min;
-			float			max;
+			double			min;
+			double			height;
+			double			radius;
 		} s_cone;
 	};
 }							t_object;

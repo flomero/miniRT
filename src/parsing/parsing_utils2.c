@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 16:32:02 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/18 15:26:29 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	get_vector(t_vector3 *vector, char *str)
 {
 	char	**nums;
 	int		i;
-	float	result[3];
+	double	result[3];
 
 	nums = ft_split(str, ',');
 	if (get_arr_len(nums) != 3)
@@ -96,7 +96,7 @@ int	get_vector(t_vector3 *vector, char *str)
  * @param end
  * @return int 1 if its on range, 0 otherwise
  */
-int	in_range(t_vector3 *vector, float start, float end)
+int	in_range(t_vector3 *vector, double start, double end)
 {
 	if (vector->x < start || vector->x > end)
 		return (0);

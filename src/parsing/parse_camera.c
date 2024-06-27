@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:03:03 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/20 14:48:51 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	get_c_config(char **tokens, int len)
  */
 int	get_c(char **tokens, t_object *obj)
 {
-	float	fov;
+	double	fov;
 
 	obj->type = CAMERA;
 	obj->color = 0;
@@ -58,7 +58,7 @@ int	get_c(char **tokens, t_object *obj)
 		return (0);
 	if (!is_float(tokens[3]) && !is_int(tokens[3]))
 		return (0);
-	fov = (float)ft_atod(tokens[3]);
+	fov = (double)ft_atod(tokens[3]);
 	if (fov < 0 || fov > 180)
 		return (0);
 	obj->s_camera.fov = fov;

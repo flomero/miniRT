@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   v3_div.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:34:07 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/13 10:28:07 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * @return The divided vector.
  * @note The returned vector must be freed.
  */
-t_vector3	*ft_v3_div(const t_vector3 *v, float t)
+t_vector3	*ft_v3_div(const t_vector3 *v, double t)
 {
 	t_vector3	*result;
 
@@ -40,7 +40,7 @@ t_vector3	*ft_v3_div(const t_vector3 *v, float t)
  * @param t The scalar to divide by.
  * @return The divided vector.
  */
-t_vector3	*ft_v3_div_ip(t_vector3 *v, float t)
+t_vector3	*ft_v3_div_ip(t_vector3 *v, double t)
 {
 	v->x /= t;
 	v->y /= t;

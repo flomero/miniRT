@@ -6,7 +6,7 @@
 #    By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/25 15:38:49 by klamprak         ###   ########.fr        #
+#    Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -186,7 +186,7 @@ norm:
 	@norminette $(SRC_DIRS) $(INC_DIR) $(LIBFT_DIR) | grep "Error" || echo "$(GREEN)Norme OK$(NC)"
 
 debug: CFLAGS += -g
-debug: CFLAGS += -fsanitize=thread #-fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fno-sanitize=null -fno-sanitize=alignment
+debug: CFLAGS += -fsanitize=thread #-fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=double-divide-by-zero -fsanitize=double-cast-overflow -fno-sanitize=null -fno-sanitize=alignment
 debug: CFLAGS += -DDEBUG=1
 debug: clean all
 

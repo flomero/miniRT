@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 18:48:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/25 17:01:13 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,6 @@ t_bool	get_tex_checker(char **tokens, t_object *obj, t_bool UV)
 		return (FALSE);
 	if (!is_int(tokens[4]) && !is_float(tokens[4]))
 		return (FALSE);
-	obj->s_tex.s_checker.size = (float)ft_atod(tokens[4]);
+	obj->s_tex.s_checker.size = (double)ft_atod(tokens[4]);
 	return (TRUE);
 }
