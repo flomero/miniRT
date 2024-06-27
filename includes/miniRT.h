@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/25 15:38:43 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/27 13:01:04 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,8 @@ double				hit_top_bot(t_object *obj, t_ray *ray, const double radius);
 
 // ERRORS
 void				ft_print_error(const char *error);
-void				print_err_extend(const char *msg1, const char *msg2);
+void				print_err_extend(const char *msg1, char *msg2, \
+int is_alloc);
 
 // PARSING
 int					is_valid_parsing(char *fname);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   compute_phong.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:32:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/21 15:11:27 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/27 14:14:58 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ t_color	*ft_compute_phong(t_color *phong_color, const t_object *light,
 		const t_hit *hit, t_program *program)
 {
 	t_vector3	light_dir;
-	t_color		color;
 	t_color		spec_color;
 	t_color		refl_col;
 
@@ -72,7 +71,7 @@ t_color	*ft_compute_phong(t_color *phong_color, const t_object *light,
 	if (ft_is_shadow(&light_dir, hit, program))
 		return (phong_color);
 	ft_v3_normal_ip(&light_dir);
-	ft_compute_diffuse(&color, hit, light, &light_dir);
+	ft_compute_diffuse(phong_color, hit, light, &light_dir);
 	if (hit->ray->depth > 0 && hit->obj->material->s_mat.reflectivness > 0)
 	{
 		ft_compute_reflection(&refl_col, hit, --hit->ray->depth);
