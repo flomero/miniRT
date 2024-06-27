@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:39:34 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/27 15:45:00 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:01:33 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,22 @@ static float	in_height(float t[2], t_object *cone, float CO_A, float D_A);
 float	ft_cone_hit(t_object *cone, t_ray *ray)
 {
 	t_vector3	co;
-	float		cos_theta2;
+	float		k;
 	float		dot_dc[2];
 	float		abc[4];
 	float		t[2];
 
 	ft_v3_init(&co, ray->origin->x - cone->pos.x, ray->origin->y - cone->pos.y,
 		ray->origin->z - cone->pos.z);
-	cos_theta2 = cos(cone->s_cone.angle) * cos(cone->s_cone.angle);
+	k = (cone->s_cone.radius / cone->s_cone.height) * (cone->s_cone.radius
+			/ cone->s_cone.height);
 	dot_dc[0] = ft_v3_dotprod(ray->direction, &cone->s_cone.normal);
 	dot_dc[1] = ft_v3_dotprod(&co, &cone->s_cone.normal);
-	abc[0] = ft_v3_dotprod(ray->direction, ray->direction) - (cos_theta2 + 1)
+	abc[0] = ft_v3_dotprod(ray->direction, ray->direction) - (1 + k)
 		* (dot_dc[0] * dot_dc[0]);
-	abc[1] = 2 * (ft_v3_dotprod(ray->direction, &co) - (cos_theta2 + 1)
-			* dot_dc[0] * dot_dc[1]);
-	abc[3] = ft_v3_dotprod(&co, &co) - (cos_theta2 + 1) * (dot_dc[1]
+	abc[1] = 2 * (ft_v3_dotprod(ray->direction, &co) - (1 + k) * dot_dc[0]
 			* dot_dc[1]);
+	abc[3] = ft_v3_dotprod(&co, &co) - (1 + k) * (dot_dc[1] * dot_dc[1]);
 	abc[3] = abc[1] * abc[1] - 4 * abc[0] * abc[3];
 	if (abc[3] < 0 || abc[0] == 0)
 		return (INFINITY);
