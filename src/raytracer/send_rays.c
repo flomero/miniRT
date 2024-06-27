@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   send_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:48:28 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 15:20:45 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_ray_init(t_ray *ray, t_vector3 *origin, t_vector3 *direction)
 uint32_t	ft_trace_ray(t_ray *ray)
 {
 	int			i;
-	float		closest;
+	double		closest;
 	t_hit		hit;
 	t_color		color;
 	t_program	*program;
@@ -83,13 +83,13 @@ uint32_t	ft_send_ray(int x, int y, t_object *camera)
 {
 	t_ray		ray;
 	uint32_t	color;
-	float		u;
-	float		v;
+	double		u;
+	double		v;
 	t_vector3	temp_vec;
 
 	ray.origin = &camera->pos;
-	u = ((float)x + ft_randf()) / (float)(WIN_WIDTH - 1);
-	v = 1 - ((float)y + ft_randf()) / (float)(WIN_HEIGHT - 1);
+	u = ((double)x + ft_randf()) / (double)(WIN_WIDTH - 1);
+	v = 1 - ((double)y + ft_randf()) / (double)(WIN_HEIGHT - 1);
 	ray.direction = &(t_vector3){camera->s_camera.ll_corner->x,
 		camera->s_camera.ll_corner->y, camera->s_camera.ll_corner->z};
 	ft_v3_init(&temp_vec, camera->s_camera.horizontal->x * u,

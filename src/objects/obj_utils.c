@@ -6,27 +6,27 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 12:46:05 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/21 09:34:04 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
 /**
- * @brief Get the min object, return the minimum float value
+ * @brief Get the min object, return the minimum double value
  *
  * @param t1
  * @param t2
  * @param t3
  * @param t4
- * @return float, skip INFINITY values except if every value is INFINITY then
+ * @return double, skip INFINITY values except if every value is INFINITY then
  * return INFINITY
  */
-float	get_min(float t1, float t2, float t3, float t4)
+double	get_min(double t1, double t2, double t3, double t4)
 {
-	float		t[4];
+	double		t[4];
 	int			i;
-	float		min;
+	double		min;
 
 	t[0] = t1;
 	t[1] = t2;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   compute_specular.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 09:43:35 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/27 14:23:45 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ t_color	*ft_compute_specular(t_color *spec_col, const t_hit *rec,
 {
 	t_vector3	tmp;
 	t_vector3	rev_ray;
-	float		l_n;
-	float		r_v;
-	float		power;
+	double		l_n;
+	double		r_v;
+	double		power;
 
 	*spec_col = (t_color){0, 0, 0};
 	if (rec->obj->material->s_mat.specular <= 0)

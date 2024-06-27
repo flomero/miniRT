@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_handlers2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:43:05 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/27 15:45:21 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int	get_cy(char **tokens, t_object *obj)
 		return (0);
 	if (!is_float(tokens[3]) && !is_int(tokens[3]))
 		return (0);
-	obj->s_cylinder.diameter = (float)ft_atod(tokens[3]);
+	obj->s_cylinder.diameter = (double)ft_atod(tokens[3]);
 	if (!is_float(tokens[4]) && !is_int(tokens[4]))
 		return (0);
-	obj->s_cylinder.height = (float)ft_atod(tokens[4]);
+	obj->s_cylinder.height = (double)ft_atod(tokens[4]);
 	if (!get_color(tokens[5], &obj->color))
 		return (0);
 	ft_color_to_float(obj->color, &obj->color_f);
@@ -57,10 +57,10 @@ int	get_co(char **tokens, t_object *obj)
 		return (0);
 	if (!is_float(tokens[3]) && !is_int(tokens[3]))
 		return (0);
-	obj->s_cone.radius = (float)ft_atod(tokens[3]);
+	obj->s_cone.radius = (double)ft_atod(tokens[3]);
 	if (!is_float(tokens[4]) && !is_int(tokens[4]))
 		return (0);
-	obj->s_cone.height = (float)ft_atod(tokens[4]);
+	obj->s_cone.height = (double)ft_atod(tokens[4]);
 	if (!get_color(tokens[5], &obj->color))
 		return (0);
 	ft_color_to_float(obj->color, &obj->color_f);

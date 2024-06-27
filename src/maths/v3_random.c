@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   v3_random.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 16:10:46 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/11 16:14:03 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_vector3	*ft_v3_rand_ip(t_vector3 *vec)
 	return (vec);
 }
 
-t_vector3	*ft_v3_rand_range(float min, float max)
+t_vector3	*ft_v3_rand_range(double min, double max)
 {
 	t_vector3	*rand;
 
@@ -37,7 +37,7 @@ t_vector3	*ft_v3_rand_range(float min, float max)
 	return (rand);
 }
 
-t_vector3	*ft_v3_rand_range_ip(t_vector3 *vec, float min, float max)
+t_vector3	*ft_v3_rand_range_ip(t_vector3 *vec, double min, double max)
 {
 	vec->x = ft_randf_range(min, max);
 	vec->y = ft_randf_range(min, max);
@@ -47,7 +47,7 @@ t_vector3	*ft_v3_rand_range_ip(t_vector3 *vec, float min, float max)
 
 t_vector3	*ft_v3_rand_unit(t_vector3 *vec)
 {
-	float	len;
+	double	len;
 
 	while (1)
 	{

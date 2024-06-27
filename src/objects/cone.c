@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   cone.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:39:34 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/27 16:01:33 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static float	in_height(float t[2], t_object *cone, float CO_A, float D_A);
+static double	in_height(double t[2], t_object *cone, double CO_A, double D_A);
 
-float	ft_cone_hit(t_object *cone, t_ray *ray)
+double	ft_cone_hit(t_object *cone, t_ray *ray)
 {
 	t_vector3	co;
-	float		k;
-	float		dot_dc[2];
-	float		abc[4];
-	float		t[2];
+	double		k;
+	double		dot_dc[2];
+	double		abc[4];
+	double		t[2];
 
 	ft_v3_init(&co, ray->origin->x - cone->pos.x, ray->origin->y - cone->pos.y,
 		ray->origin->z - cone->pos.z);
@@ -41,9 +41,9 @@ float	ft_cone_hit(t_object *cone, t_ray *ray)
 	return (in_height(t, cone, dot_dc[1], dot_dc[0]));
 }
 
-static float	in_height(float t[2], t_object *cone, float CO_A, float D_A)
+static double	in_height(double t[2], t_object *cone, double CO_A, double D_A)
 {
-	float	hit_height[2];
+	double	hit_height[2];
 
 	if (t[0] > 0)
 	{
@@ -65,9 +65,9 @@ static float	in_height(float t[2], t_object *cone, float CO_A, float D_A)
 int	ft_cone_normal(t_hit *hit, t_ray *ray)
 {
 	t_vector3	tmp;
-	float		projec;
-	float		magnitude;
-	float		angle;
+	double		projec;
+	double		magnitude;
+	double		angle;
 
 	ft_v3_init(&hit->p, ray->origin->x + ray->direction->x * hit->t,
 		ray->origin->y + ray->direction->y * hit->t, ray->origin->z

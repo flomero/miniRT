@@ -6,19 +6,19 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:45:47 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/25 15:57:25 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static int		in_height(float t, t_object *cyl, t_ray *ray);
-static void		get_t(float t[2], t_object *cyl, t_ray *ray);
-static float	handle_zero(float abc[3], t_ray *ray, t_object *cyl);
+static int		in_height(double t, t_object *cyl, t_ray *ray);
+static void		get_t(double t[2], t_object *cyl, t_ray *ray);
+static double	handle_zero(double abc[3], t_ray *ray, t_object *cyl);
 
-float	ft_cylinder_hit(t_object *cyl, t_ray *ray)
+double	ft_cylinder_hit(t_object *cyl, t_ray *ray)
 {
-	float		t[4];
+	double		t[4];
 	t_object	plane;
 	t_vector3	tmp;
 	int			i;
@@ -45,12 +45,12 @@ float	ft_cylinder_hit(t_object *cyl, t_ray *ray)
 	return (get_min(t[0], t[1], t[2], t[3]));
 }
 
-static void	get_t(float t[3], t_object *cyl, t_ray *ray)
+static void	get_t(double t[3], t_object *cyl, t_ray *ray)
 {
 	t_vector3	t1;
 	t_vector3	t2;
 	t_vector3	n_rd;
-	float		ac[3];
+	double		ac[3];
 
 	ft_v3_init(&n_rd, ray->direction->x, ray->direction->y, ray->direction->z);
 	ft_v3_normal_ip(&n_rd);
@@ -74,9 +74,9 @@ static void	get_t(float t[3], t_object *cyl, t_ray *ray)
 	t[1] = (-ac[1] - sqrt(ac[1] * ac[1] - 4 * ac[0] * ac[2])) / (2 * ac[0]);
 }
 
-static float	handle_zero(float abc[3], t_ray *ray, t_object *cyl)
+static double	handle_zero(double abc[3], t_ray *ray, t_object *cyl)
 {
-	float		t[2];
+	double		t[2];
 	t_vector3	temp;
 	t_vector3	temp2;
 
@@ -98,11 +98,11 @@ static float	handle_zero(float abc[3], t_ray *ray, t_object *cyl)
 	return (INFINITY);
 }
 
-static int	in_height(float t, t_object *cyl, t_ray *ray)
+static int	in_height(double t, t_object *cyl, t_ray *ray)
 {
 	t_vector3	temp;
 	t_vector3	temp2;
-	float		hei_p;
+	double		hei_p;
 
 	if (t < 0)
 		return (0);

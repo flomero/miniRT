@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_material.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:10:43 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/25 16:41:23 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_bool	get_basic_mat(char **tokens, t_object *obj)
 	if (!is_float(tokens[3]) && !is_int(tokens[3]))
 		return (FALSE);
 	ft_default_material(obj);
-	obj->s_mat.reflectivness = (float)ft_atod(tokens[3]);
+	obj->s_mat.reflectivness = (double)ft_atod(tokens[3]);
 	ft_compute_if_reflective(obj);
 	return (TRUE);
 }
@@ -89,9 +89,9 @@ t_bool	get_adv_mat(char **tokens, t_object *obj)
 		return (FALSE);
 	if (!is_float(tokens[6]) && !is_int(tokens[6]))
 		return (FALSE);
-	obj->s_mat.reflectivness = (float)ft_atod(tokens[3]);
-	obj->s_mat.diffuse = (float)ft_atod(tokens[4]);
-	obj->s_mat.specular = (float)ft_atod(tokens[5]);
-	obj->s_mat.shininess = (float)ft_atod(tokens[6]);
+	obj->s_mat.reflectivness = (double)ft_atod(tokens[3]);
+	obj->s_mat.diffuse = (double)ft_atod(tokens[4]);
+	obj->s_mat.specular = (double)ft_atod(tokens[5]);
+	obj->s_mat.shininess = (double)ft_atod(tokens[6]);
 	return (TRUE);
 }
