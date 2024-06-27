@@ -6,14 +6,14 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:45:47 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/27 17:06:26 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
 static int		in_height(double t, t_object *cyl, t_ray *ray);
-static void		get_t(double t[2], t_object *cyl, t_ray *ray);
+static void		get_t(double t[4], t_object *cyl, t_ray *ray);
 static double	handle_zero(double abc[3], t_ray *ray, t_object *cyl);
 
 double	ft_cylinder_hit(t_object *cyl, t_ray *ray)
@@ -34,10 +34,10 @@ double	ft_cylinder_hit(t_object *cyl, t_ray *ray)
 	ft_v3_scalar_ip(&tmp, cyl->s_cylinder.height);
 	ft_v3_init(&plane.pos, tmp.x, tmp.y, tmp.z);
 	ft_v3_add_ip(&plane.pos, &cyl->pos);
-	t[2] = hit_top_bot(&plane, ray, cyl->s_cylinder.diameter / 2);
+	t[2] = hit_top_bot(&plane, ray, cyl->s_cylinder.diameter / 2, cyl);
 	ft_v3_scalar_ip(&plane.s_plane.normal, -1);
 	plane.pos = cyl->pos;
-	t[3] = hit_top_bot(&plane, ray, cyl->s_cylinder.diameter / 2);
+	t[3] = hit_top_bot(&plane, ray, cyl->s_cylinder.diameter / 2, cyl);
 	i = -1;
 	while (++i < 4)
 		if (!in_height(t[i], cyl, ray))
@@ -45,7 +45,7 @@ double	ft_cylinder_hit(t_object *cyl, t_ray *ray)
 	return (get_min(t[0], t[1], t[2], t[3]));
 }
 
-static void	get_t(double t[3], t_object *cyl, t_ray *ray)
+static void	get_t(double t[4], t_object *cyl, t_ray *ray)
 {
 	t_vector3	t1;
 	t_vector3	t2;

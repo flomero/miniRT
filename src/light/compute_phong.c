@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   compute_phong.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:32:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/27 17:02:39 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/27 17:04:49 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:36:37 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/18 15:24:44 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/27 13:00:54 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,13 @@ void	ft_print_error(const char *error)
  * @param msg2
  * @param i
  */
-void	print_err_extend(const char *msg1, const char *msg2)
+void	print_err_extend(const char *msg1, char *msg2, int is_alloc)
 {
 	char	*line;
 
 	line = ft_strjoin(msg1, msg2);
 	ft_print_error(line);
 	free(line);
+	if (is_alloc)
+		free(msg2);
 }
