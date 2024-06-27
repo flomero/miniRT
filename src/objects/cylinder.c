@@ -6,14 +6,14 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:45:47 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/27 17:04:59 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/27 17:05:39 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
 static int		in_height(double t, t_object *cyl, t_ray *ray);
-static void		get_t(double t[2], t_object *cyl, t_ray *ray);
+static void		get_t(double t[4], t_object *cyl, t_ray *ray);
 static double	handle_zero(double abc[3], t_ray *ray, t_object *cyl);
 
 double	ft_cylinder_hit(t_object *cyl, t_ray *ray)
