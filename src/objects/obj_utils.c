@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 12:46:05 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/21 09:34:04 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:54:44 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,28 @@ float	get_min(float t1, float t2, float t3, float t4)
  * @param ray The current ray.
  * @return int 1 if the hit point is in the height, 0 otherwise.
  */
-double	hit_top_bot(t_object *plane, t_ray *ray, const double radius)
+double	hit_top_bot(t_object *plane, t_ray *ray, const double radius, t_object \
+*cyl)
 {
 	double		t;
 	t_vector3	tmp;
+	double		tmp_z;
 	double		d2;
 
+	tmp_z = ray->origin->z;
+	if (cyl->s_cylinder.normal.x == 0 && cyl->s_cylinder.normal.y == 0)
+		ray->origin->z = 0;
 	t = ft_plane_hit(plane, ray);
 	if (t < 0)
+	{
+		ray->origin->z = tmp_z;
 		return (INFINITY);
+	}
 	ft_v3_init(&tmp, ray->direction->x, ray->direction->y, ray->direction->z);
 	ft_v3_scalar_ip(&tmp, t);
 	ft_v3_add_ip(&tmp, ray->origin);
 	ft_v3_sub_ip(&tmp, &plane->pos);
+	ray->origin->z = tmp_z;
 	d2 = ft_v3_len(&tmp);
 	if (d2 <= radius)
 		return (t);
