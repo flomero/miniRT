@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:15:15 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/27 14:41:35 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/28 16:07:48 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ int	init_struct(char *fname, int len)
 		return (ft_print_error(ALLOC_ERR), 0);
 	fd = open(fname, O_RDONLY);
 	if (fd == -1)
-		return (print_err_extend("Error opening file: ", strerror(errno), 0), \
-		0);
+		return (print_err_extend("Error opening file: ", strerror(errno), 0),
+			0);
 	if (!proccess_line(fd, objs))
 		return (0);
 	ft_get_program()->objs = objs;
 	if (close(fd) == -1)
-		return (print_err_extend("Error closing file: ", strerror(errno), 0), \
-		0);
+		return (print_err_extend("Error closing file: ", strerror(errno), 0),
+			0);
 	return (is_valid_obj_nbr(objs));
 }
 
@@ -96,8 +96,8 @@ static int	proccess_line(int fd, t_object *objs)
 			continue ;
 		}
 		if (!get_obj(tokens, &objs[i++]))
-			return (print_err_extend("Invalid object ", ft_itoa(i), 1), \
-			free_str_arr(tokens), free(objs), 0);
+			return (print_err_extend("Invalid object ", ft_itoa(i), 1),
+				free_str_arr(tokens), free(objs), 0);
 		free_str_arr(tokens);
 		line = get_next_line(fd);
 	}
@@ -142,6 +142,8 @@ int	get_obj(char **tokens, t_object *obj)
 		return (get_cy(tokens, obj));
 	else if (!ft_strcmp("co", tokens[0]))
 		return (get_co(tokens, obj));
+	else if (!ft_strcmp("tr", tokens[0]))
+		return (get_tr(tokens, obj));
 	else if (!ft_strcmp("M", tokens[0]))
 		return (get_basic_mat(tokens, obj));
 	return (get_obj2(tokens, obj));
