@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:32:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/28 13:38:00 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/28 18:26:33 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,11 @@ t_bool	ft_is_shadow(t_vector3 *light_dir, const t_hit *hit, t_program *program)
 				program->objs[i].s_cylinder.in_shadow = 0;
 			if (is_hitted)
 			{
-				// if (program->objs[i].type == CYLINDER && !(tmp_hit.t > 0.0001 && tmp_hit.t < 0.9999))
-				// 	printf("Cyl\n %f\n", tmp_hit.t);
 				if (tmp_hit.t > 0.0001 && tmp_hit.t < 0.9999)
 					return (TRUE);
 				if (program->objs[i].type == CYLINDER)
-				{
 					if (tmp_hit.t < program->objs[i].s_cylinder.height)
 						return (TRUE);
-					// else
-					// 	return (TRUE);
-				}
 			}
 		}
 		i++;

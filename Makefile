@@ -6,7 +6,7 @@
 #    By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/28 17:40:51 by klamprak         ###   ########.fr        #
+#    Updated: 2024/06/28 18:25:48 by klamprak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ CFILES += 	parsing.c \
 			parsing_utils3.c \
 			parse_camera.c \
 			parse_material.c \
+			parse_triangle.c \
 			custom_split.c \
 
 # OBJECTS
@@ -62,6 +63,7 @@ CFILES += get_first_obj.c \
 			cylinder_utils.c \
 			obj_utils.c \
 			cone.c \
+			triangle.c \
 
 # RT
 CFILES += send_rays.c \

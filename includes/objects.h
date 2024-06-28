@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:49:15 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/28 12:57:20 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/28 18:26:04 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef enum e_object_type
 	PLANE,
 	CYLINDER,
 	CONE,
+	TRIANGLE,
 	OBJECT_COUNT,
 }							t_object_type;
 
@@ -168,6 +169,12 @@ typedef struct s_object
 			double			height;
 			double			radius;
 		} s_cone;
+		struct
+		{
+			t_vector3		points[3];
+			t_vector3		edge1;
+			t_vector3		edge2;
+		} s_triangle;
 	};
 }							t_object;
 

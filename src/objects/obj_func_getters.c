@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   obj_func_getters.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 17:15:54 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/19 15:52:07 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/28 16:30:31 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ t_hit_func	*ft_get_hit_func(void)
 	[SPHERE] = ft_sphere_hit,
 	[PLANE] = ft_plane_hit,
 	[CYLINDER] = ft_cylinder_hit,
-	[CONE] = ft_cone_hit};
+	[CONE] = ft_cone_hit,
+	[TRIANGLE] = ft_triangle_hit};
 
 	return ((t_hit_func *)hit_functions);
 }
@@ -29,7 +30,8 @@ t_normal_func	*ft_get_normal_func(void)
 	[SPHERE] = ft_sphere_normal,
 	[PLANE] = ft_plane_normal,
 	[CYLINDER] = ft_cylinder_normal,
-	[CONE] = ft_cone_normal};
+	[CONE] = ft_cone_normal,
+	[TRIANGLE] = ft_triangle_normal};
 
 	return ((t_normal_func *)normal_functions);
 }

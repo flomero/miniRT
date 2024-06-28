@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/28 17:43:45 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/28 18:25:54 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,18 +108,20 @@ int					ft_sphere_uv(t_hit *hit, t_vector2 *uv);
 double				ft_plane_hit(t_object *plane, t_ray *ray);
 double				ft_cylinder_hit(t_object *cyl, t_ray *ray);
 double				ft_cone_hit(t_object *cone, t_ray *ray);
+double				ft_triangle_hit(t_object *triangle, t_ray *ray);
 int					ft_sphere_normal(t_hit *hit, t_ray *ray);
 int					ft_plane_normal(t_hit *hit, t_ray *ray);
 int					ft_cylinder_normal(t_hit *hit, t_ray *ray);
 int					ft_cone_normal(t_hit *hit, t_ray *ray);
+int					ft_triangle_normal(t_hit *hit, t_ray *ray);
 
 // OBJECT UTILS
 t_object			*ft_get_first_obj(t_object_type type);
 t_object			*ft_get_nth_obj(t_object_type type, int n);
 void				ft_calculate_viewport(t_object *camera);
 double				get_min(double t1, double t2, double t3, double t4);
-double				hit_top_bot(t_object *obj, t_ray *ray, const double \
-radius, t_object *cyl);
+double				hit_top_bot(t_object *obj, t_ray *ray, const double radius,
+						t_object *cyl);
 
 // CYLINDER UTILS
 bool				inter_disk(t_ray *ray, t_object *disk_pl, float *t, float \
@@ -130,8 +132,8 @@ bool				is_sol_equation(float *abc, float *t0, float *t1);
 
 // ERRORS
 void				ft_print_error(const char *error);
-void				print_err_extend(const char *msg1, char *msg2, \
-int is_alloc);
+void				print_err_extend(const char *msg1, char *msg2,
+						int is_alloc);
 
 // PARSING
 int					is_valid_parsing(char *fname);
@@ -167,6 +169,7 @@ int					get_c(char **tokens, t_object *obj);
 int					get_l(char **tokens, t_object *obj);
 int					get_sp(char **tokens, t_object *obj);
 int					get_pl(char **tokens, t_object *obj);
+int					get_tr(char **tokens, t_object *obj);
 
 // PARSING HANDLERS2
 int					get_co(char **tokens, t_object *obj);
@@ -237,7 +240,8 @@ t_vector3			*ft_v3_normal_ip(t_vector3 *a);
 t_vector3			*ft_v3_rand(void);
 t_vector3			*ft_v3_rand_ip(t_vector3 *vec);
 t_vector3			*ft_v3_rand_range(double min, double max);
-t_vector3			*ft_v3_rand_range_ip(t_vector3 *vec, double min, double max);
+t_vector3			*ft_v3_rand_range_ip(t_vector3 *vec, double min,
+						double max);
 t_vector3			*ft_v3_rand_unit(t_vector3 *vec);
 t_vector3			*ft_v3_scalar(const t_vector3 *a, double scalar);
 t_vector3			*ft_v3_scalar_ip(t_vector3 *a, double scalar);
