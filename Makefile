@@ -6,7 +6,7 @@
 #    By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr        #
+#    Updated: 2024/06/28 17:40:51 by klamprak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ CFILES += get_first_obj.c \
 			sphere.c \
 			plane.c \
 			cylinder.c \
+			cylinder_utils.c \
 			obj_utils.c \
 			cone.c \
 
