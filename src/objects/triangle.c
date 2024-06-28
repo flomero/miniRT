@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   triangle.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 16:08:43 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/28 16:48:16 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/28 18:34:59 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,8 @@ double	ft_triangle_hit(t_object *triangle, t_ray *ray)
 	afuvt[3] = afuvt[1] * ft_v3_dotprod(ray->direction, &q);
 	if (afuvt[3] < 0.0 || afuvt[2] + afuvt[3] > 1.0)
 		return (INFINITY);
-	afuvt[4] = afuvt[1] * ft_v3_dotprod(&triangle->s_triangle.edge2, &q);
-	if (afuvt[4] > EPSILON)
-		return (afuvt[4]);
+	if (afuvt[1] * ft_v3_dotprod(&triangle->s_triangle.edge2, &q) > EPSILON)
+		return (afuvt[1] * ft_v3_dotprod(&triangle->s_triangle.edge2, &q));
 	return (INFINITY);
 }
 

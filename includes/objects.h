@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:49:15 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/28 18:26:04 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/28 18:32:51 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,6 @@ typedef struct s_object
 		{
 			double			diameter;
 			double			height;
-			int				in_shadow;
 			t_vector3		normal;
 		} s_cylinder;
 		struct
