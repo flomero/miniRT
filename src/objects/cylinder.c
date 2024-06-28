@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:45:47 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/27 17:06:26 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/28 13:34:43 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ static int	in_height(double t, t_object *cyl, t_ray *ray)
 	cyl->s_cylinder.normal.z);
 	ft_v3_normal_ip(&temp2);
 	hei_p = ft_v3_dotprod(&temp, &temp2);
-	if (hei_p >= 0 && hei_p <= cyl->s_cylinder.height)
+	if ((cyl->s_cylinder.in_shadow || hei_p >= 0) && hei_p <= cyl->s_cylinder.height)
 		return (1);
 	return (0);
 }
