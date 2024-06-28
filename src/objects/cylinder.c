@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:45:47 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/28 17:42:59 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/28 18:22:14 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,34 @@
 static void	calc_abc(t_ray *ray, t_object *cy, float *coeffs)
 {
 	t_vector3	delta_p;
-	float		dp_axis;
-	float		rd_axis;
+	float		dp_norm;
+	float		rd_norm;
 	float		radius;
 
 	radius = cy->s_cylinder.diameter / 2;
 	ft_v3_init(&delta_p, ray->origin->x - cy->pos.x, ray->origin->y
 		- cy->pos.y, ray->origin->z - cy->pos.z);
-	dp_axis = ft_v3_dotprod(&delta_p, &cy->s_cylinder.normal);
-	rd_axis = ft_v3_dotprod(ray->direction, &cy->s_cylinder.normal);
-	coeffs[0] = ft_v3_dotprod(ray->direction, ray->direction) - powf(rd_axis,
+	dp_norm = ft_v3_dotprod(&delta_p, &cy->s_cylinder.normal);
+	rd_norm = ft_v3_dotprod(ray->direction, &cy->s_cylinder.normal);
+	coeffs[0] = ft_v3_dotprod(ray->direction, ray->direction) - powf(rd_norm,
 			2);
-	coeffs[1] = 2 * (ft_v3_dotprod(ray->direction, &delta_p) - rd_axis
-			* dp_axis);
-	coeffs[2] = ft_v3_dotprod(&delta_p, &delta_p) - powf(dp_axis, 2)
+	coeffs[1] = 2 * (ft_v3_dotprod(ray->direction, &delta_p) - rd_norm
+			* dp_norm);
+	coeffs[2] = ft_v3_dotprod(&delta_p, &delta_p) - powf(dp_norm, 2)
 		- powf(radius, 2);
 }
 
 static bool	calc_hit(t_ray *ray, t_object *cy, float dist, float *t)
 {
-	t_vector3	hit_point;
+	t_vector3	p;
+	t_vector3	tmp;
 	float		dist_to_cap;
 
-	ft_v3_init(&hit_point, ray->origin->x + ray->direction->x * dist,
+	ft_v3_init(&p, ray->origin->x + ray->direction->x * dist,
 		ray->origin->y + ray->direction->y * dist, ray->origin->z
 		+ ray->direction->z * dist);
-	dist_to_cap = ft_v3_dotprod(ft_v3_sub(&hit_point, &cy->pos),
-			&cy->s_cylinder.normal);
+	ft_v3_init(&tmp, p.x - cy->pos.x, p.y - cy->pos.y, p.z - cy->pos.z);
+	dist_to_cap = ft_v3_dotprod(&tmp, &cy->s_cylinder.normal);
 	if (dist_to_cap >= 0 && dist_to_cap <= cy->s_cylinder.height)
 	{
 		if (dist < *t)
@@ -56,17 +57,16 @@ static bool	is_hit_wall_cy(t_ray *ray, t_object *cy, float *coeffs, float *t)
 	float	t0;
 	float	t1;
 	float	tmp;
-	bool	hit0_valid;
-	bool	hit1_valid;
+	bool	hit[2];
 
 	tmp = INFINITY;
-	hit0_valid = false;
-	hit1_valid = false;
+	hit[0] = false;
+	hit[1] = false;
 	if (!is_sol_equation(coeffs, &t0, &t1))
 		return (false);
-	hit0_valid = calc_hit(ray, cy, t0, &tmp);
-	hit1_valid = calc_hit(ray, cy, t1, &tmp);
-	if (hit0_valid || hit1_valid)
+	hit[0] = calc_hit(ray, cy, t0, &tmp);
+	hit[1] = calc_hit(ray, cy, t1, &tmp);
+	if (hit[0] || hit[1])
 	{
 		*t = tmp;
 		return (true);

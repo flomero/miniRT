@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 17:33:39 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/28 17:43:32 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/28 18:23:07 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,20 +75,14 @@ bool	is_sol_equation(float *abc, float *t0, float *t1)
 {
 	float	d;
 	float	sqrt_disc;
-	float	a;
-	float	b;
-	float	c;
 
-	a = abc[0];
-	b = abc[1];
-	c = abc[2];
-	d = b * b - 4 * a * c;
+	d = abc[1] * abc[1] - 4 * abc[0] * abc[2];
 	if (d < 0)
 		return (false);
 	sqrt_disc = sqrtf(d);
-	if (a == 0)
+	if (abc[0] == 0)
 		return (false);
-	*t0 = (-b - sqrt_disc) / (2 * a);
-	*t1 = (-b + sqrt_disc) / (2 * a);
+	*t0 = (-abc[1] - sqrt_disc) / (2 * abc[0]);
+	*t1 = (-abc[1] + sqrt_disc) / (2 * abc[0]);
 	return (true);
 }

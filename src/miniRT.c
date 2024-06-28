@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/28 17:45:25 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/28 18:24:21 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	main(int argc, char **argv)
 {
 	t_program	*program;
 
-	atexit(leaks);
 	if (DEBUG)
 		atexit(leaks);
 	if (argc != 2)
