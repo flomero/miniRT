@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr        #
+#    Updated: 2024/06/28 16:08:38 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ CFILES += 	parsing.c \
 			parsing_utils3.c \
 			parse_camera.c \
 			parse_material.c \
+			parse_triangle.c \
 			custom_split.c \
 
 # OBJECTS
@@ -61,6 +62,7 @@ CFILES += get_first_obj.c \
 			cylinder.c \
 			obj_utils.c \
 			cone.c \
+			triangle.c \
 
 # RT
 CFILES += send_rays.c \

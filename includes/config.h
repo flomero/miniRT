@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:29:22 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/27 14:17:42 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/28 16:23:19 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 // COMPUTATION
 # define DEFAULT_THREADS 1
 # define MAX_THREADS 32
+# define EPSILON 0.000001
 
 // VIEWPORT
 # define VIEWPORT_WIDTH 2.0
