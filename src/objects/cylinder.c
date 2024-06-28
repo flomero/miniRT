@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:45:47 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/28 16:56:00 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/28 17:14:40 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,15 @@
 bool	check_radius(float *t, t_ray *ray, t_object *disk_pl, float radius)
 {
 	t_vector3	pos;
-	float	len;
+	t_vector3	sub;
+	float		len;
 
-	pos = *ft_v3_add(ray->origin, ft_v3_scalar(ray->direction, *t));
-	len = sqrt(ft_v3_dotprod(ft_v3_sub(&disk_pl->pos, &pos), ft_v3_sub(&disk_pl->pos, &pos)));
+	ft_v3_init(&pos, ray->origin->x + ray->direction->x * *t,
+		ray->origin->y + ray->direction->y * *t, ray->origin->z
+		+ ray->direction->z * *t);
+	ft_v3_init(&sub, disk_pl->pos.x - pos.x, disk_pl->pos.y - pos.y,
+		disk_pl->pos.z - pos.z);
+	len = sqrt(ft_v3_dotprod(&sub, &sub));
 	if (len >= radius)
 		return (false);
 	return (true);
@@ -26,15 +31,16 @@ bool	check_radius(float *t, t_ray *ray, t_object *disk_pl, float radius)
 
 bool	intersect_disk(t_ray *ray, t_object *disk_pl, float *t, float radius)
 {
-	float	denominator;
-	t_vector3	point_to_origin;
-	float	tmp;
+	float		d;
+	t_vector3	po;
+	float		tmp;
 
-	denominator = ft_v3_dotprod(&disk_pl->s_plane.normal, ray->direction);
-	if (fabs(denominator) < 1e-16)
+	d = ft_v3_dotprod(&disk_pl->s_plane.normal, ray->direction);
+	if (fabs(d) < 1e-16)
 		return (false);
-	point_to_origin = *ft_v3_sub(&disk_pl->pos, ray->origin);
-	tmp = ft_v3_dotprod(&point_to_origin, &disk_pl->s_plane.normal) / denominator;
+	ft_v3_init(&po, disk_pl->pos.x - ray->origin->x, disk_pl->pos.y
+		- ray->origin->y, disk_pl->pos.z - ray->origin->z);
+	tmp = ft_v3_dotprod(&po, &disk_pl->s_plane.normal) / d;
 	if (tmp >= 0 && check_radius(&tmp, ray, disk_pl, radius))
 	{
 		if (tmp < *t)
@@ -52,8 +58,12 @@ void	make_helper_plane(t_object *cylinder, t_object *to_init_pl, bool is_top)
 	normal = cylinder->s_cylinder.normal;
 	center = cylinder->pos;
 	if (is_top == true)
-		center = *ft_v3_add(&cylinder->pos, ft_v3_scalar(&normal,
-					cylinder->s_cylinder.height));
+	{
+		ft_v3_init(&center, normal.x * cylinder->s_cylinder.height,
+			normal.y * cylinder->s_cylinder.height,
+			normal.z * cylinder->s_cylinder.height);
+		center = *ft_v3_add_ip(&center, &cylinder->pos);
+	}
 	*to_init_pl = (t_object){
 		.pos = center,
 		.s_plane.normal = normal,
@@ -63,14 +73,15 @@ void	make_helper_plane(t_object *cylinder, t_object *to_init_pl, bool is_top)
 
 bool	intersect_plane(t_ray *ray, t_object *plane, float *t)
 {
-	float		denominator;
-	t_vector3	point_to_origin;
+	float		d;
+	t_vector3	po;
 
-	denominator = ft_v3_dotprod(&plane->s_plane.normal, ray->direction);
-	if (fabs(denominator) < 1e-16)
+	d = ft_v3_dotprod(&plane->s_plane.normal, ray->direction);
+	if (fabs(d) < 1e-16)
 		return (false);
-	point_to_origin = *ft_v3_sub(&plane->pos, ray->origin);
-	*t = ft_v3_dotprod(&point_to_origin, &plane->s_plane.normal) / denominator;
+	ft_v3_init(&po, plane->pos.x - ray->origin->x, plane->pos.y
+		- ray->origin->y, plane->pos.z - ray->origin->z);
+	*t = ft_v3_dotprod(&po, &plane->s_plane.normal) / d;
 	if (*t < 0)
 		return (false);
 	return (true);
@@ -97,27 +108,29 @@ t_vector3	vec_unit(t_vector3 a)
 	return (res);
 }
 
-static bool	solve_quadratic_siuuu(float *coefficients, float *t0, float *t1)
+static bool	solve_quadratic_siuuu(float *abc, float *t0, float *t1)
 {
-	float	discriminant;
+	float	d;
 	float	sqrt_disc;
 	float	a;
 	float	b;
 	float	c;
 
-	a = coefficients[0];
-	b = coefficients[1];
-	c = coefficients[2];
-	discriminant = b * b - 4 * a * c;
-	if (discriminant < 0)
+	a = abc[0];
+	b = abc[1];
+	c = abc[2];
+	d = b * b - 4 * a * c;
+	if (d < 0)
 		return (false);
-	sqrt_disc = sqrtf(discriminant);
+	sqrt_disc = sqrtf(d);
+	if (a == 0)
+		return (false);
 	*t0 = (-b - sqrt_disc) / (2 * a);
 	*t1 = (-b + sqrt_disc) / (2 * a);
 	return (true);
 }
 
-static void	calculate_coefficients(t_ray *ray, t_object *cy, float *coeffs)
+static void	calc_abc(t_ray *ray, t_object *cy, float *coeffs)
 {
 	t_vector3	delta_p;
 	float		dp_axis;
@@ -125,7 +138,8 @@ static void	calculate_coefficients(t_ray *ray, t_object *cy, float *coeffs)
 	float		radius;
 
 	radius = cy->s_cylinder.diameter / 2;
-	delta_p = *ft_v3_sub(ray->origin, &cy->pos);
+	ft_v3_init(&delta_p, ray->origin->x - cy->pos.x, ray->origin->y
+		- cy->pos.y, ray->origin->z - cy->pos.z);
 	dp_axis = ft_v3_dotprod(&delta_p, &cy->s_cylinder.normal);
 	rd_axis = ft_v3_dotprod(ray->direction, &cy->s_cylinder.normal);
 	coeffs[0] = ft_v3_dotprod(ray->direction, ray->direction) - powf(rd_axis,
@@ -141,7 +155,9 @@ static bool	calc_hit(t_ray *ray, t_object *cy, float dist, float *t)
 	t_vector3	hit_point;
 	float		dist_to_cap;
 
-	hit_point = *ft_v3_add(ray->origin, ft_v3_scalar(ray->direction, dist));
+	ft_v3_init(&hit_point, ray->origin->x + ray->direction->x * dist,
+		ray->origin->y + ray->direction->y * dist, ray->origin->z
+		+ ray->direction->z * dist);
 	dist_to_cap = ft_v3_dotprod(ft_v3_sub(&hit_point, &cy->pos),
 			&cy->s_cylinder.normal);
 	if (dist_to_cap >= 0 && dist_to_cap <= cy->s_cylinder.height)
@@ -188,7 +204,7 @@ bool	intersect_object(t_ray *ray, t_object *cylinder, float *t)
 	tmp.s_cylinder.normal = vec_unit(cylinder->s_cylinder.normal);
 	make_helper_plane(&tmp, &bottom_pl, false);
 	make_helper_plane(&tmp, &top_pl, true);
-	calculate_coefficients(ray, &tmp, coefficients);
+	calc_abc(ray, &tmp, coefficients);
 	hits[0] = check_cy_body(ray, &tmp, coefficients, t);
 	hits[1] = intersect_disk(ray, &bottom_pl, t, cylinder->s_cylinder.diameter
 			/ 2);
