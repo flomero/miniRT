@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:32:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/27 17:04:49 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/28 11:57:15 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ t_bool	ft_is_shadow(t_vector3 *light_dir, const t_hit *hit, t_program *program)
 			tmp_hit.t = INFINITY;
 			if (ft_hit(&ray, &program->objs[i], &tmp_hit))
 			{
-				if (tmp_hit.obj->type != PLANE && tmp_hit.t > 0.0001
-					&& tmp_hit.t < 0.9999)
+				if ((tmp_hit.obj->type != PLANE && tmp_hit.obj->type != \
+				CYLINDER) && tmp_hit.t > 0.0001 && tmp_hit.t < 0.9999)
 					return (TRUE);
 				else if (tmp_hit.obj->type == PLANE && tmp_hit.t < -0.0001
 					&& tmp_hit.t > -0.9999)
