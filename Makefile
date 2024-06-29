@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/28 16:08:38 by flfische         ###   ########.fr        #
+#    Updated: 2024/06/28 18:25:48 by klamprak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ CFILES += get_first_obj.c \
 			sphere.c \
 			plane.c \
 			cylinder.c \
+			cylinder_utils.c \
 			obj_utils.c \
 			cone.c \
 			triangle.c \

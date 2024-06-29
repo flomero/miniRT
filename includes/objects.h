@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:49:15 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/28 16:18:52 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/28 18:32:51 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

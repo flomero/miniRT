@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/28 16:30:11 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/28 18:25:54 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,13 @@ void				ft_calculate_viewport(t_object *camera);
 double				get_min(double t1, double t2, double t3, double t4);
 double				hit_top_bot(t_object *obj, t_ray *ray, const double radius,
 						t_object *cyl);
+
+// CYLINDER UTILS
+bool				inter_disk(t_ray *ray, t_object *disk_pl, float *t, float \
+radius);
+void				get_plane(t_object *cylinder, t_object *to_init_pl, bool \
+is_top);
+bool				is_sol_equation(float *abc, float *t0, float *t1);
 
 // ERRORS
 void				ft_print_error(const char *error);

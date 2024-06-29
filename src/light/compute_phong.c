@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   compute_phong.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:32:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/28 16:46:56 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/28 18:32:18 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_bool	ft_is_shadow(t_vector3 *light_dir, const t_hit *hit, t_program *program)
 	t_ray	ray;
 	t_hit	tmp_hit;
 	int		i;
+	int		is_hitted;
 
 	ray.origin = &(t_vector3){hit->p.x, hit->p.y, hit->p.z};
 	ray.direction = light_dir;
@@ -34,11 +35,11 @@ t_bool	ft_is_shadow(t_vector3 *light_dir, const t_hit *hit, t_program *program)
 		if (program->objs[i].type > LIGHT)
 		{
 			tmp_hit.t = INFINITY;
-			if (ft_hit(&ray, &program->objs[i], &tmp_hit))
-			{
+			is_hitted = ft_hit(&ray, &program->objs[i], &tmp_hit)
+				&& tmp_hit.obj != hit->obj;
+			if (is_hitted)
 				if (tmp_hit.t > 0.0001 && tmp_hit.t < 0.9999)
 					return (TRUE);
-			}
 		}
 		i++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_handlers2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:43:05 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/27 16:39:01 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/28 18:32:58 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
