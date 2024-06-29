@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:29:22 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/28 16:23:19 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/29 12:08:28 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,12 @@
 
 // LIGHT
 # define DEFAULT_BOUNCES 3
-# define DEFAULT_SPECULAR 0.4
-# define DEFAULT_SHININESS 10
-# define DEFAULT_DIFFUSE 0.7
+# define DEFAULT_SPECULAR 0.1
+# define DEFAULT_SHININESS 5
+# define DEFAULT_DIFFUSE 0.9
+// # define DEFAULT_SPECULAR 0.4
+// # define DEFAULT_SHININESS 10
+// # define DEFAULT_DIFFUSE 0.7
 # define DEFAULT_REFLECTIVNESS 0.0
 
 // TERMINAL COLORS
