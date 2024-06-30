@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_handlers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 14:41:37 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/30 12:09:34 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,3 @@ int	get_pl(char **tokens, t_object *obj)
 	ft_assign_own_tm(obj);
 	return (1);
 }
-
-/*
-int	get_cy(char **tokens, t_object	*obj): This implementation is on
-parsing_utils3.c in order for norminette to aprove it.
- */

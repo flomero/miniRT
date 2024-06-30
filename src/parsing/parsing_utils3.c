@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:46:57 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/27 12:58:42 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/06/30 12:02:22 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,26 +63,6 @@ int	get_nbr_of_lines(char *fname)
 	if (close(fd) == -1)
 		return (print_err_extend("Err closing file: ", strerror(errno), 0), -1);
 	return (count);
-}
-
-/**
- * @brief combine three integers [0-255] to one uint32_t number
- *
- * @param red
- * @param green
- * @param blue
- * @return uint32_t
- */
-uint32_t	int_to_rgb(int red, int green, int blue)
-{
-	uint32_t	color;
-
-	color = 0;
-	color |= (uint32_t)red << 24;
-	color |= (uint32_t)green << 16;
-	color |= (uint32_t)blue << 8;
-	color |= 0xFF;
-	return (color);
 }
 
 /**

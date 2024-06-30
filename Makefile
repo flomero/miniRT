@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/28 18:25:48 by klamprak         ###   ########.fr        #
+#    Updated: 2024/06/30 12:08:47 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,13 +43,14 @@ CFILES := miniRT.c \
 
 CFILES += 	parsing.c \
 			parsing_handlers.c \
-			parsing_handlers2.c \
 			parsing_utils.c \
 			parsing_utils2.c \
 			parsing_utils3.c \
 			parse_camera.c \
 			parse_material.c \
 			parse_triangle.c \
+			parse_cone.c \
+			parse_cylinder.c \
 			custom_split.c \
 
 # OBJECTS
@@ -71,7 +72,7 @@ CFILES += send_rays.c \
 
 # COLORS
 CFILES += avg_color.c \
-			color_float.c \
+			color_conversions.c \
 			color_add.c \
 			color_mult.c \
 
