@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:45:47 by klamprak          #+#    #+#             */
-/*   Updated: 2024/07/01 10:00:58 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/07/01 11:11:34 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static void	calc_abc(t_ray *ray, t_object *cy, float *coeffs)
+static void	calc_abc(t_ray *ray, t_object *cy, double *coeffs)
 {
 	t_vector3	delta_p;
-	float		dp_norm;
-	float		rd_norm;
-	float		radius;
+	double		dp_norm;
+	double		rd_norm;
+	double		radius;
 
 	radius = cy->s_cylinder.diameter / 2;
-	ft_v3_init(&delta_p, ray->origin->x - cy->pos.x, ray->origin->y
-		- cy->pos.y, ray->origin->z - cy->pos.z);
+	ft_v3_init(&delta_p, ray->origin->x - cy->pos.x, ray->origin->y - cy->pos.y,
+		ray->origin->z - cy->pos.z);
 	dp_norm = ft_v3_dotprod(&delta_p, &cy->s_cylinder.normal);
 	rd_norm = ft_v3_dotprod(ray->direction, &cy->s_cylinder.normal);
 	coeffs[0] = ft_v3_dotprod(ray->direction, ray->direction) - powf(rd_norm,
@@ -32,15 +32,14 @@ static void	calc_abc(t_ray *ray, t_object *cy, float *coeffs)
 		- powf(radius, 2);
 }
 
-static bool	calc_hit(t_ray *ray, t_object *cy, float dist, float *t)
+static bool	calc_hit(t_ray *ray, t_object *cy, double dist, double *t)
 {
 	t_vector3	p;
 	t_vector3	tmp;
-	float		dist_to_cap;
+	double		dist_to_cap;
 
-	ft_v3_init(&p, ray->origin->x + ray->direction->x * dist,
-		ray->origin->y + ray->direction->y * dist, ray->origin->z
-		+ ray->direction->z * dist);
+	ft_v3_init(&p, ray->origin->x + ray->direction->x * dist, ray->origin->y
+		+ ray->direction->y * dist, ray->origin->z + ray->direction->z * dist);
 	ft_v3_init(&tmp, p.x - cy->pos.x, p.y - cy->pos.y, p.z - cy->pos.z);
 	dist_to_cap = ft_v3_dotprod(&tmp, &cy->s_cylinder.normal);
 	if (dist_to_cap >= 0 && dist_to_cap <= cy->s_cylinder.height)
@@ -52,11 +51,11 @@ static bool	calc_hit(t_ray *ray, t_object *cy, float dist, float *t)
 	return (false);
 }
 
-static bool	is_hit_wall_cy(t_ray *ray, t_object *cy, float *coeffs, float *t)
+static bool	is_hit_wall_cy(t_ray *ray, t_object *cy, double *coeffs, double *t)
 {
-	float	t0;
-	float	t1;
-	float	tmp;
+	double	t0;
+	double	t1;
+	double	tmp;
 	bool	hit[2];
 
 	tmp = INFINITY;
@@ -76,8 +75,8 @@ static bool	is_hit_wall_cy(t_ray *ray, t_object *cy, float *coeffs, float *t)
 
 double	ft_cylinder_hit(t_object *cyl, t_ray *ray)
 {
-	float		t;
-	float		abc[3];
+	double		t;
+	double		abc[3];
 	t_object	tmp;
 	t_object	top_bot[2];
 	bool		hit;

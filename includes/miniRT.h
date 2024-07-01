@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/28 18:25:54 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/07/01 11:05:13 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,11 +124,11 @@ double				hit_top_bot(t_object *obj, t_ray *ray, const double radius,
 						t_object *cyl);
 
 // CYLINDER UTILS
-bool				inter_disk(t_ray *ray, t_object *disk_pl, float *t, float \
-radius);
-void				get_plane(t_object *cylinder, t_object *to_init_pl, bool \
-is_top);
-bool				is_sol_equation(float *abc, float *t0, float *t1);
+bool				inter_disk(t_ray *ray, t_object *disk_pl, double *t,
+						double radius);
+void				get_plane(t_object *cylinder, t_object *to_init_pl,
+						bool is_top);
+bool				is_sol_equation(double *abc, double *t0, double *t1);
 
 // ERRORS
 void				ft_print_error(const char *error);

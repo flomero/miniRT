@@ -3,24 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 17:33:39 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/28 18:23:07 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/07/01 11:04:15 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static bool	in_radius(float *t, t_ray *ray, t_object *disk_pl, float radius)
+static bool	in_radius(double *t, t_ray *ray, t_object *disk_pl, double radius)
 {
 	t_vector3	pos;
 	t_vector3	sub;
-	float		len;
+	double		len;
 
-	ft_v3_init(&pos, ray->origin->x + ray->direction->x * *t,
-		ray->origin->y + ray->direction->y * *t, ray->origin->z
-		+ ray->direction->z * *t);
+	ft_v3_init(&pos, ray->origin->x + ray->direction->x * *t, ray->origin->y
+		+ ray->direction->y * *t, ray->origin->z + ray->direction->z * *t);
 	ft_v3_init(&sub, disk_pl->pos.x - pos.x, disk_pl->pos.y - pos.y,
 		disk_pl->pos.z - pos.z);
 	len = sqrt(ft_v3_dotprod(&sub, &sub));
@@ -29,11 +28,11 @@ static bool	in_radius(float *t, t_ray *ray, t_object *disk_pl, float radius)
 	return (true);
 }
 
-bool	inter_disk(t_ray *ray, t_object *disk_pl, float *t, float radius)
+bool	inter_disk(t_ray *ray, t_object *disk_pl, double *t, double radius)
 {
-	float		d;
+	double		d;
 	t_vector3	po;
-	float		tmp;
+	double		tmp;
 
 	d = ft_v3_dotprod(&disk_pl->s_plane.normal, ray->direction);
 	if (fabs(d) < 1e-16)
@@ -56,25 +55,24 @@ void	get_plane(t_object *cylinder, t_object *to_init_pl, bool is_top)
 	t_vector3	normal;
 
 	normal = cylinder->s_cylinder.normal;
+	if (!is_top)
+		ft_v3_scalar_ip(&normal, -1);
 	center = cylinder->pos;
 	if (is_top == true)
 	{
-		ft_v3_init(&center, normal.x * cylinder->s_cylinder.height,
-			normal.y * cylinder->s_cylinder.height,
-			normal.z * cylinder->s_cylinder.height);
-		center = *ft_v3_add_ip(&center, &cylinder->pos);
+		ft_v3_init(&center, normal.x * cylinder->s_cylinder.height, normal.y
+			* cylinder->s_cylinder.height, normal.z
+			* cylinder->s_cylinder.height);
+		ft_v3_add_ip(&center, &cylinder->pos);
 	}
-	*to_init_pl = (t_object){
-		.pos = center,
-		.s_plane.normal = normal,
-		.color = cylinder->color,
-	};
+	ft_v3_init(&to_init_pl->pos, center.x, center.y, center.z);
+	ft_v3_init(&to_init_pl->s_plane.normal, normal.x, normal.y, normal.z);
 }
 
-bool	is_sol_equation(float *abc, float *t0, float *t1)
+bool	is_sol_equation(double *abc, double *t0, double *t1)
 {
-	float	d;
-	float	sqrt_disc;
+	double	d;
+	double	sqrt_disc;
 
 	d = abc[1] * abc[1] - 4 * abc[0] * abc[2];
 	if (d < 0)
