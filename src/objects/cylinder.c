@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:45:47 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/28 18:22:14 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/07/01 10:00:58 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ double	ft_cylinder_hit(t_object *cyl, t_ray *ray)
 	bool		hit;
 
 	tmp = *cyl;
+	t = INFINITY;
 	ft_v3_init(&tmp.s_cylinder.normal, cyl->s_cylinder.normal.x,
 		cyl->s_cylinder.normal.y, cyl->s_cylinder.normal.z);
 	ft_v3_normal_ip(&tmp.s_cylinder.normal);
