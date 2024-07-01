@@ -6,15 +6,29 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 16:04:39 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/28 16:19:47 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/30 12:22:02 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+static int	assign_triangle_mat(char **tokens, t_object *obj, int i)
+{
+	if (get_arr_len(tokens) >= i + 1)
+		ft_strlcpy(obj->material_name, tokens[i], ft_strlen(tokens[i]) + 1);
+	return (1);
+}
+
+/**
+ * @brief Get the tr object
+ *
+ * @param tokens
+ * @param obj
+ * @return int 1 on success, 0 otherwise
+ */
 int	get_tr(char **tokens, t_object *obj)
 {
-	if (get_arr_len(tokens) != 5)
+	if (get_arr_len(tokens) != 5 && get_arr_len(tokens) != 6)
 		return (0);
 	if (!get_vector(&obj->s_triangle.points[0], tokens[1]))
 		return (0);
@@ -36,5 +50,5 @@ int	get_tr(char **tokens, t_object *obj)
 		- obj->s_triangle.points[0].x, obj->s_triangle.points[2].y
 		- obj->s_triangle.points[0].y, obj->s_triangle.points[2].z
 		- obj->s_triangle.points[0].z);
-	return (1);
+	return (assign_triangle_mat(tokens, obj, 5));
 }
