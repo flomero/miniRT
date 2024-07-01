@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:46:57 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/30 12:02:22 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/01 15:50:30 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	get_nbr_of_lines(char *fname)
 
 	fd = open(fname, O_RDONLY);
 	if (fd == -1)
-		return (print_err_extend("Err opening file: ", strerror(errno), 0), -1);
+		return (print_err_extend("Opening file: ", strerror(errno), 0), -1);
 	line = get_next_line(fd);
 	count = 0;
 	while (line)
@@ -61,7 +61,7 @@ int	get_nbr_of_lines(char *fname)
 		line = get_next_line(fd);
 	}
 	if (close(fd) == -1)
-		return (print_err_extend("Err closing file: ", strerror(errno), 0), -1);
+		return (print_err_extend("Closing file: ", strerror(errno), 0), -1);
 	return (count);
 }
 
