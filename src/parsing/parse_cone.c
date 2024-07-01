@@ -6,16 +6,23 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 12:06:48 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/30 12:07:21 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/30 14:11:15 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+static int	assign_cone_mat(char **tokens, t_object *obj, int i)
+{
+	if (get_arr_len(tokens) >= i + 1)
+		ft_strlcpy(obj->material_name, tokens[i], ft_strlen(tokens[i]) + 1);
+	return (1);
+}
+
 int	get_co(char **tokens, t_object *obj)
 {
 	obj->type = CONE;
-	if (get_arr_len(tokens) != 6)
+	if (get_arr_len(tokens) != 6 && get_arr_len(tokens) != 7)
 		return (0);
 	if (!get_vector(&obj->pos, tokens[1]))
 		return (0);
@@ -36,5 +43,5 @@ int	get_co(char **tokens, t_object *obj)
 	obj->s_cone.min = 0;
 	ft_default_material(obj);
 	ft_assign_own_tm(obj);
-	return (1);
+	return (assign_cone_mat(tokens, obj, 6));
 }

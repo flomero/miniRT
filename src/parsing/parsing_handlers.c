@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 14:41:37 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/30 12:09:34 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/30 12:22:26 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	get_sp(char **tokens, t_object *obj)
 int	get_pl(char **tokens, t_object *obj)
 {
 	obj->type = PLANE;
-	if (get_arr_len(tokens) != 4)
+	if (get_arr_len(tokens) != 4 && get_arr_len(tokens) != 5)
 		return (0);
 	if (!get_vector(&obj->pos, tokens[1]))
 		return (free(&obj), 0);
@@ -123,5 +123,7 @@ int	get_pl(char **tokens, t_object *obj)
 	ft_color_to_float(obj->color, &obj->color_f);
 	ft_default_material(obj);
 	ft_assign_own_tm(obj);
+	if (get_arr_len(tokens) >= 5)
+		ft_strlcpy(obj->material_name, tokens[4], ft_strlen(tokens[4]) + 1);
 	return (1);
 }

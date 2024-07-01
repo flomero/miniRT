@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/30 12:08:47 by flfische         ###   ########.fr        #
+#    Updated: 2024/06/30 12:40:12 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -190,11 +190,16 @@ norm:
 	@norminette $(SRC_DIRS) $(INC_DIR) $(LIBFT_DIR) | grep "Error" || echo "$(GREEN)Norme OK$(NC)"
 
 debug: CFLAGS += -g
-debug: CFLAGS += -fsanitize=thread #-fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=double-divide-by-zero -fsanitize=double-cast-overflow -fno-sanitize=null -fno-sanitize=alignment
+debug: CFLAGS += -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fno-sanitize=null -fno-sanitize=alignment
 debug: CFLAGS += -DDEBUG=1
 debug: clean all
 
-.PHONY: all clean fclean re norm ascii debu
+debug_thread: CFLAGS += -g
+debug_thread: CFLAGS += -fsanitize=thread
+debug_thread: CFLAGS += -DDEBUG=1
+debug_thread: clean all
+
+.PHONY: all clean fclean re norm ascii debug debug_thread
 
 # colors:
 GREEN = \033[0;32m

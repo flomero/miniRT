@@ -1,16 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_handlers2.c                                :+:      :+:    :+:   */
+/*   parse_cylinder.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:43:05 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/30 12:07:18 by flfische         ###   ########.fr       */
+/*   Updated: 2024/06/30 12:20:38 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+static int	assign_cylinder_mat(char **tokens, t_object *obj, int i)
+{
+	if (get_arr_len(tokens) >= i + 1)
+		ft_strlcpy(obj->material_name, tokens[i], ft_strlen(tokens[i]) + 1);
+	return (1);
+}
 
 /**
  * @brief Get the cy object
@@ -22,7 +29,7 @@
 int	get_cy(char **tokens, t_object *obj)
 {
 	obj->type = CYLINDER;
-	if (get_arr_len(tokens) != 6)
+	if (get_arr_len(tokens) != 6 && get_arr_len(tokens) != 7)
 		return (0);
 	if (!get_vector(&obj->pos, tokens[1]))
 		return (0);
@@ -41,5 +48,5 @@ int	get_cy(char **tokens, t_object *obj)
 	ft_color_to_float(obj->color, &obj->color_f);
 	ft_default_material(obj);
 	ft_assign_own_tm(obj);
-	return (1);
+	return (assign_cylinder_mat(tokens, obj, 6));
 }
