@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:15:15 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/28 16:07:48 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/01 15:25:54 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,15 @@ int	is_valid_parsing(char *fname)
 	int	len;
 
 	if (!fname || ft_strlen(fname) < 4)
-		return (ft_print_error("Not valid filename"), 0);
+		return (ft_print_error("Filetype not valid. Has to be .rt."), 0);
 	len = ft_strlen(fname);
 	if (fname[len - 1] != 't' || fname[len - 2] != 'r' || fname[len - 3] != '.')
-		return (ft_print_error("Not valid filename"), 0);
+		return (ft_print_error("Filetype not valid. Has to be .rt."), 0);
 	len = get_nbr_of_lines(fname);
 	if (len == 0)
 		return (ft_print_error("Empty file"), 0);
+	if (len == -1)
+		return (0);
 	return (init_struct(fname, len));
 }
 
@@ -57,14 +59,12 @@ int	init_struct(char *fname, int len)
 		return (ft_print_error(ALLOC_ERR), 0);
 	fd = open(fname, O_RDONLY);
 	if (fd == -1)
-		return (print_err_extend("Error opening file: ", strerror(errno), 0),
-			0);
+		return (print_err_extend("Opening file: ", strerror(errno), 0), 0);
 	if (!proccess_line(fd, objs))
 		return (0);
 	ft_get_program()->objs = objs;
 	if (close(fd) == -1)
-		return (print_err_extend("Error closing file: ", strerror(errno), 0),
-			0);
+		return (print_err_extend("Closing file: ", strerror(errno), 0), 0);
 	return (is_valid_obj_nbr(objs));
 }
 

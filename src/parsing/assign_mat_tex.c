@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 18:05:37 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/25 16:45:38 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/01 15:28:24 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ static t_bool	ft_assign_mat(t_object *obj, t_program *program)
 				program->objs[i].s_mat.name))
 		{
 			obj->material = &program->objs[i];
+			if (DEBUG)
+				printf("Assigned material %s to object %d\n",
+					obj->material_name, i);
 			return (TRUE);
 		}
 		i++;
@@ -41,7 +44,9 @@ static t_bool	ft_assign_tex(t_object *obj, t_program *program)
 				program->objs[i].s_tex.name))
 		{
 			obj->texture = &program->objs[i];
-			printf("Assigned texture %s to object\n", obj->texture_name);
+			if (DEBUG)
+				printf("Assigned texture %s to object %d\n", obj->texture_name,
+					i);
 			return (TRUE);
 		}
 		i++;
@@ -60,7 +65,8 @@ static t_bool	ft_assign_bump(t_object *obj, t_program *program)
 				program->objs[i].s_bump.name))
 		{
 			obj->bump = &program->objs[i];
-			printf("Assigned bump %s to object\n", obj->bump_name);
+			if (DEBUG)
+				printf("Assigned bump %s to object %d\n", obj->bump_name, i);
 			return (TRUE);
 		}
 		i++;
