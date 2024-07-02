@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 17:33:39 by klamprak          #+#    #+#             */
-/*   Updated: 2024/07/02 15:46:44 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/02 15:55:43 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,11 @@ void	get_plane(t_object *cylinder, t_object *to_init_pl, bool is_top)
 	ft_v3_init(&normal, cylinder->s_cylinder.normal.x,
 		cylinder->s_cylinder.normal.y, cylinder->s_cylinder.normal.z);
 	ft_v3_init(&center, cylinder->pos.x, cylinder->pos.y, cylinder->pos.z);
-	if (is_top)
-		ft_v3_init(&middle_offset, normal.x * cylinder->s_cylinder.height / 2,
-			normal.y * cylinder->s_cylinder.height / 2, normal.z
-			* cylinder->s_cylinder.height / 2);
-	else
-		ft_v3_init(&middle_offset, normal.x * -cylinder->s_cylinder.height / 2,
-			normal.y * -cylinder->s_cylinder.height / 2, normal.z *
-			-cylinder->s_cylinder.height / 2);
+	ft_v3_init(&middle_offset, normal.x * cylinder->s_cylinder.height / 2,
+		normal.y * cylinder->s_cylinder.height / 2, normal.z
+		* cylinder->s_cylinder.height / 2);
+	if (!is_top)
+		ft_v3_scalar_ip(&middle_offset, -1);
 	ft_v3_scalar_ip(&center, 1 + EPSILON);
 	ft_v3_add_ip(&center, &middle_offset);
 	ft_v3_init(&to_init_pl->pos, center.x, center.y, center.z);
