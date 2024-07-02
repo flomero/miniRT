@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 17:33:39 by klamprak          #+#    #+#             */
-/*   Updated: 2024/07/02 10:13:28 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/02 15:55:43 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,21 @@ void	get_plane(t_object *cylinder, t_object *to_init_pl, bool is_top)
 {
 	t_vector3	center;
 	t_vector3	normal;
+	t_vector3	middle_offset;
 
-	normal = cylinder->s_cylinder.normal;
+	ft_v3_init(&normal, cylinder->s_cylinder.normal.x,
+		cylinder->s_cylinder.normal.y, cylinder->s_cylinder.normal.z);
+	ft_v3_init(&center, cylinder->pos.x, cylinder->pos.y, cylinder->pos.z);
+	ft_v3_init(&middle_offset, normal.x * cylinder->s_cylinder.height / 2,
+		normal.y * cylinder->s_cylinder.height / 2, normal.z
+		* cylinder->s_cylinder.height / 2);
 	if (!is_top)
-		ft_v3_scalar_ip(&normal, -1);
-	center = cylinder->pos;
-	if (is_top == true)
-	{
-		ft_v3_init(&center, normal.x * cylinder->s_cylinder.height, normal.y
-			* cylinder->s_cylinder.height, normal.z
-			* cylinder->s_cylinder.height);
-		ft_v3_add_ip(&center, &cylinder->pos);
-	}
+		ft_v3_scalar_ip(&middle_offset, -1);
+	ft_v3_scalar_ip(&center, 1 + EPSILON);
+	ft_v3_add_ip(&center, &middle_offset);
 	ft_v3_init(&to_init_pl->pos, center.x, center.y, center.z);
 	ft_v3_init(&to_init_pl->s_plane.normal, normal.x, normal.y, normal.z);
+	ft_v3_normal_ip(&to_init_pl->s_plane.normal);
 }
 
 bool	is_sol_equation(double *abc, double *t0, double *t1)

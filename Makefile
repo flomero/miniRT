@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/06/30 12:40:12 by flfische         ###   ########.fr        #
+#    Updated: 2024/07/02 15:53:53 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ CFILES += get_first_obj.c \
 			plane.c \
 			cylinder.c \
 			cylinder_utils.c \
+			cylinder_normal.c \
 			obj_utils.c \
 			cone.c \
 			triangle.c \
