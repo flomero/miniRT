@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   send_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:48:28 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/07/02 10:30:39 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,24 +82,27 @@ uint32_t	ft_trace_ray(t_ray *ray)
 uint32_t	ft_send_ray(int x, int y, t_object *camera)
 {
 	t_ray		ray;
-	uint32_t	color;
-	double		u;
-	double		v;
+	t_vector2	uv;
 	t_vector3	temp_vec;
+	double		randoff;
 
 	ray.origin = &camera->pos;
-	u = ((double)x + ft_randf()) / (double)(WIN_WIDTH - 1);
-	v = 1 - ((double)y + ft_randf()) / (double)(WIN_HEIGHT - 1);
+	randoff = 0;
+	if (ft_get_program()->max_samples > 1)
+		randoff = ft_randf();
+	uv.x = ((double)x + randoff) / (double)(WIN_WIDTH - 1);
+	if (ft_get_program()->max_samples > 1)
+		randoff = ft_randf();
+	uv.y = 1 - ((double)y + randoff) / (double)(WIN_HEIGHT - 1);
 	ray.direction = &(t_vector3){camera->s_camera.ll_corner->x,
 		camera->s_camera.ll_corner->y, camera->s_camera.ll_corner->z};
-	ft_v3_init(&temp_vec, camera->s_camera.horizontal->x * u,
-		camera->s_camera.horizontal->y * u, camera->s_camera.horizontal->z * u);
+	ft_v3_init(&temp_vec, camera->s_camera.hor->x * uv.x,
+		camera->s_camera.hor->y * uv.x, camera->s_camera.hor->z * uv.x);
 	ft_v3_add_ip(ray.direction, &temp_vec);
-	ft_v3_init(&temp_vec, camera->s_camera.vertical->x * v,
-		camera->s_camera.vertical->y * v, camera->s_camera.vertical->z * v);
+	ft_v3_init(&temp_vec, camera->s_camera.ver->x * uv.y,
+		camera->s_camera.ver->y * uv.y, camera->s_camera.ver->z * uv.y);
 	ft_v3_add_ip(ray.direction, &temp_vec);
 	ft_v3_sub_ip(ray.direction, &camera->pos);
 	ray.depth = ft_get_program()->bounces;
-	color = ft_trace_ray(&ray);
-	return (color);
+	return (ft_trace_ray(&ray));
 }

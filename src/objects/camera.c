@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:24:49 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/07/02 10:28:08 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ static t_vector3	*calc_lower_left_corner(t_object *camera)
 	ft_v3_init(&v, w.x, w.y, w.z);
 	ft_v3_crossprod_ip(&v, &u);
 	ll_corner = ft_v3_new(camera->pos.x, camera->pos.y, camera->pos.z);
-	camera->s_camera.horizontal = ft_v3_scalar(&u, camera->s_camera.vp_width);
-	camera->s_camera.vertical = ft_v3_scalar(&v, camera->s_camera.vp_height);
+	camera->s_camera.hor = ft_v3_scalar(&u, camera->s_camera.vp_width);
+	camera->s_camera.ver = ft_v3_scalar(&v, camera->s_camera.vp_height);
 	ft_v3_scalar_ip(&u, camera->s_camera.vp_width / 2.0);
 	ft_v3_scalar_ip(&v, camera->s_camera.vp_height / 2.0);
 	ft_v3_sub_ip(ft_v3_sub_ip(ft_v3_sub_ip(ll_corner, &u), &v), &w);

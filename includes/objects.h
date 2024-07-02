@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:49:15 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/28 18:32:51 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/07/02 10:28:08 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,8 @@ typedef struct s_object
 			double			vp_width;
 			double			vp_height;
 			t_vector3		*ll_corner;
-			t_vector3		*horizontal;
-			t_vector3		*vertical;
+			t_vector3		*hor;
+			t_vector3		*ver;
 			t_vector3		*look_at;
 			double			focal_length;
 		} s_camera;
