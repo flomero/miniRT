@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 17:33:39 by klamprak          #+#    #+#             */
-/*   Updated: 2024/07/01 11:04:15 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/02 10:13:28 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ bool	is_sol_equation(double *abc, double *t0, double *t1)
 	sqrt_disc = sqrtf(d);
 	if (abc[0] == 0)
 		return (false);
-	*t0 = (-abc[1] - sqrt_disc) / (2 * abc[0]);
-	*t1 = (-abc[1] + sqrt_disc) / (2 * abc[0]);
+	*t0 = (-abc[1] - sqrt_disc) / (2 * abc[0]) - EPSILON;
+	*t1 = (-abc[1] + sqrt_disc) / (2 * abc[0]) - EPSILON;
 	return (true);
 }

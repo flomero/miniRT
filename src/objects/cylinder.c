@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:45:47 by klamprak          #+#    #+#             */
-/*   Updated: 2024/07/01 16:56:45 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/02 10:13:03 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ int	ft_cylinder_normal(t_hit *hit, t_ray *ray)
 	proj_hit.y = hit_to_center.y - len * hit->obj->s_cylinder.normal.y;
 	proj_hit.z = hit_to_center.z - len * hit->obj->s_cylinder.normal.z;
 	ft_v3_normal_ip(&proj_hit);
-	if (ft_v3_dotprod(&proj_hit, ray->direction) < 0)
+	if (ft_v3_dotprod(&proj_hit, ray->direction) > 0)
 		ft_v3_scalar_ip(&proj_hit, -1);
 	ft_v3_init(&hit->n, proj_hit.x, proj_hit.y, proj_hit.z);
 	return (1);
