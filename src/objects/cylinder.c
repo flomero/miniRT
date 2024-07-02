@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:45:47 by klamprak          #+#    #+#             */
-/*   Updated: 2024/07/02 10:13:03 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/02 15:51:50 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,18 @@ static void	calc_abc(t_ray *ray, t_object *cy, double *coeffs)
 	t_vector3	delta_p;
 	double		dp_norm;
 	double		rd_norm;
-	double		radius;
+	double		radius_squared;
 
-	radius = cy->s_cylinder.diameter / 2;
+	radius_squared = pow(cy->s_cylinder.diameter / 2, 2);
 	ft_v3_init(&delta_p, ray->origin->x - cy->pos.x, ray->origin->y - cy->pos.y,
 		ray->origin->z - cy->pos.z);
 	dp_norm = ft_v3_dotprod(&delta_p, &cy->s_cylinder.normal);
 	rd_norm = ft_v3_dotprod(ray->direction, &cy->s_cylinder.normal);
-	coeffs[0] = ft_v3_dotprod(ray->direction, ray->direction) - powf(rd_norm,
-			2);
+	coeffs[0] = ft_v3_dotprod(ray->direction, ray->direction) - pow(rd_norm, 2);
 	coeffs[1] = 2 * (ft_v3_dotprod(ray->direction, &delta_p) - rd_norm
 			* dp_norm);
-	coeffs[2] = ft_v3_dotprod(&delta_p, &delta_p) - powf(dp_norm, 2)
-		- powf(radius, 2);
+	coeffs[2] = ft_v3_dotprod(&delta_p, &delta_p) - pow(dp_norm, 2)
+		- radius_squared;
 }
 
 static bool	calc_hit(t_ray *ray, t_object *cy, double dist, double *t)
@@ -37,12 +36,15 @@ static bool	calc_hit(t_ray *ray, t_object *cy, double dist, double *t)
 	t_vector3	p;
 	t_vector3	tmp;
 	double		dist_to_cap;
+	double		projection_on_axis;
 
 	ft_v3_init(&p, ray->origin->x + ray->direction->x * dist, ray->origin->y
 		+ ray->direction->y * dist, ray->origin->z + ray->direction->z * dist);
 	ft_v3_init(&tmp, p.x - cy->pos.x, p.y - cy->pos.y, p.z - cy->pos.z);
-	dist_to_cap = ft_v3_dotprod(&tmp, &cy->s_cylinder.normal);
-	if (dist_to_cap >= 0 && dist_to_cap <= cy->s_cylinder.height)
+	projection_on_axis = ft_v3_dotprod(&tmp, &cy->s_cylinder.normal);
+	dist_to_cap = fabs(projection_on_axis);
+	if (projection_on_axis >= -cy->s_cylinder.height / 2
+		&& projection_on_axis <= cy->s_cylinder.height / 2)
 	{
 		if (dist < *t)
 			*t = dist;
@@ -116,8 +118,8 @@ static int	hit_disks(t_ray *ray, t_object *cylinder, double *t, t_hit *hit)
 			disk_hit = 1;
 	if (!disk_hit)
 		return (0);
-	ft_v3_init(&norm, hit->p.x - hit->obj->pos.x, hit->p.y - hit->obj->pos.y,
-		hit->p.z - hit->obj->pos.z);
+	ft_v3_init(&norm, cylinder->s_cylinder.normal.x,
+		cylinder->s_cylinder.normal.y, cylinder->s_cylinder.normal.z);
 	ft_v3_normal_ip(&norm);
 	ft_v3_init(&hit->n, norm.x, norm.y, norm.z);
 	if (disk_hit == 2)
