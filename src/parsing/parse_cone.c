@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cone.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 12:06:48 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/30 14:11:15 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/01 16:47:29 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ int	get_co(char **tokens, t_object *obj)
 	obj->s_cone.min = 0;
 	ft_default_material(obj);
 	ft_assign_own_tm(obj);
+	ft_v3_normal_ip(&obj->s_cone.normal);
 	return (assign_cone_mat(tokens, obj, 6));
 }
