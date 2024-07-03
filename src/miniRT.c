@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/28 18:24:21 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/07/03 15:47:32 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int argc, char **argv)
 	if (DEBUG)
 		print_objs(NULL);
 	program = ft_get_program();
-	if (ft_mlx_init())
+	if (ft_mlx_init(argv[1]))
 		return (1);
 	if (!ft_assign_mat_tex())
 		return (1);

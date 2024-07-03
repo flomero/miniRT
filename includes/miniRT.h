@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/07/01 11:05:13 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/03 15:47:30 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void				ft_init_rt(t_program *program);
 void				join_threads(t_program *program);
 
 // MLX
-int					ft_mlx_init(void);
+int					ft_mlx_init(char *filename);
 void				ft_render(void *param);
 void				ft_key_hook(mlx_key_data_t key_data, void *param);
 void				ft_render_multithread(void *param);
