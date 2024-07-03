@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:25:07 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/10 14:00:32 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/03 15:49:48 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@
  *
  * @return 0 on success, 1 on error.
  */
-int	ft_mlx_init(void)
+int	ft_mlx_init(char *filename)
 {
 	t_program	*program;
+	char		title[100];
 
+	ft_strlcpy(title, WIN_TITLE " ", 100);
+	ft_strlcat(title, filename, 100);
 	program = ft_get_program();
-	program->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, WIN_TITLE, 0);
+	program->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, title, 0);
 	if (!program->mlx)
 		return (ft_print_error(mlx_strerror(mlx_errno)), 1);
 	program->image = mlx_new_image(program->mlx, WIN_WIDTH, WIN_HEIGHT);

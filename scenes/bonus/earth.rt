@@ -8,6 +8,6 @@ L -20.0,0.0,70.0 0.2 255,255,255
 sp 0,0,-30 10 0,0,0 ref earth bump
 
 M ref 0,0,0 0
-TF earth scenes/earth.png
-TF white scenes/white.png
-B bump scenes/earth_bump.png
+TF earth scenes/assets/earth.png
+TF white scenes/assets/white.png
+B bump scenes/assets/earth_bump.png
