@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:29:22 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/29 12:08:28 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/03 16:59:36 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@
 
 // IMAGE
 # define WIN_TITLE "miniRT"
-# define WIN_WIDTH 1200
-# define WIN_HEIGHT 800
+# ifndef WIN_WIDTH
+#  define WIN_WIDTH 1200
+# endif
+# ifndef WIN_HEIGHT
+#  define WIN_HEIGHT 800
+# endif
 
 // COMPUTATION
 # define DEFAULT_THREADS 1
