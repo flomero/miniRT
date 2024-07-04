@@ -6,12 +6,12 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/07/02 15:53:53 by flfische         ###   ########.fr        #
+#    Updated: 2024/07/03 17:04:18 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -O3
 MAKEFLAGS += --no-print-directory
 NAME := miniRT
 # DIRECTORIES
@@ -200,7 +200,10 @@ debug_thread: CFLAGS += -fsanitize=thread
 debug_thread: CFLAGS += -DDEBUG=1
 debug_thread: clean all
 
-.PHONY: all clean fclean re norm ascii debug debug_thread
+hd: CFLAGS += -DWIN_WIDTH=1920 -DWIN_HEIGHT=1080
+hd: clean all
+
+.PHONY: all clean fclean re norm ascii debug debug_thread hd
 
 # colors:
 GREEN = \033[0;32m
