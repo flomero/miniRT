@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 09:33:50 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/28 09:58:30 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/04 10:45:20 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ double	ft_plane_hit(t_object *plane, t_ray *ray)
 	divisor = (plane->s_plane.normal.x * ray->direction->x
 			+ plane->s_plane.normal.y * ray->direction->y
 			+ plane->s_plane.normal.z * ray->direction->z);
-	if (fabs(divisor) < 1e-6)
+	if (fabs(divisor) < EPSILON)
 		return (INFINITY);
 	t = -(plane->s_plane.normal.x * ray->origin->x + plane->s_plane.normal.y
 			* ray->origin->y + plane->s_plane.normal.z * ray->origin->z

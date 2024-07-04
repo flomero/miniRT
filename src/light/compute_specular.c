@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   compute_specular.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 09:43:35 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/07/04 10:52:22 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ t_color	*ft_compute_reflection(t_color *refl_col, const t_hit *rec, int depth)
 		rec->ray->direction->z);
 	ft_v3_reflect(&direction, &rec->n, &direction);
 	ft_v3_normal_ip(&direction);
+	ft_v3_scalar_ip(&direction, 1 + EPSILON);
+	ft_v3_add_ip(&origin, &direction);
 	ft_ray_init(&refl_ray, &origin, &direction);
 	refl_rec.ray = &refl_ray;
 	refl_rec.obj = NULL;
