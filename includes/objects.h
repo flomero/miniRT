@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 12:49:15 by flfische          #+#    #+#             */
-/*   Updated: 2024/07/02 10:28:08 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/04 15:18:14 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,10 +136,10 @@ typedef struct s_object
 			double			fov;
 			double			vp_width;
 			double			vp_height;
-			t_vector3		*ll_corner;
-			t_vector3		*hor;
-			t_vector3		*ver;
-			t_vector3		*look_at;
+			t_vector3		ll_corner;
+			t_vector3		hor;
+			t_vector3		ver;
+			t_vector3		look_at;
 			double			focal_length;
 		} s_camera;
 		struct

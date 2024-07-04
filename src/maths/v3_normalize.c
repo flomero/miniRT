@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   v3_normalize.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:20:48 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/07/04 15:15:35 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@
  * @return The normalized vector.
  * @note The function allocates memory.
  */
-t_vector3	*ft_v3_normal(const t_vector3 *a)
-{
-	double		len;
-	t_vector3	*vector;
+// t_vector3	*ft_v3_normal(const t_vector3 *a)
+// {
+// 	double		len;
+// 	t_vector3	*vector;
 
-	len = ft_v3_len(a);
-	if (len == 0)
-		return ((t_vector3 *) a);
-	vector = ft_v3_new(a->x / len, a->y / len, a->z / len);
-	return (vector);
-}
+// 	len = ft_v3_len(a);
+// 	if (len == 0)
+// 		return ((t_vector3 *) a);
+// 	vector = ft_v3_new(a->x / len, a->y / len, a->z / len);
+// 	return (vector);
+// }
 
 /**
  * Normalizes a vector in place.

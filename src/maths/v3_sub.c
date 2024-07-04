@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:16:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/13 10:29:30 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/04 15:26:06 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
  * @return The new vector.
  * @note The function allocates memory.
  */
-t_vector3	*ft_v3_sub(const t_vector3 *a, const t_vector3 *b)
-{
-	t_vector3	*vector;
+// t_vector3	*ft_v3_sub(const t_vector3 *a, const t_vector3 *b)
+// {
+// 	t_vector3	*vector;
 
-	vector = ft_v3_new(a->x - b->x, a->y - b->y, a->z - b->z);
-	return (vector);
-}
+// 	vector = ft_v3_new(a->x - b->x, a->y - b->y, a->z - b->z);
+// 	return (vector);
+// }
 
 /**
  * Subtracts two vectors and stores the result in the first vector: a -= b.
