@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:48:28 by flfische          #+#    #+#             */
-/*   Updated: 2024/07/02 10:30:39 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/04 15:25:20 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,13 @@ uint32_t	ft_send_ray(int x, int y, t_object *camera)
 	if (ft_get_program()->max_samples > 1)
 		randoff = ft_randf();
 	uv.y = 1 - ((double)y + randoff) / (double)(WIN_HEIGHT - 1);
-	ray.direction = &(t_vector3){camera->s_camera.ll_corner->x,
-		camera->s_camera.ll_corner->y, camera->s_camera.ll_corner->z};
-	ft_v3_init(&temp_vec, camera->s_camera.hor->x * uv.x,
-		camera->s_camera.hor->y * uv.x, camera->s_camera.hor->z * uv.x);
+	ray.direction = &(t_vector3){camera->s_camera.ll_corner.x,
+		camera->s_camera.ll_corner.y, camera->s_camera.ll_corner.z};
+	ft_v3_init(&temp_vec, camera->s_camera.hor.x * uv.x, camera->s_camera.hor.y
+		* uv.x, camera->s_camera.hor.z * uv.x);
 	ft_v3_add_ip(ray.direction, &temp_vec);
-	ft_v3_init(&temp_vec, camera->s_camera.ver->x * uv.y,
-		camera->s_camera.ver->y * uv.y, camera->s_camera.ver->z * uv.y);
+	ft_v3_init(&temp_vec, camera->s_camera.ver.x * uv.y, camera->s_camera.ver.y
+		* uv.y, camera->s_camera.ver.z * uv.y);
 	ft_v3_add_ip(ray.direction, &temp_vec);
 	ft_v3_sub_ip(ray.direction, &camera->pos);
 	ray.depth = ft_get_program()->bounces;

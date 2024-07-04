@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   v3_random.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 16:10:46 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/07/04 15:25:53 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_vector3	*ft_v3_rand(void)
-{
-	t_vector3	*rand;
+// t_vector3	*ft_v3_rand(void)
+// {
+// 	t_vector3	*rand;
 
-	rand = ft_v3_new(ft_randf(), ft_randf(), ft_randf());
-	return (rand);
-}
+// 	rand = ft_v3_new(ft_randf(), ft_randf(), ft_randf());
+// 	return (rand);
+// }
 
 t_vector3	*ft_v3_rand_ip(t_vector3 *vec)
 {
@@ -28,14 +28,14 @@ t_vector3	*ft_v3_rand_ip(t_vector3 *vec)
 	return (vec);
 }
 
-t_vector3	*ft_v3_rand_range(double min, double max)
-{
-	t_vector3	*rand;
+// t_vector3	*ft_v3_rand_range(double min, double max)
+// {
+// 	t_vector3	*rand;
 
-	rand = ft_v3_new(ft_randf_range(min, max), ft_randf_range(min, max),
-			ft_randf_range(min, max));
-	return (rand);
-}
+// 	rand = ft_v3_new(ft_randf_range(min, max), ft_randf_range(min, max),
+// 			ft_randf_range(min, max));
+// 	return (rand);
+// }
 
 t_vector3	*ft_v3_rand_range_ip(t_vector3 *vec, double min, double max)
 {
