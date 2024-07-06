@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/07/03 15:47:32 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/06 18:47:07 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,8 @@ int	main(int argc, char **argv)
 	program = ft_get_program();
 	if (ft_mlx_init(argv[1]))
 		return (1);
-	if (!ft_assign_mat_tex())
+	if (!ft_assign_mat_tex() || !ft_init_rt(program))
 		return (1);
-	ft_init_rt(program);
 	mlx_key_hook(program->mlx, ft_key_hook, program);
 	if (program->thread_count < 2)
 		mlx_loop_hook(program->mlx, ft_render, program);

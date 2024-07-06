@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/07/06 16:09:36 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/06 18:41:37 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct s_program
 
 // FUNCTIONS
 t_program			*ft_get_program(void);
-void				ft_init_rt(t_program *program);
+t_bool				ft_init_rt(t_program *program);
 void				join_threads(t_program *program);
 void				ft_debug_message(char *message);
 

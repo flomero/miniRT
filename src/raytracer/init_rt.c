@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 17:25:16 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/17 15:08:24 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/06 19:08:59 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,31 @@ static uint32_t	init_void_color(void)
 	return (ft_color_from_float(color));
 }
 
+static void	print_stats(t_program *program)
+{
+	ft_printf("Rendering with %d", program->max_samples);
+	if (program->max_samples == 1)
+		ft_printf(" sample");
+	else
+		ft_printf(" samples");
+	ft_printf(" and %d", program->thread_count);
+	if (program->thread_count == 1)
+		ft_printf(" thread");
+	else
+		ft_printf(" threads");
+	ft_printf(" and %d", program->bounces);
+	if (program->bounces == 1)
+		ft_printf(" bounce\n");
+	else
+		ft_printf(" bounces\n");
+}
+
 /**
  * Initializes the raytracer.
  *
  * @param program The program.
  */
-void	ft_init_rt(t_program *program)
+t_bool	ft_init_rt(t_program *program)
 {
 	ft_calculate_viewport(ft_get_first_obj(CAMERA));
 	program->void_color = init_void_color();
@@ -48,8 +67,11 @@ void	ft_init_rt(t_program *program)
 	if (program->thread_count > 1)
 	{
 		program->stop = malloc(sizeof(pthread_mutex_t));
-		pthread_mutex_init(program->stop, NULL);
+		if (!program->stop)
+			return (ft_print_error(strerror(errno)), FALSE);
+		if (pthread_mutex_init(program->stop, NULL))
+			return (ft_print_error(strerror(errno)), FALSE);
 	}
-	ft_printf("Rendering with %d samples, %d threads and %d bounces\n",
-		program->max_samples, program->thread_count, program->bounces);
+	print_stats(program);
+	return (TRUE);
 }
