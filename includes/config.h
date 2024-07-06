@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:29:22 by flfische          #+#    #+#             */
-/*   Updated: 2024/07/04 10:54:05 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/06 16:07:50 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@
 # define RESET "\033[0m"
 # define RED "\033[31m"
 # define BOLD "\033[1m"
+# define CYAN "\033[36m"
 
 // ERRORS
 # define ALLOC_ERR "Memory allocation failed"

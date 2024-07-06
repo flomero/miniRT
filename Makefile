@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/07/03 17:04:18 by flfische         ###   ########.fr        #
+#    Updated: 2024/07/06 16:10:09 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC_DIRS := src \
 			src/parsing \
 			src/light \
 			src/textures \
+			src/debug \
 
 OBJ_DIR := obj
 INC_DIR := includes
@@ -40,6 +41,7 @@ CFILES := miniRT.c \
 			mlx_init.c \
 			mlx_hooks.c \
 			print_error.c \
+			debug_messages.c \
 
 CFILES += 	parsing.c \
 			parsing_handlers.c \
@@ -191,9 +193,11 @@ norm:
 	@norminette $(SRC_DIRS) $(INC_DIR) $(LIBFT_DIR) | grep "Error" || echo "$(GREEN)Norme OK$(NC)"
 
 debug: CFLAGS += -g
-debug: CFLAGS += -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fno-sanitize=null -fno-sanitize=alignment
 debug: CFLAGS += -DDEBUG=1
 debug: clean all
+
+sanitize: CFLAGS += -g -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fno-sanitize=null -fno-sanitize=alignment
+sanitize: clean all
 
 debug_thread: CFLAGS += -g
 debug_thread: CFLAGS += -fsanitize=thread
@@ -203,7 +207,7 @@ debug_thread: clean all
 hd: CFLAGS += -DWIN_WIDTH=1920 -DWIN_HEIGHT=1080
 hd: clean all
 
-.PHONY: all clean fclean re norm ascii debug debug_thread hd
+.PHONY: all clean fclean re norm ascii debug debug_thread hd sanitize
 
 # colors:
 GREEN = \033[0;32m
