@@ -6,14 +6,13 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 11:26:52 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/21 15:30:30 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/06 13:58:40 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-uint32_t	ft_get_pixel_color(mlx_texture_t *texture, int x, int y,
-		t_color *result)
+uint32_t	ft_pixcol(mlx_texture_t *texture, int x, int y, t_color *result)
 {
 	uint32_t	color;
 	uint8_t		*pixel;
@@ -49,6 +48,5 @@ uint32_t	ft_texture_file(t_object *obj, t_hit *hit, t_color *result)
 		uv_func[obj->type](hit, &uv);
 	uv.x = uv.x * texture->s_tex.s_custom.img->width;
 	uv.y = uv.y * texture->s_tex.s_custom.img->height;
-	return (ft_get_pixel_color(texture->s_tex.s_custom.img, uv.x, uv.y,
-			result));
+	return (ft_pixcol(texture->s_tex.s_custom.img, uv.x, uv.y, result));
 }
