@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 14:41:37 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/30 12:22:26 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/06 19:19:19 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ int	get_a(char **tokens, t_object *obj)
 	if (get_arr_len(tokens) != 3)
 		return (0);
 	if (!is_float(tokens[1]) && !is_int(tokens[1]))
-		return (free(obj), 0);
+		return (0);
 	ratio = (double)ft_atod(tokens[1]);
 	if (ratio < 0 || ratio > 1)
 		return (0);
 	if (!get_color(tokens[2], &obj->color))
-		return (free(obj), 0);
+		return (0);
 	ft_color_to_float(obj->color, &obj->color_f);
 	obj->s_ambient_light.ratio = ratio;
 	obj->type = AMBIENT_LIGHT;
@@ -55,12 +55,12 @@ int	get_l(char **tokens, t_object *obj)
 	if (!get_vector(&obj->pos, tokens[1]))
 		return (0);
 	if (!is_float(tokens[2]) && !is_int(tokens[2]))
-		return (free(obj), 0);
+		return (0);
 	brightness = (double)ft_atod(tokens[2]);
 	if (brightness < 0 || brightness > 1)
 		return (0);
 	if (!get_color(tokens[3], &obj->color))
-		return (free(obj), 0);
+		return (0);
 	ft_color_to_float(obj->color, &obj->color_f);
 	obj->s_light.brightness = brightness;
 	return (1);

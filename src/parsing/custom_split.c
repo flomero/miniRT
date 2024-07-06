@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   custom_split.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 07:51:20 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/19 12:20:05 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/07/06 19:13:13 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static char	*ft_multi_strdeldup(const char *src, char *set)
 	del = *(ft_strchr(set, *tmp));
 	dest = (char *)malloc(ft_strdellen(src, del) + 1);
 	if (dest == NULL)
-		return (NULL);
+		return (ft_print_error(strerror(errno)), NULL);
 	ft_strdelcpy(dest, src, del);
 	return (dest);
 }
@@ -79,7 +79,7 @@ char	**ft_multi_split(char const *s, char *set)
 	str_count = ft_multi_count_substr(s, set);
 	arr = malloc((str_count + 1) * sizeof(char *));
 	if (arr == NULL)
-		return (NULL);
+		return (ft_print_error(strerror(errno)), NULL);
 	i = 0;
 	while (i < str_count)
 	{

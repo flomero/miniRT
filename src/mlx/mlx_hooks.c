@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:56:51 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/20 14:42:21 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/07/06 16:11:15 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	ft_render_multithread(void *param)
 	initialized = TRUE;
 	program = (t_program *)param;
 	i = 0;
+	ft_debug_message("Rendering multithread...");
 	while (i < program->thread_count && i < MAX_THREADS)
 	{
 		ids[i] = i;

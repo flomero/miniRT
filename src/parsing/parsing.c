@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:15:15 by klamprak          #+#    #+#             */
-/*   Updated: 2024/07/01 15:25:54 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/06 18:33:54 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	init_struct(char *fname, int len)
 	objs = malloc(sizeof(t_object) * (len));
 	ft_get_program()->objs_len = len;
 	if (!objs)
-		return (ft_print_error(ALLOC_ERR), 0);
+		return (ft_print_error(strerror(errno)), 0);
 	fd = open(fname, O_RDONLY);
 	if (fd == -1)
 		return (print_err_extend("Opening file: ", strerror(errno), 0), 0);
