@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:34:52 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/07/06 14:21:51 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,31 +37,33 @@ double	ft_sphere_hit(t_object *sphere, t_ray *ray)
 	return ((-tmp.y - sqrt(discriminant)) / (2.0 * tmp.x));
 }
 
-static int	ft_sphere_bump(t_hit *hit, t_ray *ray)
+static int	ft_sphere_bump(t_hit *hit)
 {
-	uint32_t		color;
+	mlx_texture_t	*tex;
 	t_vector2		uv;
-	mlx_texture_t	*texture;
-	t_vector3		perturbation;
+	t_vector2		uv_r;
+	t_vector2		uv_d;
+	t_vector3		height_pert[2];
 
 	ft_sphere_uv(hit, &uv);
-	texture = hit->obj->bump->s_bump.img;
-	uv.x = fmod(uv.x * texture->width, texture->width);
-	uv.y = fmod(uv.y * texture->height, texture->height);
+	tex = hit->obj->bump->s_bump.img;
+	uv.x = fmod(uv.x * tex->width, tex->width);
+	uv.y = fmod(uv.y * tex->height, tex->height);
 	if (uv.x < 0)
-		uv.x += texture->width;
+		uv.x += tex->width;
 	if (uv.y < 0)
-		uv.y += texture->height;
-	color = ft_get_pixel_color(texture, (int)uv.x, (int)uv.y, NULL);
-	perturbation.x = ((color >> 16) & 0xFF) / 127.5 - 1.0;
-	perturbation.y = ((color >> 8) & 0xFF) / 127.5 - 1.0;
-	perturbation.z = (color & 0xFF) / 127.5 - 1.0;
-	hit->n.x += perturbation.x;
-	hit->n.y += perturbation.y;
-	hit->n.z += perturbation.z;
-	ft_v3_normal_ip(&hit->n);
-	(void)ray;
-	return (1);
+		uv.y += tex->height;
+	uv_r = (t_vector2){fmod(uv.x + 1, tex->width), uv.y};
+	uv_d = (t_vector2){uv.x, fmod(uv.y + 1, tex->height)};
+	height_pert[0] = (t_vector3){((ft_pixcol(tex, (int)uv.x, (int)uv.y,
+					NULL) >> 24) & 0xFF) / 255.0, ((ft_pixcol(tex, (int)uv_r.x,
+					(int)uv_r.y, NULL) >> 24) & 0xFF) / 255.0, ((ft_pixcol(tex,
+					(int)uv_d.x, (int)uv_d.y, NULL) >> 24) & 0xFF) / 255.0};
+	height_pert[1].x = (height_pert[0].y - height_pert[0].x) * BUMP_SCALE;
+	height_pert[1].y = (height_pert[0].z - height_pert[0].x) * BUMP_SCALE;
+	hit->n = (t_vector3){hit->n.x + height_pert[1].x, hit->n.y
+		+ height_pert[1].y, hit->n.z};
+	return (ft_v3_normal_ip(&hit->n), 1);
 }
 
 int	ft_sphere_normal(t_hit *hit, t_ray *ray)
@@ -74,7 +76,7 @@ int	ft_sphere_normal(t_hit *hit, t_ray *ray)
 	ft_v3_normal_ip(&hit->n);
 	ft_v3_init(&hit->uvn, hit->n.x, hit->n.y, hit->n.z);
 	if (hit->obj->bump_name[0])
-		return (ft_sphere_bump(hit, ray));
+		return (ft_sphere_bump(hit));
 	return (1);
 }
 
