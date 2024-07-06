@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/07/06 18:41:37 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/06 23:09:29 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,7 +219,7 @@ t_bool				ft_check_dup_mat(void);
 t_bool				ft_check_dup_tex(void);
 t_bool				ft_check_dup_bump(void);
 uint32_t			ft_texture_file(t_object *obj, t_hit *hit, t_color *result);
-uint32_t			ft_get_pixel_color(mlx_texture_t *texture, int x, int y,
+uint32_t			ft_pixcol(mlx_texture_t *texture, int x, int y,
 						t_color *result);
 
 // MATHS
