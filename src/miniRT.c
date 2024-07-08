@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/07/06 19:30:04 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/08 16:29:53 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(int argc, char **argv)
 {
 	t_program	*program;
 
+	// mlx_set_setting(MLX_HEADLESS, 1);
 	if (DEBUG)
 		atexit(leaks);
 	if (argc != 2)
@@ -57,5 +58,6 @@ int	main(int argc, char **argv)
 		mlx_loop_hook(program->mlx, ft_render_multithread, program);
 	mlx_loop(program->mlx);
 	join_threads(program);
+	ft_free_all();
 	return (0);
 }

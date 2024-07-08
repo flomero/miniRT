@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:45:47 by klamprak          #+#    #+#             */
-/*   Updated: 2024/07/02 15:53:26 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/08 15:36:37 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,12 @@ static bool	calc_hit(t_ray *ray, t_object *cy, double dist, double *t)
 {
 	t_vector3	p;
 	t_vector3	tmp;
-	double		dist_to_cap;
 	double		projection_on_axis;
 
 	ft_v3_init(&p, ray->origin->x + ray->direction->x * dist, ray->origin->y
 		+ ray->direction->y * dist, ray->origin->z + ray->direction->z * dist);
 	ft_v3_init(&tmp, p.x - cy->pos.x, p.y - cy->pos.y, p.z - cy->pos.z);
 	projection_on_axis = ft_v3_dotprod(&tmp, &cy->s_cylinder.normal);
-	dist_to_cap = fabs(projection_on_axis);
 	if (projection_on_axis >= -cy->s_cylinder.height / 2
 		&& projection_on_axis <= cy->s_cylinder.height / 2)
 	{

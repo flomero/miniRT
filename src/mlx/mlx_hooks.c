@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:56:51 by flfische          #+#    #+#             */
-/*   Updated: 2024/07/06 16:11:15 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/08 15:35:58 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	ft_render_multithread(void *param)
 {
 	t_program		*program;
 	int				i;
-	int				ids[MAX_THREADS];
 	static t_bool	initialized;
 
 	if (initialized)
@@ -82,7 +81,6 @@ void	ft_render_multithread(void *param)
 	ft_debug_message("Rendering multithread...");
 	while (i < program->thread_count && i < MAX_THREADS)
 	{
-		ids[i] = i;
 		pthread_create(&program->threads[i], NULL, ft_render_multi,
 			(void *)(uintptr_t)i);
 		if (!program->threads[i])
@@ -112,7 +110,9 @@ void	ft_key_hook(mlx_key_data_t keydata, void *param)
 			pthread_mutex_unlock(program->stop);
 			join_threads(program);
 		}
+		mlx_delete_image(program->mlx, program->image);
 		mlx_terminate(program->mlx);
+		ft_free_all();
 		exit(0);
 	}
 	if (keydata.key == MLX_KEY_SPACE)
