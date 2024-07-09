@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:39:34 by klamprak          #+#    #+#             */
-/*   Updated: 2024/07/09 12:31:51 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/07/09 12:55:32 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ void	get_cone_plane(t_object *cone, t_object *to_init_pl)
 	ft_v3_init(&normal, cone->s_cone.normal.x,
 		cone->s_cone.normal.y, cone->s_cone.normal.z);
 	ft_v3_init(&center, cone->pos.x, cone->pos.y, cone->pos.z);
-	ft_v3_init(&middle_offset, normal.x * cone->s_cone.height / 2,
-		normal.y * cone->s_cone.height / 2, normal.z
-		* cone->s_cone.height / 2);
+	ft_v3_init(&middle_offset, normal.x * cone->s_cone.height,
+		normal.y * cone->s_cone.height, normal.z
+		* cone->s_cone.height);
 	ft_v3_scalar_ip(&center, 1 + EPSILON);
 	ft_v3_add_ip(&center, &middle_offset);
 	ft_v3_init(&to_init_pl->pos, center.x, center.y, center.z);
