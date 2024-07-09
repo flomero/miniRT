@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/07/08 16:29:53 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/09 14:17:42 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,19 @@ t_program	*ft_get_program(void)
 void	ft_free_all(void)
 {
 	t_program	*program;
+	int			i;
 
+	i = 0;
 	program = ft_get_program();
+	while (i < program->objs_len)
+	{
+		if (program->objs[i].type == TEXTURE
+			&& program->objs[i].s_tex.type == TEX_FILE)
+			mlx_delete_texture(program->objs[i].s_tex.s_custom.img);
+		if (program->objs[i].type == BUMP)
+			mlx_delete_texture(program->objs[i].s_bump.img);
+		i++;
+	}
 	if (program->objs)
 		free(program->objs);
 }

@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/07/08 15:45:31 by flfische         ###   ########.fr        #
+#    Updated: 2024/07/09 14:52:57 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -201,7 +201,6 @@ sanitize: clean all
 
 debug_thread: CFLAGS += -g
 debug_thread: CFLAGS += -fsanitize=thread
-debug_thread: CFLAGS += -DDEBUG=1
 debug_thread: clean all
 
 hd: CFLAGS += -DWIN_WIDTH=1920 -DWIN_HEIGHT=1080

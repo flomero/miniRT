@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 11:26:52 by flfische          #+#    #+#             */
-/*   Updated: 2024/07/06 13:58:40 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/09 14:13:22 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ uint32_t	ft_pixcol(mlx_texture_t *texture, int x, int y, t_color *result)
 	y = texture->height - y - 1;
 	pixel = texture->pixels + (y * texture->width + x)
 		* texture->bytes_per_pixel;
-	color = (pixel[0] << 24) | (pixel[1] << 16) | (pixel[2] << 8) | pixel[3];
+	color = ((uint32_t)pixel[0] << 24) | ((uint32_t)pixel[1] << 16);
+	color |= ((uint32_t)pixel[2] << 8) | pixel[3];
 	if (result)
 		ft_color_to_float(color, result);
 	return (color);
