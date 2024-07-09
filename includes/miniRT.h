@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/07/06 23:09:29 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/08 15:09:25 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ t_program			*ft_get_program(void);
 t_bool				ft_init_rt(t_program *program);
 void				join_threads(t_program *program);
 void				ft_debug_message(char *message);
+void				ft_free_all(void);
 
 // MLX
 int					ft_mlx_init(char *filename);

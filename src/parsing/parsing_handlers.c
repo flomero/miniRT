@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 14:41:37 by klamprak          #+#    #+#             */
-/*   Updated: 2024/07/06 19:19:19 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/08 15:36:18 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	get_pl(char **tokens, t_object *obj)
 	if (get_arr_len(tokens) != 4 && get_arr_len(tokens) != 5)
 		return (0);
 	if (!get_vector(&obj->pos, tokens[1]))
-		return (free(&obj), 0);
+		return (0);
 	if (!get_vector(&obj->s_plane.normal, tokens[2]))
 		return (0);
 	if (!in_range(&obj->s_plane.normal, -1, 1))

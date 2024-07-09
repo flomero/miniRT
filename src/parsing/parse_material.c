@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_material.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:10:43 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/27 16:36:43 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/07/08 15:54:05 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_assign_own_tm(t_object *obj)
 	obj->material = obj;
 	ft_bzero(obj->material_name, MAX_NAME_LEN);
 	obj->texture = obj;
+	obj->s_tex.type = TEX_DEFAULT;
 	ft_bzero(obj->texture_name, MAX_NAME_LEN);
 	obj->bump = obj;
 	ft_bzero(obj->bump_name, MAX_NAME_LEN);
