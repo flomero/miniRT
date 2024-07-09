@@ -3,112 +3,179 @@
 /*                                                        :::      ::::::::   */
 /*   cone.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:39:34 by klamprak          #+#    #+#             */
-/*   Updated: 2024/07/01 10:36:57 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/09 12:31:35 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static double	in_height(double t[2], t_object *cone, double CO_A, double D_A);
+static void	calculate_coefficients(t_ray *ray, t_object *cone, double *coeffs)
+{
+	t_vector3	delta_p;
+	double		radius;
+	double		tsq;
+	double		ray_cn;
+	double		p_cn;
+
+	ft_v3_init(&delta_p, ray->origin->x - cone->pos.x, ray->origin->y
+		- cone->pos.y, ray->origin->z - cone->pos.z);
+	radius = cone->s_cone.radius;
+	tsq = 1 + ((radius / cone->s_cone.height) * (radius / cone->s_cone.height));
+	ray_cn = ft_v3_dotprod(ray->direction, &cone->s_cone.normal);
+	p_cn = ft_v3_dotprod(&delta_p, &cone->s_cone.normal);
+	coeffs[0] = ft_v3_dotprod(ray->direction, ray->direction) - tsq
+		* powf(ray_cn, 2);
+	coeffs[1] = 2 * (ft_v3_dotprod(ray->direction, &delta_p) - tsq * ray_cn
+			* p_cn);
+	coeffs[2] = ft_v3_dotprod(&delta_p, &delta_p) - tsq * powf(p_cn, 2);
+}
+
+static bool	calc_hit(t_ray *ray, t_object *cone, double dist, double *t)
+{
+	t_vector3	hit_point;
+	double		dist_to_base;
+
+	ft_v3_init(&hit_point, ray->origin->x + ray->direction->x * dist,
+		ray->origin->y + ray->direction->y * dist, ray->origin->z
+		+ ray->direction->z * dist);
+	ft_v3_sub_ip(&hit_point, &cone->pos);
+	dist_to_base = ft_v3_dotprod(&hit_point, &cone->s_cone.normal);
+	if (dist_to_base >= 0 && dist_to_base <= cone->s_cone.height)
+	{
+		if (dist < *t)
+			*t = dist;
+		return (true);
+	}
+	return (false);
+}
+
+static bool	check_cone_body(t_ray *ray, t_object *cone, double *coeffs,
+		double *t)
+{
+	bool	hit0_valid;
+	bool	hit1_valid;
+	double	tmp;
+	double	t0;
+	double	t1;
+
+	tmp = INFINITY;
+	if (!is_sol_equation(coeffs, &t0, &t1))
+		return (false);
+	hit0_valid = calc_hit(ray, cone, t0, &tmp);
+	hit1_valid = calc_hit(ray, cone, t1, &tmp);
+	if (hit0_valid || hit1_valid)
+	{
+		*t = tmp;
+		return (true);
+	}
+	return (false);
+}
+void	get_cone_plane(t_object *cone, t_object *to_init_pl)
+{
+	t_vector3	center;
+	t_vector3	normal;
+
+	// Initialize normal vector
+	ft_v3_init(&normal, cone->s_cone.normal.x, cone->s_cone.normal.y,
+		cone->s_cone.normal.z);
+	// Calculate the center of the bottom cap
+	ft_v3_init(&center, cone->pos.x - normal.x * cone->s_cone.height / 2,
+		cone->pos.y - normal.y * cone->s_cone.height / 2, cone->pos.z - normal.z
+		* cone->s_cone.height / 2);
+	// Slightly offset the center position
+	ft_v3_scalar_ip(&center, 1 + EPSILON);
+	// Initialize the bottom cap position and normal
+	ft_v3_init(&to_init_pl->pos, center.x, center.y, center.z);
+	ft_v3_init(&to_init_pl->s_plane.normal, normal.x, normal.y, normal.z);
+	ft_v3_normal_ip(&to_init_pl->s_plane.normal);
+}
 
 double	ft_cone_hit(t_object *cone, t_ray *ray)
 {
-	t_vector3	co;
-	double		k;
-	double		dot_dc[2];
-	double		abc[3];
-	double		t[2];
+	t_object	tmp_cone;
+	double		coefficients[3];
+	t_object	bot_pl;
+	bool		hit_body;
+	bool		hit_cap;
+	double		t;
 
-	ft_v3_init(&co, ray->origin->x - cone->pos.x, ray->origin->y - cone->pos.y,
-		ray->origin->z - cone->pos.z);
-	k = (cone->s_cone.radius / cone->s_cone.height) * (cone->s_cone.radius
-			/ cone->s_cone.height);
-	dot_dc[0] = ft_v3_dotprod(ray->direction, &cone->s_cone.normal);
-	dot_dc[1] = ft_v3_dotprod(&co, &cone->s_cone.normal);
-	abc[0] = ft_v3_dotprod(ray->direction, ray->direction) - (1 + k)
-		* (dot_dc[0] * dot_dc[0]);
-	abc[1] = 2 * (ft_v3_dotprod(ray->direction, &co) - (1 + k) * dot_dc[0]
-			* dot_dc[1]);
-	abc[2] = ft_v3_dotprod(&co, &co) - (1 + k) * (dot_dc[1] * dot_dc[1]);
-	abc[2] = abc[1] * abc[1] - 4 * abc[0] * abc[2];
-	if (abc[2] < 0 || abc[0] == 0)
-		return (INFINITY);
-	t[0] = (-abc[1] - sqrt(abc[2])) / (2 * abc[0]) - EPSILON;
-	t[1] = (-abc[1] + sqrt(abc[2])) / (2 * abc[0]) - EPSILON;
-	return (in_height(t, cone, dot_dc[1], dot_dc[0]));
-}
-
-static double	in_height(double t[2], t_object *cone, double CO_A, double D_A)
-{
-	double	hit_height;
-	double	t_min;
-	int		i;
-
-	t_min = INFINITY;
-	i = -1;
-	while (++i < 2)
-	{
-		if (t[i] > 0)
-		{
-			hit_height = CO_A + t[i] * D_A;
-			if (hit_height >= cone->s_cone.min
-				&& hit_height <= cone->s_cone.height)
-			{
-				if (t[i] < t_min)
-					t_min = t[i];
-			}
-		}
-	}
-	return (t_min);
-}
-
-static int	handle_projec_zero(t_hit *hit, t_ray *ray)
-{
-	t_vector3	tmp;
-	t_vector3	perp;
-
-	ft_v3_init(&perp, 1, 0, 0);
-	if (fabs(hit->obj->s_cone.normal.x) > 0.9)
-		perp = (t_vector3){0, 1, 0};
-	ft_v3_init(&tmp, hit->obj->s_cone.normal.x, hit->obj->s_cone.normal.y,
-		hit->obj->s_cone.normal.z);
-	ft_v3_crossprod_ip(&tmp, &perp);
-	ft_v3_normal_ip(&tmp);
-	ft_v3_init(&hit->n, tmp.x, tmp.y, tmp.z);
-	ft_v3_crossprod_ip(&hit->n, &hit->obj->s_cone.normal);
-	ft_v3_normal_ip(&hit->n);
-	(void)ray;
-	return (1);
+	t = INFINITY;
+	// Initialize the temporary cone object
+	ft_v3_init(&tmp_cone.pos, cone->pos.x, cone->pos.y, cone->pos.z);
+	ft_v3_init(&tmp_cone.s_cone.normal, cone->s_cone.normal.x,
+		cone->s_cone.normal.y, cone->s_cone.normal.z);
+	tmp_cone.s_cone.height = cone->s_cone.height;
+	tmp_cone.s_cone.radius = cone->s_cone.radius;
+	// Normalize the cone's normal vector
+	ft_v3_div_ip(&tmp_cone.s_cone.normal,
+		sqrt(ft_v3_dotprod(&tmp_cone.s_cone.normal, &tmp_cone.s_cone.normal)));
+	// Get the bottom cap plane of the cone
+	get_cone_plane(&tmp_cone, &bot_pl);
+	// Calculate the coefficients for the quadratic equation
+	calculate_coefficients(ray, &tmp_cone, coefficients);
+	// Check for intersection with the cone body
+	hit_body = check_cone_body(ray, &tmp_cone, coefficients, &t);
+	// Check for intersection with the bottom cap
+	hit_cap = inter_disk(ray, &bot_pl, &t, cone->s_cone.radius);
+	// Return the closest intersection distance
+	if (hit_body || hit_cap)
+		return (t);
+	return (INFINITY);
 }
 
 int	ft_cone_normal(t_hit *hit, t_ray *ray)
 {
-	t_vector3	tmp;
-	double		projec;
-	double		magnitude;
-	double		angle;
-	double		n_dot_n;
+	t_vector3	height_component;
+	t_vector3	radial_component;
+	double		radius;
 
 	ft_v3_init(&hit->p, ray->origin->x + ray->direction->x * hit->t,
 		ray->origin->y + ray->direction->y * hit->t, ray->origin->z
 		+ ray->direction->z * hit->t);
-	ft_v3_init(&hit->n, hit->p.x, hit->p.y, hit->p.z);
-	ft_v3_sub_ip(&hit->n, &hit->obj->pos);
-	projec = ft_v3_dotprod(&hit->n, &hit->obj->s_cone.normal);
-	n_dot_n = ft_v3_dotprod(&hit->n, &hit->n);
-	if (n_dot_n < projec * projec)
-		return (handle_projec_zero(hit, ray));
-	magnitude = sqrt(ft_v3_dotprod(&hit->n, &hit->n) - (projec * projec));
-	if (projec == 0)
-		return (handle_projec_zero(hit, ray));
-	angle = atan(magnitude / projec);
-	ft_v3_init(&tmp, hit->obj->s_cone.normal.x, hit->obj->s_cone.normal.y,
-		hit->obj->s_cone.normal.z);
-	ft_v3_scalar_ip(&tmp, projec * (1 + (tan(angle) * tan(angle))));
-	ft_v3_sub_ip(&hit->n, &tmp);
-	ft_v3_normal_ip(&hit->n);
+	ft_v3_init(&radial_component, hit->p.x - hit->obj->pos.x, hit->p.y
+		- hit->obj->pos.y, hit->p.z - hit->obj->pos.z);
+	ft_v3_init(&height_component, hit->obj->s_cone.normal.x,
+		hit->obj->s_cone.normal.y, hit->obj->s_cone.normal.z);
+	ft_v3_scalar_ip(&height_component, ft_v3_dotprod(&radial_component,
+			&hit->obj->s_cone.normal));
+	ft_v3_sub_ip(&radial_component, &height_component);
+	radius = hit->obj->s_cone.radius;
+	ft_v3_scalar_ip(&radial_component, 1.0 / (radius
+			/ hit->obj->s_cone.height));
+	ft_v3_add_ip(&height_component, &radial_component);
+	ft_v3_init(&hit->n, height_component.x, height_component.y,
+		height_component.z);
 	return (1);
 }
+
+// int	ft_cone_normal(t_hit *hit, t_ray *ray)
+// {
+// 	t_vector3tor3	tmp;
+// 	double		projec;
+// 	double		magnitude;
+// 	double		angle;
+// 	double		n_dot_n;
+
+// 	ft_v3_init(&hit->p, ray->origin->x + ray->direction->x * hit->t,
+// 		ray->origin->y + ray->direction->y * hit->t, ray->origin->z
+// 		+ ray->direction->z * hit->t);
+// 	ft_v3_init(&hit->n, hit->p.x, hit->p.y, hit->p.z);
+// 	ft_v3_sub_ip(&hit->n, &hit->obj->pos);
+// 	projec = ft_v3_dotprod(&hit->n, &hit->obj->s_cone.normal);
+// 	n_dot_n = ft_v3_dotprod(&hit->n, &hit->n);
+// 	if (n_dot_n < projec * projec)
+// 		return (handle_projec_zero(hit, ray));
+// 	magnitude = sqrt(ft_v3_dotprod(&hit->n, &hit->n) - (projec * projec));
+// 	if (projec == 0)
+// 		return (handle_projec_zero(hit, ray));
+// 	angle = atan(magnitude / projec);
+// 	ft_v3_init(&tmp, hit->obj->s_cone.normal.x, hit->obj->s_cone.normal.y,
+// 		hit->obj->s_cone.normal.z);
+// 	ft_v3_scalar_ip(&tmp, projec * (1 + (tan(angle) * tan(angle))));
+// 	ft_v3_sub_ip(&hit->n, &tmp);
+// 	ft_v3_normal_ip(&hit->n);
+// 	return (1);
+// }
