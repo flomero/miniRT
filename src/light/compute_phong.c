@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:32:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/07/10 10:48:32 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/10 13:05:37 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_bool	ft_is_shadow(t_vector3 *light_dir, const t_hit *hit, t_program *program)
 			is_hitted = ft_hit(&ray, &program->objs[i], &tmp_hit)
 				&& tmp_hit.obj != hit->obj;
 			if (is_hitted)
-				if (tmp_hit.t > 0.0001 && tmp_hit.t < 0.9999)
+				if (tmp_hit.t > EPSILON && tmp_hit.t < 1 - EPSILON)
 					return (TRUE);
 		}
 		i++;
