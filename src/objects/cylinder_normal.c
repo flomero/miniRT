@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 15:53:13 by flfische          #+#    #+#             */
-/*   Updated: 2024/07/02 15:53:33 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/10 10:48:32 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ int	ft_cylinder_normal(t_hit *hit, t_ray *ray)
 	t_vector3	hit_to_center;
 	t_vector3	proj_hit;
 
-	ft_v3_init(&hit->p, ray->origin->x + ray->direction->x * hit->t,
-		ray->origin->y + ray->direction->y * hit->t, ray->origin->z
-		+ ray->direction->z * hit->t);
+	ft_v3_init(&hit->p, ray->origin->x + ray->dir->x * hit->t,
+		ray->origin->y + ray->dir->y * hit->t, ray->origin->z
+		+ ray->dir->z * hit->t);
 	disk_hit = hit_disks(ray, hit->obj, &hit->t, hit);
 	if (disk_hit)
 		return (1);
@@ -60,7 +60,7 @@ int	ft_cylinder_normal(t_hit *hit, t_ray *ray)
 	proj_hit.y = hit_to_center.y - len * hit->obj->s_cylinder.normal.y;
 	proj_hit.z = hit_to_center.z - len * hit->obj->s_cylinder.normal.z;
 	ft_v3_normal_ip(&proj_hit);
-	if (ft_v3_dotprod(&proj_hit, ray->direction) > 0)
+	if (ft_v3_dotprod(&proj_hit, ray->dir) > 0)
 		ft_v3_scalar_ip(&proj_hit, -1);
 	ft_v3_init(&hit->n, proj_hit.x, proj_hit.y, proj_hit.z);
 	return (1);

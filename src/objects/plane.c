@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 09:33:50 by klamprak          #+#    #+#             */
-/*   Updated: 2024/07/04 10:45:20 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/10 10:48:32 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ double	ft_plane_hit(t_object *plane, t_ray *ray)
 
 	d_plane = -(plane->pos.x * plane->s_plane.normal.x + plane->pos.y
 			* plane->s_plane.normal.y + plane->pos.z * plane->s_plane.normal.z);
-	divisor = (plane->s_plane.normal.x * ray->direction->x
-			+ plane->s_plane.normal.y * ray->direction->y
-			+ plane->s_plane.normal.z * ray->direction->z);
+	divisor = (plane->s_plane.normal.x * ray->dir->x
+			+ plane->s_plane.normal.y * ray->dir->y
+			+ plane->s_plane.normal.z * ray->dir->z);
 	if (fabs(divisor) < EPSILON)
 		return (INFINITY);
 	t = -(plane->s_plane.normal.x * ray->origin->x + plane->s_plane.normal.y
@@ -66,13 +66,13 @@ double	ft_plane_hit(t_object *plane, t_ray *ray)
 
 int	ft_plane_normal(t_hit *hit, t_ray *ray)
 {
-	ft_v3_init(&hit->p, ray->origin->x + ray->direction->x * hit->t,
-		ray->origin->y + ray->direction->y * hit->t, ray->origin->z
-		+ ray->direction->z * hit->t);
+	ft_v3_init(&hit->p, ray->origin->x + ray->dir->x * hit->t,
+		ray->origin->y + ray->dir->y * hit->t, ray->origin->z
+		+ ray->dir->z * hit->t);
 	ft_v3_init(&hit->n, hit->obj->s_plane.normal.x, hit->obj->s_plane.normal.y,
 		hit->obj->s_plane.normal.z);
 	ft_v3_normal_ip(&hit->n);
-	if (ft_v3_dotprod(&hit->n, ray->direction) > 0)
+	if (ft_v3_dotprod(&hit->n, ray->dir) > 0)
 		ft_v3_scalar_ip(&hit->n, -1);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/07/08 15:09:25 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/10 10:48:32 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 typedef struct s_ray
 {
 	t_vector3		*origin;
-	t_vector3		*direction;
+	t_vector3		*dir;
 	int				depth;
 }					t_ray;
 
@@ -131,6 +131,8 @@ bool				inter_disk(t_ray *ray, t_object *disk_pl, double *t,
 void				get_plane(t_object *cylinder, t_object *to_init_pl,
 						bool is_top);
 bool				is_sol_equation(double *abc, double *t0, double *t1);
+// CONE UTILS
+void				get_cone_plane(t_object *cone, t_object *to_init_pl);
 
 // ERRORS
 void				ft_print_error(const char *error);
