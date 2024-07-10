@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:43:05 by klamprak          #+#    #+#             */
-/*   Updated: 2024/07/02 15:12:48 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/10 10:59:43 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ static int	assign_cylinder_mat(char **tokens, t_object *obj, int i)
 {
 	if (get_arr_len(tokens) >= i + 1)
 		ft_strlcpy(obj->material_name, tokens[i], ft_strlen(tokens[i]) + 1);
+	if (get_arr_len(tokens) >= i + 2)
+		ft_strlcpy(obj->texture_name, tokens[i + 1], ft_strlen(tokens[i + 1])
+			+ 2);
 	return (1);
 }
 
@@ -29,7 +32,7 @@ static int	assign_cylinder_mat(char **tokens, t_object *obj, int i)
 int	get_cy(char **tokens, t_object *obj)
 {
 	obj->type = CYLINDER;
-	if (get_arr_len(tokens) != 6 && get_arr_len(tokens) != 7)
+	if (get_arr_len(tokens) < 6 && get_arr_len(tokens) > 8)
 		return (0);
 	if (!get_vector(&obj->pos, tokens[1]))
 		return (0);
