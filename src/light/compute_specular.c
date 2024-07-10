@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 09:43:35 by flfische          #+#    #+#             */
-/*   Updated: 2024/07/08 15:37:31 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/10 10:48:32 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ t_color	*ft_compute_reflection(t_color *refl_col, const t_hit *rec, int depth)
 	if (depth <= 0 || rec->obj->material->s_mat.reflectivness <= 0)
 		return (refl_col);
 	ft_v3_init(&origin, rec->p.x, rec->p.y, rec->p.z);
-	ft_v3_init(&direction, rec->ray->direction->x, rec->ray->direction->y,
-		rec->ray->direction->z);
+	ft_v3_init(&direction, rec->ray->dir->x, rec->ray->dir->y,
+		rec->ray->dir->z);
 	ft_v3_reflect(&direction, &rec->n, &direction);
 	ft_v3_normal_ip(&direction);
 	ft_v3_scalar_ip(&direction, 1 + EPSILON);
@@ -74,8 +74,7 @@ t_color	*ft_compute_specular(t_color *spec_col, const t_hit *rec,
 	ft_v3_init(&tmp, rec->n.x, rec->n.y, rec->n.z);
 	ft_v3_scalar_ip(&tmp, 2 * l_n);
 	ft_v3_sub_ip(&tmp, light_dir);
-	ft_v3_init(&rev_ray, rec->ray->direction->x, rec->ray->direction->y,
-		rec->ray->direction->z);
+	ft_v3_init(&rev_ray, rec->ray->dir->x, rec->ray->dir->y, rec->ray->dir->z);
 	ft_v3_scalar_ip(&rev_ray, -1);
 	r_v = ft_v3_dotprod(&rev_ray, &tmp);
 	if (r_v < 0)

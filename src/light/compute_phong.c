@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 11:32:05 by flfische          #+#    #+#             */
-/*   Updated: 2024/07/01 14:49:58 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/10 10:48:32 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_bool	ft_is_shadow(t_vector3 *light_dir, const t_hit *hit, t_program *program)
 	int		is_hitted;
 
 	ray.origin = &(t_vector3){hit->p.x, hit->p.y, hit->p.z};
-	ray.direction = light_dir;
+	ray.dir = light_dir;
 	i = 0;
 	while (i < program->objs_len)
 	{

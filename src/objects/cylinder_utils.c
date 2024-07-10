@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 17:33:39 by klamprak          #+#    #+#             */
-/*   Updated: 2024/07/02 15:55:43 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/10 10:48:32 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static bool	in_radius(double *t, t_ray *ray, t_object *disk_pl, double radius)
 	t_vector3	sub;
 	double		len;
 
-	ft_v3_init(&pos, ray->origin->x + ray->direction->x * *t, ray->origin->y
-		+ ray->direction->y * *t, ray->origin->z + ray->direction->z * *t);
+	ft_v3_init(&pos, ray->origin->x + ray->dir->x * *t, ray->origin->y
+		+ ray->dir->y * *t, ray->origin->z + ray->dir->z * *t);
 	ft_v3_init(&sub, disk_pl->pos.x - pos.x, disk_pl->pos.y - pos.y,
 		disk_pl->pos.z - pos.z);
 	len = sqrt(ft_v3_dotprod(&sub, &sub));
@@ -34,7 +34,7 @@ bool	inter_disk(t_ray *ray, t_object *disk_pl, double *t, double radius)
 	t_vector3	po;
 	double		tmp;
 
-	d = ft_v3_dotprod(&disk_pl->s_plane.normal, ray->direction);
+	d = ft_v3_dotprod(&disk_pl->s_plane.normal, ray->dir);
 	if (fabs(d) < 1e-16)
 		return (false);
 	ft_v3_init(&po, disk_pl->pos.x - ray->origin->x, disk_pl->pos.y

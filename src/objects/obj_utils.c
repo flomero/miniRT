@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   obj_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 12:46:05 by klamprak          #+#    #+#             */
-/*   Updated: 2024/06/27 17:05:02 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/07/10 10:48:32 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ double	hit_top_bot(t_object *plane, t_ray *ray, const double radius, t_object \
 		ray->origin->z = tmp_z;
 		return (INFINITY);
 	}
-	ft_v3_init(&tmp, ray->direction->x, ray->direction->y, ray->direction->z);
+	ft_v3_init(&tmp, ray->dir->x, ray->dir->y, ray->dir->z);
 	ft_v3_scalar_ip(&tmp, t);
 	ft_v3_add_ip(&tmp, ray->origin);
 	ft_v3_sub_ip(&tmp, &plane->pos);
