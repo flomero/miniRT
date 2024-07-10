@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/07/09 14:17:42 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/10 13:08:42 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,10 @@ void	ft_free_all(void)
 		free(program->objs);
 }
 
-void	leaks(void)
-{
-	system("leaks miniRT");
-}
-
 int	main(int argc, char **argv)
 {
 	t_program	*program;
 
-	// mlx_set_setting(MLX_HEADLESS, 1);
-	if (DEBUG)
-		atexit(leaks);
 	if (argc != 2)
 		return (ft_print_error("Arguments shouldn't by empty"), 0);
 	if (!is_valid_parsing(argv[1]))
