@@ -76,24 +76,25 @@
 > Texture Names are case sensitive and must be unique.
 
 > [!NOTE]
-> Textures are optional and can be used with any object. If a texture is provided, the RGB colors will be ignored.
+> Textures are optional and can be used with spheres. If a texture is provided, the RGB colors will be ignored.
+> Only Checkerboard works on all Objects. If other objects get assigned anything else it will be ignored during rendering.
 
-### External Texture
+### External Texture (Spheres only)
 | **Identifier** | **Texture Name** | **File Path**        |
 |----------------|------------------|----------------------|
 | TF             | Texture          | textures/texture.jpg |
 
-### Checkerboard Texture 
+### Checkerboard Texture (All Objects)
 | **Identifier** | **Texture Name** | **RGB Colors** | **RGB Colors** | **Scale** |
 |----------------|------------------|----------------|----------------|-----------|
 | TC             | Checkerboard     | 255,255,255    | 0,0,0          | 0.5       |
 
-### UV Checkerboard Texture (looks better on spheres)
+### UV Checkerboard Texture (looks better on spheres - other Objects default to non UV Checkerboard)
 | **Identifier** | **Texture Name** | **RGB Colors** | **RGB Colors** | **Scale** |
 |----------------|------------------|----------------|----------------|-----------|
 | TUC            | UVCheckerboard   | 255,255,255    | 0,0,0          | 0.5       |
 
-## Bump Maps
+## Bump Maps (Spheres only)
 > [!IMPORTANT]
 > Bump Maps are optional and can currently only be used with spheres. (They will be ignored for other objects)
 

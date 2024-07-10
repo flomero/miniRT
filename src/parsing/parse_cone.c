@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cone.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 12:06:48 by flfische          #+#    #+#             */
-/*   Updated: 2024/07/01 16:47:29 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/07/10 10:59:36 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,16 @@ static int	assign_cone_mat(char **tokens, t_object *obj, int i)
 {
 	if (get_arr_len(tokens) >= i + 1)
 		ft_strlcpy(obj->material_name, tokens[i], ft_strlen(tokens[i]) + 1);
+	if (get_arr_len(tokens) >= i + 2)
+		ft_strlcpy(obj->texture_name, tokens[i + 1], ft_strlen(tokens[i + 1])
+			+ 2);
 	return (1);
 }
 
 int	get_co(char **tokens, t_object *obj)
 {
 	obj->type = CONE;
-	if (get_arr_len(tokens) != 6 && get_arr_len(tokens) != 7)
+	if (get_arr_len(tokens) < 6 && get_arr_len(tokens) > 8)
 		return (0);
 	if (!get_vector(&obj->pos, tokens[1]))
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 16:04:39 by flfische          #+#    #+#             */
-/*   Updated: 2024/06/30 12:22:02 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/10 11:01:27 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ static int	assign_triangle_mat(char **tokens, t_object *obj, int i)
 {
 	if (get_arr_len(tokens) >= i + 1)
 		ft_strlcpy(obj->material_name, tokens[i], ft_strlen(tokens[i]) + 1);
+	if (get_arr_len(tokens) >= i + 2)
+		ft_strlcpy(obj->texture_name, tokens[i + 1], ft_strlen(tokens[i + 1])
+			+ 2);
 	return (1);
 }
 
@@ -28,7 +31,7 @@ static int	assign_triangle_mat(char **tokens, t_object *obj, int i)
  */
 int	get_tr(char **tokens, t_object *obj)
 {
-	if (get_arr_len(tokens) != 5 && get_arr_len(tokens) != 6)
+	if (get_arr_len(tokens) < 5 && get_arr_len(tokens) > 7)
 		return (0);
 	if (!get_vector(&obj->s_triangle.points[0], tokens[1]))
 		return (0);
