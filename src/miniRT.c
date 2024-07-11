@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/07/11 12:51:45 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/07/11 13:26:34 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int argc, char **argv)
 	t_program	*program;
 
 	if (argc != 2)
-		return (ft_print_error("Arguments shouldn't by empty"), 0);
+		return (ft_print_error("Only 1 argument should be given."), 0);
 	if (!is_valid_parsing(argv[1]))
 		return (1);
 	if (DEBUG)
