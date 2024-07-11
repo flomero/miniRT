@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:11 by flfische          #+#    #+#             */
-/*   Updated: 2024/07/10 10:48:32 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/11 12:49:02 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int					ft_mlx_init(char *filename);
 void				ft_render(void *param);
 void				ft_key_hook(mlx_key_data_t key_data, void *param);
 void				ft_render_multithread(void *param);
+void				ft_program_exit(void *param);
 
 // RAYTRACER
 void				loop_pixels(t_program *program, int min_x, t_vector2 *max,
