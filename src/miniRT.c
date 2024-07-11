@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:40:00 by flfische          #+#    #+#             */
-/*   Updated: 2024/07/10 13:08:42 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/11 12:51:45 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	main(int argc, char **argv)
 	if (ft_mlx_init(argv[1]))
 		return (ft_free_all(), 1);
 	mlx_key_hook(program->mlx, ft_key_hook, program);
+	mlx_close_hook(program->mlx, ft_program_exit, program);
 	if (program->thread_count < 2)
 		mlx_loop_hook(program->mlx, ft_render, program);
 	else

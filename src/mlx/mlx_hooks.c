@@ -3,14 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: klamprak <klamprak@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 14:56:51 by flfische          #+#    #+#             */
-/*   Updated: 2024/07/08 15:35:58 by flfische         ###   ########.fr       */
+/*   Updated: 2024/07/11 12:51:05 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+/**
+ * @brief exit program when user clicks on the close button
+ *
+ * @param param
+ */
+void	ft_program_exit(void *param)
+{
+	t_program	*program;
+
+	program = (t_program *)param;
+	if (program->thread_count > 1)
+	{
+		pthread_mutex_lock(program->stop);
+		program->stop_threads = TRUE;
+		pthread_mutex_unlock(program->stop);
+		join_threads(program);
+	}
+	mlx_delete_image(program->mlx, program->image);
+	mlx_terminate(program->mlx);
+	ft_free_all();
+	exit(0);
+}
 
 /**
  * Renders the next sample.
