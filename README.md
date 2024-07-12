@@ -92,15 +92,9 @@ B bump scenes/assets/earth_bump.png
 </p>
 
 #### Anti-Aliasing
-Anti-Aliasing can be enabled by setting the number of samples on the camera object. The more samples, the smoother the edges. Drag the slider to see the difference.
+Anti-Aliasing can be enabled by setting the number of samples on the camera object. The more samples, the smoother the edges. Left: No Anti-Aliasing, Right: Anti-Aliasing with 100 samples.
 <p align="center">
-  <div style="position:relative; display:inline-block; line-height:0; left:50%; transform:translateX(-50%); width:80%; max-width:500px; min-width:300px;">
-    <div style="position:absolute; top:0; bottom:0; left:0; width:25px; max-width:100%; overflow:hidden; resize:horizontal;">
-      <img src="images/ice.png" style="user-select:none; height:100%;object-fit:cover;object-position:0 0"/>
-      <div style="position:absolute; right:0; bottom:0; width:13px; height:13px; padding:5px; background:linear-gradient(-45deg, white 50%, transparent 0); background-clip:content-box; cursor:ew-resize; filter:drop-shadow(0 0 2px black); -webkit-filter:drop-shadow(0 0 2px black);"></div>
-    </div>
-    <img src="images/1sample.png" style="user-select:none;height:100%"/>
-  </div>
+<img src="images/comparison.png" style="width:80%" alt="anti aliasing scene"/>
 </p>
 
 #### Multiple Lights
