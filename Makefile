@@ -6,7 +6,7 @@
 #    By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 18:35:04 by flfische          #+#    #+#              #
-#    Updated: 2024/07/10 10:46:31 by flfische         ###   ########.fr        #
+#    Updated: 2024/10/21 15:21:55 by flfische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -172,6 +172,7 @@ $(MLX42):
 	@echo "$(YELLOW)Compiling mlx42...$(NC)"
 	@if [ ! -d $(MLX42_DIR)/build ]; then mkdir -p $(MLX42_DIR)/build; fi
 	@git submodule update --remote --init -q
+	@cd $(MLX42_DIR) && git checkout tags/v2.3.4
 	@cd $(MLX42_DIR)/build && cmake .. && make -j4
 
 clean:
